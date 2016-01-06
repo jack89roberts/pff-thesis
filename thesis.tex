@@ -1,0 +1,35 @@
+% Single sided library version
+\documentclass[12pt,a4paper,openright]{thesis}
+
+% Double sided version (bound or unbound)
+% \documentclass[12pt,twoside,a4paper,openright]{thesis}
+
+\input{preamble}
+\input{commands}
+\input{covertex}
+
+\begin{document}
+
+\baselineskip=3ex
+
+\include{titleandcontents}
+\include{glossary}
+
+\cleardoublepage
+\pagestyle{headings}
+\pagenumbering{arabic}
+\flushbottom
+
+\parskip=1.5ex
+
+\include{introduction}
+
+\include{chapter1}
+
+\appendix
+
+\include{appendix1}
+
+\include{bibliography}
+
+\end{document}

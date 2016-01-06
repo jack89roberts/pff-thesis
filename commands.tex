@@ -1,0 +1,45 @@
+% Place global macros here.
+
+% Define macros to start new chapters, automatically define a label and
+% set the headings to include the chapter or section titles.
+%
+% The first argument is the label attached to the section, the second
+% is the title of the chapter or section.
+
+\newcommand{\newchapter}[2]{
+  \chapter{#2}
+  \label{c:#1}
+  \pagestyle{myheadings}
+  \markboth{{\bf Chapter \ref{c:#1}. #2}}{{\bf Chapter \ref{c:#1}. #2}}
+}
+
+\newcommand{\newsection}[2]{
+  \section{#2}
+  \label{s:#1}
+  \pagestyle{myheadings}
+  \markright{{\bf \ref{s:#1} #2}}
+}
+
+\newcommand{\newappendix}[2]{
+  \chapter{#2}
+  \label{a:#1}
+  \pagestyle{myheadings}
+  \markboth{{\bf Appendix \ref{a:#1} #2}}{{\bf \ref{a:#1} #2}}
+}
+
+\newcommand{\newappendette}[2]{
+  \section{#2}
+  \label{a:#1}
+  \pagestyle{myheadings}
+  \markright{{\bf \ref{a:#1} #2}}
+}
+
+% Command to place a small ``abstract'' block at the start of each chapter.
+
+\newcommand{\cabs}[1]{
+  \begin{center}
+  \vspace*{-1cm}
+  \parbox{14cm}{\small #1}
+  \end{center}
+}
+
