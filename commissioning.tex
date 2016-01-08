@@ -2,6 +2,8 @@
 
 This is the introductory text.
 
+\newsection{s:pffEquations}{Theoretical Corrected Jitter and Optimal Gain}
+
 \newsection{s:daq}{Controls}
 
 \newsection{s:droopCorr}{Droop Correction}
@@ -44,18 +46,35 @@ Shape of FF kick on BPMs vs. shape of upstream phase
 
 \newsection{s:timing}{Kick Output Timing}
 
-\subsection{Relative Kicker Timing}
-\label{ss:relativeTiming}
-
-
 \subsection{Absolute Kicker Timing}
-\label{ss:relativeTiming}
+\label{ss:absoluteTiming}
 
 from beam pickup
 
 from kick on BPMs
 
-\newsection{s:slowCorr}{Slow Correction}
+\newsection{s:limCorrection}{Effect of Limited Correction Range}
+
+\newsection{s:limBandwidth}{Effect of Limited Correction Bandwidth}
+
+
+\subsection{Relative Kicker Timing}
+\label{ss:relativeTiming}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.45\textwidth]{Figures/relativeTimingScan_traces}
+  \caption{Traces relative timing scan.}
+  \label{f:relativeTimingScan_traces}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.45\textwidth]{Figures/relativeTimingScan_slopeFit}
+  \caption{Relative timing scan - fit to rising/falling edge.}
+  \label{f:relativeTimingScan_slopeFit}
+\end{figure}
+
 
 
 
