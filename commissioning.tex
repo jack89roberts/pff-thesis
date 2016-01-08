@@ -1,10 +1,17 @@
-\newchapter{c:commissioning}{Commissioning of the PFF System}
+\newchapter{c:commissioning}{Setup and Commissioning of the PFF System}
 
 This is the introductory text.
 
-\newsection{s:pffEquations}{Theoretical Corrected Jitter and Optimal Gain}
+\newsection{s:pffSetup}{Experimental Setup}
 
-\newsection{s:daq}{Controls}
+\subsection{Implementation of PFF Algorithm in Firmware}
+\label{ss:pffFirmware}
+
+\subsection{FONT5 and Amplifier Setup}
+\label{ss:fontSetup}
+
+\subsection{SiS and CERN Control System Setup}
+\label{ss:sisSetup}
 
 \newsection{s:droopCorr}{Droop Correction}
 
@@ -32,34 +39,37 @@ Unfortunately, as can be seen in Figure \ref{f:droopFit} which shows an example 
 
 Instead, changes will be made to the currently in development FONT5a board hardware and firmware to greatly reduce the scale of the droop. Different transformers will be used to reduce the droop rate by up to a factor of fifty and in addition digital filtering will be implemented in firmware to smooth out and reduce the remaining droop component even further. It is expected that after these changes the droop will be small enough to not have a detrimental effect on the performance of the phase feedforward system. 
 
-\newsection{s:constKicks}{Constant Kick Tests}
+\newsection{s:constKicks}{Kicker and Optics Performance Verification}
+
+\subsection{Correction Range}
+\label{ss:corrRange}
+
 
 Scan and comparison to expectation from optics.
 
-Linearity
+\subsection{Linearity}
+\label{ss:kickLin}
 
-Orbit closure
+\subsection{Orbit Closure}
+\label{ss:orbitClosure}
+
+\subsection{Shape}
+\label{ss:kickShape}
 
 Shape of FF kick on BPMs vs. shape of upstream phase
 
-\newsection{s:latency}{Latency Measurements}
+\newsection{s:absoluteTiming}{Absolute Kicker Timing}
 
-\newsection{s:timing}{Kick Output Timing}
+\subsection{Latency}
+\label{ss:measLatency}
 
-\subsection{Absolute Kicker Timing}
-\label{ss:absoluteTiming}
+\subsection{Using Beam Pickup}
+\label{ss:beamPickup}
 
-from beam pickup
+\subsection{Using BPMs}
+\label{ss:relativeBPM}
 
-from kick on BPMs
-
-\newsection{s:limCorrection}{Effect of Limited Correction Range}
-
-\newsection{s:limBandwidth}{Effect of Limited Correction Bandwidth}
-
-
-\subsection{Relative Kicker Timing}
-\label{ss:relativeTiming}
+\newsection{s:relativeTiming}{Relative Kicker Timing}
 
 \begin{figure}
   \centering
@@ -75,6 +85,7 @@ from kick on BPMs
   \label{f:relativeTimingScan_slopeFit}
 \end{figure}
 
+\newsection{s:corrBandwidth}{Correction Bandwidth}
 
 
 
