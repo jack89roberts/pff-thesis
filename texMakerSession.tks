@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TexmakerSession quickmode="3">
-    <document bookmark1="0" bookmark3="0" master="false" line="4" bookmark2="0" hasfocus="false" file="/home/jack/Documents/pff-thesis/commissioning.tex"/>
-    <document bookmark1="0" bookmark3="0" master="false" line="0" bookmark2="0" hasfocus="false" file="/home/jack/Documents/pff-thesis/feedforward.tex"/>
-    <document bookmark1="0" bookmark3="0" master="false" line="0" bookmark2="0" hasfocus="false" file="/home/jack/Documents/pff-thesis/conclusion.tex"/>
-    <document bookmark1="0" bookmark3="0" master="false" line="0" bookmark2="0" hasfocus="true" file="/home/jack/Documents/pff-thesis/ctfPFF.tex"/>
-    <document bookmark1="0" bookmark3="0" master="false" line="0" bookmark2="0" hasfocus="false" file="/home/jack/Documents/pff-thesis/phasePropagation.tex"/>
-    <document bookmark1="0" bookmark3="0" master="false" line="0" bookmark2="0" hasfocus="false" file="/home/jack/Documents/pff-thesis/introduction.tex"/>
-    <document bookmark1="0" bookmark3="0" master="false" line="0" bookmark2="0" hasfocus="false" file="/home/jack/Documents/pff-thesis/phaseMons.tex"/>
-    <document bookmark1="0" bookmark3="0" master="false" line="24" bookmark2="0" hasfocus="false" file="/home/jack/Documents/pff-thesis/thesis.tex"/>
-    <document bookmark1="0" bookmark3="0" master="false" line="20" bookmark2="0" hasfocus="false" file="/home/jack/Documents/pff-thesis/tl2Optics.tex"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/feedforward.tex" hasfocus="false" bookmark2="0" line="0" master="false"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/commissioning.tex" hasfocus="false" bookmark2="0" line="4" master="false"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/phasePropagation.tex" hasfocus="false" bookmark2="0" line="0" master="false"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/conclusion.tex" hasfocus="false" bookmark2="0" line="0" master="false"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/introduction.tex" hasfocus="false" bookmark2="0" line="0" master="false"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/phaseMons.tex" hasfocus="false" bookmark2="0" line="0" master="false"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/thesis.tex" hasfocus="true" bookmark2="0" line="24" master="false"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/tl2Optics.tex" hasfocus="false" bookmark2="0" line="20" master="false"/>
+    <document bookmark1="0" bookmark3="0" file="/home/jack/Documents/pff-thesis/ctfPFF.tex" hasfocus="false" bookmark2="0" line="20" master="false"/>
 </TexmakerSession>
