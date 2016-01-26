@@ -1,8 +1,8 @@
-\newchapter{c:commissioning}{Setup and Commissioning of the PFF System}
+\newchapter{commissioning}{Setup and Commissioning of the PFF System}
 
 This is the introductory text.
 
-\newsection{s:pffSetup}{Experimental Setup}
+\newsection{pffSetup}{Experimental Setup}
 
 \subsection{Implementation of PFF Algorithm in Firmware}
 \label{ss:pffFirmware}
@@ -13,7 +13,7 @@ This is the introductory text.
 \subsection{SiS and CERN Control System Setup}
 \label{ss:sisSetup}
 
-\newsection{s:droopCorr}{Droop Correction}
+\newsection{droopCorr}{Droop Correction}
 
 The droop in the response of the FONT5 ADCs, as most clearly seen in the output of the diode channel in Figure \ref{f:diodeDroop} (although it also effects the mixer channel), is not an issue for the work the FONT group does at ATF2 where the signals are well approximated by delta functions separated by \(\sim\)100~ns. Although the droop has been seen previously, its significance for the continuous microsecond length pulse at CTF3 had not been considered because of this.
 
@@ -39,7 +39,10 @@ Unfortunately, as can be seen in Figure \ref{f:droopFit} which shows an example 
 
 Instead, changes will be made to the currently in development FONT5a board hardware and firmware to greatly reduce the scale of the droop. Different transformers will be used to reduce the droop rate by up to a factor of fifty and in addition digital filtering will be implemented in firmware to smooth out and reduce the remaining droop component even further. It is expected that after these changes the droop will be small enough to not have a detrimental effect on the performance of the phase feedforward system. 
 
-\newsection{s:constKicks}{Kicker and Optics Performance Verification}
+\newsection{timeAlignment}{Time Alignment of Signals}
+
+
+\newsection{constKicks}{Kicker and Optics Performance Verification}
 
 \subsection{Correction Range}
 \label{ss:corrRange}
@@ -58,7 +61,7 @@ Scan and comparison to expectation from optics.
 
 Shape of FF kick on BPMs vs. shape of upstream phase
 
-\newsection{s:absoluteTiming}{Absolute Kicker Timing}
+\newsection{absoluteTiming}{Absolute Kicker Timing}
 
 \subsection{Latency}
 \label{ss:measLatency}
@@ -69,7 +72,7 @@ Shape of FF kick on BPMs vs. shape of upstream phase
 \subsection{Using BPMs}
 \label{ss:relativeBPM}
 
-\newsection{s:relativeTiming}{Relative Kicker Timing}
+\newsection{relativeTiming}{Relative Kicker Timing}
 
 \begin{figure}
   \centering
@@ -85,7 +88,7 @@ Shape of FF kick on BPMs vs. shape of upstream phase
   \label{f:relativeTimingScan_slopeFit}
 \end{figure}
 
-\newsection{s:corrBandwidth}{Correction Bandwidth}
+\newsection{corrBandwidth}{Correction Bandwidth}
 
 
 
