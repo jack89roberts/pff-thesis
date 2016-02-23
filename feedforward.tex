@@ -83,24 +83,24 @@ At CLIC 0.2 degrees phase stability would clearly have to be maintained for much
 
 \end{landscape}
 
-The raw history of the mean phases upstream and downstream with the correction on and off in the combined data are shown in Figure \ref{f:longFF_noMeanSubHistory}. The time span of each individual dataset is marked by vertical black lines and the times displayed on the plot represent the start time of each dataset. Over the course of the afternoon the mean upstream phase, in green, varies by ten degrees peak-to-peak or \(1.75 \pm 0.02^\circ\) in terms of jitter. Small drifts of up to a few degrees in the upstream phase are not an issue for the performance of the PFF correction providing the correlation between the upstream and downstream phase is not degraded. In some cases upstream phase drifts may lead to a loss in correlation, this could be the case if the source of the drift is a variation in beam energy due to the issues discussed in Chapter \ref{c:phasePropagation}, for example. 
+The raw history of the mean phases upstream and downstream with the correction on and off in the combined data are shown in Figure \ref{f:longFF_noMeanSubHistory}. The time span of each individual dataset is marked by vertical black lines and the times displayed on the plot represent the start time of each dataset. 
 
-However, larger changes in the upstream phase such as the ten degree fluctuation seen here will impact the PFF performance due to the limited correction range of twelve degrees (\(\pm6^\circ\)) combined with the phase sag along the CTF pulse. 
+Over the course of the afternoon the mean upstream phase, in green, varies by ten degrees peak-to-peak or \(1.75 \pm 0.02^\circ\) in terms of jitter. Small drifts of up to a few degrees in the upstream phase are not an issue for the performance of the PFF correction providing the correlation between the upstream and downstream phase is not degraded. In some cases upstream phase drifts may lead to a loss in correlation, this could be the case if the source of the drift is a variation in beam energy due to the issues discussed in Chapter \ref{c:phasePropagation}, for example. The variation of the correlation between datasets is discussed later in this section.
+
+Larger changes in the upstream phase such as the ten degree fluctuation seen here will impact the PFF performance purely via the limited correction range of \(\pm6^\circ\) combined with the phase sag along the CTF pulse. Indeed the PFF prototype's main purpose is not to remove any large, slow phase drifts but rather the faster pulse-to-pulse jitter and high frequency variations along the pulse. The phase offset applied by the PFF correction at each sample along the downstream phase, \(\Delta\phi_d(t)\), is given by:
 
 \begin{eqnarray}
-	\Delta\phi(t) = \begin{cases}
-	-6^\circ, &  \text{if $g\phi_u \geq+6^\circ$.}\\
-	+6^\circ, &  \text{if $g\phi_u\leq-6^\circ$}.\\
-	-g\phi_u, &  \text{otherwise.}
+	\Delta\phi_d(t) = \begin{cases}
+	-6^\circ, &  \text{if $g\phi_u(t) \geq+6^\circ$.}\\
+	+6^\circ, &  \text{if $g\phi_u(t)\leq-6^\circ$}.\\
+	-g\phi_u(t), &  \text{otherwise.}
 	\end{cases}
 	\label{e:limCorrection}
 \end{eqnarray}
 
+Where \(\phi_u(t)\) is the upstream phase at each sample point and \(g\) is the gain factor used. As the optimal gain (Section\ref{ss:theoryGain}) for the correction is typically larger than one due to the slight amplification in the downstream phase jitter with respect to the upstream jitter the range of the PFF system in terms of the upstream phase is less than \(\pm6^\circ\) (for example \(\pm5.3^\circ\) for the 15:38 jitter record dataset with a gain of 1.13). Any point along the upstream phase with \(|g\phi_u(t)| > 6^\circ\) receives the maximum \(6^\circ\) phase shift downstream but can not corrected to zero, with this remaining residual degrading the corrected phase jitter that can be achieved.
 
-
-Figure \ref{f:longFF_fractInRange} shows the fraction of pulses for which the optimal correction (upstream phase multiplied by the optimal gain) is within the correction range. In the PFF firmware on the FONT5a board it is possible to add an offset to the ADC output corresponding to the upstream phase. If on the FONT5a board this offset has been set up to zero the apparent measured upstream phase (so that the mean voltage sent to the kickers across the afternoon is zero) the effects of limited correction range are small, as the full \(\pm6^\circ\) range can be used to remove phase jitter rather than any static phase offsets. In this case the ideal correction across a 310~ns portion of the pulse is within the \(\pm6^\circ\) range 96\% of the time.
-
-However, as to date this offset has been set up manually small deviations from the ideal case are possible. Figure \ref{f:longFF_fractInRange} also shows the fraction of pulses within the correction range if there is a static two degree offset in the upstream phase. In this case as many as 39\% of pulses are outside the correction range. To mitigate these effects and to get the largest reduction in jitter possible the centring of the upstream phase in the correction range on the FONT5a board is normally adjusted between datasets. As a consequence of this slow drifts in the upstream phase between datasets are not removed in the corrected downstream phase. 
+Figure \ref{f:longFF_fractInRange} shows the fraction of pulses for which the optimal correction is within the correction range in the combined dataset. During the setup of the PFF system it is necessary to choose the zero point for the correction, i.e. the incoming upstream phase at which the correction output to the kickers is 0~V. This is done in the PFF firmware on the FONT5a board by varying a channel offset applied to the ADC to which the mixer signal from the upstream phase monitor is connected. If on the FONT5a board this offset has been set up perfectly, so that the mean voltage sent to the kickers across the afternoon is zero, the effects of limited correction range are small, as the full \(\pm6^\circ\) range can be used to remove phase jitter rather than any static phase offsets. In this case the ideal correction across a 310~ns portion of the pulse is within the \(\pm6^\circ\) range 96\% of the time.
 
 \begin{figure}
   \centering
@@ -109,6 +109,9 @@ However, as to date this offset has been set up manually small deviations from t
   \label{f:longFF_fractInRange}
 \end{figure}
 
+However, as to date this offset has been set up manually small deviations from the ideal case are possible. Figure \ref{f:longFF_fractInRange} also shows the fraction of pulses within the correction range if there is a static two degree offset in the upstream phase. In this case as many as 39\% of pulses are outside the correction range within the normally correctable central region of the pulse. To mitigate these effects and to get the largest reduction in jitter possible within each individual dataset the centring of the upstream phase in the correction range on the FONT5a board is normally adjusted between datasets. As a consequence of this differences in the upstream phase between datasets are not removed in the corrected downstream phase, as the zero point for the PFF correction is effectively drifting with the phase during the afternoon. These remaining slow drifts could be removed at CTF3 using a secondary ``slow phase feedback", also utilising the TL2 chicane, which is the focus of Section \ref{s:slowCorr}.
+
+The accuracy to which the channel offset for the upstream phase has been selected can be inferred by comparing the mean downstream phase in each dataset with the correction on (red) and off (blue) in Figure \ref{f:longFF_noMeanSubHistory}. In the ideal case the mean phase should be identical with the PFF system on and off, so that the full range is used to correct jitter about the mean rather than applying a constant kick. Although this is the case for some datasets, such as the 15:38 dataset, a clear offset between the two is often present, perhaps most visible in the 16:39 dataset.
 
 \begin{figure}
   \centering
