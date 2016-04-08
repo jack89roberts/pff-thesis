@@ -18,7 +18,7 @@ Gain conversion factor
 \label{ss:fontDAQ}
 
 gain
-n                                                                                                           
+                                                                                                           
 filter weights
 
 timing delays
@@ -110,7 +110,7 @@ Figure \ref{f:AmpOutvsDAC_residual} shows the residuals between the linear fit a
 
 The effects of amplifier saturation are not taken in to account in the PFF algorithm on the FONT5a board, in which the DAC output is linearly dependent on the input phase (voltage from the phase monitor mixer signal) across the full range. The applied correction to the downstream phase will therefore be non-optimal when the DAC output calculated by the PFF algorithm is above an absolute value of 2500 counts (1.2~V sent to the amplifier). To date the non-linearity of the amplifier as it begins to enter saturation has also not been included in the PFF simulations presented in the following chapters. This may partially explain the small discrepancies seen between the simulated and real results in some datasets, so including the effect will be pursued in the future. In addition, it could be foreseen to incorporate the saturation characteristics in to the PFF algorithm on the FONT5a board, so that calculated outputs above 2500 counts are boosted slightly to compensate for the lower than expected amplifier output.
 
-Discrepancies between the four amplifier outputs are also visible in Figure \ref{f:AmpOutvsDAC_residual} and Table \ref{t:AmpOutVsDAC}, both in terms of gradient and peak output. This can be partially but not completely explained by errors of up to a few percent in the precise calibration of the four monitoring outputs, which do not output exactly 1/115 of the real input voltage [TODO: Ask Colin about errors]. Differences between the A and B outputs sent to each kicker are not an issue for the PFF performance as both are linear (in the \(\pm1.2\)~V range) and the kick experienced by the beam in each kicker is proportional to the difference of the two. Therefore, only the calibration between the output from the FONT5a board sent to the amplifier and the resulting phase shift in the TL2 chicane is affected. However, disparity between the potential difference across each kicker (LA-LB and RA-RB), so that the deflection of the beam in each kicker is different, leads to the orbit bump created by the PFF system not being closed in the chicane, degrading the horizontal beam stability downstream. The fitted potential difference at 1~V input is 869~V for the left amplifier (LA-LB, sent to the first kicker) and 835~V for the right amplifier (RA-RB, sent to the second kicker), a difference of 4\%. This can be compensated in the PFF setup on the FONT5a board by using a different gain for each correction output, so that the voltage sent to the right amplifier is higher but the resulting output voltage sent to both kickers is the same. Orbit closure is discussed further in Section \ref{ss:orbitClosure}.
+Discrepancies between the four amplifier outputs are also visible in Figure~\ref{f:AmpOutvsDAC_residual} and Table~\ref{t:AmpOutVsDAC}, both in terms of gradient and peak output. This can be partially but not completely explained by errors of up to a few percent in the precise calibration of the four monitoring outputs, which do not output exactly 1/115 of the real input voltage [TODO: Ask Colin about errors]. Differences between the A and B outputs sent to each kicker are not an issue for the PFF performance as both are linear (in the \(\pm1.2\)~V range) and the kick experienced by the beam in each kicker is proportional to the difference of the two. Therefore, only the calibration between the output from the FONT5a board sent to the amplifier and the resulting phase shift in the TL2 chicane is affected. However, disparity between the potential difference across each kicker (LA-LB and RA-RB), so that the deflection of the beam in each kicker is different, leads to the orbit bump created by the PFF system not being closed in the chicane, degrading the horizontal beam stability downstream. The fitted potential difference at 1~V input is 869~V for the left amplifier (LA-LB, sent to the first kicker) and 835~V for the right amplifier (RA-RB, sent to the second kicker), a difference of 4\%. This can be compensated in the PFF setup on the FONT5a board by using a different gain for each correction output, so that the voltage sent to the right amplifier is higher but the resulting output voltage sent to both kickers is the same. Orbit closure is discussed further in Section~\ref{ss:orbitClosure}.
 
 
 \begin{figure}
@@ -146,7 +146,7 @@ Discrepancies between the four amplifier outputs are also visible in Figure \ref
 \subsection{Shape}
 \label{ss:ampShape}
 
-In the previous section the linearity of the mean output was considered but the performance of the PFF correction is clearly also sensitive to any variations in output voltage along the amplifier output pulse. Figures \ref{f:ampLTraces} and \ref{f:ampRTraces} show the full 1.4~\(\mathrm{\mu}\)s amplifier output pulse at a constant \(+1\)~V input sent to the left amplifier and a constant \(-1\)~V input sent to the right amplifier respectively. Spikes in the signal just prior to 2000~ns and after 3000~ns on the time axis as seen in the plots are beam pickup induced by the beam passing through the kickers. These are therefore not a property of the amplifier performance and are excluded from the analysis in this section. However, the beam pickup is used later in Section \ref{ss:absTiming} for the purposes of optimising the correction timing.
+In the previous section the linearity of the mean output was considered but the performance of the PFF correction is clearly also sensitive to any variations in output voltage along the amplifier output pulse. Figures~\ref{f:ampLTraces} and \ref{f:ampRTraces} show the full 1.4~\(\mathrm{\mu}\)s amplifier output pulse at a constant \(+1\)~V input sent to the left amplifier and a constant \(-1\)~V input sent to the right amplifier respectively. Spikes in the signal just prior to 2000~ns and after 3000~ns on the time axis as seen in the plots are beam pickup induced by the beam passing through the kickers. These are therefore not a property of the amplifier performance and are excluded from the analysis in this section. However, the beam pickup is used later in Section~\ref{ss:absTiming} for the purposes of optimising the correction timing.
 
 \begin{figure}
   \centering
@@ -162,7 +162,7 @@ In the previous section the linearity of the mean output was considered but the 
   \label{f:ampRTraces}
 \end{figure}
 
-For each side of the amplifier both the A and B outputs are plotted as well as the difference of the two, which is the relevant quantity in terms of the kick received by the beam as it traverses the kickers. In the ideal case the potential difference should be flat along the full pulse length. However, for both the left and right side variations in the difference are visible, with an initial increase in output across the first 500~ns of the pulse followed by a droop in response across the second half of the pulse. Although not shown here, the shape of the variations along the pulse is consistent across the full range of output voltages, and scale in magnitude with the output voltage. Figure \ref{f:ampFlatness} shows the peak-to-peak and mean deviation of the output voltage along the pulse across the full range of input voltages. The peak-to-peak deviation refers to the difference between the minimum and maximum output along the pulse, whilst the mean deviation is the average absolute difference between the mean output and the output at each sample point. For a constant input voltage the output voltage along the pulse varies by up to 88~V peak-to-peak (mean 12~V) for the left amplifier or 93~V peak-to-peak (mean 14~V) for the right amplifier. As a relative difference, this corresponds to approximately a 6~\% peak-to-peak, or 1~\% mean, variation along the pulse.
+For each side of the amplifier both the A and B outputs are plotted as well as the difference of the two, which is the relevant quantity in terms of the kick received by the beam as it traverses the kickers. In the ideal case the potential difference should be flat along the full pulse length. However, for both the left and right side variations in the difference are visible, with an initial increase in output across the first 500~ns of the pulse followed by a droop in response across the second half of the pulse. Although not shown here, the shape of the variations along the pulse is consistent across the full range of output voltages, and scale in magnitude with the output voltage. Figure~\ref{f:ampFlatness} shows the peak-to-peak and mean deviation of the output voltage along the pulse across the full range of input voltages. The peak-to-peak deviation refers to the difference between the minimum and maximum output along the pulse, whilst the mean deviation is the average absolute difference between the mean output and the output at each sample point. For a constant input voltage the output voltage along the pulse varies by up to 88~V peak-to-peak (mean 12~V) for the left amplifier or 93~V peak-to-peak (mean 14~V) for the right amplifier. As a relative difference, this corresponds to approximately a 6~\% peak-to-peak, or 1~\% mean, variation along the pulse.
 
 The PFF algorithm on the FONT5a board uses a single gain value across the whole pulse length for each correction output, thus making the approximation that the amplifier response is flat along the pulse. The variations along the amplifier pulse therefore directly translate in to discrepancies between the intended phase shift as calculated and the real phase shift experienced by the beam. As the region of interest for the correction is a few hundred nanoseconds about the central part of the pulse, as opposed to the full pulse length, the 1~\% mean variation is more indicative of the resulting error than the 6~\% peak-to-peak variation. With a correction range (Section \ref{ss:corrRange}) of \(\pm6^\circ\), the effects of the non-flat amplifier output should be below \(0.06^\circ\) and not measurable considering the phase monitor resolution of \(0.14^\circ\). Nevertheless, it could be foreseen to implement a droop correction in the PFF algorithm on the FONT5a board, taking the variations in the amplifier output along the pulse in to account.
 
@@ -213,38 +213,89 @@ Online display
 \subsection{Definition of Zero Phase}
 \label{ss:zeroPhase}
 
+
+\newsection{measLatency}{Latency}
+
+Kicker pick-up theory
+Kicker why drive downstream end theory
+Cable length measurements (cutting, matching length of drive pairs)
+
 \newsection{constKicks}{Kicker and Optics Performance Verification}
 
 \subsection{Correction Range}
 \label{ss:corrRange}
 
+Knowledge of the correction range of the PFF system, or more specifically the relationship between the voltage sent to the amplifier and the phase shift in the chicane, is critical for the PFF setup. The first checks of the ability to shift the phase in the TL2 chicane using the new phase feedforward optics were performed with magnetic correctors prior to the PFF amplifier being available (these correctors can be used to implement a secondary ``Slow Correction'' to complement the PFF system, as discussed in Section~\ref{s:slowCorr}). Aside from their use for the PFF correction, these tests and the clear variation with beam phase versus voltage sent to the PFF kickers shown in this section are already a significant achievement and a verification of the extensive work to improve the MADX model of TL2 presented in Chapter~\ref{c:tl2Optics}. 
+
+Figure \ref{f:phaseVsAmpVoltage} shows the mean phase shift after the chicane (in the downstream phase monitor) across the full \(\pm2\)~V input range of the amplifier. Constant DAC outputs from the FONT5a board were sent to the amplifier in 17 steps between -4096 counts (-2~V) and +4096 counts (+2~V). In order to reduce the sensitivity to any drifts in the beam phase between data points the scan was taken in interleaved mode, alternating between pulses with no drive sent to the amplifier and a constant non-zero DAC output. The phase plotted in Figure \ref{f:phaseVsAmpVoltage} is therefore the difference between 50 kicked beam pulses and 50 ``nominal'' pulses taken at the same time for each amplifier input voltage. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseVsAmpVoltage}
+  \caption{Phase shift versus amplifier input voltage.}
+  \label{f:phaseVsAmpVoltage}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseVsAmpVoltage_residuals}
+  \caption{Phase shift versus amplifier input voltage.}
+  \label{f:phaseVsAmp_resid}
+\end{figure}
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{| c | c | c |}
+	   \hline
+        & Phase Shift at +1~V Input & Max Phase Shift \\ \hline
+       Data & \(3.5\pm0.1^\circ\) & \(5.5\pm0.3^\circ\) \\
+	   Model & \(3.6^\circ\) & \(5.6^\circ\) \\
+ 	   \hline
+    \end{tabular}
+    \caption{Phase shift at +1 volt input to the amplifier.}
+  	\label{t:PhaseVsDAC}
+  \end{center}
+\end{table}
+
+At the maximum amplifier input voltage of \(2\)~V the phase after the chicane is shifted by \(5.5\pm0.3^\circ\). The fitted phase shift per Volt sent to the amplifier is \(3.5\pm0.1^\circ\) in the \(\pm1.2\)~V linear range of the amplifier (excluding the first and last three points, blue ``FIT'' line in Figure~\ref{f:phaseVsAmpVoltage}). This fitted gradient is required and was previously introduced for the conversion between the PFF gain in the units on the FONT5a board and the real applied gain in Section~\ref{ss:pffFirmware}. In Section~\ref{ss:pffFirmware} it was quoted in terms of the phase shift in radians per DAC count output from the FONT5a board, rather than degrees per Volt as shown here. The value of \(30\mathrm{\mu rad/count}\) is easily derived using the conversion factors between degrees and radians and knowing that a DAC output of 4096 counts corresponds to 2~V sent to the amplifier.
+[TODO: Calculated factor is 29.827 microradians/count here. One I actually used for gain conversion, simulations etc. was 26.18 (used full range rather than linear range)]
+
+Given knowledge of the amplifier output characteristics (Section~\ref{ss:ampLin}), the kicker specifications (Section~\ref{ss:kickers}) and the chicane optics (Section~\ref{ss:pffMatched}) the real phase shift seen in the scan can be compared to the expected phase shift based on the system parameters. The predicted phase shift, \(\Delta\phi\), in degrees is given by:
+\begin{equation}
+ 	\Delta\phi = V_{amp}[V_{font}].K.R_{52}.\frac{360}{\lambda_{12\mathrm{GHz}}}
+\end{equation} 
+\label{e:ampVoltToPhase}
+Where \(V_{amp}[V_{font}]\) is the amplifier output Voltage at an input voltage of \(V_{font}\) sent from the FONT5a board, \(K\) is the angular deflection of the beam per Volt applied to each kicker strip, \(R_{52}\) is the \(R_{52}\) value between the kickers in the PFF optics and \(\frac{360}{\lambda_{12\mathrm{GHz}}}\) converts the calculated orbit length difference in to an equivalent 12~GHz phase using the 12~GHz wavelength \(\lambda_{12\mathrm{GHz}}\). The value of most of these parameters has already been derived in the sections previously mentioned. They are:
+\begin{eqnarray*}
+V_{amp}[1~\mathrm{V}] = 435~\mathrm{V} \\
+K = 0.8~\mathrm{\mu rad/V}\\
+R_{52} = -0.7~\mathrm{m}\\
+\lambda_{12\mathrm{GHz}} = 2.5~\mathrm{cm} 
+\end{eqnarray*}
+The value of \(V_{amp}[1~\mathrm{V}]\) is given as a representative value in the linear range of the amplifier but the real amplifier output at all input voltages is used in the predictions to include the effects of saturation in the calculated phase shift values. Also, the output sent to the first kicker (from the left side of the amplifier) is used as this is most relevant for the phase shift in the chicane (the orbit should be closed after the second kicker with no further phase shift in the chicane after that point). The value of \(K\) is derived from the kicker design, in which 1.4~kV applied to each strip gives a 1~mrad kick for a 150~MeV beam [TODO: REF].  The actual CTF3 beam energy at this time was approximately 135~MeV (calculated based on the dipole currents used in the machine setup), so the value of \(K\) above is scaled by a factor 150/135.
+
+In Figure~\ref{f:phaseVsAmpVoltage} the red line ``MODEL'' shows the predicted phase shifts using Equation~\ref{e:ampVoltToPhase}. Table~\ref{t:PhaseVsDAC} compares the fitted gradients and maximum phase shift for the model and real data. The overall agreement between the two is good, with the residuals between both the model and the data, as well as the linear fit to the data and the data, generally consistent with zero within error bars in the \(\pm1.2\)~V linear range of the amplifier as shown in Figure~\ref{f:phaseVsAmp_resid}. 
+
+Outside the linear range some discrepancies appear, although at the maximum \(\pm2\)~V output the agreement is good so the effect is largest where the amplifier is entering saturation but before hard saturation is reached. However, most amplifier effects can be excluded as the analysis in this section uses the same dataset that was used to characterise the amplifier performance in Section~\ref{s:amplifierSetup}. This could hint at possible remaining higher order errors in the TL2 chicane optics, or unexpected behaviour from the kickers or amplifier. Although subtracting alternating, interleaved pulses should remove the sensitivity to drifts in the machine it is possible that some residual effect remains. To determine whether the discrepancies are reproducible further scans of this type will need to be completed in the future. The residuals between between the data and the linear fit between \(\pm1.2\)~V would also be of significance for the PFF correction should they not converge to zero with additional measurements, as they are of similar magnitude to the \(0.2^\circ\) downstream jitter target. 
+
+However, the overall conclusion is as expected --- the phase shift in the chicane linearly depends on the amplifier input in the \(\pm1.2\)~V (\(\pm2500\) DAC counts) region thus a close to optimal correction can be applied in this range, corresponding to a \(\pm4.2\pm0.1^\circ\) phase shift. However, when the calculated optimal correction is between an absolute input voltage of 1.2~V and 2.0~V, 2500 to 4096 DAC counts, or \(\pm4.2\pm0.1^\circ\) to \(\pm7.0\pm0.2^\circ\), the actual phase shift in the chicane is lower, only up to \(\pm5.5\pm0.3^\circ\), due to the amplifier entering saturation (and possibly other effects to be determined ). Any calculated correction outside \(\pm5.5\pm0.3^\circ\) receives a static phase shift of \(\pm5.5\pm0.3^\circ\) in the chicane. In the limit where all pulses are outside this range the PFF system can only induce a static shift in the mean phase and makes no improvement to the phase jitter. Understanding the impact of the limited correction range on the PFF results was particularly critical for interpreting the early correction attempts with the first version of the amplifier, giving approximately half the ranges shown in this section. This is discussed using simulations of the PFF system in Chapters~\ref{c:earlyFFSim} and \ref{c:feedforward}.
+
 http://accelconf.web.cern.ch/accelconf/ipac2011/papers/tupc007.pdf
 1.4 kV to each strip = 1 mrad kick at 150 MeV
 1.26 kV to each strip = 1 mrad kick at 135 MeV
 
-
-Scan and comparison to expectation from optics.
-
-Effect on correction.
-
-Optics: 0.7m R52 -> 10 degrees for 1mrad kick
-
-
-\subsection{Linearity}
-\label{ss:kickLin}
-
-\subsection{Orbit Closure}
-\label{ss:orbitClosure}
+\subsection{Variations Along Pulse}
+\label{ss:kickPulseVar}
 
 \subsection{Shape}
 \label{ss:kickShape}
 
 Shape of FF kick on BPMs vs. shape of upstream phase
 
-\newsection{timing}{Correction Output Timing}
+\subsection{Orbit Closure}
+\label{ss:orbitClosure}
 
-\subsection{Latency}
-\label{ss:measLatency}
+\newsection{timing}{Correction Output Timing}
 
 \subsection{Absolute Timing}
 \label{ss:absTiming}
