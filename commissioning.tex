@@ -287,13 +287,64 @@ http://accelconf.web.cern.ch/accelconf/ipac2011/papers/tupc007.pdf
 \subsection{Variations Along Pulse}
 \label{ss:kickPulseVar}
 
+In this section I intended to check the stability of the constant kick along the pulse, as I did for the "Shape" section with the amplifier above. The results from the constant kick data do not look good, though - the errors are quite large and there are some nasty oscillations along the pulse, such as in the example Figure~\ref{f:phaseShiftAlongConstKick}. With the phase stability downstream a much longer scan would probably be needed to draw conclusions here, though even on longer time scales I think it needs to be checked that the difference between odd and even pulses converges to zero. As it is I would probably choose to skip this section, or possibly just show one of the better plots.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseShiftAlong}
+  \caption{Traces relative timing scan.}
+  \label{f:phaseShiftAlongConstKick}
+\end{figure}
+
 \subsection{Shape}
 \label{ss:kickShape}
 
-Shape of FF kick on BPMs vs. shape of upstream phase
+The purpose of this section is to compare the shape of the given kick to the upstream phase - i.e. compare the upstream phase to the amplifier monitoring output and the difference in the downstream phase with PFF off and on. Again here my first attempts produced results that were not as I'd like, without particularly good agreement between the difference in the downstream phase and the upstream phase shape. Looks kind of like the two are rotated with respect to each other. More analysis needed here to check more thoroughly. I think this section should definitely be included, but I need either an explanation for the differences or to find datasets where the agreement is much better.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/pffKickShape}
+  \caption{Traces relative timing scan.}
+  \label{f:pffKickShape}
+\end{figure}
 
 \subsection{Orbit Closure}
 \label{ss:orbitClosure}
+
+At CLIC the PFF system must not degrade the transverse beam stability. This means for any voltage sent to the kickers the horizontal beam orbit after the PFF chicane must be unchanged, or closed, despite the different orbits inside the chicane. As such, the PFF optics for the TL2 chicane at CTF3 is also designed to give a closed kick, as presented in Section~\ref{ss:pffMatched}. However, up until now the main focus during PFF operation has been the primary goal of reducing the downstream phase jitter and ensuring good beam transmission to the downstream phase monitor. As a result orbit closure after the TL2 chicane has not yet been strictly enforced during PFF operation as will be seen in this section, but the current status is shown here as an additional cross-check of the PFF optics and to highlight where improvements are needed for future tests.
+
+Using the same constant kick data as Section~\ref{ss:corrRange} Figure~\ref{f:HOrbitVsInput} shows mean the horizontal orbit before, inside and after the TL2 chicane across the full \(\pm2\)~V range of inputs sent to the amplifier. The vertical black lines on the plot mark the approximate location of the entry to the chicane (index CC.500) and the exit of the chicane (index CC.800), with the two kickers being located at CC.480 and CC.780. Two BPMs before and after the chicane, as well as the four inside the chicane, are included. The plotted positions are the difference between the kicked and nominal (non-kicked) orbit at each BPM, thus removing any misalignment in the BPM centres. Before the chicane and the first kickers there is no significant effect on the orbit as expected. Inside the chicane the PFF system induces an orbit offset of up to \(1.4\pm0.1\)~mm. After the chicane, in BPMs CC.845 and CC.930, the orbit should return to zero in the ideal case. However, a clear residual offset can be seen, up to \(0.5\pm0.1\)~mm in CC.930.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/HOrbitVsInput}
+  \caption{Horizontal orbit offset in and around the TL2 chicane at different input voltages sent to the amplifier.}
+  \label{f:HOrbitVsInput}
+\end{figure}
+
+During this scan the input sent to both sides of the amplifier was the same magnitude. However, in Section~\ref{ss:ampLin} it was seen that the right side of the amplifier, sent to the second kicker, gave 4\% lower output than the left side. This could explain why the orbit after the chicane was not closed during this scan, and during PFF operation which has typically used equal gain for both correction outputs to date. Figure~\ref{f:orbClosureVsAmpModel} shows the expected orbit in the TL2 chicane in the case where both kickers are driven with the same voltage (``nominal optics'') and with the 2nd driven with a 4\% lower voltage (``real amplifier ratio'').
+\footnote{The term ``nominal optics" is used in this section to refer to the nominal PFF optics, not the nominal optics created in Chapter~\ref{c:tl2Optics} to use when the PFF system is not under operation.}
+The full MADX orbit propagated through all elements is shown, with the eight real measured BPM offsets also included at their respective positions. Each BPM point represents the gradient of a linear fit using the variation with input voltage seen previously in Figure~\ref{f:HOrbitVsInput}. Before and inside the chicane the agreement between the BPM data and the model is excellent. As seen before, the BPM orbit is not closed after the chicane, unlike the nominal optics. If the actual kicker voltage ratio is taken in to account the MADX orbit after the chicane is not closed either, but the offset has opposite polarity to the real data in the last BPM.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/orbClosureVsAmpModel}
+  \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data, nominal model and model taking in to account the difference in amplifier output voltage to each kicker.}
+  \label{f:orbClosureVsAmpModel}
+\end{figure}
+
+The true explanation for the non-closed orbit is that the quadrupole strengths used in the machine setup are not exactly nominal. Although every effort has been made to keep the TL2 optics as close to nominal as possible, particularly inside the chicane, it is an extremely sensitive area for the setup of CTF3 and beam transport in to the CLEX area downstream of TL2 (including the location of the downstream phase monitor in the TBL line) is always difficult. Minor modifications have therefore been necessary in order to achieve full beam transmission to the downstream area, both for PFF and other experiments at CTF3. The largest changes have been made to the four quadrupoles following the chicane but one quadrupole inside the chicane, CC.IQFL0730 (just prior to the 2nd kicker) has a set value \(10\%\) lower than the nominal optics, as well as differences up to \(2\%\) in the other quadrupoles. Using the real quadrupole strengths used in the machine gives the result shown in Figure \ref{f:orbClosureVsQuadModel}. In this case the agreement between the model and the data is also extremely good after the chicane. It may still be possible to compensate for these differences by outputting different voltages to each kicker and this will be investigated. Alternatively, a completely nominal optics can be set in the chicane purely for the purposes of verifying orbit closure, reverting back to non-nominal optics and closure but good beam transmission for normal PFF operation.
+
+[TODO: Not enough detail r.e. why beam transport there is difficult etc.?]
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
+  \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data, nominal model and model taking in to account the quadrupole currents in the real machine setup.}
+  \label{f:orbClosureVsQuadModel}
+\end{figure}
+
+[Comment for Piotr: With these quad currents also expect to see some dispersion leaking  out of the chicane. Up to 0.3 m in girder 9.]
 
 \newsection{timing}{Correction Output Timing}
 
@@ -311,14 +362,14 @@ Shape of FF kick on BPMs vs. shape of upstream phase
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.45\textwidth]{Figures/commissioning/relativeTimingScan_traces}
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relativeTimingScan_traces}
   \caption{Traces relative timing scan.}
   \label{f:relativeTimingScan_traces}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.45\textwidth]{Figures/commissioning/relativeTimingScan_slopeFit}
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relativeTimingScan_slopeFit}
   \caption{Relative timing scan - fit to rising/falling edge.}
   \label{f:relativeTimingScan_slopeFit}
 \end{figure}
