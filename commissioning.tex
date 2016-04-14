@@ -214,11 +214,6 @@ Online display
 \label{ss:zeroPhase}
 
 
-\newsection{measLatency}{Latency}
-
-Kicker pick-up theory
-Kicker why drive downstream end theory
-Cable length measurements (cutting, matching length of drive pairs)
 
 \newsection{constKicks}{Kicker and Optics Performance Verification}
 
@@ -333,9 +328,11 @@ The full MADX orbit propagated through all elements is shown, with the eight rea
   \label{f:orbClosureVsAmpModel}
 \end{figure}
 
-The true explanation for the non-closed orbit is that the quadrupole strengths used in the machine setup are not exactly nominal. Although every effort has been made to keep the TL2 optics as close to nominal as possible, particularly inside the chicane, it is an extremely sensitive area for the setup of CTF3 and beam transport in to the CLEX area downstream of TL2 (including the location of the downstream phase monitor in the TBL line) is always difficult. Minor modifications have therefore been necessary in order to achieve full beam transmission to the downstream area, both for PFF and other experiments at CTF3. The largest changes have been made to the four quadrupoles following the chicane but one quadrupole inside the chicane, CC.IQFL0730 (just prior to the 2nd kicker) has a set value \(10\%\) lower than the nominal optics, as well as differences up to \(2\%\) in the other quadrupoles. Using the real quadrupole strengths used in the machine gives the result shown in Figure \ref{f:orbClosureVsQuadModel}. In this case the agreement between the model and the data is also extremely good after the chicane. It may still be possible to compensate for these differences by outputting different voltages to each kicker and this will be investigated. Alternatively, a completely nominal optics can be set in the chicane purely for the purposes of verifying orbit closure, reverting back to non-nominal optics and closure but good beam transmission for normal PFF operation.
+The true explanation for the non-closed orbit is that the quadrupole strengths used in the machine setup are not exactly nominal. Although every effort has been made to keep the TL2 optics as close to nominal as possible, particularly inside the chicane, it is an extremely sensitive area for the setup of CTF3 and beam transport in to the CLEX area downstream of TL2 (including the location of the downstream phase monitor in the TBL line) is always difficult. Minor modifications have therefore been necessary in order to achieve full beam transmission to the downstream area, both for PFF and other experiments at CTF3. The largest changes have been made to the four quadrupoles following the chicane but one quadrupole inside the chicane, CC.IQFL0730 (just prior to the 2nd kicker) has a set value \(10\%\) lower than the nominal optics, as well as differences up to \(2\%\) in the other quadrupoles. Using the real quadrupole strengths used in the machine gives the result shown in Figure \ref{f:orbClosureVsQuadModel}. In this case the agreement between the model and the data is also extremely good after the chicane. It may still be possible to compensate for these differences by outputting different voltages to each kicker and this will be investigated. Alternatively, a completely nominal optics can be set in the chicane purely for the purposes of verifying orbit closure, reverting back to non-nominal optics and closure if needed to achieve good beam transmission for normal PFF operation.
 
 [TODO: Not enough detail r.e. why beam transport there is difficult etc.?]
+
+[TODO: Do have data with different ratios of kicker strengths. Can analyse to see effect on closure. Considering quad currents don't think it adds anything to discussion here, though.]
 
 \begin{figure}
   \centering
@@ -348,30 +345,128 @@ The true explanation for the non-closed orbit is that the quadrupole strengths u
 
 \newsection{timing}{Correction Output Timing}
 
+\subsection{Kicker Cable Lengths}
+\label{ss:kickerCables}
+
+Kicker why drive downstream end theory
+Cable length measurements (tdr, matching length of drive pairs)
+
+
+
+
 \subsection{Absolute Timing}
 \label{ss:absTiming}
+
+
 
 \subsubsection{Using Beam Pickup}
 \label{sss:beamPickup}
 
-\subsubsection{Using BPMs}
-\label{sss:relativeBPM}
+[TODO: Kicker pick-up theory. In particular, is time between pickup exactly the beam pulse length or is it longer by double the kicker length?]
 
-\subsection{Relative Kicker Timing}
-\label{ss:relativeTiming}
+Figure~\ref{f:beamPickup_noKick} shows the beam pickup at the start and end of the pulse from the PFF kickers at CTF3, as seen on one of the amplifier monitoring outputs (each of the four amplifier monitoring outputs, one for the upstream end of each strip prior to the signal being terminated at the amplifier, gives a similar response). The separation of the peaks in the beam pickup is \(1.1~\mathrm{\mu s}\), thus the same as the CTF3 pulse length as expected. By comparing the timing of these peaks with respect to the start and end of the amplifier output pulse, using the same amplifier monitoring signal, it is possible to ensure that the correction output arrives in sync with the beam.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relativeTimingScan_traces}
-  \caption{Traces relative timing scan.}
-  \label{f:relativeTimingScan_traces}
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/beamPickup_noKick}
+  \caption{Beam pickup on kicker strips as seen on amplifier monitoring signals.}
+  \label{f:beamPickup_noKick}
+\end{figure}
+
+An example of this is shown in Figure~\ref{f:absDelay0_all}. A constant DAC output is sent from the FONT5a board to the amplifier and both this output pulse and the beam pickup, at samples 275 and 493, are visible in the figure. Importantly, the DAC output is gated using the upstream phase monitor diode signal (in other words, the constant DAC output is only sent during the time when the diode is non-zero) and this has two consequences. Firstly, the amplifier output pulse has the same length as the beam pulse in the upstream phase monitor. Secondly, the timing of the output is identical to what it would be in normal PFF operation. In the case of Figure~\ref{f:absDelay0_all} the drive to the amplifier is sent as quickly as possible after the arrival of the upstream diode signal at the FONT5a board. It can be seen that the amplifier pulse arrives before the beam pickup, thus with the PFF system setup this way the correction would be applied slightly early. This result therefore proves that the PFF system just meets the latency requirements, with the overall time needed to transport and process all the relevant signals a few tens of nanoseconds less than the 380~ns time of flight of the beam between the upstream phase monitor and the first kicker. However, what is also clear in the figure is that the time offset between the start of the amplifier pulse and the first beam pickup spike is much larger than the time difference between the end of the amplifier pulse and the second beam pickup spike. This is due to the energy transient across the first 100~ns of the CTF3 beam pulse which is present in the upstream phase monitor but is then lost prior to the TL2 chicane, predominantly in TL1. As a result the downstream beam pulse is shorter than the upstream beam pulse which defines the length of the correction output. Therefore, in order to align the correction output with the beam the signals from the end of the amplifier and beam pulses must be used, not the start.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absDelay0_all}
+  \caption{Output delay of 0 clock cycles. Full pulse.}
+  \label{f:absDelay0_all}
+\end{figure}
+
+The firmware for the FONT5a board includes an output delay parameter that can be used to fine-tune the timing of the correction output sent to the amplifier. This can be done independently for each of the two correction outputs so that it can be ensured the correction arrives in sync with the beam in each kicker individually (the relative timing of the two kickers is discussed in the next section). The delay can be varied between 0~and~31~clock~cycles in integer steps, with one clock cycle corresponding to one period of the 357~MHz ADC clock frequency, or 2.8~ns. A delay of up to 86.8~ns can therefore be added to the correction outputs. Figure~\ref{f:absDelayAll_endPulse} shows the effect of varying the output delay across the full range of possible values, zoomed in on the end of the pulse. For all output delays the beam pickup remains at sample 493, as expected. Meanwhile, the end of the amplifier pulse is moved from before the beam pickup (output too early) to after the beam pickup (output too late). To achieve the optimal correction timing the end of the amplifier pulse must be aligned with the beam pickup and this is achieved with a delay of 7~clock~cycles, or 19.6~ns, as shown in Figures~\ref{f:absDelay7_all}~and~\ref{f:absDelay7_end}. This delay has been used for the latest PFF runs presented in Chapter~\ref{c:feedforward}. Due to ambiguity in which point along the falling edge of the amplifier pulse the beam pickup should be aligned to there may be a remaining error of up 3 clock cycles in the exact alignment, and this can only be verified by beam based measurements (not using the amplifier monitoring outputs). 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absDelayAll_endPulse}
+  \caption{Output delay scan, end of pulse.}
+  \label{f:absDelayAll_endPulse}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relativeTimingScan_slopeFit}
-  \caption{Relative timing scan - fit to rising/falling edge.}
-  \label{f:relativeTimingScan_slopeFit}
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absDelay7_all}
+  \caption{Output delay of 7 clock cycles. Full pulse.}
+  \label{f:absDelay7_all}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absDelay7_end}
+  \caption{Output delay of 7 clock cycles. End of pulse.}
+  \label{f:absDelay7_end}
+\end{figure}
+
+
+\subsubsection{Using BPMs}
+\label{sss:relativeBPM}
+
+This section presents one way in which the correction output timing can be determined using a combination of the phase monitor measurements and a BPM signal downstream of the TL2 chicane. The results shown here were performed with the first, lower power version of the amplifier and the FONT5 rather than the later FONT5a board, and because of this the optimal output delay calculated here does not agree with the value of 7~clock~cycles from the beam pickup based measurement above. The newer hardware has the same latency as the previous versions, thus the difference does not come from hardware changes but rather associated changes to cabling between the phase monitor electronics, FONT5a board and amplifier. The measurement will be repeated in the future to verify that both methods give consistent results when the same hardware and cabling setup is used.
+
+The FONT5 (and FONT5a) board firmware provides the functionality to be able to change the gain of each PFF correction output independently. This means it is possible to apply the correction to only one kicker, or to kick the beam in the same direction in each kicker (i.e. to use the same sign for the gain in each kicker, rather than gains with equal magnitude but opposite sign). In both of these cases the kicked PFF orbit in the chicane is not closed, thus the horizontal position along the beam pulse in a BPM after the chicane depends on the shape and timing of the applied correction.\footnote{In Section~\ref{ss:orbitClosure} it was shown that the corrected orbit is not perfectly closed in normal PFF operation either. However, in this case no attempt at orbit closure is made so the measured effect seen in the BPMs is much larger.}
+
+Figure~\ref{f:absTimBeam_d0} compares the upstream phase, downstream phase and horizontal position (in a BPM after the TL2 chicane) along the pulse in the case where the PFF correction is applied with gains set to kick the beam in the same direction in each kicker, and with no output delay applied in the FONT5 board. The data is taken in interleaved mode, with the plotted phases shown using the PFF off data and the BPM trace being the difference between the PFF on and PFF off data. Each signal is scaled and sign flipped where necessary to give variations along the pulse with the same magnitude and sign, in arbitrary units. The BPM and phase monitor signals are acquired with the same sampling frequency of 192~MHz, with each aligned so that the end of the pulse is at the same sample number. 
+
+By taking the difference of the PFF off and PFF on data in the BPM any residual orbit variations along the pulse not related to the PFF system are removed, thus the remaining shape should match that of the PFF correction output, which in turn is linked to the upstream phase. The downstream phase should also have the same shape as the upstream phase with the PFF system off, within the limits of the upstream-downstream phase correlation achieved at this time. During this measurement many oscillations along the upstream phase were present, which usually are not desired but for this measurement are perfect points of reference to check the time alignment of the signals. As expected the overall shape of the residual horizontal position in the BPM along the pulse and the two phase signals is very similar. The largest feature in the upstream phase that is present in all three signals occurs at sample 671 in the upstream phase, with the location of the peak of this oscillation in the phase signals and the BPM marked by vertical black lines in the figure. The peak as seen in the BPM signal is clearly before the peak in the phase monitor signals thus in this case the correction was applied early, with a measured offest of -36~ns between the peaks.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absTimBeam_d0}
+  \caption{Kick output with no delay as seen on BPM and phase signals.}
+  \label{f:absTimBeam_d0}
+\end{figure}
+
+This measurement was repeated with four different correction output delays applied in the FONT5 board, at delays of 0, 10, 20 and 30~clock~cycles (0 to 84~ns), which includes points where the correction is applied both early and late. Fitting the measured time offset between the peaks in the BPM and the phase in the same way as before yields an optimal correction output delay to apply of \(39\pm7\)~ns (Figure \ref{f:absTimBeam_fit}), or \(14\pm3\)~clock~cycles. Applying this delay in data analysis gives the result shown in Figure~\ref{f:absTimBeam_opt}, in which the similarity of the three signals becomes clear.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absTimBeam_fit}
+  \caption{Fit time offset between kick and beam at different output delays.}
+  \label{f:absTimBeam_fit}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absTimBeam_opt}
+  \caption{Alignment between BPMs and phase signals with optimal delay applied in analysis.}
+  \label{f:absTimBeam_opt}
+\end{figure}
+
+
+\subsection{Relative Kicker Timing}
+\label{ss:relativeTiming}
+
+
+offset calculated first slope: \(1.9\pm2.0\)~clock~cycles
+offset calculated second slope: \(0.13\pm0.51\)~clock~cycles (better data)
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relDelay_sim}
+  \caption{Simulated response to offset kicks.}
+  \label{f:relDelay_sim}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relDelay_traces}
+  \caption{Measured BPM offset for different relative kick delays.}
+  \label{f:relDelay_traces}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relDelay_fit}
+  \caption{Fitted peak BPM offset vs. relative kick delay.}
+  \label{f:relDelay_sim}
 \end{figure}
 
 
