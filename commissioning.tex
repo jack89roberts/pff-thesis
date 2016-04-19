@@ -31,25 +31,46 @@ Interleaved mode
 \subsection{ADC Droop Correction}
 \label{ss:droopCorr}
 
-The droop in the response of the FONT5 ADCs, as most clearly seen in the output of the diode channel in Figure \ref{f:diodeDroop} (although it also effects the mixer channel), is not an issue for the work the FONT group does at ATF2 where the signals are well approximated by delta functions separated by \(\sim\)100~ns. Although the droop has been seen previously, its significance for the continuous microsecond length pulse at CTF3 had not been considered because of this.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFiltOffOn}
+  \caption{Diode output along the pulse with the IIR filter off and on.}
+  \label{f:iirDiodefiltOffOn}
+\end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/diodeDroop}
-  \caption{Mean diode and mixer output with no filter.}
-  \label{f:diodeDroop}
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
+  \caption{Diode output along the pulse with the IIR filter off and on. Zoomed in.}
+  \label{f:iirDiodefiltOffOn_zoom}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFit}
+  \caption{Exponential fit to diode droop.}
+  \label{f:iirDiodeFit}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFitResid}
+  \caption{Residuals between diode exponential fit and actual diode output.}
+  \label{f:iirDiodeFitResid}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirPhaseFiltOffOn}
+  \caption{Phase along the pulse with the IIR filter off and on.}
+  \label{f:iirPhasefiltOffOn}
+\end{figure}
+
+The droop in the response of the FONT5 ADCs, as most clearly seen in the output of the diode channel in Figure \ref{f:diodeDroop} (although it also effects the mixer channel), is not an issue for the work the FONT group does at ATF2 where the signals are well approximated by delta functions separated by \(\sim\)100~ns. Although the droop has been seen previously, its significance for the continuous microsecond length pulse at CTF3 had not been considered because of this.
 
 The droop emerges as a result of the use of AC coupling on the ADC input transformers for electrical isolation. This involves using a capacitor, the current across which is dependent on \({dV}/{dt}\) (\(V\) being voltage and \(t\) time), to remove the DC component from a signal. In particular for the diode channel, which should be a square wave, the output is increasingly well described by a DC signal on the flat top as you move away from the leading edge of the pulse, with the capacitor causing droop in the response as a result.
 
 In the simplest case the droop should be well described by an exponential decay of the form \(A\exp\left(-t/T\right)\). The droop makes it difficult to perform calibrations and measurements on the data and one way in which it could be removed in offline analysis is by determining the decay constants, \(T\), for each of the ADCs on the FONT5 board. To avoid the influence of beam effects tests were done in Oxford using a generated 10~\(\mu\)s DC pulse.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.45\textwidth]{Figures/commissioning/droopFit}
-  \caption{Attempted exponential fit to the ADC droop.}
-  \label{f:droopFit}
-\end{figure}
 
 Unfortunately, as can be seen in Figure \ref{f:droopFit} which shows an example of an exponential fit for one ADC, although the fits return good \(R^{2}\) values it is clear that the slope of the exponential curve is not a good match for the slope of the data. This is perhaps not unexpected as the ferrite cores used in the transformers have many non-linear properties. In fact, by using a fit with two exponential terms it is possible to obtain a perfect match to the data but at this point the complexity of the fit would make any attempt to remove the droop in real beam data in this way spurious.
 
@@ -74,7 +95,7 @@ First version (nov 2014) 350 V (check)
 
 Amplifier inputs:
 
-Trigger from FONT5a board
+Trigger from FONT5a board (TRIG OUT DELAY)
 
 DAC1 and DAC2 from FONT5a board
 
@@ -282,7 +303,7 @@ http://accelconf.web.cern.ch/accelconf/ipac2011/papers/tupc007.pdf
 \subsection{Variations Along Pulse}
 \label{ss:kickPulseVar}
 
-In this section I intended to check the stability of the constant kick along the pulse, as I did for the "Shape" section with the amplifier above. The results from the constant kick data do not look good, though - the errors are quite large and there are some nasty oscillations along the pulse, such as in the example Figure~\ref{f:phaseShiftAlongConstKick}. With the phase stability downstream a much longer scan would probably be needed to draw conclusions here, though even on longer time scales I think it needs to be checked that the difference between odd and even pulses converges to zero. As it is I would probably choose to skip this section, or possibly just show one of the better plots.
+[TODO: In this section I intended to check the stability of the constant kick along the pulse, as I did for the "Shape" section with the amplifier above. The results from the constant kick data do not look good, though - the errors are quite large and there are some nasty oscillations along the pulse, such as in the example Figure~\ref{f:phaseShiftAlongConstKick}. With the phase stability downstream a much longer scan would probably be needed to draw conclusions here, though even on longer time scales I think it needs to be checked that the difference between odd and even pulses converges to zero. As it is I would probably choose to skip this section, or possibly just show one of the better plots.]
 
 \begin{figure}
   \centering
@@ -294,7 +315,7 @@ In this section I intended to check the stability of the constant kick along the
 \subsection{Shape}
 \label{ss:kickShape}
 
-The purpose of this section is to compare the shape of the given kick to the upstream phase - i.e. compare the upstream phase to the amplifier monitoring output and the difference in the downstream phase with PFF off and on. Again here my first attempts produced results that were not as I'd like, without particularly good agreement between the difference in the downstream phase and the upstream phase shape. Looks kind of like the two are rotated with respect to each other. More analysis needed here to check more thoroughly. I think this section should definitely be included, but I need either an explanation for the differences or to find datasets where the agreement is much better.
+[TODO: The purpose of this section is to compare the shape of the given kick to the upstream phase - i.e. compare the upstream phase to the amplifier monitoring output and the difference in the downstream phase with PFF off and on. Again here my first attempts produced results that were not as I'd like, without particularly good agreement between the difference in the downstream phase and the upstream phase shape. Looks kind of like the two are rotated with respect to each other. More analysis needed here to check more thoroughly. I think this section should definitely be included, but I need either an explanation for the differences or to find datasets where the agreement is much better.]
 
 \begin{figure}
   \centering
@@ -345,11 +366,78 @@ The true explanation for the non-closed orbit is that the quadrupole strengths u
 
 \newsection{timing}{Correction Output Timing}
 
+All the results based on the amplifier outputs and kicked beam presented so far have used a constant output voltage sent from the FONT5a board across the full \(1.4~\mathrm{\mu s}\) time window that the amplifier is powered for. As the \(1.4~\mathrm{\mu s}\) amplifier output sent to the kickers is much longer than the \(1.1~\mathrm{\mu s}\) CTF3 beam pulse it is easy to ensure that the full length of the pulse experiences the constant kick with this setup. However, for operation of the PFF system precise control of the correction output timing becomes critical. In order to remove phase variations along the pulse with the PFF system the output correction signal, shaped by the upstream phase, must arrive at the kickers exactly in sync with the beam. Any timing misalignment between the beam and correction signal arrival will result in residual oscillations along the pulse in the downstream phase, even in the case where the upstream-downstream phase propagation is perfect. Approximating the phase sag along the pulse to be quadratic, \(\phi_{u}(t) \sim \phi_{d}(t) \sim t^2\), a misaligned correction would yield a corrected downstream phase with a linear increase in phase along the pulse with time, \(\phi_{PFF}(t)~\sim~\phi_d(t)-\phi_u(t+\delta)~\sim -2\delta t - \delta^2\), for example, where \(\phi_{PFF}\) is the corrected phase, \(\phi_{d}\) the uncorrected downstream phase, \(\phi_{u}\) the upstream phase, \(t\) the time and \(\delta\) the time misalignment in the applied correction. Also, the effect is particularly significant for any higher frequency variations in phase along the pulse. If a 40~ns oscillation is present in the upstream phase but the correction is applied with a 50~ns delay, for example, a second 40~ns oscillation with opposite sign would be introduced to the ``corrected'' downstream phase at a later time with no change to the initial oscillation. Although the effects are most visible along the pulse, any timing delay will also degrade the achievable mean phase jitter. This section gives an overview of the main methods that have been used to ensure that the correction output to the two kickers arrives in time with the beam. 
+
 \subsection{Kicker Cable Lengths}
 \label{ss:kickerCables}
 
-Kicker why drive downstream end theory
-Cable length measurements (tdr, matching length of drive pairs)
+The cables carrying the correction signal between the PFF amplifier and the kickers in the TL2 chicane are the single largest contributor to the overall system latency. They must be routed from the PFF electronics racks (in the klystron gallery, one floor and directly above the location of the upstream phase monitors), down in to the machine hall and across the width of the CTF3 facility to the TL2 chicane. The initial kicker cables installation used pre-existing cable trays and gave a signal transit time of 260~ns, with a signal speed of 0.66~c and approximate lengths of 50~m. This is more than two thirds the overall PFF latency budget, which must be lower than the 380~ns beam time of flight between the upstream phase monitor and the first kicker. Considering the latencies of the various pieces of hardware in the PFF system chain as well as the cables between the upstream phase monitors and the PFF electronics (Section~\ref{ss:availLatency}), the overall PFF system latency would have been in excess of the \(380\)~ns beam time of flight with this setup. By re-routing the cables on to a dedicated pathway and trimming any remaining slack it was possible to reduce the cable lengths by up to 90~ns, bringing the system within the latency budget as will be seen in the following sections. Precise measurements of the cable lengths with this setup are presented in this section, as well as their significance beyond ensuring the system is within the latency requirements.
+
+With two kickers, two strips per kicker and two ends of each strip a total of eight cables are needed. The drive from the amplifier is sent to the downstream end of each kicker strip, traverses the kicker, and is then terminated back at the amplifier after leaving the upstream end. Drive is sent to the downstream end of each kicker (meaning it propagates through the kicker in the opposite direction to the beam) so that the electric and magnetic fields between the strips are in the same direction, as discussed in Section~\ref{ss:kickers}. Rather than being connected directly to the amplifier, the eight kicker cables are connected to a patch panel below the amplifier in the PFF electronics racks. Eight additional cables, around 70~cm in length, are used to connect the amplifier outputs to the patch panel. This is in order to create a tidier cabling setup in the rack as well as making changes to the amplifier cabling easier, when necessary. [TODO: Picture]. The kicker cables are of type [TODO: REF] with HN-type connectors and the patch panel cables of type [TODO: REF] with N-type connectors to match the amplifier.
+
+The length of the eight kicker cables and eight patch panel cables has been measured using time domain reflectometry (TDR) on a network analyser [TODO: REF?]. The network analyser is used to send a short pulse down the cable,  with one end of the cable connected to the network analyser and the other end disconnected so it is not correctly terminated. As the signal reaches the (non-terminated) end of the cable the discontinuity in impedance creates a reflected signal that propagates back to the network analyser. The time difference between when the signal was output and when the reflected signal arrives back at the network analyser therefore corresponds to double the one-way signal transit time in the cable. [TODO: Example TDR plot?] 
+
+Table~\ref{t:kickCabLengths} shows the kicker cable lengths and Table~\ref{t:shortCabLengths} the patch panel cable lengths that were determined with this method. Quoted errors of \(\pm0.05\)~ns are estimated based on the sampling rate of the measurement. The amplifier port, patch panel port and kicker strip that the cables are connected to are also shown in the table, as well as their corresponding CTF3 identifying number for reference. For the amplifier port labels the three letters correspond to:
+\begin{itemize}
+\item Whether the cable is connected to the \textbf{L}eft or \textbf{R}ight side of the amplifier.
+\item  Whether the cable is connected to the amplifier \textbf{A} or \textbf{B} outputs on that side.
+\item Whether the cable is connected to the amplifier \textbf{D}rive or \textbf{T}erminator.
+\end{itemize}
+And for the kicker strip labels the three letters correspond to:
+\begin{itemize}
+\item Whether the cable is connected to the first (\textbf{1}) or second (\textbf{2}) kicker.
+\item  Whether the cable is connected to the \textbf{U}pstream or \textbf{D}ownstream end of the kicker strip.
+\item Whether the cable is connected to the \textbf{L}eft or \textbf{R}ight kicker strip, as viewed looking at the upstream end of the kicker.
+\end{itemize}
+Finally, the patch panel connectors are simply labelled from 1 to 8 from left to right, as viewed from the front of the rack. All of the cable connections between the amplifier, patch panel and kickers are shown in Figure~\ref{f:kickerCables}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{| c | c | c | c | c |}
+	   \hline
+       Label & Length & Amplifier Port & Patch Panel Port & Kicker Strip \\ \hline
+       2907701A & \(171.28\pm0.05\)~ns & LAT & 1 & 1UL \\
+       2907703A & \(171.30\pm0.05\)~ns & LBT & 2 & 1UR \\
+       2907700A & \(171.29\pm0.05\)~ns & LAD & 3 & 1DL \\
+       2907702A & \(171.30\pm0.05\)~ns & LBD & 4 & 1DR \\
+       2907838A & \(205.45\pm0.05\)~ns & RAD & 5 & 2DL \\
+       2907740A & \(205.62\pm0.05\)~ns & RBD & 6 & 2DR \\
+       2907739A & \(205.15\pm0.05\)~ns & RAT & 7 & 2UL \\
+       2907741A & \(204.49\pm0.05\)~ns & RBT & 8 & 2UR \\
+ 	   \hline
+    \end{tabular}
+    \caption{Lengths of kicker cables.}
+  	\label{t:kickCabLengths}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{| c | c | c | c | c |}
+	   \hline
+       Label & Length & Amplifier Port & Patch Panel Port \\ \hline
+       2907701B & \(2.99\pm0.05\)~ns & LAT & 1 \\
+       2907703B & \(3.03\pm0.05\)~ns & LBT & 2 \\
+       2907700B & \(3.03\pm0.05\)~ns & LAD & 3 \\
+       2907702B & \(3.01\pm0.05\)~ns & LBD & 4 \\
+       2907838B & \(3.03\pm0.05\)~ns & RAD & 5 \\
+       2907740B & \(3.05\pm0.05\)~ns & RBD & 6 \\
+       2907739B & \(3.03\pm0.05\)~ns & RAT & 7 \\
+       2907741B & \(3.03\pm0.05\)~ns & RBT & 8 \\
+ 	   \hline
+    \end{tabular}
+    \caption{Lengths of cables between amplifier and patch panel.}
+  	\label{t:shortCabLengths}
+  \end{center}
+\end{table}
+
+The patch panel cables all have lengths of around 3~ns, with the lengths of each matched to within the measurement error. After the re-routing and shortening of the kicker cables the cables connected to the first kicker have a length of around \(170\)~ns, whilst the cables for the downstream kicker are longer at around \(205\)~ns. For the downstream kicker the latency requirements are slightly relaxed due to the additional 36~ns beam time of flight between the kickers. Rather than also shortening the downstream kicker cables as much as possible some additional slack was left so that the difference in lengths is similar to the difference in the beam time of flight between the two. This means the two correction outputs (one for each kicker) can be sent from the FONT5a board at, or close to, the same time as discussed in Section~\ref{ss:relativeTiming}.
+
+Although all the upstream kicker cables are matched within the measurement error there are some differences in the downstream kicker cable lengths, with cable 2907741A more than 1~ns shorter than cable 2907740A, for example. If there is a difference between the lengths of the cables connected to the downstream left and downstream right strips of a kicker (the driven end) there will be a time offset in the voltage applied to each side of the kicker, which would degrade the quality of the PFF correction. However, there is no need for the cables connected to the upstream ends of the kickers to be of matched lengths, the only requirement is that they are terminated correctly at the amplifier. The shorter 2907741A cable is therefore connected to the upstream end of the second kicker, and the cables 2907838A and 2907740A, with lengths matched to within 200~ps, are used to carry the amplifier output to the downstream end of the strips.
+
+[TODO: Tolerances for cable length matching?]
+
+
 
 
 
@@ -444,9 +532,9 @@ This measurement was repeated with four different correction output delays appli
 \subsection{Relative Kicker Timing}
 \label{ss:relativeTiming}
 
+For the phase correction the absolute output timing sent to the first kicker, as derived above, is the most critical as this defines the alignment of the applied phase shift in the chicane with the beam. The second kicker's main purpose is then to close the kick created by the first, ensuring the orbit after the chicane is closed (with the caveats already mentioned in Section~\ref{ss:orbitClosure}). For the purposes of orbit closure it is also important to ensure that the correction arrives at the second kicker in time with the beam. As discussed in Section~\ref{ss:kickerCables} the beam time of flight between the kickers is about 36~ns, thus the correction must arrive at the second kicker 36~ns later than the first kicker. Most of this difference should be accounted for by the longer cable lengths for the second kicker, but the precise relative timing is checked here. In this context the relative timing means the additional output delay that must be applied to the FONT5a correction output for the second kicker with respect to the first in order to ensure the correction is aligned in time with the beam in both kickers.
 
-offset calculated first slope: \(1.9\pm2.0\)~clock~cycles
-offset calculated second slope: \(0.13\pm0.51\)~clock~cycles (better data)
+Figure~\ref{f:relDelay_sim} shows a simulated example of the expected effect of kicking the beam with a relative time offset in each kicker, in this case with the output to the second kicker arriving later than the first kicker (with respect to the beam pulse). The kickers are driven with opposite polarity in the same way as the PFF system, and the first kicker is shown with a larger output than the second. The total kick received in the chicane is given by the sum of the two, shown in black. In the ideal case the total/residual kick in the chicane should be zero so that the orbit is closed after the chicane. However, with a timing offset between the two kickers there are large peaks in the residual kick at the start and end of the pulse, where only one of the two kickers receives its full drive. Due to the different amplitude of the two kickers the residual kick is also non-zero in the central part of the pulse. With well-aligned timing the residual kick would be constant along the full pulse length, or zero across the full pulse length if the kicks had matched amplitudes.
 
 \begin{figure}
   \centering
@@ -455,6 +543,8 @@ offset calculated second slope: \(0.13\pm0.51\)~clock~cycles (better data)
   \label{f:relDelay_sim}
 \end{figure}
 
+By varying the relative timing of the two correction outputs on the FONT5a board (K1 and K2 delay) and using a BPM after the TL2 chicane to measure the size of the peaks at the start and end of the pulse resulting from the offset kicks (in the same way as Figure~\ref{f:relDelay_sim}) the optimal relative delay can be determined. The optimal relative delay is the point that minimises the size of the peaks on the rising/falling edge of the pulse, with the peak magnitude  approximately linearly dependent on the delay. Figure~\ref{f:relDelay_traces} shows the result of doing this, using a constant DAC output from the FONT5a board applied across a 168~ns portion of the pulse. The horizontal position in a BPM after the TL2 chicane is plotted for relative K2 delays ranging between -10 (K1 output delayed with respect to K2) to +10 (K2 output delayed with respect to K1) clock~cycles. Aside from the asymmetry between the size of the peaks at the start and end of the pulse the result is as expected from the example previously discussed. [TODO: Why asymmetry? Differences in output along pulse?]. Note the non-zero position offset in the central part of the pulse. Based on the orbit closure results in Section~\ref{ss:orbitClosure} this is predominantly due to optics differences leading to a non-closed orbit, rather than the small difference in amplifier output voltage to each kicker.
+
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/commissioning/relDelay_traces}
@@ -462,14 +552,20 @@ offset calculated second slope: \(0.13\pm0.51\)~clock~cycles (better data)
   \label{f:relDelay_traces}
 \end{figure}
 
+Figure~\ref{f:relDelay_fit} then shows the peak beam offset in the BPM versus the relative K2 delay using the falling edge of the pulse. The peak beam offset is defined as the difference between the maximum and minimum beam position after the chicane between sample 458 and 477 (as seen in Figure~\ref{f:relDelay_traces} [TODO: Add vertical lines to show ranges?]). As the K2 delay approaches the optimal value the difference in beam position in this range converges to the 0.3~mm offset in the flat central part of the kicked pulse. The point of intersection between the two linear fits shown (one for the points with a positive peak position and the other for points with a negative peak) gives the optimal relative K2 offset to be \(0.1\pm0.5\)~clock~cycles. Repeating the procedure for the peaks at the rising edge of the pulse gives a result of \(1.9\pm2.0\)~clock~cycles, and the two results combine to give an optimal value of \(0.5\pm0.6\)~clock~cycles.
+
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/commissioning/relDelay_fit}
   \caption{Fitted peak BPM offset vs. relative kick delay.}
-  \label{f:relDelay_sim}
+  \label{f:relDelay_fit}
 \end{figure}
 
-
+Relative K2 delays of both 0 and 1 clock~cycles have been used during PFF operation, with no measurable difference in the PFF results between the two to date although this will have to be verified with further orbit closure tests. Adding the absolute delay of 7~clock~cycles derived in Section~\ref{ss:absTiming}, the final delays to apply in the FONT5a board are:
+\begin{itemize}
+\item \textbf{K1 delay}: 7 clock~cycles.
+\item \textbf{K2 delay}: 7 or 8 clock~cycles.
+\end{itemize}
 
 %\newsection{corrBandwidth}{Correction Bandwidth}
 
