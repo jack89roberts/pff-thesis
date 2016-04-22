@@ -69,7 +69,7 @@ All the parameters and controls that must be adjusted during the PFF system setu
 
 \textbf{K1, K2 const DAC}: Constant DAC values can range between \(\pm4096\)~counts, or \(\pm2\)~V sent to the amplifier, and can be varied independently for each output.
 
-\textbf{Gain}: The PFF gain can also be set independently for each correction output, with each being a 14-bit value (\(\pm8192\)~units). The conversion between the gain in FONT units and the real applied gain is derived in Section~\ref{ss:pffFirmware}. An applied gain of 711~units corresponds to a real gain of approximately 1 (with a gain of 711 an upstream phase offset of 1~degree corresponds to a downstream phase correction of approximately -1~degrees).
+\textbf{Gain}: The PFF gain can also be set independently for each correction output, with each being a 14-bit value (\(\pm8192\)~units). The conversion between the gain in FONT units and the real applied gain is derived in Section~\ref{ss:pffFirmware}. An applied gain of 624~units corresponds to a real gain of approximately 1 (with a gain of 624 an upstream phase offset of 1~degree corresponds to a downstream phase correction of approximately -1~degrees).
 
 \textbf{Channel Offset:} To maximise the effect of the PFF system it is necessary to zero the mean upstream mixer (ADC2) output in the central region of the pulse where the correction is being attempted (the start and end of the pulse can not be fully corrected due to the large phase sag, so the central portion is usually used). Ideally this should be adjusted by varying the Mon1 phase shifter, but this can not be done remotely so the channel offset on the FONT5a board can be used instead to make small adjustments from the control room. For large phase offsets giving close to maximum mixer output the phase monitor resolution is degraded (Section~\ref{s:resolution}) and the small angle approximation used in the FONT5a phase reconstruction (Section~\ref{ss:pffFirmware}) becomes invalid, in which case the phase shifter should still be used to zero the phase. The channel offset adds a static offset in counts to the ADC2 output, allowing the mixer output to be zeroed at any point along the pulse. The consequences of using a non-optimal Channel Offset are discussed in Section~\ref{ss:longFF_upDrifts}.
 
@@ -85,6 +85,8 @@ All the parameters and controls that must be adjusted during the PFF system setu
 \subsection{ADC Droop Correction}
 \label{ss:droopCorr}
 
+Although the FONT5a (and previous FONT5) boards have been (and still are) used extensively at ATF2, KEK for IP feedback tests by the FONT group [REF] prior to its application for the PFF system, it had not been routinely used to process long, microsecond like, pulse lengths such as the CTF3 beam signals. During the first tests of the FONT5 board at CTF3 (prior to the FONT5a board being available) it was immediately apparent that there was a large droop in the measured phase monitor diode outputs using the FONT ADCs. An example of this, taken from the FONT5a board, is shown in Figure~\ref{f:iirDiodefiltOffOn}, remembering that as the diodes are highly saturated the response should be close to a perfect square wave. The measured diode output droops by 200~counts (approximately 15\%) across the pulse length, with this difference also visible as an offset in the baseline after the pulse.
+
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFiltOffOn}
@@ -92,12 +94,9 @@ All the parameters and controls that must be adjusted during the PFF system setu
   \label{f:iirDiodefiltOffOn}
 \end{figure}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
-  \caption{Diode output along the pulse with the IIR filter off and on. Zoomed in.}
-  \label{f:iirDiodefiltOffOn_zoom}
-\end{figure}
+The droop emerges as a result of the use of AC coupling on the ADC input transformers for electrical isolation. This involves using a capacitor, the current across which is dependent on \({dV}/{dt}\) (\(V\) being voltage and \(t\) time), to remove the DC component (or mean offset) from a signal [REF]. In particular for the diode channel the output is increasingly well described by a DC signal on the flat top as you move away from the leading edge of the pulse, with the capacitor causing droop in the response as a result. There is also a small effect on the mixer output, as will be seen later. [TODO: Is the effect on the diode and mixer really different? Is this correctly taken in to account by the IIR filter?]
+
+In the simplest case the droop should be well described by an exponential decay of the form \(A\exp\left(-t/\tau\right)\), where \(t\) is the time or sample number along the pulse and \(\tau\) is the decay time constant. For the FONT5 board this only gave a rough approximation of the true droop characteristics due to non-linear properties of the input transformers. On the updated FONT5a board the transformers were changed to both reduce the magnitude of the droop and give closer to the expected exponential decay [REF]. Figure~\ref{f:iirDiodeFit} shows an exponential fit to the Mon1 diode output as seen on the FONT5a board (ADC1). Apart from a small deviation at the beginning of the pulse the agreement is excellent, with residuals to the fit of only up to 2~counts compared to a signal magnitude of 1250~counts. For ADC1 the fitted decay time constant is \(\tau = 838\pm16\)~samples, or \(2.35\pm0.05~\mathrm{\mu}\)s (with one ADC sample every 2.8~ns at 357~MHz). Each ADC on the FONT5a board has slightly different droop characteristics, with the decay time constant for ADC2 being \(938\pm18\)~samples, for example (calculated with the diode moved on to ADC2).
 
 \begin{figure}
   \centering
@@ -113,6 +112,43 @@ All the parameters and controls that must be adjusted during the PFF system setu
   \label{f:iirDiodeFitResid}
 \end{figure}
 
+In the case where the diode is used in the phase reconstruction as originally envisaged the ADC droop would propagate in to the applied correction and create an output to the amplifier that increases with time with respect to the ideal value (as the Mixer is divided by sqrt(Diode)). The effect on the correction is much smaller without diode normalisation but it still slightly distorts the measured Mixer input to ADC2. Therefore, a digital IIR filter has been implemented in the FONT5a board firmware to remove the exponential droop in the ADC outputs [REF]. This works by recursively adding the expected droop to the ADC output based on the known decay constants, so that:
+\begin{equation}
+y(t) = x(t) + \frac{1}{\tau} \sum_{i=1}^{t} x(i-1)
+\end{equation}
+\label{e:iirFilt}
+Where \(y(t)\) is the filtered ADC output at sample \(t\), \(x(t)\) is the original unfiltered output at sample \(t\), and \(\tau\) is the decay time constant. Rather than being hard-coded in the firmware the applied decay constant in the filter for each ADC is calculated using an 8-bit \(\pm64\) filter weight, which can be changed in the DAQ, which is then divided by a common division factor to get the real applied value of \(1/\tau\) [REF]. The optimal filter weights for each ADC in the FONT5a board currently used for PFF operation are shown in Table~\ref{t:filtWeights}, these can be converted in to the true decay constant values using the fitted values for ADC1 and ADC2 quoted above.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{| c | c |}
+	   \hline
+       ADC & Filter Weight \\ \hline
+       1 (Mon1 Diode) & 50 \\
+	   2 (Mon1 Mixer) & 56 \\
+	   3 & 50 \\
+	   4 & 53 \\
+	   5 & 45 \\
+	   6 & 51 \\
+	   7 & 48 \\
+	   8 & 55 \\
+	   9 & 49 \\
+ 	   \hline
+    \end{tabular}
+    \caption{IIR filter weights for the FONT5a board ADCs.}
+  	\label{t:filtWeights}
+  \end{center}
+\end{table}
+
+With the IIR filters enabled on the FONT5a board the droop on the diode (ADC1) is almost perfectly removed as shown in Figures~\ref{f:iirDiodefiltOffOn}~and~\ref{f:iirDiodefiltOffOn_zoom}, although in the zoomed in figure some slight deviation from flat is visible due to the residuals around the exponential fit seen previously. The effect on the reconstructed phase using only the mixer (ADC2) is shown in Figure~\ref{f:iirPhasefiltOffOn}, with a modest adjustment to the overall shape that is most visible at the start and end of the pulse.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
+  \caption{Diode output along the pulse with the IIR filter off and on. Zoomed in.}
+  \label{f:iirDiodefiltOffOn_zoom}
+\end{figure}
+
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirPhaseFiltOffOn}
@@ -120,22 +156,82 @@ All the parameters and controls that must be adjusted during the PFF system setu
   \label{f:iirPhasefiltOffOn}
 \end{figure}
 
-The droop in the response of the FONT5 ADCs, as most clearly seen in the output of the diode channel in Figure \ref{f:diodeDroop} (although it also effects the mixer channel), is not an issue for the work the FONT group does at ATF2 where the signals are well approximated by delta functions separated by \(\sim\)100~ns. Although the droop has been seen previously, its significance for the continuous microsecond length pulse at CTF3 had not been considered because of this.
-
-The droop emerges as a result of the use of AC coupling on the ADC input transformers for electrical isolation. This involves using a capacitor, the current across which is dependent on \({dV}/{dt}\) (\(V\) being voltage and \(t\) time), to remove the DC component from a signal. In particular for the diode channel, which should be a square wave, the output is increasingly well described by a DC signal on the flat top as you move away from the leading edge of the pulse, with the capacitor causing droop in the response as a result.
-
-In the simplest case the droop should be well described by an exponential decay of the form \(A\exp\left(-t/T\right)\). The droop makes it difficult to perform calibrations and measurements on the data and one way in which it could be removed in offline analysis is by determining the decay constants, \(T\), for each of the ADCs on the FONT5 board. To avoid the influence of beam effects tests were done in Oxford using a generated 10~\(\mu\)s DC pulse.
-
-Unfortunately, as can be seen in Figure \ref{f:droopFit} which shows an example of an exponential fit for one ADC, although the fits return good \(R^{2}\) values it is clear that the slope of the exponential curve is not a good match for the slope of the data. This is perhaps not unexpected as the ferrite cores used in the transformers have many non-linear properties. In fact, by using a fit with two exponential terms it is possible to obtain a perfect match to the data but at this point the complexity of the fit would make any attempt to remove the droop in real beam data in this way spurious.
-
-Instead, changes will be made to the currently in development FONT5a board hardware and firmware to greatly reduce the scale of the droop. Different transformers will be used to reduce the droop rate by up to a factor of fifty and in addition digital filtering will be implemented in firmware to smooth out and reduce the remaining droop component even further. It is expected that after these changes the droop will be small enough to not have a detrimental effect on the performance of the phase feedforward system. 
 
 \subsection{Implementation of PFF Algorithm in Firmware}
 \label{ss:pffFirmware}
 
-Not using arcsin in phase reconstruction - effect
+As shown in Section~\ref{s:pffEquations} the effect of the PFF system can be modelled by simply subtracting the measured upstream phase, \(\phi_u\), from the downstream phase, \(\phi_g\) with a gain factor, \(g\):
+\begin{equation} \label{e:realGainEqn}
+\phi_{PFF} = \phi_d - g\phi_u
+\end{equation}
+Where \(\phi_{PFF}\) is the corrected downstream phase. The way this algorithm is implemented in the FONT5a board firmware is discussed in this section, highlighting some important aspects of the gain calculation and the phase reconstruction using the input phase monitor signals.
 
-Gain conversion factor
+In the case where diode normalisation is not used, which is the nominal setup, the FONT5a DAC outputs when the PFF system is enabled are given by:
+\begin{eqnarray}
+\mathrm{DAC1} = \frac{\mathrm{F1}}{64}\mathrm{ADC2} \nonumber \\ 
+\mathrm{DAC2} = \frac{\mathrm{F2}}{64}\mathrm{ADC2} \label{e:fontGain1}
+\end{eqnarray}
+Where \(\mathrm{DAC1}\) and \(\mathrm{DAC2}\) are the two DAC outputs, in DAC counts, \(\mathrm{F1}\) and \(\mathrm{F2}\) are the respective gains for each DAC output set in the DAQ, and \(\mathrm{ADC2}\) is the Mon1 mixer signal level in ADC counts, which is connected to ADC2 for normal PFF operation. The whole calculation uses 16-bit architecture, with the 3 sub-integer bits discarded when sent to the 13-bit DACs. The FONT gains \(\mathrm{F1}\) and \(\mathrm{F2}\) are 14-bit (\(\pm8192\)) and the common division factor of \(1/64\) is set by several parameters fixed in the FONT5a firmware in order to give a sensible range of gain values based on the approximate signal levels [REF]. Typically \(\mathrm{F2} = -\mathrm{F1}\), so that the beam is deflected in opposite directions in each kicker to achieve orbit closure in the chicane. With a maximum FONT gain of 8192 an ADC2 input of 1~ADC~count gives an output of 128~DAC~counts. If diode normalisation is enabled the expressions above are multiplied by \(1/\sqrt{\mathrm{ADC1}}\) (with the Mon1 diode signal connected to ADC1 in normal operation). Values for the square root are taken from a lookup table, rather than being calculated directly, in order to save latency [REF].
+
+To determine the optimal values for \(F1\) and \(F2\) given the current beam conditions it is important to know how they translate in to the real applied gain \(g\) from Equation~\ref{e:realGainEqn}. The real gain \(g\) is related to the DAC outputs derived above by:
+\begin{equation} \label{e:fontGain2}
+g\phi_u = k\mathrm{DAC}
+\end{equation}
+Where \(k\) is the phase shift, in radians, in the chicane resulting from a DAC output of 1 count. The indices 1 and 2 are dropped from \(\mathrm{DAC1, DAC2, F1}\) and \(\mathrm{F2}\) from this point for simplicity. The upstream phase, also in radians, can then be related to the ADC2 input by:
+\begin{equation} \label{e:fontGain3}
+\phi_u \simeq \frac{\mathrm{ADC2}}{A}
+\end{equation}
+Where \(A\) is the calibrated maximum Mon1 mixer amplitude, in ADC counts, determined in the same way as Section~\ref{s:monCalibrations}. Note that both this and the direct proportionality with ADC2 in Equations~\ref{e:fontGain1} assume the small angle approximation \(\mathrm{ADC2} = A\sin\phi_u \simeq A\phi_u\) for small \(\phi_u\). This is done for latency reasons and its effect on the accuracy of the applied correction is discussed later in this section.
+
+Combining Equations~\ref{e:fontGain1},~\ref{e:fontGain2}~and~\ref{e:fontGain3} gives:
+\begin{align}
+\frac{g}{A}\mathrm{ADC2} &= \frac{k\mathrm{F}}{64}\mathrm{ADC2} \nonumber \\
+g &= \frac{kA}{64}\mathrm{F} \label{e:fontGain4}
+\end{align}
+In Section~\ref{ss:corrRange} a phase shift of \(3.5^\circ\) per volt sent to the amplifier is determined. Knowing that 4096 DAC counts corresponds to 2~V sent to the amplifier this value can be converted into \(k = 29.8~\mathrm{\mu}\)radians/DAC~count. Typical calibrations for Mon1 on the FONT5a board give \(A = 3440\)~ADC~counts. Overall, the real applied gain therefore relates to the set FONT gain in the DAQ via:
+\begin{equation}
+g \simeq \frac{\mathrm{F}}{624}
+\end{equation}
+The optimal real gain to apply (Section~\ref{ss:theoryGain}) is given by the upstream-downstream phase correlation, \(\rho\), multiplied by downstream-upstream jitter ratio, \(\sigma_{d}/\sigma_{u}\):
+\begin{equation}
+g_{\mathrm{opt}} = \frac{\sigma_{d}}{\sigma_{u}} \rho  
+\end{equation}
+Therefore the optimal FONT gain to set in the DAQ dependent on the current beam conditions is:
+\begin{equation}
+F_{\mathrm{opt}} \simeq 624 \frac{\sigma_{d}}{\sigma_{u}} \rho
+\end{equation}
+In good conditions the correlation and jitter ratio are close to one, although the downstream phase jitter can be up to a factor two larger than the upstream jtiter at CTF3 thus the applied FONT gains are typically in the range between 625 and 1250.
+
+As mentioned previously the phase calculation in the PFF algorithm in the FONT5a firmware uses the small-angle approximation, thus differs from the correct full phase reconstruction method used in Chapter~\ref{c:phaseMons} as follows:
+\begin{align}
+\phi_{\mathrm{FONT}} &= \frac{\mathrm{Mixer}}{A} \\
+\phi_{\mathrm{FULL}} &= \arcsin\left(\frac{\mathrm{Mixer}-d}{A}\right)
+\end{align}
+Where \(\phi_{\mathrm{FONT}}\) and \(\phi_{\mathrm{FULL}}\) are the upstream phase with the FONT and full phase reconstruction methods respectively, \(\mathrm{Mixer}\) is the Mon1 mixer signal, \(A\) is the Mon1 calibration amplitude and \(d\) is the calibration offset needed to take in to account asymmetry in the mixer minimum and maximum output due to cross-talk from the diode (Section~\ref{ss:crossTalk}).
+
+The difference between the measured phase using these two reconstruction methods is plotted in Figure~\ref{f:phaseRecDiff}, versus the phase offset between the beam phase and the electronics LO phase. For small incoming phases (close to zero Mixer output) the only difference between the two methods is a static offset of \(-d/A\) in the measured phase, and this holds up to \(\pm10^\circ\) (and is a good approximation up to \(\pm20^\circ\)). In this case the corrected downstream phase will contain this constant offset, but the corrected phase jitter, which has been the only focus of the PFF prototype to date, will still be optimal. 
+
+With larger offsets between the beam phase and the LO (large Mixer output) the small angle approximation is no longer valid and the difference between the two methods rises to up to \(35^\circ\). Most importantly the measured phase, and therefore the correction output, is no longer linearly dependent on the incoming beam phase when there is a large offset between the beam and LO phases. In the most extreme case, the measured phase difference between two pulses with a beam-LO phase offset of \(80^\circ\) and \(90^\circ\) would only be \(1^\circ\) with the FONT algorithm instead of the expected \(10^\circ\), for example. In turn, the difference in the correction applied to the two pulses would only be \(1^\circ\) instead of \(10^\circ\), degrading the achievable corrected phase jitter.
+
+[TODO: Change legend labels to FONT and FULL, rather than FONT and SiS. And beam-LO rather than Beam-Shifter phase offset]
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseRecDiff}
+  \caption{Difference between the phase reconstruction method used in the PFF algorithm on the FONT5a board (with the small angle approximation) and the full reconstruction used with data acquired from the SiS digitisers.}
+  \label{f:phaseRecDiff}
+\end{figure}
+
+Figure~\ref{f:phaseRecJitSim} shows a simulation of the theoretical downstream jitter that can be achieved with both phase reconstruction methods with \(0.8^\circ\) initial upstream and downstream phase jitter and an upstream-downstream phase correlation of \(97\%\). These values are chosen to represent the beam conditions that will need to be achieved in order to demonstrate \(0.2^\circ\) phase stability at CTF3. In the \(\pm10^\circ\) region where the small approximation holds there is no degradation in the achievable corrected phase jitter using the simplified method in the PFF algorithm. Outside this region the jitter is degraded, increasing from below \(0.2^\circ\) to \(0.3^\circ\) for a beam-LO phase offset of \(50^\circ\). 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseRecJitSim}
+  \caption{Achievable PFF jitter versus phase offset for full phase reconstruction and with the small angle approximation.}
+  \label{f:phaseRecJitSim}
+\end{figure}
+
+As the correction range of the PFF system is less than \(\pm10^\circ\) (Section~\ref{ss:corrRange}) there should be no degradation in the PFF performance resulting from the use of the small angle approximation in the PFF algorithm, providing the LO phase shifter in the phase monitor electronics has been set correctly. This highlights the importance to adjust the phase shifters to zero the Mixer output not only in order to maximise the phase monitor resolution (Section~\ref{s:resolution}) but also to ensure the correction calculation itself is valid. However, it is perhaps interesting to note that it would not be possible to correct the full CTF3 pulse length to \(0.2^\circ\) jitter with this implementation of the PFF algorithm even if the correction range was large enough to encompass the \(\pm40^\circ\) phase sag.
 
 \newsection{amplifierSetup}{Amplifier}
 
@@ -162,7 +258,7 @@ DAC1 and DAC2 from FONT5a board
 
 Amplifier outputs:
 
-4 drive signals - one for each strip. Sent to downstream end of kicker (why?)
+4 drive signals - one for each strip. Sent to downstream end of kicker
 
 4 terminators
 

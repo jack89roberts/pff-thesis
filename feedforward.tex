@@ -206,6 +206,8 @@ Figure \ref{f:longFF_datSetJitSim} and Table \ref{t:LongFFIndivSim} then show th
 \item \textbf{All effects:} With \(\pm6^\circ\) correction range, the real gain, and the real offset in the actual PFF setup.
 \end{itemize}
 
+[TODO: Simulations should use 5.5 degree range instead AND I used FONT gain conversion factor of 711 but correct value is 624]
+
 By comparing the results of these five simulations it is possible to identify which PFF parameters are most critical for the correction performance. Later, by comparing the most restricted simulation, including the real offset and gain, to the real achieved phase jitter it can be determined whether the PFF system is behaving as expected or whether there are remaining effects that need to be understood.
 
 With the ideal PFF setup the \(\pm6^\circ\) range set by the amplifier power is sufficient to be able to optimally correct almost all the natural phase jitter, thus the difference between the unlimited and 6deg range simulation is small. The only visible effect is in datasets with the largest incoming phase jitter, with a maximal \(0.05^o\) degradation in the achievable phase jitter in the 16:00 dataset with an incoming uncorrected phase jitter of 1.8 degrees, for example. The correction range is therefore not a limiting factor for the PFF performance in normal conditions, although it may become significant if the PFF system were operated on longer time scales without updating the offset or when trying to demonstrate a factor 10 reduction in jitter (Section \ref{s:pffNovelSetups}).
