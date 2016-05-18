@@ -156,7 +156,7 @@ Preliminary attempts to reduce the residual R56 between the upstream and downstr
 	\begin{figure}
   		\centering
   		\includegraphics[height=\textwidth]{Figures/propagation/TL1}
-  		\caption{TL1.}
+  		\caption{TL1 [REF].}
   		\label{f:tl1Layout}
 	\end{figure}
 \end{landscape}
@@ -236,31 +236,101 @@ As a starting point the simplest case, where only the TL1 optics is changed duri
 
 \subsubsection{Mean Phase}
 
-Figure~\ref{f:r56Scan_meanPhaseJit} shows the mean phase jitter during the scan both upstream and downstream. Although the noise in the measurement is quite large, the downstream phase jitter is reduced from above 2.5 degrees with zero R56 in TL1, to below 1 degree and close to the level of the upstream phase jitter by adding positive R56 in TL1. The optimal R56 value is approximately 0.175~m, in close agreement with expectations considering the -0.2~m R56 in TL2. The upstream-downstream phase correlation, in Figure~\ref{f:r56Scan_correlation}, is also maximised at this point, from an initial correlation of 20\% with zero R56 to up to 80\%.
+Only the mean phase jitters and correlation will be considered here, features along the pulse are discussed in later sections for other scans. Figure~\ref{f:r56Scan_meanPhaseJit} shows the mean phase jitter during the scan both upstream and downstream. Although the noise in the measurement is quite large, the downstream phase jitter is reduced from above 2.5 degrees with zero R56 in TL1, to below 1 degree and close to the level of the upstream phase jitter by adding positive R56 in TL1. The optimal R56 value is approximately 0.175~m, in close agreement with expectations considering the -0.2~m R56 in TL2. The upstream-downstream phase correlation, in Figure~\ref{f:r56Scan_correlation}, is also maximised at this point, from an initial correlation of 20\% with zero R56 to up to 80\%. In terms of the PFF system, increasing the upstream-downstream phase correlation from 20\% to 80\% improves the theoretical correction from a 2\% reduction in downstream phase jitter to a 40\% decrease (Equation~\ref{e:theoretJitOptGain}).
 
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/propagation/r56Scan_meanPhaseJit}
-  \caption{Phase jitter during scan of R56 in TL1. [TODO: Could add simulated line, agreement pretty good for R56>0 in jitter but bad R56<0. Correlation not great either]}
+  \caption{Phase jitter during scan of R56 in TL1.}
   \label{f:r56Scan_meanPhaseJit}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/propagation/r56Scan_correlation}
-  \caption{Correlation during scan of R56 in TL1. Simulation is simulation-0.2}
+  \caption{Correlation during scan of R56 in TL1.}
   \label{f:r56Scan_correlation}
 \end{figure}
 
 As the upstream phase monitors are prior to TL1, changing the TL1 optics has no effect on the upstream phase jitter. All differences in the upstream phase jitter between datasets are caused by drifts in the CTF3 injector, typically changes in either klystron phases or beam current. Although the overall stability of the upstream phase jitter during this scan is good, it does vary between 0.5~degrees and 1.2~degrees. In addition to the upstream phase there are also differences in the relative energy jitter and upstream phase-energy correlation during the scan, as seen in Figure~\ref{f:r56Scan_upstreamParams}. The relative beam energy jitter varies between \(0.4\times10^{-3}\) and \(1.0\times10^{-3}\) and the upstream phase-energy correlation between -0.5 and +0.5. All these parameters influence the downstream phase, as per the equations in Section~\ref{ss:r56Equations}.
 
-The differences in the upstream phase and energy conditions between datasets partially explains the apparent spread of the data points away from the expected clean distribution. The black ``simulation'' lines in Figures~\ref{f:r56Scan_meanPhaseJit}~and~\ref{f:r56Scan_correlation} represent the expected downstream phase jitter and upstream-downstream phase correlation at each point in the scan given the upstream phase jitter, relative energy jitter and upstream phase-energy correlation at that time (using Equations~\ref{e:r56JitEq}~and~\ref{e:r56CorrDefFinal}). The correlation simulation in Figure~\ref{f:r56Scan_correlation} has been scaled so that the peak value is in agreement with the data, at 0.8. The majority of the data points follow the scaled simulated distribution, with several remaining outliers. For the downstream phase jitter (which uses the simulated result directly with no scaling) the agreement with the simulation is good for R56 values above 0.15~m. However, below 0.15~m the actual phase jitter seen in the scan is much larger than the simulation. One possible explanation for this is that the downstream beam current stability is up to a factor 3 worse for these points (bottom plot in Figure~\ref{f:r56Scan_upstreamParams}). Small beam losses between the monitors can induce additional jitter in the measured phase that are not characterised by the R56.
+The differences in the upstream phase and energy conditions between datasets partially explains the apparent spread of the data points away from the expected clean distribution. The black ``simulation'' lines in Figures~\ref{f:r56Scan_meanPhaseJit}~and~\ref{f:r56Scan_correlation} represent the expected downstream phase jitter and upstream-downstream phase correlation at each point in the scan given the upstream phase jitter, relative energy jitter and upstream phase-energy correlation at that time (using Equations~\ref{e:r56JitEq}~and~\ref{e:r56CorrDefFinal}). The correlation simulation in Figure~\ref{f:r56Scan_correlation} has been scaled so that the peak value is in agreement with the data, at 0.8. The majority of the data points follow the scaled simulated distribution, with several remaining outliers. For the downstream phase jitter (which uses the simulated result directly with no scaling) the agreement with the simulation is generally good for R56 values below 0.3~m. However, above 0.3~m the actual phase jitter seen in the scan is smaller than the simulation. One possible explanation for this are the changes in downstream beam current between datasets, which varies by a factor 3 during the scan (bottom plot in Figure~\ref{f:r56Scan_upstreamParams}). Small beam losses between measurements may change the phase jitter in a way that is not characterised by the R56. Possible other sources are discussed in Sections~\ref{s:t566}~and~\ref{s:otherJitterSources}.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/propagation/r56Scan_upstreamParams}
   \caption{Upstream and downstream beam conditions during the R56 scan.}
   \label{f:r56Scan_upstreamParams}
+\end{figure}
+
+\subsubsection{Results from Other Scans}
+
+Figures~\ref{f:r56Scan2_meanJitter}~and~\ref{f:r56Scan3_meanJitter} show the results of two further scans of R56 in TL1, both taken a few days after the scan previously shown. For both scans the mean downstream phase jitter can again be decreased to the level of the upstream phase jitter by varying the R56 in TL1, and the upstream-downstream correlation increased to 80\%. However, the optimal optics to use is different for each scan --- the scan in Figure~\ref{f:r56Scan2_meanJitter} has an optimal R56 value of around 0.1~m whereas for the scan in Figure~\ref{f:r56Scan3_meanJitter} the optimal value quite close to zero, around 0.04~m. Both values are also different to the scan previously shown, which had an optimal R56 setting of 0.175~m.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/r56Scan2_meanJitter}
+  \caption{Mean phase jitter during R56 scan 2.}
+  \label{f:r56Scan2_meanJitter}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/r56Scan3_meanJitter}
+  \caption{Mean phase jitter during R56 scan 3.}
+  \label{f:r56Scan3_meanJitter}
+\end{figure}
+
+With R56 alone and the model of the phase propagation used to derive the equations in Section~\ref{ss:r56Equations} there is no mechanism for the optimal R56 value to vary with time. The best conditions for the phase propagation should always be provided with zero residual R56 between the upstream and downstream phase monitors. As the optics in all beam lines between the upstream and downstream phase monitors (apart from TL1) were unchanged between each scan, the optimal R56 value in TL1 should also be the same for each scan in this model. The most likely explanation is a sensitivity to higher order energy dependencies.
+
+\newsection{t566}{Higher Order Energy Dependencies}
+
+In the same way the first oder optics dependencies are described by the \(6 \times 6\) R-matrix, the second order effects are described using a three dimensional \(6 \times 6 \times 6\) T-matrix. \(R_{56}\) is the relevant first order transfer matrix coefficient for the energy related effects on the phase propagation, as already discussed, and it then follows that the relevant T-matrix coefficient for second order energy dependencies is \(T_{566}\). By including the second order term the dependence of the downstream phase on the energy from Equation~\ref{e:r56PhasEq} becomes:
+\begin{equation}
+\phi_d = \phi_u + R_{56}\left(\frac{\Delta p}{p}\right) + T_{566}\left(\frac{\Delta p}{p}\right)^2
+\label{e:t566}
+\end{equation}
+
+The ideal case for the phase propagation would be to have both zero \(R_{56}\) and zero \(T_{566}\) between the upstream and downstream phase monitors. However, constraints are not placed on the \(T_{566}\) in the optics at CTF3 [TODO: elaborate] and it is therefore typically non-zero. With non-zero \(T_{566}\) the optimal \(R_{56}\) value for the phase propagation, found by setting \(\phi_d = \phi_u\) in Equation~\ref{e:t566}, is also non-zero and is instead given by:
+\begin{equation}
+R_{56} = -T_{566} \left(\frac{\Delta p}{p}\right)
+\label{e:r56t566dep}
+\end{equation}
+
+The above dependence of the \(R_{56}\) value on the beam energy offset has many consequences. Firstly, it provides a mechanism by which the optimal \(R_{56}\) value in TL1 can vary with time (and be non-zero), as was seen comparing the results of different \(R_{56}\) scans in the previous section. CTF3 does experience drifts in beam energy (Section~\ref{ss:energyVariations}), creating small offsets between the actual beam energy and the energy that the optics has been set for (i.e. the strength of bending and focusing elements in the accelerator). In other words, it is possible for the mean of \(\Delta p / p\) to be non-zero. The optimal \(R_{56}\) value is therefore expected to drift with the beam energy when higher order phase-energy dependencies are included.
+
+variations along the pulse means R56 can never be optimal across the whole pulse length
+
+consequences for pff
+
+\subsection{Expected Dependence due to Optics}
+\label{ss:t566Sim}
+
+
+\subsection{Beam Energy Variations}
+\label{ss:energyVariations}
+
+\subsubsection{Mean Beam Energy}
+
+\subsubsection{Energy Variations Along the Pulse}
+
+and different R56 optimal point along pulse
+
+\subsection{R56 Scans whilst Varying Beam Energy}
+\label{ss:r56ScanWithEnergy}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/R56ScanGunWiggle_PhaseJitter}
+  \caption{Phase jitter for different R56 whilst wiggling gun current.}
+  \label{f:R56ScanGunWiggle_PhaseJitter}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/R56ScanGunWiggle_Vs608}
+  \caption{Phase vs. energy for different R56 in TL1.}
+  \label{f:R56ScanGunWiggle_Vs608}
 \end{figure}
 
 \subsubsection{Phase Along the Pulse}
@@ -286,35 +356,6 @@ The difference between the phase along the pulse for two different settings of R
 [TODO: comparison of upstream and downstream phase along the pulse]
 
 [TODO: Jitter along the pulse]
-
-\subsubsection{Results from Other Scans}
-
-\newsection{t566}{Higher Order Energy Dependencies}
-
-\subsection{Expected Dependence due to Optics}
-\label{ss:t566Sim}
-
-\subsection{Energy Variation Along the Pulse}
-\label{ss:energyAlongPulse}
-
-and different R56 optimal point along pulse
-
-\subsection{R56 Scans whilst Varying Beam Energy}
-\label{ss:r56ScanWithEnergy}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/propagation/R56ScanGunWiggle_PhaseJitter}
-  \caption{Phase jitter for different R56 whilst wiggling gun current.}
-  \label{f:R56ScanGunWiggle_PhaseJitter}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/propagation/R56ScanGunWiggle_Vs608}
-  \caption{Phase vs. energy for different R56 in TL1.}
-  \label{f:R56ScanGunWiggle_Vs608}
-\end{figure}
 
 \subsection{Mitigation of Higher Order Dependencies}
 \label{ss:t566Mitigation}
