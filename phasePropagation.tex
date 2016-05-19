@@ -16,9 +16,16 @@ Injector feedbacks etc.
 \subsection{Correlation between Phase and Energy}
 \label{ss:corrPhaseEnergy}
 
-energy jitter
-
 Upstream AND downstream
+
+\subsection{Beam Energy Variations}
+\label{ss:energyVariations}
+
+\subsubsection{Mean Beam Energy}
+
+\subsubsection{Energy Variations Along the Pulse}
+
+and different R56 optimal point along pulse
 
 
 \subsection{R56}
@@ -291,33 +298,69 @@ In the same way the first oder optics dependencies are described by the \(6 \tim
 \label{e:t566}
 \end{equation}
 
-The ideal case for the phase propagation would be to have both zero \(R_{56}\) and zero \(T_{566}\) between the upstream and downstream phase monitors. However, constraints are not placed on the \(T_{566}\) in the optics at CTF3 [TODO: elaborate] and it is therefore typically non-zero. With non-zero \(T_{566}\) the optimal \(R_{56}\) value for the phase propagation, found by setting \(\phi_d = \phi_u\) in Equation~\ref{e:t566}, is also non-zero and is instead given by:
+\(T_{566}\) introduces another source of energy dependent phase jitter which is independent from the first order \(R_{56}\) value. The ideal case for the phase propagation would be to have both zero \(R_{56}\) and zero \(T_{566}\) between the upstream and downstream phase monitors. However, constraints are not placed on the \(T_{566}\) in the optics at CTF3 [TODO: elaborate] and it is therefore typically non-zero. It may be possible to create optics with zero, or at least reduced, \(T_{566}\) for the TL1 and TL2 lines at CTF3 in the future but this has not yet been pursued, thus it will be treated as a fixed property of the optics here. In this case an expression for the optimal \(R_{56}\) value in terms of the \(T_{566}\) can be determined by setting \(\phi_d = \phi_u\) in Equation~\ref{e:t566}:
 \begin{equation}
 R_{56} = -T_{566} \left(\frac{\Delta p}{p}\right)
 \label{e:r56t566dep}
 \end{equation}
 
-The above dependence of the \(R_{56}\) value on the beam energy offset has many consequences. Firstly, it provides a mechanism by which the optimal \(R_{56}\) value in TL1 can vary with time (and be non-zero), as was seen comparing the results of different \(R_{56}\) scans in the previous section. CTF3 does experience drifts in beam energy (Section~\ref{ss:energyVariations}), creating small offsets between the actual beam energy and the energy that the optics has been set for (i.e. the strength of bending and focusing elements in the accelerator). In other words, it is possible for the mean of \(\Delta p / p\) to be non-zero. The optimal \(R_{56}\) value is therefore expected to drift with the beam energy when higher order phase-energy dependencies are included.
+The above dependence of the \(R_{56}\) value on the beam energy offset has many consequences. Firstly, it provides a mechanism by which the apparent optimal \(R_{56}\) value in TL1 can vary with time (and be non-zero), as was seen comparing the results of different \(R_{56}\) scans in the previous section. CTF3 does experience drifts in beam energy (Section~\ref{ss:energyVariations}), creating small offsets between the actual beam energy and the energy that the optics has been set for (i.e. the strength of bending and focusing elements in the accelerator). In other words, it is possible for the mean of \(\Delta p / p\) to be non-zero. The optimal \(R_{56}\) value to use in TL1 is therefore expected to drift with the beam energy when higher order phase-energy dependencies are included.
 
-variations along the pulse means R56 can never be optimal across the whole pulse length
-
-consequences for pff
+Secondly, energy variations along the beam pulse and jitter in the beam energy mean that the phase propagation cannot be perfectly optimised by varying the \(R_{56}\) alone. Due to the energy dependence in Equation~\ref{e:r56t566dep}, any energy variations along the pulse cause the optimal \(R_{56}\) value to set in TL1 to also vary along the beam pulse. There are static variations in the mean phase along the pulse (e.g. as seen in Section~\ref{ss:energyVariations}) at CTF3, so this means the phase propagation can never be completely optimised along the full pulse length when \(T_{566}\) is non-zero. 
 
 \subsection{Expected Dependence due to Optics}
 \label{ss:t566Sim}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/t566TotVsr56TL1}
+  \caption{\(T_{566}\) coefficient for all sets of TL1 optics.}
+  \label{f:t566TotVsr56TL1}
+\end{figure}
 
-\subsection{Beam Energy Variations}
-\label{ss:energyVariations}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/phaseVsEn_r56Only}
+  \caption{Phase shift between the upstream and downstream phase monitors for all sets of TL1 optics when only \(R_{56}\) is considered.}
+  \label{f:phaseVsEn_r56Only}
+\end{figure}
 
-\subsubsection{Mean Beam Energy}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/phaseVsEn_t566}
+  \caption{Phase shift between the upstream and downstream phase monitors for all sets of TL1 optics when both \(R_{56}\) and \(T_{566}\) are considered.}
+  \label{f:phaseVsEn_t566}
+\end{figure}
 
-\subsubsection{Energy Variations Along the Pulse}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/jitVsR56_t566}
+  \caption{Downstream phase jitter vs. residual \(R_{56}\) in TL1 including the effects of \(T_{566}\) with \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\).}
+  \label{f:jitVsR56_t566}
+\end{figure}
 
-and different R56 optimal point along pulse
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/corrVsR56_t566}
+  \caption{Upstream-downstream phase correlation vs. residual \(R_{56}\) in TL1 including the effects of \(T_{566}\)  with \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\).}
+  \label{f:corrVsR56_t566}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/maxCorrWithT566}
+  \caption{Best possible upstream-downstream phase correlation vs. beam energy jitter both with and without including the effects of \(T_{566}\).}
+  \label{f:maxCorrWithT566}
+\end{figure}
 
 \subsection{R56 Scans whilst Varying Beam Energy}
 \label{ss:r56ScanWithEnergy}
+
+By intentionally varying the CTF3 beam energy to artificially increase the energy jitter during an \(R_{56}\) scan the energy dependent effects in both the upstream and the downstream phase are amplified. This has the benefit of increasing the visibility of the higher order effects, but it also improves the results of the scan in general by reducing the sensitivity to other small drifts in beam conditions. In this section the results of an \(R_{56}\) scan in which the \(R_{56}\) value in TL1 was varied between -0.1~m and +0.3~m whilst the beam energy was varied by [TODO: how much?] are discussed. Before considering the effect of the higher order dependencies directly, the overall results of the scan are presented first to expand upon the conclusions from the \(R_{56}\) scans shown in the previous sections.
+
+\subsubsection{Mean Phase}
+
+
 
 \begin{figure}
   \centering
@@ -326,16 +369,12 @@ and different R56 optimal point along pulse
   \label{f:R56ScanGunWiggle_PhaseJitter}
 \end{figure}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/propagation/R56ScanGunWiggle_Vs608}
-  \caption{Phase vs. energy for different R56 in TL1.}
-  \label{f:R56ScanGunWiggle_Vs608}
-\end{figure}
+
+upstream phase-energy plot
 
 \subsubsection{Phase Along the Pulse}
 
-As well as the mean phase it is interesting to look at the effect of varying the R56 on the phase along the pulse. Figure~\ref{f:r56Scan_meanPhaseAlong} shows the mean phase along the pulse for each R56 setting in TL1 during the scan. Any difference in the mean (rather than the jitter) along the pulse with the R56 value should originate from static energy variations along the pulse. If the energy along the pulse was constant changing the R56 would only affect the phase jitter and would not change the mean pulse shape. The clear change in certain features along the pulse in the downstream phase is therefore an indication of energy variations in these regions. Perhaps the best example of this is the oscillation around a time of 800~ns, where the phase is flat close to the optimal R56 value of 0.175~m but swings upwards when a negative R56 in TL1 is used or downards for R56 values above 0.175~m.
+As well as the mean phase it is interesting to look at the effect of varying the R56 on the phase along the pulse. Figure~\ref{f:r56Scan_meanPhaseAlong} shows the mean phase along the pulse for each R56 setting in TL1 during the scan. Any difference in the mean (rather than the jitter) along the pulse with the R56 value should originate from static energy variations along the pulse. If the energy along the pulse was constant changing the R56 would only affect the phase jitter and would not change the mean pulse shape. The clear change in certain features along the pulse in the downstream phase is therefore an indication of energy variations in these regions. Perhaps the best example of this is the oscillation around a time of 800~ns, where the phase is flat close to the optimal R56 value of 0.1~m but swings upwards when a negative R56 in TL1 is used or downards for R56 values above 0.1~m.
 
 \begin{figure}
   \centering
@@ -344,7 +383,7 @@ As well as the mean phase it is interesting to look at the effect of varying the
   \label{f:r56Scan_meanPhaseAlong}
 \end{figure}
 
-The difference between the phase along the pulse for two different settings of R56 in TL1 should be proportional to the beam energy along the pulse. Figure~\ref{f:r56Scan_comparisonPhaseEnergy} plots the difference between the R56~=~+0.3~m optics and the optimal R56~=~+0.175~m optics, and compares this to the beam energy along the pulse (measured using the horizontal beam position in the dispersive BPM after the first dipole in TL1). Both lines are mean subtracted and normalised to give equivalent amplitudes in arbitrary units. For reference the peak to peak beam position offset along the pulse is 1.6~mm in this case, coresponding to a relative energy offset along the pulse of \(2.3\times10^{-3}\). Overall, the differences in phase along the pulse resulting from using non-optimal R56 in TL1 are very well matched with the energy variation along the pulse, as expected.
+The difference between the phase along the pulse for two different settings of R56 in TL1 should be proportional to the beam energy along the pulse. Figure~\ref{f:r56Scan_comparisonPhaseEnergy} plots the difference between the R56~=~+0.3~m optics and the roughly optimal R56~=~+0.1~m optics, and compares this to the beam energy along the pulse (measured using the horizontal beam position in the dispersive BPM after the first dipole in TL1). Both lines are mean subtracted and normalised to give equivalent amplitudes in arbitrary units. For reference the peak to peak beam position offset along the pulse is 1.6~mm in this case, coresponding to a relative energy offset along the pulse of \(2.3\times10^{-3}\). Overall, the differences in phase along the pulse resulting from using non-optimal R56 in TL1 are very well matched with the energy variation along the pulse, as expected.
 
 \begin{figure}
   \centering
@@ -356,6 +395,15 @@ The difference between the phase along the pulse for two different settings of R
 [TODO: comparison of upstream and downstream phase along the pulse]
 
 [TODO: Jitter along the pulse]
+
+\subsubsection{Higher Order Effects}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/R56ScanGunWiggle_Vs608}
+  \caption{Phase vs. energy for different R56 in TL1.}
+  \label{f:R56ScanGunWiggle_Vs608}
+\end{figure}
 
 \subsection{Mitigation of Higher Order Dependencies}
 \label{ss:t566Mitigation}
