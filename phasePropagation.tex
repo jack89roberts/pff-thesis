@@ -298,25 +298,21 @@ In the same way the first oder optics dependencies are described by the \(6 \tim
 \label{e:t566}
 \end{equation}
 
-\(T_{566}\) introduces another source of energy dependent phase jitter which is independent from the first order \(R_{56}\) value. The ideal case for the phase propagation would be to have both zero \(R_{56}\) and zero \(T_{566}\) between the upstream and downstream phase monitors. However, constraints are not placed on the \(T_{566}\) in the optics at CTF3 [TODO: elaborate] and it is therefore typically non-zero. It may be possible to create optics with zero, or at least reduced, \(T_{566}\) for the TL1 and TL2 lines at CTF3 in the future but this has not yet been pursued, thus it will be treated as a fixed property of the optics here. In this case an expression for the optimal \(R_{56}\) value in terms of the \(T_{566}\) can be determined by setting \(\phi_d = \phi_u\) in Equation~\ref{e:t566}:
+\(T_{566}\) introduces another source of energy dependent phase jitter which is independent from the first order \(R_{56}\) value. The ideal case for the phase propagation would be to have both zero \(R_{56}\) and zero \(T_{566}\) between the upstream and downstream phase monitors. However, constraints are not placed on the \(T_{566}\) in the optics at CTF3 [TODO: elaborate] and it is therefore typically non-zero. It may be possible to create optics with zero, or at least reduced, \(T_{566}\) for the TL1 and TL2 lines at CTF3 in the future but this has not yet been pursued, thus it will be treated as a fixed property of the optics here. In this case an expression for the \(R_{56}\) value that minimises the downstream phase-energy dependence can be derived:
 \begin{equation}
-R_{56} = -T_{566} \left(\frac{\Delta p}{p}\right)
+R_{56} = -2T_{566} \left(\frac{\Delta p}{p}\right)
 \label{e:r56t566dep}
 \end{equation}
+This is obtained by zeroing the partial differential of Equation~\ref{e:t566} with respect to \(\Delta p/p\).
 
 The above dependence of the \(R_{56}\) value on the beam energy offset has many consequences. Firstly, it provides a mechanism by which the apparent optimal \(R_{56}\) value in TL1 can vary with time (and be non-zero), as was seen comparing the results of different \(R_{56}\) scans in the previous section. CTF3 does experience drifts in beam energy (Section~\ref{ss:energyVariations}), creating small offsets between the actual beam energy and the energy that the optics has been set for (i.e. the strength of bending and focusing elements in the accelerator). In other words, it is possible for the mean of \(\Delta p / p\) to be non-zero. The optimal \(R_{56}\) value to use in TL1 is therefore expected to drift with the beam energy when higher order phase-energy dependencies are included.
 
 Secondly, energy variations along the beam pulse and jitter in the beam energy mean that the phase propagation cannot be perfectly optimised by varying the \(R_{56}\) alone. Due to the energy dependence in Equation~\ref{e:r56t566dep}, any energy variations along the pulse cause the optimal \(R_{56}\) value to set in TL1 to also vary along the beam pulse. There are static variations in the mean phase along the pulse (e.g. as seen in Section~\ref{ss:energyVariations}) at CTF3, so this means the phase propagation can never be completely optimised along the full pulse length when \(T_{566}\) is non-zero. 
 
-\subsection{Expected Dependence due to Optics}
+\subsection{Simulated Effect of \(T_{566}\) on the Downstream Phase}
 \label{ss:t566Sim}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/propagation/t566TotVsr56TL1}
-  \caption{\(T_{566}\) coefficient for all sets of TL1 optics.}
-  \label{f:t566TotVsr56TL1}
-\end{figure}
+When only the first order effect of \(R_{56}\) is considered the dependence of the downstream phase on the energy is linear, with the gradient depending on the residual \(R_{56}\) value between the upstream and downstream phase monitors. The downstream phase versus beam energy offset with only first order \(R_{56}\) term included is shown in Figure~\ref{f:phaseVsEn_r56Only} for each set of TL1 optics, demonstrating this effect. The optimal \(R_{56}\) value of \(+0.2\)~m in TL1 minimises the phase-energy dependence for all energy offsets.
 
 \begin{figure}
   \centering
@@ -325,12 +321,43 @@ Secondly, energy variations along the beam pulse and jitter in the beam energy m
   \label{f:phaseVsEn_r56Only}
 \end{figure}
 
+By running MADX with varying energy offsets set in the initial conditions the expected effect of the higher order energy dependencies on the downstream phase can be seen. This is shown in Figure~\ref{f:phaseVsEn_t566}, and the impact of the higher orders is immediately clear. The optimal \(R_{56}\) to use in TL1, where the phase has the minimal dependence on the energy (at the peaks of the phase-energy curves in the figure), now depends on the energy offset. Figure~\ref{f:optR56vsEnergy} shows that the dependence of the optimal \(R_{56}\) value on the relative energy offset is linear, as expected from Equation~\ref{e:r56t566dep}. The plotted \(R_{56}\) value does not exceed \(+0.6\)~m or go below \(-0.3\)~m as only the available sets of optics for TL1 are considered, which are restricted to this range. This also creates small non-linearities in the central region of the plot, although there is also a contribution from effects above second order. 
+
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/propagation/phaseVsEn_t566}
-  \caption{Phase shift between the upstream and downstream phase monitors for all sets of TL1 optics when both \(R_{56}\) and \(T_{566}\) are considered.}
+  \caption{Phase shift between the upstream and downstream phase monitors for all sets of TL1 optics including higher orders.}
   \label{f:phaseVsEn_t566}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/optR56vsEnergy}
+  \caption{Dependence of the optimal optics to use in TL1 on the beam energy offset.}
+  \label{f:optR56vsEnergy}
+\end{figure}
+
+MADX does not output the optics \(T_{566}\) coefficient directly but it can be approximated using a quadratic fit to the downstream phase vs. energy curves seen in Figure~\ref{f:phaseVsEn_t566}. The fit coefficients then give the \(T_{566}\) and \(R_{56}\) values, as per Equation~\ref{e:t566}. An example of this is shown in Figure~\ref{f:madxT566Fit} for the nominal \(R_{56}=0\) optics in TL1. Again, as the results from MADX also includes effects above second order there is a slight discrepancy between the quadratic fit and the MADX output. However, including up to the second order energy dependence is enough to characterise the true behaviour and the slight modifications induced by higher orders are beyond the scope of the discussion here.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/madxT566Fit}
+  \caption{Quadratic fit to the MADX phase shift output for different energy offsets, giving values for \(R_{56}\) and \(T_{566}\).}
+  \label{f:madxT566Fit}
+\end{figure}
+
+Figure~\ref{f:t566TotVsr56TL1} then shows the fitted \(T_{566}\) coefficient for all the sets of matched optics in TL1. The changes in \(T_{566}\) across the range of TL1 optics are much smaller than the (intentional) differences in \(R_{56}\), varying between -13.1~m and -15.4~m. Optics around the usually optimal \(R_{56}\) value of 0.2~m in TL1  are close to where the second order effects are minimal, with \(T_{566}\) values around -13.4~m. The \(T_{566}\) coefficients are approximately two orders of magnitude larger than the \(R_{56}\) but as \(\left(\Delta p / p\right)^2 << \left(\Delta p / p\right) << 1\) the effect on the phase is smaller than for non-optimised \(R_{56}\). For example, for a typical relative energy offset of \(1 \times 10^{-3}\) a residual \(R_{56}\) of 0.2~m between the upstrem and downstream phase monitors leads to a phase shift of more than one degree. For the same energy offset the phase shift resulting from the second order \(T_{566}\) term is approximately 0.1 degrees. However, the key point for the phase propagation is that the first order dependence can be removed by zeroing \(R_{56}\) between the upstream and downstream phase monitors, whereas for all the available sets of optics the second order contribution will remain at roughly the same magnitude.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/t566TotVsr56TL1}
+  \caption{\(T_{566}\) coefficient for all sets of TL1 optics.}
+  \label{f:t566TotVsr56TL1}
+\end{figure}
+
+To determine the consequences of the \(T_{566}\) for the PFF system the effect it has on the upstream-downstream phase correlation and downstream phase jitter must be calculated. This was done analytically using the equations in in Section~\ref{ss:r56Equations} for the first order \(R_{56}\), but for the second order terms a simple Monte Carlo simulation approach has been used. Correlated random distributions are created in MatLab to match the typical CTF3 upstream phase and energy conditions --- namely \(\sigma_p = 0.001\), \(\sigma_u = 0.8^\circ\) and \(\rho_{up} = 0.2\). The simulated downstream phase for each set of TL1 optics is then calculated using Equation~\ref{e:t566} and the known \(R_{56}\) and \(T_{566}\) values. The jitter of this simulated downstream phase and its correlation with the initial upstream phase distribution give the values shown in the following figures.
+
+The solid lines in Figure~\ref{f:jitVsR56_t566} show the downstream phase jitter versus the residual \(R_{56}\) between the upstream and downstream phase monitors in the case where only the first oder \(R_{56}\) term is included (red) and when both the \(R_{56}\) and the second order \(T_{566}\) are included (blue). The effect of including \(T_{566}\) is very small, with the downstream phase jitter only increasing from \(0.80^\circ\) to \(0.85^\circ\) degrees at the optimal residual \(R_{56}\) of zero. The effect of including \(T_{566}\) on the upstream-downstream phase correlation is much more significant for the PFF correction. The maximum achievable correlation (excluding the effects of the phase monitor resolution) is reduced from \(\rho_{ud} = 1\) with only the first order term to \(\rho_{ud} = 0.95\) when \(T_{566}\) is included. This is shown in Figure~\ref{f:corrVsR56_t566}.  This increases the achievable corrected downstream phase jitter with the PFF systen from zero to \(0.27^\circ\) (again excluding the phase monitor resolution). 
 
 \begin{figure}
   \centering
@@ -346,11 +373,22 @@ Secondly, energy variations along the beam pulse and jitter in the beam energy m
   \label{f:corrVsR56_t566}
 \end{figure}
 
+With the initial conditions and optics used here it would therefore be impossible to achieve \(0.2^\circ\) phase stability at CTF3. However, the relative energy jitter of \(1\times10^{-3}\) is in fact somewhat pessimistic for the conditions that can be achieved at CTF3. Figure~\ref{f:maxCorrWithT566} shows how the maximum achievable upstream-downstream phase correlation varies with the relative energy jitter. An upstream-downstream phase correlation of 97\% is required to make achieving \(0.2^\circ\) downstream phase jitter at CTF3 possible. This can be achieved with a relative energy jitter of \(0.85\times10^{-3}\) if the \(R_{56}\) is perfectly optimised. In good conditions the CTF3 energy jitter can be reduced to around \(0.5\times10^{-3}\) (Section~\ref{ss:energyVariations}), in which case correlations up to \(99.6\%\) are theoretically achievable. It should therefore still be possible to achieve the necessary conditions for the PFF system at CTF3 even after taking in to account \(T_{566}\).
+
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/propagation/maxCorrWithT566}
   \caption{Best possible upstream-downstream phase correlation vs. beam energy jitter both with and without including the effects of \(T_{566}\).}
   \label{f:maxCorrWithT566}
+\end{figure}
+
+One final consequence of the non-zero \(T_{566}\) between the upstream and downstream phase monitors is the effect of energy variations along the pulse, or equivalently cases where the mean value of \(\Delta p/p\) is non-zero. All previous calculations have assumed the energy jitter to be about a mean \(\Delta p / p\) of zero, but this can not be true for all points along the CTF3 pulse due to the variations in mean beam energy along the pulse seen in Section~\ref{ss:energyVariations}. The effect of mean energy offsets on the upstream-downstream phase correlation is shown in Figure~\ref{f:corrVsEnergyOffset}, in this case assuming a relative energy jitter of \(0.5\times10^{-3}\) about the offset mean value and zero \(R_{56}\). Typically the energy variation along the CTF3 pulse is approximately \(\pm1 \times10^{-3}\). In this case the upstream-downstream phase correlation would vary between 96\% and 99.6\% along the pulse. Slightly larger variations in energy along the pulse, up to \(2\times 10^{-3}\) can cause the correlation to drop below 90\%. As a result of this effect the achievable corrected downstream phase jitter with the PFF system will also vary along the pulse. Without reducing either the energy variations along the pulse, or changing the optics to decrease the magnitude of \(T_{566}\), it is unlikely that \(0.2^\circ\) sample-by-sample jitter along the pulse can be demonstrated across more than 100~ns portions of the pulse length. [TODO: wording of this paragraph]
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/corrVsEnergyOffset}
+  \caption{Upstream-downstream phase correlation vs. relative beam energy offset.}
+  \label{f:corrVsEnergyOffset}
 \end{figure}
 
 \subsection{R56 Scans whilst Varying Beam Energy}
