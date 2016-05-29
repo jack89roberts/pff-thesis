@@ -1,31 +1,167 @@
 \newchapter{phasePropagation}{Phase Propagation}
 
-This is the introductory text.
+The PFF system uses the upstream phase measurement to correct the downstream phase. In this scheme any differences between the initial upstream phase and the downstream phase cannot be removed by the PFF system. The PFF system is therefore very sensitive to the ``phase propagation'', or the extent to which the upstream phase predicts the actual downstream phase. As at CTF3 the upstream and downstream phase monitors are separated by roughly 150~m of beam line there are many potential sources that may change the downstream phase with respect to the upstream phase. This chapter derives the requirements that the PFF system places on the phase propagation before describing its original status during the first PFF tests and the extensive work that has been needed to improve it.
 
-\newsection{phaseJitDefs}{Definitions of Different Phase Statistics}
+\newsection{pffEquations}{Feedforward Algorithm}
 
-Definitions of different types of phase jitter.
+In the PFF system the voltage sent to the kickers in the TL2 chicane is varied depending on the upstream phase. The corrected downstream phase, \(\phi_{PFF}\), can therefore be simply modelled as subtracting the upstream phase, \(\phi_u\), from the initial downstream phase \(\phi_d\):
+\begin{equation}
+\phi_{PFF} = \phi_d - g\phi_u
+\label{e:pffEq1}
+\end{equation}
+Where \(g\) is the applied correction gain. The corrected downstream phase jitter, \(\sigma_{PFF}\), can then be defined using the standard result of subtracting correlated variances [REF]:
+\begin{equation}
+\sigma_{PFF}^2 = \sigma_d^2 + g^2\sigma_u^2 - 2g\rho_{ud}\sigma_u\sigma_d
+\label{e:pffEq2}
+\end{equation}
+Where \(\rho_{ud}\) is the correlation coefficient between the upstream phase and the downstream phase. 
 
+Setting the partial differential of Equation~\ref{e:pffEq2} with respect to the gain equal to zero yields an expression for the theoretical optimal gain value to apply:
+\begin{equation}
+\frac{\partial \sigma_{PFF}^2}{\partial g} = 2g\sigma_u^2 - 2\rho_{ud}\sigma_u\sigma_d = 0
+\end{equation}
+\begin{equation}
+g = \rho_{ud}\left(\frac{\sigma_d}{\sigma_u}\right)
+\label{e:theoretOptGain}
+\end{equation}
+In the case where the phase propagation is perfect and the downstream phase is identical to the upstream phase the optimal gain factor is 1, as expected. Alternatively, if there is no correlation between the upstream and downstream phase the PFF system could only act to increase the downstream phase jitter, thus the optimal gain would be zero. If the downstream phase jitter is amplified with respect to the upstream phase jitter (\(\phi_d = \mathrm{const}\times\phi_u\)), this can be removed by the PFF system via the dependence of the optimal gain on the upstream--downstream phase jitter ratio.
+
+Susbstituting the optimal gain value back in to Equation~\ref{e:pffEq2} gives an expression for the theoretical limit on the corrected downstream phase jitter using the PFF system:
+\begin{equation}
+\sigma_{PFF} = \sigma_d\sqrt{1-\rho_{ud}^2}
+\label{e:theoretJitOptGain}
+\end{equation}
+With the optimal PFF setup the achievable corrected downstream phase jitter has no dependence on the upstream phase jitter. It depends only on the initial downstream phase jitter and most strongly on the upstream--downstream phase correlation. If non-optimal gains are used there is also a dependence on the upstream phase jitter and the set gain value as per Equation~\ref{e:pffEq2}. Figure~\ref{f:theoretJitvsCorr} shows how the achievable corrected downstream phase jitter depends on the upstream--downstream phase correlation. A factor 2 reduction in the initial downstream phase jitter requires a correlation of 86.6\%, for example.
+
+Equations~\ref{e:pffEq2},~\ref{e:theoretOptGain}~and~\ref{e:theoretJitOptGain} are used extensively in the remainder of this thesis to determine the beam conditions needed to achieve a \(0.2^\circ\) correction at CTF3, as well as to calculate the expected effect of the PFF system given the beam conditions and PFF setup.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/theoretJitvsCorr}
+  \caption{Theoretical corrected downstream phase jitter in optimal conditions with an initial downstream jitter of 1 in arbitrary units.}
+  \label{f:theoretJitvsCorr}
+\end{figure}
 
 \newsection{origJitter}{Characteristics of Uncorrected Phase Jitter}
 
-Injector feedbacks etc.
+This section summarises the status of the phase propagation during the first PFF tests to demonstrate why the work in this chapter was necessary and to provide a point of comparison to the improved conditions later achieved in Section~\ref{s:bestPhaseProp}.
+
+\subsubsection{Mean Phase}
+
+Figure~\ref{f:origMeanPhJit} compares the mean phase upstream and downstream across one dataset of 213 pulses, or roughly 5 minutes. The downstream phase jitter is more than double the upstream phase jitter --- at \(1.86\pm0.09^\circ\) compared to \(0.81\pm0.04^\circ\) upstream. Theoretically the PFF system could still remove the amplified downstream phase jitter providing the jitter is still well correlated with the upstream phase, as derived in the previous section. Unfortunately, as shown in Figure~\ref{f:origUpVsDown}, there is only very weak correlation between the upstream and downstream phase, \(0.34\pm0.06\) in this case.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/origMeanPhJit}
+  \caption{Mean phase jitter upstream and downstream during early PFF tests.}
+  \label{f:origMeanPhJit}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/origUpVsDown}
+  \caption{Correlation between the downstream phase and the upstream phase during early PFF tests.}
+  \label{f:origUpVsDown}
+\end{figure}
+
+Using Equation~\ref{e:theoretJitOptGain}, with the optimal PFF gain applied an initial downstream phase jitter of \(1.86\pm0.09^\circ\) could be reduced to \(1.51\pm0.09^\circ\) with the PFF system in these conditions with \(0.34\pm0.06\) upstream--downstream phase correlation. This is only a modest improvement of around 20\%, and far from the CLIC target of \(0.2^\circ\) phase stability. Also, the limitations of the actual PFF system, such as in the correction range (Section~\ref{ss:corrRange}), means that in reality even this 20\% reduction would be difficult to achieve in reality.
+
+Assuming the downstream phase jitter could be reduced to the same level as the upstream phase jitter, at \(0.8^\circ\), the upstream--downstream phase correlation required to be able to make \(0.2^\circ\) corrected phase jitter theoretically possible is 97\%. The target of this chapter is to achieve both this correlation and downstream phase jitter.
+
+\subsubsection{Phase Along Pulse}
+
+In addition to the differences in the mean phase there are also large discrepancies between the upstream and downstream phase along the pulse. Figure~\ref{f:origPhaseAlong} shows one example of this. The overall phase sag along the pulse is approximately equivalent for both the upstream and downstream phase. However, there are many oscillations along the downstream phase, up to \(10^\circ\) peak-to-peak, that are not present upstream. Clearly these differences also need to be removed to enable phase jitters close to the CLIC target to be achieved with the PFF prototype at CTF3. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/origPhaseAlong}
+  \caption{Upstream and downstream phase along the pulse during early PFF tests.}
+  \label{f:origPhaseAlong}
+\end{figure}
+
+As well as the static variations in the downstream phase along the pulse, there are also large differences in the phase jitter along the pulse. This is shown in Figure~\ref{f:origJitterAlong}. The point by point upstream phase jitter along the pulse is quite flat at around 1 degree, slightly larger than the jitter on the mean. Alternatively, the downstream phase jitter has large variations in stability along the pulse. In some regions the downstream jitter is a factor 4 higher than the upstream phase jitter, whilst in others it is only 50\% higher.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/origJitterAlong}
+  \caption{Upstream and downstream phase jitter along the pulse during early PFF tests.}
+  \label{f:origJitterAlong}
+\end{figure}
 
 \newsection{r56}{First Order Energy Dependencies}
 
-\subsection{Correlation between Phase and Energy}
-\label{ss:corrPhaseEnergy}
-
-Upstream AND downstream
+The transfer matrix coefficient \(R_{56}\) defines the phase shift between two points in the lattice resulting from a beam energy offset (Section~\ref{c:opticsIntro}). Due to issues with meeting all the optics constraints for the PFF system a non-zero \(R_{56}\) value of close to -0.2~m had to be tolerated in the TL2 chicane (Section~\ref{ss:pffMatched}).  As a result a dependence of the downstream phase on the beam energy is expected. Naturally, this was the first place to look to try to understand and improve the poor upstream--downstream phase correlation and high downstream phase jitter.
 
 \subsection{Beam Energy Variations}
 \label{ss:energyVariations}
 
+The best way to measure variations in the beam energy at CTF3 is via the beam position in one of the chicanes or rings, where the position after a bending magnet depends on the beam energy. The beam position offset, \(\Delta x\), in a BPM (beam position monitor) in these regions is linked to the relative energy offset, \(\Delta p / p\), as follows:
+\begin{equation}
+\frac{\Delta p}{p} = \frac{\Delta x}{D_x}
+\end{equation}
+Where \(D_{x}\) is the dispersion at that location given by the machine optics. Regions where \(D_{x}\) is non-zero are referred to as dispersive regions.
+
+For the current beam setup used for the PFF system (bypassing the stretching chicane and delay loop, see Figure~\ref{f:ctfLayout}) the first dispersive BPM after the CTF3 linac is the BPM CT.0608 in the transfer line TL1.  TL1 is introduced in more detail in Section~\ref{ss:tl1Optics}. The BPM CT.0608 is placed roughly 1~m after the first dipole magnet in TL1, with a horizontal dispersion of \(D_{x} = -0.61\)~m at this point according to the CTF3 MADX model. There are no quadrupoles or other elements between the dipole and CT.0608, which reduces the sensitivity of this dispersion value to any inaccuracies in the model. All quoted energy measurements in this chapter are obtained using the horizontal position in BPM CT.0608, converted in to the energy using the equation above. %The only exception is Section~\ref{ss:corrPhaseEnergy}, as this includes measurements from an earlier setup where the stretching chicane was in use. A dispersive BPM in the stretching chicane, CT.0285, is used instead in that section but both BPMs give equivalent measured energies.
+
+It should be noted that whilst this provides an accurate measurement of the relative energy jitter and variations along the pulse, it cannot be used to determine the absolute energy value. The mean beam position in CT.0608 is non-zero due to device misalignments, for example. This mean position offset is subtracted in all cases so that the resulting energy values are centred around zero, although the actual mean energy offset may be non-zero. In certain simulations in this chapter non-zero mean energy offsets are used to improve the agreement with the data, as indicated.
+
 \subsubsection{Mean Beam Energy}
+
+Figure~\ref{f:enJitter_mean} shows an example of variations in the mean beam energy on medium to long timescales at CTF3, in this case 500 pulses or roughly 10 minutes. Relative energy jitter on the mean is typically at the level of \(1 \times 10^{-3}\), and varies by roughly \(\pm50\%\) about this value. For shorter timescales, in datasets up to a couple of hundred pulses or a few minutes in length, the relative energy jitter is routinely closer to the \(0.5 \times 10^{-3}\) level (seen later in Figure~\ref{f:r56Scan_upstreamParams}, for example). The main sources of drifts in the mean energy at CTF3 are variations in beam current and temperature dependent effects on the klystron phase and RF power feedback loops [REF]. Recent improvements have demonstrated below \(1 \times 10^{-3}\) energy stability also on longer timescales (see Section~\ref{ss:t566Mitigation}), which will aid future PFF tests.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/enJitter_mean}
+  \caption{Example of variations in mean energy across 500 pulses, with a relative jitter of \(1.2\times 10^{-3}\).}
+  \label{f:enJitter_mean}
+\end{figure}
 
 \subsubsection{Energy Variations Along the Pulse}
 
-and different R56 optimal point along pulse
+Energy stability point by point along the pulse is at the same level as the mean energy stability, with relative jitter at, or slightly above, the \(1 \times 10^{-3}\) level, as seen in Figure~\ref{f:enJitter_along}. Typically the energy stability is slightly worse at the start and end of the pulse.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/enJitter_along}
+  \caption{Example of relative energy jitter along the pulse.}
+  \label{f:enJitter_along}
+\end{figure}
+
+In addition to the jitter there are also static variations in the energy along the pulse. Figure~\ref{f:enMeanAlong} shows one example of this. Peak-to-peak variations in the energy along the pulse are normally several times larger than the energy jitter, at the level of 2---\(5\times 10^{-3}\). New feedbacks have also been recently developed at CTF3 to reduce variations in energy along the pulse (Section~\ref{ss:t566Mitigation}).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/enMeanAlong}
+  \caption{Example of variations in energy along the pulse.}
+  \label{f:enMeanAlong}
+\end{figure}
+
+
+\subsection{Correlation between Phase and Energy}
+\label{ss:corrPhaseEnergy}
+
+Figure~\ref{f:corrDownstream_En} shows one example of the typical dependence of the mean downstream phase on the beam energy during the first PFF attempts. It's immediately clear that there is a strong relationship between the two, with a correlation in this case of \(0.82\pm0.03\). 
+
+Alternatively, in Figure~\ref{f:corrUpstream_En} there is almost no dependence of the upstream phase on the energy. However, the calculated correlation coefficient of \(0.19\pm0.06\) is statistically significant and this has consequences for the discussions in the remainder of this chapter. Normally the small upstream phase--energy correlation typically varies between 0 and 0.4 at CTF3 depending on the conditions, in particular the energy jitter, at that time. In certain setups there can also be high correlations between the upstream phase and energy (Section~\ref{s:r56ScanWithEnergy}).
+
+By itself having a high correlation between the downstream phase and the energy is not an issue for the PFF system. The problem is the difference between the upstream phase--energy correlation and the downstream phase--energy correlation, which leads to low correlation between the upstream and downstream phase. The high downstream phase jitter is also a problem for the PFF system due to its limited correction range, as previously mentioned.
+
+The goal of this section is to determine whether the non-zero optics \(R_{56}\) value between the upstream and downstream phase monitors is sufficient to explain both the large amplification in downstream phase jitter and the low upstream--downstream phase correlation seen here. To start, the effect of \(R_{56}\) on the downstream phase jitter and upstream--downstream phase correlation will be more formally defined.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/corrUpstreamEn}
+  \caption{Dependence of the mean downstream phase on the beam energy.}
+  \label{f:corrUpstream_En}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/propagation/corrDownstreamEn}
+  \caption{Dependence of the mean downstream phase on the beam energy.}
+  \label{f:corrDownstream_En}
+\end{figure}
+
 
 
 \subsection{R56}
@@ -37,7 +173,7 @@ Assuming energy is the only source of differences between the upstream and downs
 \label{e:r56PhasEq}
 \end{equation}
 
-Where \(\phi_u\) is the upstream phase, \(\Delta p / p\) is the relative energy offset and \(R_{56}\) is the R56 value between the upstream and downstream phase monitors, defined by the machine optics. R56 defines the phase shift between two points in the lattice resulting from a beam energy offset. The units of R56 in the equation above are 12~GHz radians per unit relative energy offset (\(\Delta p/p = 1\)). MADX uses units of metres and this value is what will be referred to in this chapter. To obtain the R56 value to use in the equation above the MADX value must be multiplied by the conversion factor \(2\pi/0.025\), where 0.025~m is the 12~GHz wavelength.
+Where \(\phi_u\) is the upstream phase, \(\Delta p / p\) is the relative energy offset and \(R_{56}\) is the R56 value between the upstream and downstream phase monitors, defined by the machine optics. The units of R56 in the equation above are 12~GHz radians per unit relative energy offset (\(\Delta p/p = 1\)). MADX uses units of metres and this value is what will be referred to in this chapter. To obtain the R56 value to use in the equation above the MADX value must be multiplied by the conversion factor \(2\pi/0.025\), where 0.025~m is the 12~GHz wavelength.
 
 In terms of jitters Equation~\ref{e:r56PhasEq} becomes:
 \begin{equation}
