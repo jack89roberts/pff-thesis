@@ -176,7 +176,7 @@ Finally, the resolution is defined as:
 \end{align}
 In terms of a resolution calculation these equations only apply to the two upstream phase monitors. All the resolution values quoted in this chapter use this equation and the difference between the measurement of Mon~1 and Mon~2.
 
-However, as the act of the PFF system can also be though of as subtracting two phases (removing the upstream phase from the downstream phase) the same equations can be directly applied to determine the limitations that the phase monitor resolution places on the PFF performance. Equation~\ref{e:pffVsResolution} shows that the lowest possible corrected downstream phase jitter is a factor \(\sqrt{2}\) times larger than the phase monitor resolution. In order to reduce the downstream phase jitter to the CLIC target of \(0.2^\circ\) the phase monitor resolution must therefore be better than \(0.14^\circ\). Equation~\ref{e:corrVsResolution} shows that with this \(0.14^\circ\) resolution and a typical beam phase jitter of \(0.8^\circ\) (Section~\ref{s:origJitter}) the measured correlation between two phase monitor measurements would be \(97\%\).
+However, as the act of the PFF system can also be thought of as subtracting two phases (removing the upstream phase from the downstream phase) the same equations can be directly applied to determine the limitations that the phase monitor resolution places on the PFF performance. Equation~\ref{e:pffVsResolution} shows that the lowest possible corrected downstream phase jitter is a factor \(\sqrt{2}\) times larger than the phase monitor resolution. In order to reduce the downstream phase jitter to the CLIC target of \(0.2^\circ\) the phase monitor resolution must therefore be better than \(0.14^\circ\). Equation~\ref{e:corrVsResolution} shows that with this \(0.14^\circ\) resolution and a typical beam phase jitter of \(0.8^\circ\) (Section~\ref{s:origJitter}) the measured correlation between two phase monitor measurements would be \(97\%\).
 
 \newsection{monSigResponse}{Signal Generator Measurements}
 
@@ -394,11 +394,17 @@ Two calibration constants are needed -- \(A\) and \(d\). \(A\) is the fitted amp
 
 As any variations in input power are not removed by this method there is a benefit to operating the mixer in a region where the power dependence of the output is reduced. The best phase resolution achieved to date has been achieved with input powers to the electronics in the range between 24.5~dBm and 27~dBm (as stated in [REF]), where the mixers have actually begun to enter saturation, as a result. Operating in this range also has the benefit of reducing the deviation from ideal sinusoidal behaviour at lower input powers as seen in Section~\ref{ss:sigGenMixer}.
 
+All the beam based measurements in the remainder of this chapter and the rest of the thesis use this phase reconstruction approach. Although the diodes are no longer directly used as part of the phase measurement they are still useful for the purposes of the time alignment of signals and for monitoring whether there have been any large changes in input power.
 
 \newsection{monCalibrations}{Calibrations}
 
+Calibrations of the phase monitor signals are typically taken on a daily basis during data taking periods, as well as additional calibrations when there have been any changes in beam conditions or to the setup of the electronics. These are needed to determine the calibration constants, amplitude and offset, to be able to determine the phase from the mixer output as previously discussed.
+
+For beam based measurements calibrations are performed using the LO phase shifters. By varying the LO phase shifter the phase between the LO and the beam signal is changed. By moving the phase shifter through \(360^\circ\) at 12~GHz the response of the mixer to all  phase offsets between the beam and LO can be determined. Normally calibrations are taken at 12 shifter settings across the full \(360^\circ\) range, with 10 pulses acquired at each setting and the whole scan taking approximately 10~minutes. These choices are a compromise between having enough points for a good quality fit whilst reducing the possibility of large drifts in beam phase during the scan which would degrade the fit results.
+
 \subsection{Procedure}
 \label{ss:calProcedure}
+
 
 \subsection{Single Sample Results}
 \label{ss:calSingSamp}
@@ -450,7 +456,14 @@ As any variations in input power are not removed by this method there is a benef
   \label{f:PhMon_HistMech}
 \end{figure}
 
-\newsection{resolution}{Resolution}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/PhMon_Resolution}
+  \caption{Resolution.}
+  \label{f:PhMon_Resolution}
+\end{figure}
+
+\newsection{resVsShifter}{Dependence of Resolution on LO Phase}
 
 Single sample.
 
@@ -462,14 +475,12 @@ Impact for phase correlations.
 
 vs. shifter setting
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/PhMon_Resolution}
-  \caption{Resolution.}
-  \label{f:PhMon_Resolution}
-\end{figure}
+\newsection{monComp}{Differences Between Monitors}
 
-\newsection{monLinearity}{Linearity}
+shape mon1 vs mon2
+jitter mon1 vs mon2
+comparison mon1/2 and bpr
+comparison mon3 and pets
 
 \newsection{monBandwidth}{Bandwidth}
 
