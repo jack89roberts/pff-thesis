@@ -115,6 +115,69 @@ Figure~\ref{f:sinFitEx} and Table~\ref{t:sinFitEx} show the results of an exampl
   \end{center}
 \end{table}
 
+\newsection{s:resolutionEqs}{Resolution Definition}
+
+The performance of the PFF system clearly depends on the accuracy to which the phase can be measured. Many of the measurements in this chapter are therefore focused on the phase monitor resolution, or more precisely on the resolution of the combined phase monitor and electronics setup. The resolution is defined as the jitter between the measured phase and the true beam phase. This can be calculated by comparing the difference between the measured phase of two monitors. This is why two phase monitors, Mon~1 and Mon~2 are installed neighbouring each other in the upstream system in the CT line. The beam phase should be identical in these two monitors thus their measurements can always be compared to derive the resolution.
+
+The precise derivation of the resolution dependent on the measurement of two monitors is as follows. First, the measured phase, \(\phi_x(t)\) and \(\phi_y(t)\), in two monitors at time \(t\) can be defined as:
+\begin{align}
+\phi_x(t) &= \phi_b(t) + n_x(t) \\
+\phi_y(t) &= \phi_b(t) + n_y(t)
+\end{align}
+Where \(\phi_b(t)\) is the true beam phase and \(n_x(t)\) and \(n_y(t)\) is the noise on the measurement at that time. The time dependence will not be written explicitly from this point. These equations assume the beam phase is identical in each monitor, as should be the case for Mon~1 and Mon~2. The variance of each phase monitor measurement can then be derived from the equations above by adding the variance of the beam phase and the noise in quadrature:
+\begin{align}
+\sigma_x^2 &= \sigma_b^2 + \sigma_{nx}^2 \\
+\sigma_y^2 &= \sigma_b^2 + \sigma_{ny}^2
+\end{align}
+Where \(\sigma_x\) and \(\sigma_y\) are the phase jitters measured by each phase monitor, \(\sigma_b\) is the true beam phase jitter and \(\sigma_{nx}\) and \(\sigma_{ny}\) are the phase monitor resolutions. Assuming each phase monitor has the same resolution, \(\sigma_n\), this can be simplified to \(\sigma_x^2~=~\sigma_y^2~=~\sigma_b^2~+~\sigma_n^2\).
+
+The quantity of interest for calculating the phase monitor resolution is the jitter in the difference between the two measured phases, \(\sigma_{x-y}\). The variance of the difference between two correlated variables is defined as:
+\begin{align}
+\sigma_{x-y}^2 &= \sigma_x^2 + \sigma_y^2 - 2\sigma_x\sigma_y\rho_{xy} \\
+\end{align}
+Where \(\rho_{xy}\) is the correlation between the phase measurement of \(x\) and \(y\). Substituting in the previously derived expressions for \(\sigma_x\) and \(\sigma_y\) this becomes:
+\begin{align}
+\sigma_{x-y}^2 &= 2(\sigma_b^2 + \sigma_n^2)(1-\rho_{xy})
+\end{align}
+
+The correlation coefficient \(\rho_{xy}\) depends on the covariance between \(x\) and \(y\), \(\mathrm{cov}[x,y]\), as follows:
+\begin{align}
+\rho_{xy} &= \frac{\mathrm{cov}[x,y]}{\sigma_x\sigma_y} = \frac{\mathrm{cov}[x,y]}{\sigma_b^2+\sigma_n^2} \\
+\end{align}
+Where the covariance is defined as:
+\begin{align}
+\mathrm{cov}[x,y] = \frac{1}{N}\sum_{i=1}^{N}\phi_{xi}\phi_{yi} \\
+\end{align}
+
+Substituting in the expressions for \(\phi_{x}\) and \(\phi_{y}\) above and separating the terms in the sum then gives the following expression for the covariance of \(x\) and \(y\):
+\begin{equation}
+\begin{gathered}
+\mathrm{cov}[x,y] = \frac{1}{N}\sum_{i=1}^{N}(\phi_{bi}+n_{xi})(\phi_{bi}+n_{yi}) \\
+\mathrm{cov}[x,y] = \frac{1}{N}\sum_{i=1}^{N}\phi_{bi}^2 + \frac{1}{N}\sum_{i=1}^{N}\phi_{bi}n_{xi} + \frac{1}{N}\sum_{i=1}^{N}\phi_{bi}n_{yi} + \frac{1}{N}\sum_{i=1}^{N}n_{xi}n_{yi} 
+\end{gathered}
+\end{equation}
+The first term is the definition of the variance of the beam phase, \(\sigma_b^2\). The remaining terms are the covariance between the beam phase and the monitor noises, and the covariance between the two monitor noises. Assuming the noise is uncorrelated all these terms are zero. The remaining equation for the covariance between \(x\) and \(y\) is therefore simply: \(\mathrm{cov}[x,y] = \sigma_b^2\). Finally, the correlation between the phase measurement of \(x\) and \(y\) becomes:
+\begin{align}
+\rho_{xy} &= \frac{\sigma_b^2}{\sigma_b^2 + \sigma_n^2}
+\label{e:corrVsResolution}
+\end{align}
+
+Substituting this expression for the correlation in to the derived equation for the variance between the two phase measurements gives the following simple dependence on the phase monitor resolution:
+\begin{equation}
+\begin{gathered}
+\sigma_{x-y}^2 = 2(\sigma_b^2 + \sigma_n^2)\left(1-\frac{\sigma_b^2}{\sigma_b^2 + \sigma_n^2}\right) \\
+\sigma_{x-y}^2 = 2\sigma_n^2 \label{e:pffVsResolution}
+\end{gathered}
+\end{equation}
+Finally, the resolution is defined as:
+\begin{align}
+\sigma_n = \frac{\sigma_{x-y}}{\sqrt{2}}
+\label{e:resolutionEq}
+\end{align}
+In terms of a resolution calculation these equations only apply to the two upstream phase monitors. All the resolution values quoted in this chapter use this equation and the difference between the measurement of Mon~1 and Mon~2.
+
+However, as the act of the PFF system can also be though of as subtracting two phases (removing the upstream phase from the downstream phase) the same equations can be directly applied to determine the limitations that the phase monitor resolution places on the PFF performance. Equation~\ref{e:pffVsResolution} shows that the lowest possible corrected downstream phase jitter is a factor \(\sqrt{2}\) times larger than the phase monitor resolution. In order to reduce the downstream phase jitter to the CLIC target of \(0.2^\circ\) the phase monitor resolution must therefore be better than \(0.14^\circ\). Equation~\ref{e:corrVsResolution} shows that with this \(0.14^\circ\) resolution and a typical beam phase jitter of \(0.8^\circ\) (Section~\ref{s:origJitter}) the measured correlation between two phase monitor measurements would be \(97\%\).
+
 \newsection{monSigResponse}{Signal Generator Measurements}
 
 Measurements have been taken using a 12~GHz signal generator to determine the performance of the three sets of phase monitor electronics independently from the phase monitors themselves. In particular, these tests were focused on identifying the saturation and cross-talk characteristics of the output mixer and diode signals in order to determine a suitable input power range to use during normal operation.
