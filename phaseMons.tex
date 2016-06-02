@@ -315,6 +315,23 @@ Where \(d_1\), \(d_2\), \(d_3\), \(d_4\) and \(\delta\) are calibration constant
 \subsection{Consequences for Normal Operation}
 \label{ss:sigGenConsq}
 
+The results of the signal generator tests have several consequences for the setup of the electronics and phase reconstruction during normal operation with the beam induced signals from the phase monitors. Firstly, in order to maximise the signal to noise ratio and yield the best possible resolution on the phase measurement the highest possible input power below saturation should normally be used. The degradation of the phase resolution with the input power is seen for beam based measurements in Section~[REF]. However, the diodes begin to enter saturation much earlier than the mixers, at around 15~dBm rather than 23~dBm. This means that in order to be able to use the diode measurement as part of the phase reconstruction the input power would have to be limited to below 15~dBm, 8~dBm lower than would be ideal for the mixer performance. There is no way to use different input powers for the mixers and diodes without a complete redesign of the electronics.
+
+Secondly, the modifications that the cross-talk on the mixer and diode make to Equations~\ref{e:actualMixerResponse}~and~\ref{e:actualDiodeResponse} above makes the needed calculation to reconstruct the phase much more complex than the ideal case using Mixer/sqrt(Diode) in Equation~\ref{e:phaseRecIdeal}. In particular, the dependence of the diode output on \(\sin(\phi+\delta)\) means there is no simple expression that can be derived to create an input power independent phase measurement. An iterative process would have to be used to estimate the phase instead, converging towards the true diode output without cross-talk after each iteration using the estimated phase value. This may be possible in offline data analysis but would be difficult to implement in the PFF algorithm whilst still meeting latency requirements.
+
+Due to these reasons, and with no possibility to make modifications to the electronics, the decision was eventually taken to not include the diode measurement in the phase reconstruction process. For operation with the beam this means making the assumption that the output power from the phase monitors is constant along the pulse, and that the jitter in the output power is small. This is a good approximation, as seen later in Section~[REF]. To reduce the sensitivity to any slow drifts in the output power due to changes in the beam conditions calibrations are taken at regular intervals between measurements.
+
+With this treatment of the electronics outputs the phase is reconstructed as follows:
+\begin{align}
+&\mathrm{Mixer}(t) = A\sin[\phi(t)] + d \\
+&\phi(t) = \arcsin\left(\frac{\mathrm{Mixer}(t)-d}{A}\right)
+\label{e:phaseRecUsed}
+\end{align}
+Two calibration constants are needed -- \(A\) and \(d\). \(A\) is the fitted amplitude of the sinusoidal mixer output, and \(d\) is the asymmetry between the maximum and minimum mixer output. This is a simplified form of Equation~\ref{e:actualMixerResponse} given the assumption that the power is constant. In reality both \(A\) and \(d\) have a power dependence.
+
+As any variations in input power are not removed by this method there is a benefit to operating the mixer in a region where the power dependence of the output is reduced. The best phase resolution achieved to date has been achieved with input powers to the electronics in the range between 24.5~dBm and 27~dBm (as stated in [REF]), where the mixers have actually begun to enter saturation, as a result. Operating in this range also has the benefit of reducing the deviation from ideal sinusoidal behaviour at lower input powers as seen in Section~\ref{ss:sigGenMixer}.
+
+
 \newsection{monCalibrations}{Calibrations}
 
 \subsection{Procedure}
