@@ -390,27 +390,115 @@ With this treatment of the electronics outputs the phase is reconstructed as fol
 &\phi(t) = \arcsin\left(\frac{\mathrm{Mixer}(t)-d}{A}\right)
 \label{e:phaseRecUsed}
 \end{align}
-Two calibration constants are needed -- \(A\) and \(d\). \(A\) is the fitted amplitude of the sinusoidal mixer output, and \(d\) is the asymmetry between the maximum and minimum mixer output. This is a simplified form of Equation~\ref{e:actualMixerResponse} given the assumption that the power is constant. In reality both \(A\) and \(d\) have a power dependence.
+Two calibration constants are needed -- \(A\) and \(d\). \(A\) is the fitted amplitude of the sinusoidal mixer output, and \(d\) is the asymmetry or offset between the maximum and minimum mixer output. This is a simplified form of Equation~\ref{e:actualMixerResponse} given the assumption that the power is constant. In reality both \(A\) and \(d\) have a power dependence.
 
 As any variations in input power are not removed by this method there is a benefit to operating the mixer in a region where the power dependence of the output is reduced. The best phase resolution achieved to date has been achieved with input powers to the electronics in the range between 24.5~dBm and 27~dBm (as stated in [REF]), where the mixers have actually begun to enter saturation, as a result. Operating in this range also has the benefit of reducing the deviation from ideal sinusoidal behaviour at lower input powers as seen in Section~\ref{ss:sigGenMixer}.
 
-All the beam based measurements in the remainder of this chapter and the rest of the thesis use this phase reconstruction approach. Although the diodes are no longer directly used as part of the phase measurement they are still useful for the purposes of the time alignment of signals and for monitoring whether there have been any large changes in input power.
+All the beam based measurements in the remainder of this chapter and the rest of the thesis use this phase reconstruction approach. Although the diodes are no longer directly used as part of the phase measurement they are still useful for the purposes of the time alignment of signals and for monitoring whether there have been any large changes in input power. The PFF firmware on the FONT5a feedforward controller has also been changed to add the option to not include the diode in the correction calculation (Section~\ref{ss:fontDAQ}). The nominal PFF setup, as used for the results presented in Chapter~\ref{c:feedforward}, now does not use diode normalisation.
 
 \newsection{monCalibrations}{Calibrations}
 
 Calibrations of the phase monitor signals are typically taken on a daily basis during data taking periods, as well as additional calibrations when there have been any changes in beam conditions or to the setup of the electronics. These are needed to determine the calibration constants, amplitude and offset, to be able to determine the phase from the mixer output as previously discussed.
 
-For beam based measurements calibrations are performed using the LO phase shifters. By varying the LO phase shifter the phase between the LO and the beam signal is changed. By moving the phase shifter through \(360^\circ\) at 12~GHz the response of the mixer to all  phase offsets between the beam and LO can be determined. Normally calibrations are taken at 12 shifter settings across the full \(360^\circ\) range, with 10 pulses acquired at each setting and the whole scan taking approximately 10~minutes. These choices are a compromise between having enough points for a good quality fit whilst reducing the possibility of large drifts in beam phase during the scan which would degrade the fit results.
+For beam based measurements calibrations are performed using the LO phase shifters. By varying the LO phase shifter the phase between the LO and the beam signal is changed. During a calibration the phase shifters are moved through \(360^\circ\) at 12~GHz  so that the response of the mixer to all phase offsets between the beam and LO can be determined. Normally calibrations are taken at 12 shifter settings across the full \(360^\circ\) range, with 10 pulses acquired at each setting and the whole scan taking approximately 10~minutes. These choices are a compromise between having enough points for a good quality fit whilst reducing the possibility of large drifts in beam phase during the scan which would degrade the fit results.
 
-\subsection{Procedure}
-\label{ss:calProcedure}
+This section presents typical calibration results for all three phase monitors and discusses aspects such as the stability of the calibration along the pulse and over time. All the calibrations presented use the electronics setup with the mechanical LO phase shifters in place (Section~\ref{s:shifters}) and with the mixer outputs amplified and sent to the SiS digitisers (Section~\ref{s:digNoise}). The LO phase shifter settings approximately correspond to degrees at 4~GHz, thus a phase shifter change of 120 units corresponds to \(360^\circ\) at 12~GHz.
+
+\subsection{Change in Mixer Output with LO phase}
+\label{ss:mixCalPlots}
+
+Figures~\ref{f:mon1AllPoints}--\ref{f:mon3AllPoints} show the output of the mixer for each phase monitor along the pulse for all the phase shifter settings used during the LO scan. Away from the minimum and maximum output each mixer shows the expected phase sag along the beam pulse resulting from the RF pulse compression used at CTF3 [REF]. The shape of the phase sag as seen on the mixer changes sign depending on whether the LO phase places the mixer on the rising or falling slope of its sinusoidal output. Usually the mixers are operated on the falling slope where the measured phase sag is `u'-shaped, rather than `n'-shaped, as this is also the convention for other phase dependent signals at CTF3 [REF].
+
+Near the minimum or maximum mixer amplitude the beam phase sag causes a much smaller variation in the mixer output voltage along the pulse. The phase resolution close to the peaks in the mixer output is therefore greatly reduced, as seen in Section~\ref{s:resVsShifter}. LO phase scans are used to not only calculate the calibration constants but also to determine the phase shifter settings that zero the mixer output, where the resolution is maximal. This process is documented in Section~\ref{ss:calZeroCross}.
+
+The noisier appearance of the output on Mon~3 is not an effect of the phase monitors or phase monitor electronics but is rather caused by real differences between the beam phase upstream (Mon~1, Mon~2) and downstream (Mon~3). Reducing the differences between the upstream and downstream phase is the focus of Chapter~\ref{c:phasePropagation}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/mon1AllPoints}
+  \caption{Mon~1 phase along the pulse for each LO phase shifter setting during the calibration.}
+  \label{f:mon1AllPoints}
+ \includegraphics[width=0.9\textwidth]{Figures/phaseMons/mon2AllPoints}
+  \caption{Mon~2 phase along the pulse for each LO phase shifter setting during the calibration.}
+  \label{f:mon2AllPoints}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/mon3AllPoints}
+  \caption{Mon~3 phase along the pulse for each LO phase shifter setting during the calibration.}
+  \label{f:mon3AllPoints}
+\end{figure}
 
 
-\subsection{Single Sample Results}
+\subsection{Single Sample Calibration Results}
 \label{ss:calSingSamp}
+
+Figure~\ref{f:allMixersSamp605} shows the result of fitting the mixer output versus the phase shifter setting at sample 605 along the pulse. The fitted values of the mixer amplitude, \(A\), and offset, \(d\), are found in Table~\ref{t:calFitConsts}. These values are used to calculate the beam phase as per Equation~\ref{e:phaseRecUsed}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/allMixersSamp605}
+  \caption{Fits to the mixer output vs. LO phase shifter setting at sample 605.}
+  \label{f:allMixersSamp605}
+\end{figure}
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+	   \hline
+       Monitor & \(A\) (amplitude) & \(d\) (offset) \\ \hline
+       Mon~1 & \(1167\pm10\)~mV & \(86\pm9\)~mV \\ 
+       Mon~2 & \(1064\pm6\)~mV & \(69\pm7\)~mV\\
+       Mon~3 & \(990\pm12\)~mV & \(150\pm10\)~mV\\ \hline
+    \end{tabular}
+    \caption{Fit parameters from the calibration for each monitor.}
+  	\label{t:calFitConsts}
+  \end{center}
+\end{table}
 
 \subsection{Multi-Sample Results}
 \label{ss:calMultiSamp}
+
+\subsection{Stability with Time}
+\label{ss:calStability}
+
+\subsection{Zero Crossing}
+\label{ss:calZeroCross}
+
+The full fit to the calibration result that is performed is:
+\begin{equation}
+\mathrm{Mixer} = A\sin(bx + c) + d
+\end{equation}
+Where \(x\) is the phase shifter setting. \(A\) and \(d\) are the calibration constants used to reconstruct the phase, with their values already quoted in Table~\ref{t:calFitConsts}. The remaining fit parameters \(b\) and \(c\) convert the phase shifter setting in to the phase offset between the LO and the beam. As the shifter readings are approximately in 4~GHz degrees, the expected value for \(b\) that converts the shifter value in to 12~GHz radians is \((12/4)*(\pi/180) \simeq 50\)~mrad/unit.
+
+To obtain the best resolution for the measurement the mixers should be operated where the dependence of the output voltage on the phase is maximal. This means maximising the partial derivative of the mixer output with respect to the phase shifter setting:
+\begin{equation}
+\frac{\partial \mathrm{Mixer}}{\partial x} = Ab\cos(bx+c)
+\end{equation}
+This is maximised when \(bx + c = n\pi\), where \(n\) is any positive or negative integer. The optimal phase shifter settings therefore meet this criteria:
+\begin{equation}
+x = \frac{n\pi-c}{b}
+\end{equation}
+Where the mixer output is \(\mathrm{Mixer} = A\sin(n\pi)+d = d\). In the case where there is no offset between the minimum and maximum mixer output (\(d=0\)) the optimal point to operate the mixers is at zero output. Because of this the optimal shifter setting will be referred to as the zero crossing. In reality the small asymmetry in the mixer output means the optimal shifter setting is where mixer output is \(d\). The effect of operating the mixers away from the zero crossing on the resolution is shown in Section~\ref{s:resVsShifter}.
+
+In addition, as previously mentioned the convention is to operate the mixers on the falling slope where the partial derivate above is negative. The set shifter values are obtained using the smallest positive integer \(n\) that leads to this criteria being met. Table~\ref{t:calZeroCross} shows an example of values for the fit parameters \(b\) and \(c\) and the calculated phase shifter settings to be on the zero crossing for each monitor. These values are taken from the same calibration and sample number presented in Section~\ref{ss:calSingSamp}. The reader may be interested to compare where the shifter settings fall along the mixer output traces during the calibration in Figure~\ref{f:allMixersSamp605}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c c|}
+	   \hline
+       Monitor & \(b\) & \(c\) & Zero Crossing \\ \hline
+       Mon~1 & \(50.8\pm0.5\)~mrad/unit & \(2.29\pm0.04\)~rad & \(16.7\pm0.9\)~units \\ 
+       Mon~2 & \(47.4\pm0.5\)~mrad/unit & \(1.36\pm0.04\)~rad & \(37.5\pm0.8\)~units \\
+       Mon~3 & \(51.3\pm0.6\)~mrad/unit & \(4.02\pm0.04\)~rad & \(105.5\pm1.5\)~units \\ \hline
+    \end{tabular}
+    \caption{Phase shifter setting to obtain the zero crossing for each mixer output and the fit parameters needed to calculate them.}
+  	\label{t:calZeroCross}
+  \end{center}
+\end{table}
+
+Due to the large phase sag along the beam pulse it is clearly not possible to be at the zero crossing of the mixer for the full pulse length. For the PFF system the region of interest is the central portion of the pulse where the phase sag is flattest. The shifters are therefore set to zero the mixer output in this region, giving best resolution in the central part of the pulse but degraded resolution near the start and end of the pulse. In addition to this, slow drifts in the beam phase, particularly downstream, mean that the shifters must routinely be changed to stay at the zero crossing. With the current setup using mechanical phase shifters this must be done by hand, with no possibility to implement an automatic feedback on the shifter settings, for example.
 
 \newsection{digNoise}{Digitiser Noise}
 
@@ -465,15 +553,12 @@ For beam based measurements calibrations are performed using the LO phase shifte
 
 \newsection{resVsShifter}{Dependence of Resolution on LO Phase}
 
-Single sample.
-
-(Multi-sample)
-
-Sample averaging.
-
-Impact for phase correlations.
-
-vs. shifter setting
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/resolutionVsShifter}
+  \caption{Resolution.}
+  \label{f:resolutionVsShifter}
+\end{figure}
 
 \newsection{monComp}{Differences Between Monitors}
 
