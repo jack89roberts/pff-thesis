@@ -188,7 +188,7 @@ Combining Equations~\ref{e:fontGain1},~\ref{e:fontGain2}~and~\ref{e:fontGain3} g
 \frac{g}{A}\mathrm{ADC2} &= \frac{k\mathrm{F}}{64}\mathrm{ADC2} \nonumber \\
 g &= \frac{kA}{64}\mathrm{F} \label{e:fontGain4}
 \end{align}
-In Section~\ref{ss:corrRange} a phase shift of \(3.5^\circ\) per volt sent to the amplifier is determined. Knowing that 4096 DAC counts corresponds to 2~V sent to the amplifier this value can be converted into \(k = 29.8~\mathrm{\mu}\)radians/DAC~count. Typical calibrations for Mon1 on the FONT5a board give \(A = 3440\)~ADC~counts. Overall, the real applied gain therefore relates to the set FONT gain in the DAQ via:
+In Section~\ref{ss:corrRange} a phase shift of \(3.5^\circ\) per volt sent to the amplifier is determined. Knowing that 4096 DAC counts corresponds to 2~V sent to the amplifier this value can be converted into \(k = 29.8~\mathrm{\mu}\)radians/DAC~count. Typical calibrations for Mon1 on the FONT5a board give \(A \simeq 3440\)~ADC~counts (Section~\ref{ss:FONTCal}). Overall, the real applied gain therefore relates to the set FONT gain in the DAQ via:
 \begin{equation}
 g \simeq \frac{\mathrm{F}}{624}
 \end{equation}

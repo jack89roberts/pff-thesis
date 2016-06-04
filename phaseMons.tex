@@ -9,11 +9,18 @@ Mon3 = mon in TBL
 Mon1/Mon2 = upstream phase
 Mon3 = downstream phase
 
-\newsection{monElectronics}{Phase Monitor Electronics}
+\newsection{phaseMonDesign}{Phase Monitor Design}
 
 Hybrid - remove dipole (position dependent) mode. 19dB below monopole mode for 1mm offset (11\% amplitude). 1mm beam offset = 2.8 degrees phase offset. 180 degree hybrids to remove. Additional 20 dB attenuation in dipole mode.
 
 Bunch length sensitivity: more sensitive to variation in bunch length for longer variations. 5mm bunch length - 50\% amplitude output compared to 0mm. With 1mm bunches 16\% variation in bunch length needed to cause 1\% change in output voltage.
+
+Mon1 24.6 dBm + 3dB
+Mon2 26.8 dBm + 3dB
+Mon3 24.5 dBm
+
+\newsection{monElectronics}{Phase Monitor Electronics}
+
 
 LO should have 5fs stability? What is the source of the LO?
 
@@ -66,54 +73,18 @@ Mixer output -> attenuator -> amplifier -> SiS OR -> attenuator->FONT
 Diode output -> SiS/FONT
 
 Latest power measurements:
-Mon1 24.6 dBm + 3dB
-Mon2 26.8 dBm + 3dB
-Mon3 24.5 dBm
+
 LO1 22.6 dBm
 LO2 23.6 dBm
 LO3 25.5 dBm
 
-\newsection{sinFitAlgorithm}{Fitting Method}
+\newsection{monDigitisers}{Digitisation of Phase Monitor Signals}
 
-Due to the dependence of the mixer output on \(\cos(\phi)\) as seen in the previous section, many of the measurements in this chapter require a sinusoidal fit of the form:
-\begin{equation}
-y = A\sin(bx + c) + d
-\label{e:generalSinEq}
-\end{equation}
-The use of sine rather than cosine makes no difference to the fitted amplitude, \(A\), and offset, \(d\) which are usually the only parameters of interest in this chapter. It is also convenient to consider a mixer output of zero to correspond to zero phase (rather than \(90^\circ\) as in Equation~\ref{e:mixOverSqrtDio}). All the fits of this type have been performed using a weighted nonlinear least squares fit implemented in MatLab fitting libraries \cite{MatLabFit}. Each data point is weighted by the inverse of its standard error squared.
+\subsection{On FONT5a Board}
+\label{ss:font5Noise}
 
-Care must be taken to select suitable initial values for the four parameters in the fit in order to avoid local minima and ensure a reasonable fit. This is particularly important for a sinusoidal fit as there are many solutions with different frequencies and phase offsets that can match the data. The frequency, \(b\), is the most critical parameter but for all the applications in this chapter this is already known, e.g. from the properties of the used phase shifters. Initial values for the three reamining parametrs are estimated as follows:
-\begin{align}
-A &= \frac{\mathrm{max}(y)-\mathrm{min}(y)}{2} \\
-d &= \frac{\mathrm{max}(y)+\mathrm{min}(y)}{2} \\
-c &= \arcsin\left(\frac{y-d}{A}\right) - bx
-\end{align}
-The initial amplitude, \(A\), and offset, \(d\), of the sine curve are simply determined by comparing the minimum and maximum output. These initial estimates are therefore highly biased by any large outliers around the minimum and maximum output, but this is rarely the case for the application here and these simple estimators are sufficient.
-Rearranging Equation~\ref{e:generalSinEq} gives the expression for \(c\) above. Due to its use of arcsin the equation is only valid in the first and fourth quadrants, between \(-\pi/2\) and \(+\pi/2\) where the gradient of the sine curve is positive. The \(y\) value at each data point is compared to its neighbours to determine whether it is on the rising slope. The initial value of \(c\) is the mean value calculated across all the data points that meet this criteria.
-
-Figure~\ref{f:sinFitEx} and Table~\ref{t:sinFitEx} show the results of an example fit using this approach. An initial distribution of points with \(y=\sin(x+1)+1\) is used (\(A = b = c = d = 1\)), with random noise added. \(b\) is assumed to be known, as is normal. The initial estimates for \(A\) and \(d\) are within a few percent of their true value. The initial estimate for \(c\) is within \(20\%\) of the correct value. After fitting all four parameters are in agreement with the expected values within error bars.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/sinFitEx}
-  \caption{Example sine fit to generated data with added random noise.}
-  \label{f:sinFitEx}
-\end{figure}
-
-\begin{table}
-  \begin{center}
-    \begin{tabular}{|c c c c|}
-	   \hline
-       Parameter & Value & Initial & Fit \\ \hline
-       \(A\) & 1 & 1.03 & \(0.99\pm0.02\)\\
-       \(b\) & 1 & 1 & \(1.00\pm0.02\) \\
-       \(c\) & 1 & 0.81 & \(1.00\pm0.06\) \\
-       \(d\) & 1 & 0.99 & \(0.99\pm0.02\) \\ \hline
-    \end{tabular}
-    \caption{Typical upstream phase and energy conditions at CTF3.}
-  	\label{t:sinFitEx}
-  \end{center}
-\end{table}
+\subsection{On SiS Digitiser}
+\label{ss:sisNoise}
 
 \newsection{s:resolutionEqs}{Resolution Definition}
 
@@ -177,6 +148,48 @@ Finally, the resolution is defined as:
 In terms of a resolution calculation these equations only apply to the two upstream phase monitors. All the resolution values quoted in this chapter use this equation and the difference between the measurement of Mon~1 and Mon~2.
 
 However, as the act of the PFF system can also be thought of as subtracting two phases (removing the upstream phase from the downstream phase) the same equations can be directly applied to determine the limitations that the phase monitor resolution places on the PFF performance. Equation~\ref{e:pffVsResolution} shows that the lowest possible corrected downstream phase jitter is a factor \(\sqrt{2}\) times larger than the phase monitor resolution. In order to reduce the downstream phase jitter to the CLIC target of \(0.2^\circ\) the phase monitor resolution must therefore be better than \(0.14^\circ\). Equation~\ref{e:corrVsResolution} shows that with this \(0.14^\circ\) resolution and a typical beam phase jitter of \(0.8^\circ\) (Section~\ref{s:origJitter}) the measured correlation between two phase monitor measurements would be \(97\%\).
+
+\newsection{sinFitAlgorithm}{Fitting Method}
+
+Due to the dependence of the mixer output on \(\cos(\phi)\) as seen in Section~\ref{s:monElectronics}, many of the measurements in this chapter require a sinusoidal fit of the form:
+\begin{equation}
+y = A\sin(bx + c) + d
+\label{e:generalSinEq}
+\end{equation}
+The use of sine rather than cosine makes no difference to the fitted amplitude, \(A\), and offset, \(d\) which are usually the only parameters of interest in this chapter. It is also convenient to consider a mixer output of zero to correspond to zero phase (rather than \(90^\circ\) as in Equation~\ref{e:mixOverSqrtDio}). All the fits of this type have been performed using a weighted nonlinear least squares fit implemented in MatLab fitting libraries \cite{MatLabFit}. Each data point is weighted by the inverse of its standard error squared.
+
+Care must be taken to select suitable initial values for the four parameters in the fit in order to avoid local minima and ensure a reasonable fit. This is particularly important for a sinusoidal fit as there are many solutions with different frequencies and phase offsets that can match the data. The frequency, \(b\), is the most critical parameter but for all the applications in this chapter this is already known, e.g. from the properties of the used phase shifters. Initial values for the three reamining parametrs are estimated as follows:
+\begin{align}
+A &= \frac{\mathrm{max}(y)-\mathrm{min}(y)}{2} \\
+d &= \frac{\mathrm{max}(y)+\mathrm{min}(y)}{2} \\
+c &= \arcsin\left(\frac{y-d}{A}\right) - bx
+\end{align}
+The initial amplitude, \(A\), and offset, \(d\), of the sine curve are simply determined by comparing the minimum and maximum output. These initial estimates are therefore highly biased by any large outliers around the minimum and maximum output, but this is rarely the case for the application here and these simple estimators are sufficient.
+Rearranging Equation~\ref{e:generalSinEq} gives the expression for \(c\) above. Due to its use of arcsin the equation is only valid in the first and fourth quadrants, between \(-\pi/2\) and \(+\pi/2\) where the gradient of the sine curve is positive. The \(y\) value at each data point is compared to its neighbours to determine whether it is on the rising slope. The initial value of \(c\) is the mean value calculated across all the data points that meet this criteria.
+
+Figure~\ref{f:sinFitEx} and Table~\ref{t:sinFitEx} show the results of an example fit using this approach. An initial distribution of points with \(y=\sin(x+1)+1\) is used (\(A = b = c = d = 1\)), with random noise added. \(b\) is assumed to be known, as is normal. The initial estimates for \(A\) and \(d\) are within a few percent of their true value. The initial estimate for \(c\) is within \(20\%\) of the correct value. After fitting all four parameters are in agreement with the expected values within error bars.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/sinFitEx}
+  \caption{Example sine fit to generated data with added random noise.}
+  \label{f:sinFitEx}
+\end{figure}
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c c|}
+	   \hline
+       Parameter & Value & Initial & Fit \\ \hline
+       \(A\) & 1 & 1.03 & \(0.99\pm0.02\)\\
+       \(b\) & 1 & 1 & \(1.00\pm0.02\) \\
+       \(c\) & 1 & 0.81 & \(1.00\pm0.06\) \\
+       \(d\) & 1 & 0.99 & \(0.99\pm0.02\) \\ \hline
+    \end{tabular}
+    \caption{Typical upstream phase and energy conditions at CTF3.}
+  	\label{t:sinFitEx}
+  \end{center}
+\end{table}
 
 \newsection{monSigResponse}{Signal Generator Measurements}
 
@@ -398,14 +411,16 @@ All the beam based measurements in the remainder of this chapter and the rest of
 
 \newsection{monCalibrations}{Calibrations}
 
-Calibrations of the phase monitor signals are typically taken on a daily basis during data taking periods, as well as additional calibrations when there have been any changes in beam conditions or to the setup of the electronics. These are needed to determine the calibration constants, amplitude and offset, to be able to determine the phase from the mixer output as previously discussed.
+The remainder of this chapter presents the performance of the complete phase monitor and electronics system for normal operation with the beam, replacing the signal generator with the RF output from the phase monitors. 
 
-For beam based measurements calibrations are performed using the LO phase shifters. By varying the LO phase shifter the phase between the LO and the beam signal is changed. During a calibration the phase shifters are moved through \(360^\circ\) at 12~GHz  so that the response of the mixer to all phase offsets between the beam and LO can be determined. Normally calibrations are taken at 12 shifter settings across the full \(360^\circ\) range, with 10 pulses acquired at each setting and the whole scan taking approximately 10~minutes. These choices are a compromise between having enough points for a good quality fit whilst reducing the possibility of large drifts in beam phase during the scan which would degrade the fit results.
+The first step in using the the phase monitor measurements is to calibrate the mixer outputs. Calibrations of the phase monitor signals are typically taken on a daily basis during data taking periods, as well as additional calibrations when there have been any changes in beam conditions or to the setup of the electronics. These are needed to determine the calibration constants, amplitude and offset, to be able to determine the phase from the mixer output as previously discussed. This section presents typical calibration results for all three phase monitors and discusses aspects such as the stability of the calibration along the pulse and determining the optimal set point for the LO phase shifters. 
 
-This section presents typical calibration results for all three phase monitors and discusses aspects such as the stability of the calibration along the pulse and over time. All the calibrations presented use the electronics setup with the mechanical LO phase shifters in place (Section~\ref{s:shifters}) and with the mixer outputs amplified and sent to the SiS digitisers (Section~\ref{s:digNoise}). The LO phase shifter settings approximately correspond to degrees at 4~GHz, thus a phase shifter change of 120 units corresponds to \(360^\circ\) at 12~GHz.
+For beam based measurements calibrations are performed using the LO phase shifters. By varying the LO phase shifter the phase between the LO and the beam signal is changed. During a calibration the phase shifters are moved through \(360^\circ\) at 12~GHz  so that the response of the mixer to all phase offsets between the beam and LO can be determined. Normally calibrations are taken at 12 shifter settings across the full \(360^\circ\) range, with 10 pulses acquired at each setting and the whole scan taking approximately 10~minutes. These choices are a compromise between having enough points for a good quality fit whilst reducing the possibility of large drifts in beam phase during the scan which would degrade the fit results. All the calibrations presented use the electronics setup with the mechanical LO phase shifters in place (Section~\ref{s:shifters}). The settings on these phase shifters approximately correspond to degrees at 4~GHz, thus a phase shifter change of 120 units corresponds to \(360^\circ\) at 12~GHz.
 
-\subsection{Change in Mixer Output with LO phase}
-\label{ss:mixCalPlots}
+A calibration from both the SiS digitiser and FONT5a setup will be shown. During operation of the PFF system Mon~1 is usually connected to the FONT5a board as the correction input, whilst Mon~2 and Mon~3 are connected to the SiS digitisers where they can be acquired together with other signals at CTF3. The difference in measured output voltage between the two setups results from the use of an amplifier before the SiS digitisers to reduce noise in that setup (Section~\ref{s:monDigitisers}). Also, when using the FONT5a board the mixer outputs are attenuated by 1~dB to avoid saturating the FONT ADCs. The calibration constants from Mon~1 on the FONT5a board are needed for the PFF gain calculation in Section~\ref{ss:pffFirmware}. All measurements of the upstream and downstream phase after this chapter use Mon~2 and Mon~3 on the SiS digitisers and their respective calibration constants.
+
+\subsection{Calibration on SiS Digitisers}
+\label{ss:SiSCal}
 
 Figures~\ref{f:mon1AllPoints}--\ref{f:mon3AllPoints} show the output of the mixer for each phase monitor along the pulse for all the phase shifter settings used during the LO scan. Away from the minimum and maximum output each mixer shows the expected phase sag along the beam pulse resulting from the RF pulse compression used at CTF3 [REF]. The shape of the phase sag as seen on the mixer changes sign depending on whether the LO phase places the mixer on the rising or falling slope of its sinusoidal output. Usually the mixers are operated on the falling slope where the measured phase sag is `u'-shaped, rather than `n'-shaped, as this is also the convention for other phase dependent signals at CTF3 [REF].
 
@@ -430,17 +445,15 @@ The noisier appearance of the output on Mon~3 is not an effect of the phase moni
   \label{f:mon3AllPoints}
 \end{figure}
 
+Figure~\ref{f:calSiS} shows the result of fitting the mixer output versus the phase shifter setting at sample 605 along the pulse. The mixer response is sinusoidal as expected and as seen previously in the signal generator tests. In the signal generator tests there was some visible distortion away from the sine fit around the peaks at some input power levels (Section~\ref{ss:sigGenMixer}). There is no visible effect at the powers of the phase monitor signals (Section~\ref{s:phaseMonDesign}). Differences in the peak output of each monitor are expected due to differences in the input power from each phase monitor as well as differences between the sets of electronics. Small offsets between the data and the fit at some shifter settings are caused by drifts in the beam phase during the scan (particularly for Mon~3 where the beam is less stable), as well as human error in setting the shifter values.
 
-\subsection{Single Sample Calibration Results}
-\label{ss:calSingSamp}
-
-Figure~\ref{f:allMixersSamp605} shows the result of fitting the mixer output versus the phase shifter setting at sample 605 along the pulse. The fitted values of the mixer amplitude, \(A\), and offset, \(d\), are found in Table~\ref{t:calFitConsts}. These values are used to calculate the beam phase as per Equation~\ref{e:phaseRecUsed}.
+The fitted values of the mixer amplitude, \(A\), and offset, \(d\), are found in Table~\ref{t:calSiSConsts}. These values are used to calculate the beam phase as per Equation~\ref{e:phaseRecUsed}. 
 
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/phaseMons/allMixersSamp605}
-  \caption{Fits to the mixer output vs. LO phase shifter setting at sample 605.}
-  \label{f:allMixersSamp605}
+  \caption{Fits to the mixer output vs. LO phase shifter setting at sample 605 on the SiS digitisers.}
+  \label{f:calSiS}
 \end{figure}
 
 \begin{table}
@@ -452,16 +465,77 @@ Figure~\ref{f:allMixersSamp605} shows the result of fitting the mixer output ver
        Mon~2 & \(1064\pm6\)~mV & \(69\pm7\)~mV\\
        Mon~3 & \(990\pm12\)~mV & \(150\pm10\)~mV\\ \hline
     \end{tabular}
-    \caption{Fit parameters from the calibration for each monitor.}
-  	\label{t:calFitConsts}
+    \caption{Fit parameters from the calibration on the SiS digitisers for each monitor.}
+  	\label{t:calSiSConsts}
+  \end{center}
+\end{table}
+
+\subsection{Calibration on FONT5a Board}
+\label{ss:FONTCal}
+
+Figure~\ref{f:calFONT} and Table~\ref{t:calFONTConsts} show the results of a calibration performed in exactly the same way but on the FONT5a board. The FONT5a board ADCs flip the sign of the input [REF], so a positive ADC output in counts corresponds to a negative input voltage and vice-versa. This explains why the apparent mixer output is on the rising slope at a phase shifter setting of zero on the FONT5a board in Figure~\ref{f:calFONT}, but on the falling slope on the SiS digitisers in Figure~\ref{f:calSiS}. For operation of the PFF system this difference must be taken in to account either by operating the mixer on the rising slope as seen on the FONT5a board (which in reality is the falling slope, as desired), or alternatively by using negative gain values for the correction output. The fitted values for \(d\) in Table~\ref{t:calFONTConsts} are also negative rather than positive as a result of this sign flip. Apart from these differences the overall shape of the mixer output follows the sinusoidal dependence as expected.
+
+The FONT5a ADC outputs are 13-bit, or \(\pm4096\)~counts, with an input range of \(\pm500\)~mV (Section~\ref{s:fontSetup}). The fitted Mon~1 output, with 1~dB attenuation added after the mixer, of between -3712~counts and +3156~counts therefore corresponds to an input voltage range of between +453~mV and -385~mV. Without the attenuator, which reduces the voltage by roughly 10\%, the Mon~1 mixer would saturate the ADC at its peak output. As the contribution of digitiser noise is small on the FONT5a board (Section~\ref{s:monDigitisers}) a 1~dB attenuator is also added to the Mon~2 and Mon~3 outputs so that the overall setup for each monitor is the same in this measurement. However, during normal operation of the PFF system Mon~2 and Mon~3 are connected to the SiS digitisers, with their mixer outputs then being amplified rather than attenuated.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/calFONT}
+  \caption{Results of a calibration performed on the FONT5a board.}
+  \label{f:calFONT}
+\end{figure}
+
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+	   \hline
+       Monitor & \(A\) (amplitude) & \(d\) (offset) \\ \hline
+       Mon~1 & \(3434\pm41\)~counts & \(-278\pm34\)~counts \\ 
+       Mon~2 & \(3144\pm16\)~counts & \(-138\pm17\)~counts\\
+       Mon~3 & \(2870\pm43\)~counts & \(-44\pm44\)~counts\\ \hline
+    \end{tabular}
+    \caption{Fit parameters from the calibration for each monitor on the FONT5a board.}
+  	\label{t:calFONTConsts}
   \end{center}
 \end{table}
 
 \subsection{Multi-Sample Results}
 \label{ss:calMultiSamp}
 
-\subsection{Stability with Time}
-\label{ss:calStability}
+The calibration results on both the SiS digitisers and FONT5a board have been presented at one sample number around the middle of the pulse close to where the phase sag along the pulse is flattest. In this section the variation in the fitted calibration constants along the pulse is discussed. This is particularly important after taking the decision to not use the diodes, as the intended purpose of using the diodes was to normalise the mixer response to give an output independent of the input power. Without using the diodes any variations in input power along the pulse will also create differences in the calibration constants along the pulse. 
+
+The current implementation of the PFF algorithm on the FONT5a board uses the mixer multiplied by one gain value that is constant along the full pulse length to create the correction output (Section~\ref{ss:pffFirmware}). It therefore cannot take in to account any variations in calibration constants along the pulse. Offline data analysis is usually performed in the same way so that the quoted resolutions are representative of the values that apply to the implementation of the PFF correction. The effect of taking in to account the variations in calibration parameters along the pulse seen here is shown in Section~\ref{ss:resCalAlongPulse}.
+
+Figures~\ref{f:calAmpVsSample}~and~\ref{f:calOffVsSample} show the variation in the fitted calibration amplitude and offset across the full pulse length, using the same calibration on the SiS digitisers presented in Section~\ref{ss:SiSCal}. Differences in both the amplitude and offset along the pulse are visible. These are summarised in Table~\ref{t:calConstsStdAlong} in terms of the standard deviation of the fitted parameter values along the pulse. 
+
+The stability of the fitted amplitude along the pulse is similar for the upstream monitors (Mon~1 and Mon~2), with a jitter of around 8~mV in both cases. As the downstream beam is less stable than the upstream beam the variations in fitted ampltidue along the pulse are larger for Mon~3, at the 15~mV level. In terms of a relative difference these values correspond to roughly a 0.7\% variation in fitted amplitude for Mon~1 and Mon~2, or 1.5\% for Mon~3. With further optimisation of the downstream beam, as documented in Chapter~\ref{c:phasePropagation}, it should be possible to achieve similar Mon~3 amplitude stability to that seen for Mon~1 and Mon~2. 
+
+Absolute stability in the fitted offset along the pulse is similar to that of the amplitude but therefore much larger as a relative difference at the level of several percent. The variation in fitted offset along the pulse is smallest for Mon~2 at around 3~mV. For both Mon~1 and Mon~3 the variation is around a factor two larger, at 6~mV.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/calAmpVsSample}
+  \caption{Variation in fitted amplitude along the pulse for each phase monitor.}
+  \label{f:calAmpVsSample}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/calOffVsSample}
+  \caption{Variation in fitted offset along the pulse for each phase monitor}
+  \label{f:calOffVsSample}
+\end{figure}
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+	   \hline
+       Monitor & \(A\) (amplitude) & \(d\) (offset) \\ \hline
+       Mon~1 & \(8.3\pm0.4\)~mV & \(6.7\pm0.3\)~mV \\ 
+       Mon~2 & \(7.7\pm0.4\)~mV & \(3.0\pm0.3\)~mV\\
+       Mon~3 & \(14.7\pm0.7\)~mV & \(6.1\pm0.3\)~mV\\ \hline
+    \end{tabular}
+    \caption{Standard deviation in calibration fit parameters along the pulse.}
+  	\label{t:calConstsStdAlong}
+  \end{center}
+\end{table}
 
 \subsection{Zero Crossing}
 \label{ss:calZeroCross}
@@ -482,7 +556,7 @@ x = \frac{n\pi-c}{b}
 \end{equation}
 Where the mixer output is \(\mathrm{Mixer} = A\sin(n\pi)+d = d\). In the case where there is no offset between the minimum and maximum mixer output (\(d=0\)) the optimal point to operate the mixers is at zero output. Because of this the optimal shifter setting will be referred to as the zero crossing. In reality the small asymmetry in the mixer output means the optimal shifter setting is where mixer output is \(d\). The effect of operating the mixers away from the zero crossing on the resolution is shown in Section~\ref{s:resVsShifter}.
 
-In addition, as previously mentioned the convention is to operate the mixers on the falling slope where the partial derivate above is negative. The set shifter values are obtained using the smallest positive integer \(n\) that leads to this criteria being met. Table~\ref{t:calZeroCross} shows an example of values for the fit parameters \(b\) and \(c\) and the calculated phase shifter settings to be on the zero crossing for each monitor. These values are taken from the same calibration and sample number presented in Section~\ref{ss:calSingSamp}. The reader may be interested to compare where the shifter settings fall along the mixer output traces during the calibration in Figure~\ref{f:allMixersSamp605}.
+In addition, as previously mentioned the convention is to operate the mixers on the falling slope where the partial derivate above is negative. The set shifter values are obtained using the smallest positive integer \(n\) that leads to this criteria being met. Table~\ref{t:calZeroCross} shows an example of values for the fit parameters \(b\) and \(c\) and the calculated phase shifter settings to be on the zero crossing for each monitor. These values are taken from the same calibration and sample number presented in Section~\ref{ss:SiSCal} (on the SiS digitisers). The reader may be interested to compare where the shifter settings fall along the mixer output traces during the calibration in Figure~\ref{f:allMixersSamp605}.
 
 \begin{table}
   \begin{center}
@@ -500,13 +574,7 @@ In addition, as previously mentioned the convention is to operate the mixers on 
 
 Due to the large phase sag along the beam pulse it is clearly not possible to be at the zero crossing of the mixer for the full pulse length. For the PFF system the region of interest is the central portion of the pulse where the phase sag is flattest. The shifters are therefore set to zero the mixer output in this region, giving best resolution in the central part of the pulse but degraded resolution near the start and end of the pulse. In addition to this, slow drifts in the beam phase, particularly downstream, mean that the shifters must routinely be changed to stay at the zero crossing. With the current setup using mechanical phase shifters this must be done by hand, with no possibility to implement an automatic feedback on the shifter settings, for example.
 
-\newsection{digNoise}{Digitiser Noise}
 
-\subsection{On FONT5 Board}
-\label{ss:font5Noise}
-
-\subsection{On SiS Digitiser}
-\label{ss:sisNoise}
 
 \newsection{shifters}{Phase Shifter Noise}
 
@@ -551,7 +619,18 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
   \label{f:PhMon_Resolution}
 \end{figure}
 
-\newsection{resVsShifter}{Dependence of Resolution on LO Phase}
+\newsection{resolutionMeas}{Resolution Measurements}
+
+\subsection{Best Resolution}
+\label{ss:bestRes}
+
+\subsection{Dependence of Resolution on LO Phase}
+\label{ss:resVsShifter}
+
+\subsection{Using Varying Calibration Constants}
+\label{ss:resCalAlongPulse}
+
+move this section and add plots of how varying cal change phase measurement along pulse etc.?
 
 \begin{figure}
   \centering
@@ -559,6 +638,8 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
   \caption{Resolution.}
   \label{f:resolutionVsShifter}
 \end{figure}
+
+
 
 \newsection{monComp}{Differences Between Monitors}
 
