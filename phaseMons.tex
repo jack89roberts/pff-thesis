@@ -173,7 +173,7 @@ Figure~\ref{f:digitiserNosie} shows the ADC noise, converted from counts in to a
 
 As derived in the previous section the phase resolution must be better than \(0.14^\circ\) in order to achieve a corrected downstream phase jitter of \(0.2^\circ\) with the PFF system. The \(\sim0.02^\circ\) contribution of ADC noise on the FONT5a board is therefore insignificant compared to the resolution requirements. However, although it does not directly impact the PFF performance the \(\sim0.2^\circ\) ADC jitter on the SiS digitisers would greatly degrade the resolution of the measurements of Mon~2 and Mon~3 usually connected to the SiS~digitisers and used for offline data analysis of the PFF results. 
 
-The high phase jitter contribution from the SiS digitisers originates from the roughly 500~mV maximum mixer output being much lower than the SiS ADC range of \(\pm2.5\)~V. In order to rectify this the mixer outputs are boosted by roughly a factor 2.5 in voltage using an amplifier prior to the SiS digitisers. The specifications of the amplifier used are documented in [REF]. With the amplifier in place the peak signal level sent to the SiS digitisers is around 1~V, and the equivalent phase jitter is reduced to \(0.078\pm0.002^\circ\). This no longer prevents \(0.14^\circ\) resolution from being achieved on measurements using the SiS digitisers, as proven later in Section~\ref{s:resolutionMeas}. A small further improvement could be achieved using a different amplifier and boosting the peak output voltage closer to 2~V.
+The high phase jitter contribution from the SiS digitisers originates from the roughly 500~mV maximum mixer output being much lower than the SiS ADC range of \(\pm2.5\)~V. In order to rectify this the mixer outputs are boosted by roughly a factor 2.5 in voltage using an amplifier prior to the SiS digitisers. The specifications of the amplifier used are documented in [REF]. With the amplifier in place the peak signal level sent to the SiS digitisers is around 1~V, and the equivalent phase jitter is reduced to \(0.078\pm0.002^\circ\). This no longer prevents \(0.14^\circ\) resolution from being achieved on measurements using the SiS digitisers, as proven later in Section~\ref{s:resolutionMeas}. A small further improvement in measured resolution could be achieved using a different amplifier and boosting the peak output voltage closer to 2~V.
 
 \begin{table}
   \begin{center}
@@ -669,17 +669,26 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
 \subsection{Dependence of Resolution on LO Phase}
 \label{ss:resVsShifter}
 
-\subsection{Using Varying Calibration Constants}
-\label{ss:resCalAlongPulse}
+The process of setting the mixers on their zero crossing after calibrations was documented in Section~\ref{ss:calZeroCross}. This is necessary to operate the mixers where there output voltage is most sensitive to variations in the phase (close to the peaks of the mixer output there is negligible change in output voltage for small changes in phase). The dependence of the phase resolution on the beam phase across the full \(\pm180^\circ\) range is shown in Figure~\ref{f:resolutionVsShifter}. The plotted phase is the offset between the LO phase shifter setting and the calculated optimal setting. More than \(50^\circ\) away from the zero crossing there is a large degradation in resolution, reaching above 1~degree at the \(+90^\circ\) peak.
 
-move this section and add plots of how varying cal change phase measurement along pulse etc.?
+However, for the PFF system the phase resolution only needs to be guaranteed within its correction range, which is close to \(\pm6^\circ\) as seen in Section~\ref{ss:corrRange}. In Figure~\ref{f:resVsSmallPhasOff} it is seen that there is no noticeable degradation in resolution in the range between \(\pm15^\circ\).
 
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/phaseMons/resolutionVsShifter}
   \caption{Resolution.}
   \label{f:resolutionVsShifter}
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/resVsSmallPhasOff}
+  \caption{Resolution.}
+  \label{f:resVsSmallPhasOff}
 \end{figure}
+
+
+\subsection{Using Varying Calibration Constants}
+\label{ss:resCalAlongPulse}
+
+move this section and add plots of how varying cal change phase measurement along pulse etc.?
+
 
 
 
