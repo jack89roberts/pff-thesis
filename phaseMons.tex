@@ -78,14 +78,6 @@ LO1 22.6 dBm
 LO2 23.6 dBm
 LO3 25.5 dBm
 
-\newsection{monDigitisers}{Digitisation of Phase Monitor Signals}
-
-\subsection{On FONT5a Board}
-\label{ss:font5Noise}
-
-\subsection{On SiS Digitiser}
-\label{ss:sisNoise}
-
 \newsection{s:resolutionEqs}{Resolution Definition}
 
 The performance of the PFF system clearly depends on the accuracy to which the phase can be measured. Many of the measurements in this chapter are therefore focused on the phase monitor resolution, or more precisely on the resolution of the combined phase monitor and electronics setup. The resolution is defined as the jitter between the measured phase and the true beam phase. This can be calculated by comparing the difference between the measured phase of two monitors. This is why two phase monitors, Mon~1 and Mon~2 are installed neighbouring each other in the upstream system in the CT line. The beam phase should be identical in these two monitors thus their measurements can always be compared to derive the resolution.
@@ -148,6 +140,56 @@ Finally, the resolution is defined as:
 In terms of a resolution calculation these equations only apply to the two upstream phase monitors. All the resolution values quoted in this chapter use this equation and the difference between the measurement of Mon~1 and Mon~2.
 
 However, as the act of the PFF system can also be thought of as subtracting two phases (removing the upstream phase from the downstream phase) the same equations can be directly applied to determine the limitations that the phase monitor resolution places on the PFF performance. Equation~\ref{e:pffVsResolution} shows that the lowest possible corrected downstream phase jitter is a factor \(\sqrt{2}\) times larger than the phase monitor resolution. In order to reduce the downstream phase jitter to the CLIC target of \(0.2^\circ\) the phase monitor resolution must therefore be better than \(0.14^\circ\). Equation~\ref{e:corrVsResolution} shows that with this \(0.14^\circ\) resolution and a typical beam phase jitter of \(0.8^\circ\) (Section~\ref{s:origJitter}) the measured correlation between two phase monitor measurements would be \(97\%\).
+
+\newsection{monDigitisers}{Digitisation of Phase Monitor Signals}
+
+The mixer and diode outputs from the phase monitor electronics must be digitised on analogue to digital converters (ADCs) so the signals can be processed and used for the PFF correction and offline data analysis. Two different types of ADCs have been used to digitise the phase monitor signals --- the Texas Instruments ADS5474 ADCs [REF] on the purpose-built FONT5a board used as the PFF controller and a commercially available SiS 3320 digitiser [REF]. The design and use of the FONT5a board is discussed in more detail in Section~\ref{s:fontSetup}. Table~\ref{t:adcSpecs} summarises the specifications of each type of ADC. 
+
+The SiS digitisers are used in addition to the FONT5a board as the PFF correction running on the FONT5a board is operated as a standalone system independent from other acquisition systems at CTF3. The PFF algorithm requires only the signals from one of the upstream phase monitors to be connected to the FONT5a board, with the convention being to use Mon~1. Mon~2 and Mon~3 are then normally connected to the SiS digitisers instead. The SiS digitisers are setup with the same trigger and sampling frequency (192~MHz) used for other signals at CTF3, and data from them can be acquired together with other devices using the standard systems in place at CTF3. This allows the Mon~2 and Mon~3 signals to be easily compared to other measurements, such as beam position signals, which has been indispensable for optimising the setup of the PFF system and in particuar the phase propagation (Chater~\ref{c:phasePropagation}).
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c c c c|}
+	   \hline
+       Digitiser & No. ADCs & Resolution & Input Range & Sampling Rate & Bandwidth \\ \hline
+       SiS 3320 & 8 & 12-bit & \(\pm2.5\)~V & up to 250~MHz & 100~MHz\\
+       FONT5a & 9 & 14-bit (13-bit used) & \(\pm0.5\)~V & up to 400~MHz & 1.4~GHz\\ \hline
+    \end{tabular}
+    \caption{Specifications of the ADCs on the FONT5a board and SiS digitisers.}
+  	\label{t:adcSpecs}
+  \end{center}
+\end{table}
+
+Digitising the phase monitor signals contributes additional noise to the overall phase monitor electronics setup. The purpose of this section is to ensure that the digitiser noise makes only a negligible contribution to the resolution on the phase measurement. The main parameters of interest needed to determine this are the input range and resolution of the ADCs, with the SiS ADCs being 12-bit with a range of \(\pm2.5\)~V and the FONT5a ADCs being 13-bit with an input range of \(\pm0.5\)~V. The full 5~V peak-to-peak input range of the SiS ADCs is therefore split across \(2^{12}=4096\) values, or ADC `counts', with each count corresponding to roughly 1.2~mV. The equivalent 1~V peak-to-peak range and \(2^{13}=8192\) counts of the FONT5a board corresponds to a factor 10 lower interval of 0.12~mV per ADC count. The voltage jitter added by the digitisation of the phase monitor signals cannot be expected to be better than 1~count. This already indicates that the FONT5a board should give a much lower contribution to the phase resolution than the SiS digitisers.
+
+Figure~\ref{f:digitiserNosie} shows the ADC noise, converted from counts in to an equivalent voltage, for both the SiS and FONT5a ADCs. As expected the noise on the FONT5a board is much lower than on the SiS digitisers. The actual ADC jitter values are \(1.47\pm0.04\)~counts or \(0.179\pm0.005\)~mV on the FONT5a board, and \(1.11\pm0.03\)~counts or \(1.36\pm0.03\)~mV on the SiS digitisers. These values can be converted in to an equivalent phase jitter using the phase reconstruction method described later in Section~\ref{ss:sigGenConsq} and the monitor calibration constants determined in Section~\ref{s:monCalibrations}. For reference the peak output of the three phase monitor mixers varies between approximately 400~mV and 500~mV, which is well matched to the input range of the FONT5a ADCs. Taking the worst case scenario of Mon~3, which gives the lowest output voltage, the ADC jitter corresponds to \(0.0245\pm0.0007^\circ\) on the FONT5a board but \(0.198\pm0.005^\circ\) on the SiS digitisers. These values are summarised in Table~\ref{t:adcNoise}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/digitiserNosie}
+  \caption{Comparison of noise on the output of the SiS and FONT5a ADCs.}
+  \label{f:digitiserNosie}
+\end{figure}
+
+As derived in the previous section the phase resolution must be better than \(0.14^\circ\) in order to achieve a corrected downstream phase jitter of \(0.2^\circ\) with the PFF system. The \(\sim0.02^\circ\) contribution of ADC noise on the FONT5a board is therefore insignificant compared to the resolution requirements. However, although it does not directly impact the PFF performance the \(\sim0.2^\circ\) ADC jitter on the SiS digitisers would greatly degrade the resolution of the measurements of Mon~2 and Mon~3 usually connected to the SiS~digitisers and used for offline data analysis of the PFF results. 
+
+The high phase jitter contribution from the SiS digitisers originates from the roughly 500~mV maximum mixer output being much lower than the SiS ADC range of \(\pm2.5\)~V. In order to rectify this the mixer outputs are boosted by roughly a factor 2.5 in voltage using an amplifier prior to the SiS digitisers. The specifications of the amplifier used are documented in [REF]. With the amplifier in place the peak signal level sent to the SiS digitisers is around 1~V, and the equivalent phase jitter is reduced to \(0.078\pm0.002^\circ\). This no longer prevents \(0.14^\circ\) resolution from being achieved on measurements using the SiS digitisers, as proven later in Section~\ref{s:resolutionMeas}. A small further improvement could be achieved using a different amplifier and boosting the peak output voltage closer to 2~V.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c c|}
+	   \hline
+       Digitiser & Jitter [counts] & Jitter [mV] & Phase Jitter [degrees] \\ \hline
+       FONT5a & \(1.47\pm0.04\) & \(0.179\pm0.005\) & \(0.0245\pm0.0007\)\\ 
+       SiS 3320 & \(1.11\pm0.03\) & \(1.36\pm0.03\) & \(0.198\pm0.005\)\\
+       SiS 3320 Amplified & \(1.11\pm0.03\) & \(1.36\pm0.03\) & \(0.078\pm0.002\)\\ \hline
+    \end{tabular}
+    \caption{ADC jitter on the FONT5a board, SiS digitisers and with the mixer outputs amplified prior to the SiS digitisers expressed in terms of ADC counts, volts and and equivalent phase jitter.}
+  	\label{t:adcNoise}
+  \end{center}
+\end{table}
+
+
 
 \newsection{sinFitAlgorithm}{Fitting Method}
 
@@ -451,7 +493,7 @@ The fitted values of the mixer amplitude, \(A\), and offset, \(d\), are found in
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/allMixersSamp605}
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/calSiS}
   \caption{Fits to the mixer output vs. LO phase shifter setting at sample 605 on the SiS digitisers.}
   \label{f:calSiS}
 \end{figure}
