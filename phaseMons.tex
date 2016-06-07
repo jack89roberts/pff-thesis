@@ -620,51 +620,100 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
 
 \newsection{shifters}{Phase Shifter Noise}
 
-\subsection{Digital Phase Shifters}
-\label{ss:digShiftNoise}
-
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/PhMon_HistDig1}
-  \caption{Dig shifter 1.}
-  \label{f:PhMon_HistDig1}
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/resolutionDigShift}
+  \caption{Phase monitor resolution using initial setup with digital phase shifters in place.}
+  \label{f:resolutionDigShift}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/PhMon_HistDig2}
-  \caption{Dig shifter 2.}
-  \label{f:PhMon_HistDig2}
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/Mix1Mon1_Mix2Mon2}
+  \caption{Phase jitter along the pulse with the nominal electronics setup -- Mon~1 connected to the first mixer, and Mon~2 connected to the second mixer.}
+  \label{f:Mix1Mon1_Mix2Mon2}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/PhMon_HistDig3}
-  \caption{Dig shifter 3.}
-  \label{f:PhMon_HistDig3}
-\end{figure}
-
-\subsection{Mechanical Phase Shifters}
-\label{ss:mechShiftNoise}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/PhMon_HistMech}
-  \caption{Mech shifter.}
-  \label{f:PhMon_HistMech}
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/Mix1Mon2_Mix2Mon1}
+  \caption{Phase jitter along pulse with Mon~2 connected to the first mixer and Mon~1 connected to the second mixer.}
+  \label{f:Mix1Mon2_Mix2Mon1}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/PhMon_Resolution}
-  \caption{Resolution.}
-  \label{f:PhMon_Resolution}
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/Mix1Mon1_Mix3Mon2}
+  \caption{Phase jitter along pulse with Mon~1 connected to the first mixer and Mon~2 connected to the third mixer.}
+  \label{f:Mix1Mon1_Mix3Mon2}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/Mix1Mon1PhShft2_Mix2Mon2PhShft1}
+  \caption{Phase jitter along pulse with the phase shifters swapped between the first mixer and the second mixer.}
+  \label{f:Mix1Mon1PhShft2_Mix2Mon2PhShft1}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/Mix1Mon1PhShft3_Mix3Mon2PhShft1}
+  \caption{Phase jitter along pulse with the phase shifters swapped between the third mixer and the first mixer.}
+  \label{f:Mix1Mon1PhShft3_Mix3Mon2PhShft1}
+\end{figure}
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c | c c c|}
+	   \hline
+	   & Mon~1 & & & Mon~2 & \\ \hline
+      Mixer & Shifter & Jitter & Mixer & Shifter & Jitter \\ \hline
+      1 & \textbf{1} & \(\mathbf{0.83\pm0.01^\circ}\) & 2 & 2 & \(1.38\pm0.01^\circ\)    \\
+      2 & 2 & \(1.48\pm0.02^\circ\) & 1 & \textbf{1} & \(\mathbf{0.89\pm0.01^\circ}\)    \\ 
+      1 & \textbf{1} & \(\mathbf{1.15\pm0.01^\circ}\) & 3 & 3 & \(1.91\pm0.01^\circ\)    \\ 
+      1 & 2 & \(1.68\pm0.01^\circ\) & 2 & \textbf{1} & \(\mathbf{1.10\pm0.01^\circ}\)    \\ 
+      1 & 3 & \(2.07\pm0.01^\circ\) & 3 & \textbf{1} & \(\mathbf{1.20\pm0.01^\circ}\)    \\  
+	\hline
+    \end{tabular}
+    \caption{Comparison of phase jitter along the pulse for each measurement with different setups of the electronics. Each row corresponds to the results of one dataset. The left hand side of the table shows the results from Mon~1 in that dataset, and the right hand side of the table the results from Mon~2. Bold text indicates the lower jitter value in that dataset, all of which use the first phase shifter.}
+  	\label{t:elecSwapResults}
+  \end{center}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/jitterMechanicalShifters}
+  \caption{Phase jitter along pulse after installation of the mechanical phase shifters.}
+  \label{f:jitterMechanicalShifters}
+\end{figure}
+
 
 \newsection{resolutionMeas}{Resolution Measurements}
 
 \subsection{Best Resolution}
 \label{ss:bestRes}
+
+Mean is \(0.1257\pm0.0005^\circ\) 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/bestResolution}
+  \caption{bestResolution}
+  \label{f:bestResolution}
+\end{figure}
+
+\subsection{With Sample Averaging}
+\label{ss:resCalAlongPulse}
+
+\(0.1077\pm0.0005^\circ\) with 5 samples averaged
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/resolutionWithAveraging}
+  \caption{Effect on resolution by averaging samples.}
+  \label{f:resolutionWithAveraging}
+\end{figure}
+
 
 \subsection{Dependence of Resolution on LO Phase}
 \label{ss:resVsShifter}
@@ -683,14 +732,10 @@ However, for the PFF system the phase resolution only needs to be guaranteed wit
   \label{f:resVsSmallPhasOff}
 \end{figure}
 
+\subsection{Dependence of Resolution on Input Power}
+\label{ss:resVsPower}
 
-\subsection{Using Varying Calibration Constants}
-\label{ss:resCalAlongPulse}
-
-move this section and add plots of how varying cal change phase measurement along pulse etc.?
-
-
-
+Would need to take new data to do this section properly. Have some data with input attenuation 0dB 10dB 13dB 16dB 20dB but from before new shifters (with adjusters), and really need more in the range from 0dB to 10dB rather than at very high attenuations.
 
 \newsection{monComp}{Differences Between Monitors}
 
@@ -698,6 +743,50 @@ shape mon1 vs mon2
 jitter mon1 vs mon2
 comparison mon1/2 and bpr
 comparison mon3 and pets
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/phaseAlongAll}
+  \caption{Comparison of phase along the pulse in the three PFF phase monitors and an alternative phase measurement from a PETS.}
+  \label{f:phaseAlongAll}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/mon2Rotated}
+  \caption{Comparison of Mon~1 and Mon~2 phase along the pulse, with Mon~2 rotated by \(2.1^\circ\) about a time of 850~ns on the horizontal axis.}
+  \label{f:mon2Rotated}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/DiffMon1Mon2Along}
+  \caption{Difference between Mon~1 and Mon~2 phase along the pulse with and without Mon~2 rotated.}
+  \label{f:DiffMon1Mon2Along}
+\end{figure}
+
+rotation reduces \(1.44\pm0.08^\circ\) mean absolute offset to \(0.12\pm0.01^\circ\) between 370~ns and 1080~ns
+
+\newsection{effectsMultiSampCal}{Effect of Variations in Calibration Constant}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/resolutionWithMultiSampleCal}
+  \caption{Effect of using a varying calibration constant on the phase resolution.}
+  \label{f:resolutionWithMultiSampleCal}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/multiSampMon2Along}
+  \caption{Effect of using a varying calibration constant on the upstream phase.}
+  \label{f:multiSampMon2Along}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/multiSampMon3Along}
+  \caption{Effect of using a varying calibration constant on the downstream phase.}
+  \label{f:multiSampMon3Along}
+\end{figure}
 
 \newsection{monBandwidth}{Bandwidth}
 
