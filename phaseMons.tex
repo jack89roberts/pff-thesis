@@ -790,12 +790,120 @@ rotation reduces \(1.44\pm0.08^\circ\) mean absolute offset to \(0.12\pm0.01^\ci
 
 \newsection{monBandwidth}{Bandwidth}
 
+bandwidth [GHz] is 0.35/ 10\%-90\% rise time[ns]
+
+feature in middle goes from 156.6 ns to 167 ns: 10.4 ns, 33.7~MHz (but just 2 samples)
+falling slope goes from 287 to 297 ns, suggests 35~MHz bandwidth
+but pretty slow sampling rate...
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/bandwidthPlot}
+  \caption{Response of Mixer~3 to a jump in phase in the middle of the pulse.}
+  \label{f:bandwidthPlot}
+\end{figure}
+
+or use transient start of upstream pulse
+on FONT5a board goes 30 to 41 ns, suggests 32~MHz
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/transientUpstream}
+  \caption{Energy transient at the start of the upstream pulse as seen on the second mixer.}
+  \label{f:transientUpstream}
+\end{figure}
+
+
 \newsection{monPosition}{Dependence on Position}
 
 
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+	   \hline
+       Device & Distance From CT.0360 & Label\\ \hline
+       Mon~1 & 104.5~cm & \(s_{M1}\)\\ 
+       Mon~2 & 144.5~cm & \(s_{M2}\)\\
+       CT.BPM0430 & 357.0~cm & \(s_{430}\) \\ \hline
+    \end{tabular}
+    \caption{Distance of the upstream phase monitors and following BPM CT.0430 to the corrector CT.0360 before the phase monitors.}
+  	\label{t:distanceFromCT360}
+  \end{center}
+\end{table}
 
+offset in phase mons per unit offset measured in bpm 430 as result of kick in 360
+\begin{align}
+r_1 &= \frac{s_{M1}}{s_{430}} \\
+r_2 &= \frac{s_{M2}}{s_{430}}
+\end{align}
+substituting in values from table gives \(r_1 = 0.29\), \(r_2 = 0.41\)
 
+position in monitors dependent on position in 430
+\begin{align}
+x_{M1} &= r_{1}x_{430} \\
+x_{M2} &= r_{2}x_{430}
+\end{align}
 
+mon1 and mon2 should measure same phase \(\phi_b\)
+\begin{align}
+\phi_{M1} &= \phi_b + c_1x_{M1} \\
+\phi_{M2} &= \phi_b + c_2x_{M2}
+\end{align}
+\(c_1\) and \(c_2\) are phase shift per unit position offset
 
+drifts make raw scan results look crap, so use difference between mon1 and mon2 instead
+\begin{equation}
+\phi_{M2}-\phi_{M1} = c_2x_{M2} - c_1x_{M1} \\
+\end{equation}
+have to make approximation that strength of position dependence is the same in mon1 and mon2 here to get a meaningful result \(c_1 = c_2 = c\)
+\begin{align}
+\phi_{M2}-\phi_{M1} &= c(x_{M2}-x_{M1}) \\
+c = &\frac{\phi_{M2}-\phi_{M1}}{x_{M2}-x_{M1}} 
+\end{align}
+substitute in expressions for \(x_{M1}\) and \(x_{M2}\)
+\begin{equation}
+c = \frac{\phi_{M2}-\phi_{M1}}{x_{430}(r_2-r_1)}
+\end{equation}
+and \((\phi_{M2}-\phi_{M1})/x_{430}\) is gradient of fit to scan results
 
+Horizontal
+Fitted gradient phase diff vs. ct.430 is \(-0.22\pm0.01^\circ\)/mm
+corresponds to phase dependence of \(-1.86\pm0.07^\circ\)/mm
 
+Vertical
+Fitted gradient phase diff vs. ct.430 is \(0.06\pm0.01^\circ\)/mm
+corresponds to phase dependence of \(0.47\pm0.07^\circ\)/mm
+
+horizontal and vertical orbit jitter looks to be at around 0.02 mm level (within factor 2?). this would give phase jitter 0.04 degrees in horizontal, 0.01 degrees in vertical
+
+would be larger for mon3 - needs investigating
+calibration will change if orbit changes
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/horizontalScanDiode}
+  \caption{Mon~1 and Mon~2 diode dependence on horizontal position during scan.}
+  \label{f:horizontalScanDiode}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/horizontalPosScan}
+  \caption{Mon~1 and Mon~2 phase dependence on horizontal position during scan.}
+  \label{f:horizontalPosScan}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/horizontalScanFit}
+  \caption{Fit to difference between Mon~1 and Mon~2 phase versus horizontal position.}
+  \label{f:horizontalScanFit}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/verticalScanFit}
+  \caption{Mon~1 and Mon~2 dependence on horizontal position during scan.}
+  \label{f:verticalScanFit}
+\end{figure}
