@@ -817,6 +817,11 @@ on FONT5a board goes 30 to 41 ns, suggests 32~MHz
 
 \newsection{monPosition}{Dependence on Position}
 
+As discussed in Section~\ref{s:phaseMonDesign} the phase monitor output from the two vertical RF feedthroughs are summed in hybrids, and it is this sum signal that is connected to the mixers. This reduces, but does not remove completely, the dependence of the phase monitor signal power on the beam position in the monitor. In this section the remaining position dependence of the phase measurement is determined. Understanding the magnitude of the effect is particularly important considering the diodes are no longer used to power normalise the mixer output as originally intended.
+
+The magnetic corrector placed roughly 1~m prior to Mon~1 (labelled CT.DHD0360) has been used to scan the beam position in the upstream phase monitors both horizontally and vertically. Around 1~m following Mon~2 there is a quadrupole (CT.QFF0420) followed by a beam position monitor or BPM (CT.BPM0430). For the purposes of this measurement the quadrupole is turned off so that the whole 3.5~m length of beam line between the corrector and the BPM is a drift space. It is then straightforward to reconstruct the position offset in the two phase monitors based on the BPM measurement without having to rely on the MADX model to take in to account the effect of the quadrupole on the beam orbit. A diagram of the locations of the correctors, phase monitors, quadrupole and BPM is shown in Figure~[REF]. Distances between the elements are shown in Table~\ref{t:distanceFromCT360}.
+
+[TODO: Diagram of corrector, mon1, mon2, quad, bpm locations]
 
 \begin{table}
   \begin{center}
@@ -832,78 +837,65 @@ on FONT5a board goes 30 to 41 ns, suggests 32~MHz
   \end{center}
 \end{table}
 
-offset in phase mons per unit offset measured in bpm 430 as result of kick in 360
+In these conditions a position offset of \(x_{430}\) measured in the BPM (in horizontal or vertical) corresponds to the following position offsets, \(x_{M1}\) and \(x_{M2}\), in each phase monitor:
 \begin{align}
-r_1 &= \frac{s_{M1}}{s_{430}} \\
-r_2 &= \frac{s_{M2}}{s_{430}}
+x_{M1} &= r_{M1}x_{430} \\
+x_{M2} &= r_{M1}x_{430}
 \end{align}
-substituting in values from table gives \(r_1 = 0.29\), \(r_2 = 0.41\)
-
-position in monitors dependent on position in 430
+Where \(r_{M1}\) and \(r_{M2}\) are the position offsets in the phase monitors per unit position offset in the BPM, given by:
 \begin{align}
-x_{M1} &= r_{1}x_{430} \\
-x_{M2} &= r_{2}x_{430}
+r_{M1} &= \frac{s_{M1}}{s_{430}} \\
+r_{M2} &= \frac{s_{M2}}{s_{430}}
 \end{align}
+Where \(s_{M1}\), \(s_{M2}\) and \(s_{430}\) are the distances between the corrector and the phase monitors (\(s_{M1}\), \(s_{M2}\)) or BPM (\(s_{430}\)). Substituting in the values from Table~\ref{t:distanceFromCT360} gives values of \(r_{M1} = 0.29\) and \(r_{M2} = 0.41\).
 
-mon1 and mon2 should measure same phase \(\phi_b\)
-\begin{align}
-\phi_{M1} &= \phi_b + c_1x_{M1} \\
-\phi_{M2} &= \phi_b + c_2x_{M2}
-\end{align}
-\(c_1\) and \(c_2\) are phase shift per unit position offset
-
-drifts make raw scan results look crap, so use difference between mon1 and mon2 instead
-\begin{equation}
-\phi_{M2}-\phi_{M1} = c_2x_{M2} - c_1x_{M1} \\
-\end{equation}
-have to make approximation that strength of position dependence is the same in mon1 and mon2 here to get a meaningful result \(c_1 = c_2 = c\)
-\begin{align}
-\phi_{M2}-\phi_{M1} &= c(x_{M2}-x_{M1}) \\
-c = &\frac{\phi_{M2}-\phi_{M1}}{x_{M2}-x_{M1}} 
-\end{align}
-substitute in expressions for \(x_{M1}\) and \(x_{M2}\)
-\begin{equation}
-c = \frac{\phi_{M2}-\phi_{M1}}{x_{430}(r_2-r_1)}
-\end{equation}
-and \((\phi_{M2}-\phi_{M1})/x_{430}\) is gradient of fit to scan results
-
-Horizontal
-Fitted gradient phase diff vs. ct.430 is \(-0.22\pm0.01^\circ\)/mm
-corresponds to phase dependence of \(-1.86\pm0.07^\circ\)/mm
-
-Vertical
-Fitted gradient phase diff vs. ct.430 is \(0.06\pm0.01^\circ\)/mm
-corresponds to phase dependence of \(0.47\pm0.07^\circ\)/mm
-
-horizontal and vertical orbit jitter looks to be at around 0.02 mm level (within factor 2?). this would give phase jitter 0.04 degrees in horizontal, 0.01 degrees in vertical
-
-would be larger for mon3 - needs investigating
-calibration will change if orbit changes
+Figure~\ref{f:horizontalPosScan} shows the results of a horizontal position scan in the upstream phase monitors, with the phase plotted against the horizontal position in the BPM. Position scans of this type require a long time to complete in order to be able to acquire enough statistics at multiple corrector settings. The scan presented represents a data taking period of around one hour, for example. This means real drfits in beam phase (aside from any position dependent effects on the monitor signals) are unavoidable during the scan. The first impression of Figure~\ref{f:horizontalPosScan} is that the only visible change in measured phase is due to actual drifts in beam phase rather than being as a result of the changes in position. However, Figure~\ref{f:horizontalScanDiode} shows the response of the phase monitor diode signals to the horizontal position in the BPM during the scan. Even though the diodes are heavily saturated a dependence of their output, and so a dependence of power, on the position is visible. This suggests there should also be a visible effect on the phase.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/horizontalScanDiode}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/horizontalPosScan}
+  \caption{Mon~1 and Mon~2 phase dependence on horizontal position during scan.}
+  \label{f:horizontalPosScan}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/horizontalScanDiode}
   \caption{Mon~1 and Mon~2 diode dependence on horizontal position during scan.}
   \label{f:horizontalScanDiode}
 \end{figure}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/horizontalPosScan}
-  \caption{Mon~1 and Mon~2 phase dependence on horizontal position during scan.}
-  \label{f:horizontalPosScan}
-\end{figure}
+To remove the effects of drifts in the beam phase the difference between the measured Mon~1 and Mon~2 phase can be considered instead. The true beam phase, \(\phi_b\), should be identical in Mon~1 and Mon~2, so any differences between their measurements \(\phi_{M1}\) and \(\phi_{M2}\) during the scan can be modelled as coming from the beam position in the monitor, as follows:
+\begin{align}
+\phi_{M1} &= \phi_b + c_{M1}x_{M1} \\
+\phi_{M2} &= \phi_b + c_{M2}x_{M2}
+\end{align}
+Where \(c_{M1}\) and \(c_{M2}\) are constants expressing the phase shift per unit position offset in each monitor. The difference between the measured phase in Mon~1 and Mon~2 is therefore given by:
+\begin{equation}
+\phi_{M2}-\phi_{M1} = c_{M2}x_{M2} - c_{M1}x_{M1} \\
+\end{equation}
+\(c_{M1}\) and \(c_{M2}\) cannot be determined individually from the scan results alone using this approach, so instead it will be approximated that the strength of the position dependence is the same in Mon~1 and Mon~2. Letting \(c_{M1} = c_{M2} = c\) finally gives:
+\begin{align}
+\phi_{M2}-\phi_{M1} &= c(x_{M2}-x_{M1}) \\
+c = &\frac{\phi_{M2}-\phi_{M1}}{x_{M2}-x_{M1}} 
+\end{align}
+The expressions for \(x_{M1}\) and \(x_{M2}\) in terms of the BPM position \(x_{430}\) derived earlier can then be substituted in to give:
+\begin{equation}
+c = \frac{\phi_{M2}-\phi_{M1}}{x_{430}(r_{M2}-r_{M1})}
+\label{e:phasePosDep}
+\end{equation}
+The gradient of the phase difference versus the position offset in the BPM, \((\phi_{M2}~-~\phi_{M1})~/~x_{430}\), is the only remaining parameter left to calculate in order to estimate \(c\).
+
+Figure~\ref{f:horizontalScanFit} shows how the difference between the Mon~1 and Mon~2 phase measurement depends on the horizontal position in the BPM during the scan. By removing the actual beam phase drifts the dependence of the phase measurements on the beam position becomes clear. The fitted gradient is \(-0.22\pm0.01^\circ\)~per~mm offset in the BPM. Using Equation~\ref{e:phasePosDep} this corresponds to a phase shift of \(-1.86\pm0.07^\circ\) per mm offset in the phase monitors themselves.
+
+Exactly the same process can be repeated in the vertical plane, and the results of doing this are shown in Figure~\ref{f:verticalScanFit}. Although the effect is smaller there is still a visible dependence of the phase on the vertical position, in this case with a gradient of \(0.06\pm0.01^\circ\)~per~mm offset in the BPM corresponding to \(0.47\pm0.07^\circ\)~per~mm vertical offset in the phase monitors.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/horizontalScanFit}
+  \includegraphics[width=0.85\textwidth]{Figures/phaseMons/horizontalScanFit}
   \caption{Fit to difference between Mon~1 and Mon~2 phase versus horizontal position.}
   \label{f:horizontalScanFit}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/verticalScanFit}
+  \includegraphics[width=0.85\textwidth]{Figures/phaseMons/verticalScanFit}
   \caption{Mon~1 and Mon~2 dependence on horizontal position during scan.}
   \label{f:verticalScanFit}
 \end{figure}
+
+The position dependence of the measurement appears large when quoted like this but it must be remembered that millimetre scale orbit offsets are rarely present during normal operation. Orbit jitter at CTF3 around the location of the upstream phase monitors is typically at the 0.02~mm level [REF]. Taking the calculated position dependence of Mon~1 and Mon~2 this corresponds to only an additional measured phase jitter of roughly \(0.04^\circ\), using the larger dependence in the horizontal plane. This is only a small contribution to the overall phase monitor resolution of around \(0.13^\circ\) as seen in Section~\ref{s:resolutionMeas}. Position scans around the region of the downstream phase monitor Mon~3 would be much more difficult to perform and have not yet been attempted. The effect should be of a similar magnitude, although the downstream beam is less stable than upstream so the contribution to measured phase jitter is likely to be larger.
+
+
