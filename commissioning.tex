@@ -4,6 +4,9 @@ This is the introductory text. \cite{Dummy}
 
 \newsection{fontSetup}{Feedforward Controller (FONT5a Board)}
 
+\subsection{Design}
+\label{ss:fontDesign}
+
 \subsection{Installation}
 \label{ss:fontInstall}
 
@@ -25,7 +28,7 @@ DAC2
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/FONT5aPanelPic}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/FONT5aPanelPic}
   \caption{Front panel of the FONT5a board.}
   \label{f:FONT5aPanelPic}
 \end{figure}
@@ -38,7 +41,7 @@ The FONT5a board is controlled using a LabVIEW data acquisition system (DAQ) doc
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/DAQScreenshot}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/DAQScreenshot}
   \caption{Diode output along the pulse with the IIR filter off and on.}
   \label{f:DAQScreenshot}
 \end{figure}
@@ -89,7 +92,7 @@ Although the FONT5a (and previous FONT5) boards have been (and still are) used e
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFiltOffOn}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn}
   \caption{Diode output along the pulse with the IIR filter off and on.}
   \label{f:iirDiodefiltOffOn}
 \end{figure}
@@ -100,14 +103,14 @@ In the simplest case the droop should be well described by an exponential decay 
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFit}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFit}
   \caption{Exponential fit to diode droop.}
   \label{f:iirDiodeFit}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFitResid}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFitResid}
   \caption{Residuals between diode exponential fit and actual diode output.}
   \label{f:iirDiodeFitResid}
 \end{figure}
@@ -144,14 +147,14 @@ With the IIR filters enabled on the FONT5a board the droop on the diode (ADC1) i
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
   \caption{Diode output along the pulse with the IIR filter off and on. Zoomed in.}
   \label{f:iirDiodefiltOffOn_zoom}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/iirPhaseFiltOffOn}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirPhaseFiltOffOn}
   \caption{Phase along the pulse with the IIR filter off and on.}
   \label{f:iirPhasefiltOffOn}
 \end{figure}
@@ -217,7 +220,7 @@ With larger offsets between the beam phase and the LO (large Mixer output) the s
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseRecDiff}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseRecDiff}
   \caption{Difference between the phase reconstruction method used in the PFF algorithm on the FONT5a board (with the small angle approximation) and the full reconstruction used with data acquired from the SiS digitisers.}
   \label{f:phaseRecDiff}
 \end{figure}
@@ -226,7 +229,7 @@ Figure~\ref{f:phaseRecJitSim} shows a simulation of the theoretical downstream j
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseRecJitSim}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseRecJitSim}
   \caption{Achievable PFF jitter versus phase offset for full phase reconstruction and with the small angle approximation.}
   \label{f:phaseRecJitSim}
 \end{figure}
@@ -236,6 +239,9 @@ As the correction range of the PFF system is less than \(\pm10^\circ\) (Section~
 \newsection{amplifierSetup}{Amplifier}
 
 Make point that all effects here much smaller than phase monitors/phase propagation and although important to highlight them no attempts yet made to correct them or take them in to account in simulations.
+
+\subsection{Design}
+\label{ss:ampDesign}
 
 Amplifier versions:
 
@@ -268,7 +274,7 @@ Monitoring of each amplifier output
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/AmplifierPanelPic}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmplifierPanelPic}
   \caption{Front panel of the amplifier.}
   \label{f:AmplifierPanelPic}
 \end{figure}
@@ -276,7 +282,7 @@ Monitoring of each amplifier output
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/kickerCables}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/kickerCables}
   \caption{Cabling setup for cables between the amplifier and kickers.}
   \label{f:kickerCables}
 \end{figure}
@@ -300,14 +306,14 @@ Discrepancies between the four amplifier outputs are also visible in Figure~\ref
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/AmpOutvsDAC}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpOutvsDAC}
   \caption{Amplifier output vs. input.}
   \label{f:AmpOutvsDAC}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/AmpOutvsDAC_residual}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpOutvsDAC_residual}
   \caption{Residual between amplifier output and linear fit.}
   \label{f:AmpOutvsDAC_residual}
 \end{figure}
@@ -335,14 +341,14 @@ In the previous section the linearity of the mean output was considered but the 
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/AmpL_Traces}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpL_Traces}
   \caption{Amp L along pulse at 1 V input}
   \label{f:ampLTraces}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/AmpR_Traces}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpR_Traces}
   \caption{Amp R along pulse at 1 V input}
   \label{f:ampRTraces}
 \end{figure}
@@ -353,7 +359,7 @@ The PFF algorithm on the FONT5a board uses a single gain value across the whole 
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/AmpFlatness}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpFlatness}
   \caption{Flatness of potential difference sent to kickers.}
   \label{f:ampFlatness}
 \end{figure}
@@ -362,14 +368,14 @@ As for the mean output voltage, the second way variations in the amplifier outpu
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/residualKick_Traces}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/residualKick_Traces}
   \caption{Residual kick along pulse.}
   \label{f:ampClosure}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/residualKick_Flatness}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/residualKick_Flatness}
   \caption{Residual kick along pulse: deviation from flat.}
   \label{f:ampClosureFlatness}
 \end{figure}
@@ -413,14 +419,14 @@ Figure \ref{f:phaseVsAmpVoltage} shows the mean phase shift after the chicane (i
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseVsAmpVoltage}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage}
   \caption{Phase shift versus amplifier input voltage.}
   \label{f:phaseVsAmpVoltage}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseVsAmpVoltage_residuals}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage_residuals}
   \caption{Phase shift versus amplifier input voltage.}
   \label{f:phaseVsAmp_resid}
 \end{figure}
@@ -473,7 +479,7 @@ http://accelconf.web.cern.ch/accelconf/ipac2011/papers/tupc007.pdf
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/phaseShiftAlong}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseShiftAlong}
   \caption{Traces relative timing scan.}
   \label{f:phaseShiftAlongConstKick}
 \end{figure}
@@ -485,7 +491,7 @@ http://accelconf.web.cern.ch/accelconf/ipac2011/papers/tupc007.pdf
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/pffKickShape}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/pffKickShape}
   \caption{Traces relative timing scan.}
   \label{f:pffKickShape}
 \end{figure}
@@ -499,7 +505,7 @@ Using the same constant kick data as Section~\ref{ss:corrRange} Figure~\ref{f:HO
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/HOrbitVsInput}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/HOrbitVsInput}
   \caption{Horizontal orbit offset in and around the TL2 chicane at different input voltages sent to the amplifier.}
   \label{f:HOrbitVsInput}
 \end{figure}
@@ -510,7 +516,7 @@ The full MADX orbit propagated through all elements is shown, with the eight rea
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/orbClosureVsAmpModel}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/orbClosureVsAmpModel}
   \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data, nominal model and model taking in to account the difference in amplifier output voltage to each kicker.}
   \label{f:orbClosureVsAmpModel}
 \end{figure}
@@ -523,7 +529,7 @@ The true explanation for the non-closed orbit is that the quadrupole strengths u
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
   \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data, nominal model and model taking in to account the quadrupole currents in the real machine setup.}
   \label{f:orbClosureVsQuadModel}
 \end{figure}
@@ -622,7 +628,7 @@ Figure~\ref{f:beamPickup_noKick} shows the beam pickup at the start and end of t
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/beamPickup_noKick}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/beamPickup_noKick}
   \caption{Beam pickup on kicker strips as seen on amplifier monitoring signals.}
   \label{f:beamPickup_noKick}
 \end{figure}
@@ -631,7 +637,7 @@ An example of this is shown in Figure~\ref{f:absDelay0_all}. A constant DAC outp
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absDelay0_all}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay0_all}
   \caption{Output delay of 0 clock cycles. Full pulse.}
   \label{f:absDelay0_all}
 \end{figure}
@@ -640,21 +646,21 @@ The firmware for the FONT5a board includes an output delay parameter that can be
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absDelayAll_endPulse}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelayAll_endPulse}
   \caption{Output delay scan, end of pulse.}
   \label{f:absDelayAll_endPulse}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absDelay7_all}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay7_all}
   \caption{Output delay of 7 clock cycles. Full pulse.}
   \label{f:absDelay7_all}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absDelay7_end}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay7_end}
   \caption{Output delay of 7 clock cycles. End of pulse.}
   \label{f:absDelay7_end}
 \end{figure}
@@ -673,7 +679,7 @@ By taking the difference of the PFF off and PFF on data in the BPM any residual 
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absTimBeam_d0}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absTimBeam_d0}
   \caption{Kick output with no delay as seen on BPM and phase signals.}
   \label{f:absTimBeam_d0}
 \end{figure}
@@ -682,14 +688,14 @@ This measurement was repeated with four different correction output delays appli
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absTimBeam_fit}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absTimBeam_fit}
   \caption{Fit time offset between kick and beam at different output delays.}
   \label{f:absTimBeam_fit}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/absTimBeam_opt}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absTimBeam_opt}
   \caption{Alignment between BPMs and phase signals with optimal delay applied in analysis.}
   \label{f:absTimBeam_opt}
 \end{figure}
@@ -704,7 +710,7 @@ Figure~\ref{f:relDelay_sim} shows a simulated example of the expected effect of 
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relDelay_sim}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/relDelay_sim}
   \caption{Simulated response to offset kicks.}
   \label{f:relDelay_sim}
 \end{figure}
@@ -713,7 +719,7 @@ By varying the relative timing of the two correction outputs on the FONT5a board
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relDelay_traces}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/relDelay_traces}
   \caption{Measured BPM offset for different relative kick delays.}
   \label{f:relDelay_traces}
 \end{figure}
@@ -722,7 +728,7 @@ Figure~\ref{f:relDelay_fit} then shows the peak beam offset in the BPM versus th
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/commissioning/relDelay_fit}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/relDelay_fit}
   \caption{Fitted peak BPM offset vs. relative kick delay.}
   \label{f:relDelay_fit}
 \end{figure}
@@ -733,8 +739,13 @@ Relative K2 delays of both 0 and 1 clock~cycles have been used during PFF operat
 \item \textbf{K2 delay}: 7 or 8 clock~cycles.
 \end{itemize}
 
-%\newsection{corrBandwidth}{Correction Bandwidth}
+\newsection{earlyFFSim}{Early Phase Feedforward Attempts and Simulations}
 
+This is the introductory text.
 
+\subsection{Gain Scans}
+\label{ss:gainScans}
 
+\subsection{Effect of Limited Correction Range}
+\label{ss:effectLimRange}
 
