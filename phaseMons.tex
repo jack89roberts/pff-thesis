@@ -677,10 +677,12 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
 
 \newsection{resolutionMeas}{Resolution Measurements}
 
+This section presents resolution measurements with the mechanical phase shifters in place and the same overall electronics setup that was used to achieve the best PFF results in Chapter~\ref{c:feedforward}. All measurements use the upstream phase monitors Mon~1 and Mon~2. There is no way to directly verify the resolution of the downstream phase monitor Mon~3, but it should match that of Mon~1 and Mon~2 and the achieved phase stabilisation in Chapter~\ref{c:feedforward} suggests it does have below \(0.2^\circ\) resolution.
+
 \subsection{Best Resolution}
 \label{ss:bestRes}
 
-Mean is \(0.1257\pm0.0005^\circ\) 
+Figure~\ref{f:bestResolution} shows the best phase resolution that has been achieved to date sample by sample along the pulse. Each point corresponds to the phase jitter in the difference between the measured Mon~1 and Mon~2 phase divided by sqrt(2) as per Equation~\ref{e:resolutionEq}.  The resolution is quite stable along the pulse, with a mean value of \(0.1257\pm0.0005^\circ\). This is below the \(0.14^\circ\) needed to be able to theoretically achieve a \(0.2^\circ\) correction with the PFF prototype, as derived in Section~\ref{s:resolutionEqs}. The achieved resolution corresponds to a theoretical limit of around \(0.18^\circ\) in the corrected downstream phase jitter.
 
 \begin{figure}
   \centering
@@ -692,7 +694,7 @@ Mean is \(0.1257\pm0.0005^\circ\)
 \subsection{With Sample Averaging}
 \label{ss:resCalAlongPulse}
 
-\(0.1077\pm0.0005^\circ\) with 5 samples averaged
+The phase monitor signals are digitised with a much higher sampling rate, 357~MHz on the FONT5a board or 192~MHz on the SiS digitisers, than the PFF correction bandwidth of around 30~MHz. This means the results from several samples could be averaged to reduce noise on the measurement whilst maintaining the same correction bandwidth. For example, for a measurement on the SiS digitisers, such as those shown here, 5 samples can be averaged to effectively create a signal with 38.4~MHz sampling rate, reduced from the initial 192~MHz. The effect of doing this is shown in Figure~\ref{f:resolutionWithAveraging}. The resolution is decreased from \(0.1257\pm0.005^\circ\) as seen previously to \(0.1077\pm0.0005^\circ\) with 5 samples averaged. Currently the phase propagation (Chapter~\ref{c:phasePropagation}) is the main limiting factor for the PFF performance rather than the phase monitor resolution. However, it would be possible to implement sample averaging in the PFF firmware on the FONT5a board if deemed necessary for future tests [REF].
 
 \begin{figure}
   \centering
@@ -719,10 +721,10 @@ However, for the PFF system the phase resolution only needs to be guaranteed wit
   \label{f:resVsSmallPhasOff}
 \end{figure}
 
-\subsection{Dependence of Resolution on Input Power}
-\label{ss:resVsPower}
+%\subsection{Dependence of Resolution on Input Power}
+%\label{ss:resVsPower}
 
-Would need to take new data to do this section properly. Have some data with input attenuation 0dB 10dB 13dB 16dB 20dB but from before new shifters (with adjusters), and really need more in the range from 0dB to 10dB rather than at very high attenuations.
+%Would need to take new data to do this section properly. Have some data with input attenuation 0dB 10dB 13dB 16dB 20dB but from before new shifters (with adjusters), and really need more in the range from 0dB to 10dB rather than at very high attenuations.
 
 \newsection{monComp}{Differences Between Monitors}
 
