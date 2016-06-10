@@ -78,7 +78,7 @@ LO1 22.6 dBm
 LO2 23.6 dBm
 LO3 25.5 dBm
 
-\newsection{s:resolutionEqs}{Resolution Definition}
+\newsection{resolutionEqs}{Resolution Definition}
 
 The performance of the PFF system clearly depends on the accuracy to which the phase can be measured. Many of the measurements in this chapter are therefore focused on the phase monitor resolution, or more precisely on the resolution of the combined phase monitor and electronics setup. The resolution is defined as the jitter between the measured phase and the true beam phase. This can be calculated by comparing the difference between the measured phase of two monitors. This is why two phase monitors, Mon~1 and Mon~2 are installed neighbouring each other in the upstream system in the CT line. The beam phase should be identical in these two monitors thus their measurements can always be compared to derive the resolution.
 
@@ -603,9 +603,9 @@ In addition, as previously mentioned the convention is to operate the mixers on 
 
 Due to the large phase sag along the beam pulse it is clearly not possible to be at the zero crossing of the mixer for the full pulse length. For the PFF system the region of interest is the central portion of the pulse where the phase sag is flattest. The shifters are therefore set to zero the mixer output in this region, giving best resolution in the central part of the pulse but degraded resolution near the start and end of the pulse. In addition to this, slow drifts in the beam phase, particularly downstream, mean that the shifters must routinely be changed to stay at the zero crossing. With the current setup using mechanical phase shifters this must be done by hand, with no possibility to implement an automatic feedback on the shifter settings, for example.
 
-
-
 \newsection{shifters}{Phase Shifter Noise}
+
+In the first tests with all three phase monitors in their final positions at CTF3 the measured phase resolution was far in excess of the \(0.14^\circ\) derived to be necessary to achieve a \(0.2^\circ\) corrected downstream phase jitter in Section~\ref{s:resolutionEqs}. Figure~\ref{f:resolutionDigShift} shows a typical example of the measured resolution along the pulse at that time with an achieved resolution of around \(0.4^\circ\), three times larger than required. The lowest downstream phase jitter that could be achieved with the PFF system in these conditions is above \(0.55^\circ\), only about 30\% smaller than the initial upstream phase jitter at CTF3 (Chapter~\ref{c:phasePropagation}). To be able to achieve a large reduction in downstream phase jitter with the PFF prototype the source of the poor phase monitor resolution had to be identified and removed.
 
 \begin{figure}
   \centering
@@ -614,12 +614,19 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
   \label{f:resolutionDigShift}
 \end{figure}
 
+The first hint towards identifying the cause of the degraded resolution came by comparing the measured phase jitter from Mon~1 and Mon~2, with one example shown in Figure~\ref{f:Mix1Mon1_Mix2Mon2}. Note that for all the results in this section it is not the absolute value of the phase jitter (which depends mostly on the beam conditions in that dataset) that is important but rather the difference between the measured phase jitter in each monitor. The measured phase jitter along the pulse in Mon~2 with a mean of \(1.38\pm0.01^\circ\) is 1.7 times larger than the \(0.83\pm0.01^\circ\) phase jitter in Mon~1. Jitter values from this and all the other datasets presented in this section are shown in Table~\ref{t:elecSwapResults}. As Mon~1 and Mon~2 are neighbouring each other in the beam line the actual phase jitter in the two should be close to identical.
+
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon1_Mix2Mon2}
   \caption{Phase jitter along the pulse with the nominal electronics setup -- Mon~1 connected to the first mixer, and Mon~2 connected to the second mixer.}
   \label{f:Mix1Mon1_Mix2Mon2}
 \end{figure}
+
+The overall phase monitor and electronics setup can be roughly split in to three systems -- the RF signal from the beam (dependent on the phase monitors themselves and the hybrids), the LO reference signal and the mixers. An issue with any one of these systems could explain the larger phase jitter measured from Mon~2 (usually connected to Mixer~2 and LO~2) compared to the phase jitter from Mon~1 (usually connected to Mixer~1 and LO~1). To determine whether the issue was with the RF signal of one of the monitors measurements were taken with Mon~1 and Mon~2 swapped between the three mixers.
+
+Figure~\ref{f:Mix1Mon2_Mix2Mon1} shows the measured phase jitter along the pulse when Mon~2 is moved on to Mixer~1 (and LO~1) and with Mon~1 moved on to Mixer~2 (and LO~2). The colours in all the plots in this section correspond to the mixer that measurement is from -- blue for Mixer~1, red for Mixer~2 and green for Mixer~3. With the phase monitors swapped the higher measured phase jitter stays with Mixer~2 with the same ratio of 1.7, in this case \(1.48\pm0.01^\circ\) on Mixer~2 (connected to Mon~1) and \(0.89\pm0.01^\circ\) on Mixer~1 (connected to Mon~2). This rules out that the difference in phase jitter is coming from the phase monitors themselves, and suggests the problem is with either Mixer~2 or the reference signal LO~2 for that mixer. The same exercise can then be repeated with Mon~2 moved on to Mixer~3 (and LO~3) and the nominal setup used for Mon~1. Mixer~3 gives similar results to Mixer~2, with 1.7~times larger phase jitter than Mixer~1. This is seen in Figure~\ref{f:Mix1Mon1_Mix3Mon2}. The remaining task is therefore to identify whether the additional source of noise is from Mixer~2 or LO~2, and from Mixer~3 or LO~3.
+
 
 \begin{figure}
   \centering
@@ -635,17 +642,19 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
   \label{f:Mix1Mon1_Mix3Mon2}
 \end{figure}
 
+This was determined by swapping the LO reference signals between the mixers. Figure~\ref{f:Mix1Mon1PhShft2_Mix2Mon2PhShft1} shows the measured phase jitter with LO~2 connected to Mixer~1, and LO~1 connected to Mixer~2. In this case the lower measured phase jitter stays with LO~1, with \(1.10\pm0.01^\circ\) jitter on Mixer~2 (with LO~1) and \(1.68\pm0.01^\circ\) on Mixer~1 (with LO~2). In Figure~\ref{f:Mix1Mon1PhShft3_Mix3Mon2PhShft1} the same is seen with LO~3 connected to Mixer~1, and LO~1 connected to Mixer~3, with the lower phase jitter coming from Mixer~3 (LO~1) in this case. In Table~\ref{t:elecSwapResults} it can also be seen that the lowest phase jitter in every dataset always comes from the phase monitor for which LO~1 was used.
+
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon1PhShft2_Mix2Mon2PhShft1}
-  \caption{Phase jitter along pulse with the phase shifters swapped between the first mixer and the second mixer.}
+  \caption{Phase jitter along pulse with the LO swapped between the first mixer and the second mixer.}
   \label{f:Mix1Mon1PhShft2_Mix2Mon2PhShft1}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon1PhShft3_Mix3Mon2PhShft1}
-  \caption{Phase jitter along pulse with the phase shifters swapped between the third mixer and the first mixer.}
+  \caption{Phase jitter along pulse with the LO swapped between the third mixer and the first mixer.}
   \label{f:Mix1Mon1PhShft3_Mix3Mon2PhShft1}
 \end{figure}
 
@@ -654,7 +663,7 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
     \begin{tabular}{|c c c | c c c|}
 	   \hline
 	   & Mon~1 & & & Mon~2 & \\ \hline
-      Mixer & Shifter & Jitter & Mixer & Shifter & Jitter \\ \hline
+      Mixer & LO & Jitter & Mixer & LO & Jitter \\ \hline
       1 & \textbf{1} & \(\mathbf{0.83\pm0.01^\circ}\) & 2 & 2 & \(1.38\pm0.01^\circ\)    \\
       2 & 2 & \(1.48\pm0.02^\circ\) & 1 & \textbf{1} & \(\mathbf{0.89\pm0.01^\circ}\)    \\ 
       1 & \textbf{1} & \(\mathbf{1.15\pm0.01^\circ}\) & 3 & 3 & \(1.91\pm0.01^\circ\)    \\ 
@@ -662,10 +671,12 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
       1 & 3 & \(2.07\pm0.01^\circ\) & 3 & \textbf{1} & \(\mathbf{1.20\pm0.01^\circ}\)    \\  
 	\hline
     \end{tabular}
-    \caption{Comparison of phase jitter along the pulse for each measurement with different setups of the electronics. Each row corresponds to the results of one dataset. The left hand side of the table shows the results from Mon~1 in that dataset, and the right hand side of the table the results from Mon~2. Bold text indicates the lower jitter value in that dataset, all of which use the first phase shifter.}
+    \caption{Comparison of phase jitter along the pulse for each measurement with different setups of the electronics. Each row corresponds to the results of one dataset. The left hand side of the table shows the results from Mon~1 in that dataset, and the right hand side of the table the results from Mon~2. Bold text indicates the lower jitter value in that dataset, all of which use LO~1.}
   	\label{t:elecSwapResults}
   \end{center}
 \end{table}
+
+In this way an issue with LO~2 and LO~3 was identified. The generation of the LO reference signals (Section~\ref{s:monElectronics}) consists of a 3~GHz source that is common to all three signals, plus separate phase shifters, frequency multipliers (to create the 12~GHz reference) and amplifiers for each LO signal. The digital phase shifters were thought to be the most likely culprit to be adding noise in to the system, and preliminary tests replacing one of the digital phase shifters with a mechanical alternative provided an immediate gain in resolution. Finally, all three digital shifters were replaced with mechanical phase shifters (the specifications of the shifters were introduced in Section~\ref{s:monElectronics}). With this setup the measured phase jitter for Mon~1 and Mon~2 is the same irrespective of which mixer or LO the signal is connected to, as shown in Figure~\ref{f:jitterMechanicalShifters}. The final achieved resolution is presented in the next section.
 
 \begin{figure}
   \centering
@@ -726,12 +737,45 @@ However, for the PFF system the phase resolution only needs to be guaranteed wit
 
 %Would need to take new data to do this section properly. Have some data with input attenuation 0dB 10dB 13dB 16dB 20dB but from before new shifters (with adjusters), and really need more in the range from 0dB to 10dB rather than at very high attenuations.
 
-\newsection{monComp}{Differences Between Monitors}
+\newsection{monBandwidth}{Bandwidth}
 
-shape mon1 vs mon2
-jitter mon1 vs mon2
-comparison mon1/2 and bpr
-comparison mon3 and pets
+The overall targeted bandwidth for the prototype PFF correction is 30~MHz, which means each individual hardware component must have a bandwidth in excess of 30~MHz. [TODO: What was the bandwidth target for the phase monitors? Some mentions of 100~MHz when talking about some reflection parameter in design paper. Maybe electronics is the main limitation?]
+
+To estimate the bandwidth of the phase measurement the delay loop can be used to create a sharp jump in the phase mid-way along the pulse. [TODO: don't understand how to create a 280~ns continuous pulse with half delayed beam and half straight beam.] As Mon~1 and Mon~2 are prior to the delay loop only the bandwidth of Mon~3 can be verified in this way.
+
+Figure~\ref{f:bandwidthPlot} shows the response of Mon~3 mixer to a beam pulse with a phase step setup in this way, where the first 140~ns of the pulse corresponds to the beam bypassing the delay loop and the second half of the pulse corresponding to the beam entering the delay loop.
+
+The time taken for the mixer output to respond to the fast phase change can be related to the bandwidth by this approximate relationship [REF]:
+\begin{equation}
+\mathrm{BW} = \frac{350}{t}
+\end{equation}
+Where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the signal in ns.
+
+The transition between the two phase states as seen on the mixer output occurs between 156.6~ns and 167.0~ns, a rise time of 10.4~ns corresponding to a bandwidth of approximately 34~MHz. In addition, the falling edge of the mixer output at the end of the pulse also takes around a 10~ns, also leading to a bandwidth estimate in the region of 35~MHz.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/bandwidthPlot}
+  \caption{Response of Mixer~3 to a jump in phase in the middle of the pulse.}
+  \label{f:bandwidthPlot}
+\end{figure}
+
+%or use transient start of upstream pulse
+%on FONT5a board goes 30 to 41 ns, suggests 32~MHz
+%
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/transientUpstream}
+%  \caption{Energy transient at the start of the upstream pulse as seen on the second mixer.}
+%  \label{f:transientUpstream}
+%\end{figure}
+
+
+\newsection{monComp}{Comparison of Measured Phase Along Pulse}
+
+It has been shown that the phase jitter is at the same level in each monitor after the installation of mechanical phase shifters, and that the achieved resolution is better than the level needed to be able to theoretically achieve a \(0.2^\circ\) PFF correction. Nevertheless there are several remaining effects that have been identified which may limit the PFF performance in a way not described by the resolution. These are the focus of the remainder of this chapter, starting with differences between the measured shape of the phase along the pulse here. Neither the phase jitter nor the resolution are sensitive to any static differences in the measured phase in each monitor. For the PFF system to remove not only phase jitter but also to flatten the phase sag along the pulse the shape of the upstream and downstream phase must be the same.
+
+Figure~\ref{f:phaseAlongAll} shows an example of the measured phase along the pulse in all three monitors, as well as a fourth phase measurement taken from one of the power extraction and transfer structures (PETS) in the TBL line after Mon~3 [REF]. The PETS measurement provides an independent cross-check of the response and calibration of the three PFF monitors. All four phase measurements show approximately the same overall phase sag of around \(45^\circ\) along the full pulse length, as desired.
 
 \begin{figure}
   \centering
@@ -740,6 +784,11 @@ comparison mon3 and pets
   \label{f:phaseAlongAll}
 \end{figure}
 
+Nevertheless, there are differences between the measurements. As described later in Chapter~\ref{c:phasePropagation} there are many mechanisms by which the beam phase can change between the upstream and downstream monitors. Small discrepancies between the Mon~1 and Mon~2 phase compared to the Mon~3 and PETS phase are therefore not unexpected.  However, as Mon~1 and Mon~2 are neighbouring each other in the beam line their measurements are expected to agree almost perfectly but this is not the case. At the start of the pulse the Mon~2 phase is around \(6^\circ\) lower than the Mon~1 phase, whereas at the end of the pulse the Mon~2 phase is around \(2^\circ\) higher than the Mon~1 phase, for example. 
+
+Two possible explanations could have been an error in the fitted calibration amplitude or a time offset between the two signals. The fact that the Mon~2 phase is lower at one end of the pulse but higher at the other means that the difference is not simply a scale factor between the two, and therefore cannot be described by an error in calibration amplitude. Neither can it be explained by differences in the calibration constants along the pulse, as seen in the next section. Similarly, by observing small variations along the pulse, for example at the end of the pulse after a time of 1000~ns in the figure, it can be seen that the two measurements are well aligned in time.
+
+The blue line in Figure~\ref{f:DiffMon1Mon2Along} shows the difference between the Mon~1 and Mon~2 phase along the pulse. The offset between the two has a clear linear dependence on the time along the pulse. As a result, one way in which the agreement between the two measurements can be improved is by rotating Mon~2 with respect to Mon~1 about a time of 850~ns where the offset between the two is zero. With an optimal rotation of \(2.1^\circ\) the mean absolute offset between Mon~1 and Mon~2 between 370~ns and 1080~ns can be reduced from \(1.44\pm0.08^\circ\) to \(0.12\pm0.01^\circ\). The red line in the figure shows the difference along the pulse after performing this rotation. Figure~\ref{f:phaseAlongAll} then shows a comparison between the mean phase along the pulse in Mon~1 and Mon~2 after the rotation, with the original measurement from Mon~2 also shown for reference. The agreement in shape between the two is now excellent, with only a slight discrepancy at the end of the pulse. 
 
 \begin{figure}
   \centering
@@ -751,17 +800,15 @@ comparison mon3 and pets
   \label{f:DiffMon1Mon2Along}
 \end{figure}
 
-rotation reduces \(1.44\pm0.08^\circ\) mean absolute offset to \(0.12\pm0.01^\circ\) between 370~ns and 1080~ns
+The source of this apparent rotation between Mon~1 and Mon~2 is not clear and could be an effect of the monitors themselves, the calibration process or a real difference between the beam phase in each monitor. If there was a real rotation in the phase sag between monitors or if there was an issue with Mon~1, used as the PFF correction input, it would not be possible to completely flatten the phase sag along the pulse with the PFF system. The excellent flattening of the pulse that has in reality been achieved with the PFF system (Chapter~\ref{c:feedforward}) suggests this may be an issue affecting only Mon~2, as the correction input is based solely on Mon~1. An issue with the measured pulse shape from Mon~2 may also help to explain differences between the shape of the applied kick and the upstream phase (measured by Mon~2) seen later in Section~\ref{ss:kickShape}.
+
 
 \newsection{effectsMultiSampCal}{Effect of Variations in Calibration Constant}
 
+In Section~\ref{ss:calMultiSamp} it was shown how the calibration parameters vary along the pulse. In the PFF algorithm, and usually also in data analysis, single values for each calibration constant are used across the full pulse length. This will lead to small discrepancies between the measured phase and the true beam phase. Examples of the size of this effect are shown in Figures~\ref{f:multiSampMon2Along}, for Mon~2, and in Figure~\ref{f:multiSampMon3Along} for Mon~3, comparing the measured phase along the pulse when using single value calibration constants or varying calibration constants along the pulse. In the range between 600~ns and 1000~ns around the middle of the pulse where the phase sag is flattest (the part of interest for the PFF system) using a varying calibration constant along the pulse makes almost no difference to the measured upstream phase. This is unsurprising as the calibration constants normally used are calculated from one sample in this range. Outside this range the difference between the two reaches a peak of \(1.5^\circ\) near the start of the pulse.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/resolutionWithMultiSampleCal}
-  \caption{Effect of using a varying calibration constant on the phase resolution.}
-  \label{f:resolutionWithMultiSampleCal}
-\end{figure}
+For the downstream phase the differences are larger, including up to \(1.5^\circ\) offsets between the two methods in the range of interest for the PFF system. However, the example shown is without fully optimised downstream beam conditions achived in Chapter~\ref{c:phasePropagation} and so represents a worst case scenario for normal PFF operation. The PFF correction quality also does not directly depend on the downstream phase measurement (apart from for the gain calculation, as derived in Section~\ref{s:pffEquations}), so these differences can be removed in offline analysis if deemed necessary.
+
 
 \begin{figure}
   \centering
@@ -777,31 +824,13 @@ rotation reduces \(1.44\pm0.08^\circ\) mean absolute offset to \(0.12\pm0.01^\ci
   \label{f:multiSampMon3Along}
 \end{figure}
 
-\newsection{monBandwidth}{Bandwidth}
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/resolutionWithMultiSampleCal}
+%  \caption{Effect of using a varying calibration constant on the phase resolution.}
+%  \label{f:resolutionWithMultiSampleCal}
+%\end{figure}
 
-bandwidth [GHz] is 0.35/ 10\%-90\% rise time[ns]
-
-feature in middle goes from 156.6 ns to 167 ns: 10.4 ns, 33.7~MHz (but just 2 samples)
-falling slope goes from 287 to 297 ns, suggests 35~MHz bandwidth
-but pretty slow sampling rate...
-
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/bandwidthPlot}
-  \caption{Response of Mixer~3 to a jump in phase in the middle of the pulse.}
-  \label{f:bandwidthPlot}
-\end{figure}
-
-or use transient start of upstream pulse
-on FONT5a board goes 30 to 41 ns, suggests 32~MHz
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/transientUpstream}
-  \caption{Energy transient at the start of the upstream pulse as seen on the second mixer.}
-  \label{f:transientUpstream}
-\end{figure}
 
 
 \newsection{monPosition}{Dependence on Position}
@@ -871,9 +900,9 @@ c = \frac{\phi_{M2}-\phi_{M1}}{x_{430}(r_{M2}-r_{M1})}
 \end{equation}
 The gradient of the phase difference versus the position offset in the BPM, \((\phi_{M2}~-~\phi_{M1})~/~x_{430}\), is the only remaining parameter left to calculate in order to estimate \(c\).
 
-Figure~\ref{f:horizontalScanFit} shows how the difference between the Mon~1 and Mon~2 phase measurement depends on the horizontal position in the BPM during the scan. By removing the actual beam phase drifts the dependence of the phase measurements on the beam position becomes clear. The fitted gradient is \(-0.22\pm0.01^\circ\)~per~mm offset in the BPM. Using Equation~\ref{e:phasePosDep} this corresponds to a phase shift of \(-1.86\pm0.07^\circ\) per mm offset in the phase monitors themselves.
+Figure~\ref{f:horizontalScanFit} shows how the difference between the Mon~1 and Mon~2 phase measurement depends on the horizontal position in the BPM during the scan. By removing the actual beam phase drifts the dependence of the phase measurements on the beam position becomes clear. The fitted gradient is \(-0.22\pm0.01^\circ\)~per~mm offset in the BPM. Using Equation~\ref{e:phasePosDep} this corresponds to a phase shift of \(-1.84\pm0.07^\circ\) per mm offset in the phase monitors themselves.
 
-Exactly the same process can be repeated in the vertical plane, and the results of doing this are shown in Figure~\ref{f:verticalScanFit}. Although the effect is smaller there is still a visible dependence of the phase on the vertical position, in this case with a gradient of \(0.06\pm0.01^\circ\)~per~mm offset in the BPM corresponding to \(0.47\pm0.07^\circ\)~per~mm vertical offset in the phase monitors.
+Exactly the same process can be repeated in the vertical plane, and the results of doing this are shown in Figure~\ref{f:verticalScanFit}. Although the effect is smaller there is still a visible dependence of the phase on the vertical position, in this case with a gradient of \(0.06\pm0.01^\circ\)~per~mm offset in the BPM corresponding to \(0.53\pm0.07^\circ\)~per~mm vertical offset in the phase monitors.
 
 \begin{figure}
   \centering
@@ -885,6 +914,5 @@ Exactly the same process can be repeated in the vertical plane, and the results 
   \label{f:verticalScanFit}
 \end{figure}
 
-The position dependence of the measurement appears large when quoted like this but it must be remembered that millimetre scale orbit offsets are rarely present during normal operation. Orbit jitter at CTF3 around the location of the upstream phase monitors is typically at the 0.02~mm level [REF]. Taking the calculated position dependence of Mon~1 and Mon~2 this corresponds to only an additional measured phase jitter of roughly \(0.04^\circ\), using the larger dependence in the horizontal plane. This is only a small contribution to the overall phase monitor resolution of around \(0.13^\circ\) as seen in Section~\ref{s:resolutionMeas}. Position scans around the region of the downstream phase monitor Mon~3 would be much more difficult to perform and have not yet been attempted. The effect should be of a similar magnitude, although the downstream beam is less stable than upstream so the contribution to measured phase jitter is likely to be larger.
-
+The position dependence of the measurement appears large when quoted like this but it must be remembered that millimetre scale changes in beam orbit are rare during normal operation. Orbit jitter at CTF3 around the location of the upstream phase monitors is typically at the 0.02~mm level [REF]. Taking the calculated position dependence of Mon~1 and Mon~2 this corresponds to only an additional measured phase jitter of roughly \(0.04^\circ\), using the larger dependence in the horizontal plane. This is only a small contribution to the overall phase monitor resolution of around \(0.13^\circ\) as seen in Section~\ref{s:resolutionMeas}. However, it is important to consider that any change in beam setup that alters the trajectory through the monitors will lead to a change in output power and therefore a change in calibration constants. Calibrations are always repeated when the CTF3 setup is changed to take this in to account. Position scans around the region of the downstream phase monitor Mon~3 would be much more difficult to perform and have not yet been attempted. The effect should be of a similar magnitude, although the downstream beam is less stable than upstream so the contribution to measured phase jitter is likely to be slightly larger. 
 
