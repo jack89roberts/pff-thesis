@@ -6,7 +6,7 @@ The chapter begins with an overview of the design and installation of the phase 
 
 \newsection{phaseMonDesign}{Phase Monitor Design}
 
-The phase monitors are cylindrical cavities with a length of approximately 19~cm and an internal diamter of 23~mm, as shown in Figure~\ref{f:phMonTechDraw}. When a charged beam traverses a cavity the interaction of the beam with the cavity walls creates electromagnetic fields inside the cavity. Small ridges (called notch filters) in the cavity create a volume resonating at 12~GHz (the CLIC combined bunch frequency) that contains the beam induced fields and reflects any stray 12~GHz fields not associated with the beam outside the cavity. This is shown in Figure~\ref{f:notchFilters}. Four rectangular slots, arranged in horizontal and vertical pairs, around the mid-point of the cavity are then used to extract the beam induced resonant fields. The fields leaving the cavity are transported in short rectangular waveguides before a transition to a 50~\(\mathrm{\Omega}\) coaxial cable via an RF feedthrough [REF]. The output of the phase monitor cavities is therefore four 12~GHz signals whose time structure depends on the arrival time, or phase, of the drive beam bunches.
+The phase monitors are cylindrical cavities with a length of approximately 19~cm and an internal diamter of 23~mm, as shown in Figure~\ref{f:phMonTechDraw}. When a charged beam traverses a cavity the interaction of the beam with the cavity walls creates electromagnetic fields inside the cavity. The amplitude of the induced fields depends both on the bunch charge and the bunch length [REF]. Small ridges (called notch filters) in the cavity create a volume resonating at 12~GHz (the CLIC combined bunch frequency) that contains the beam induced fields and reflects any stray 12~GHz fields not associated with the beam outside the cavity. This is shown in Figure~\ref{f:notchFilters}. Four rectangular slots, arranged in horizontal and vertical pairs, around the mid-point of the cavity are then used to extract the beam induced resonant fields. The fields leaving the cavity are transported in short rectangular waveguides before a transition to a 50~\(\mathrm{\Omega}\) coaxial cable via an RF feedthrough [REF]. The output of the phase monitor cavities is therefore four 12~GHz signals whose time structure depends on the arrival time, or phase, of the drive beam bunches.
 
 \begin{figure}
   \centering
@@ -33,21 +33,7 @@ f_{nm} = \frac{c}{2\pi}\frac{p'_{nm}}{a}
 \end{equation}
 Where \(a\) is the radius of the cavity, \(p_{nm}\) is the \(m^\mathrm{th}\) zero of the Bessel function \(J_n(x)\), and \(p'_{nm}\) is the \(m^\mathrm{th}\) zero of the derivative of the Bessel function \(J'_n(x)\) [REF]. The beam pipe around the location of the phase monitors at CTF3 is usually 4~cm in diameter, and a cavity of this size would support six separate TM or TE modes with a cutoff frequency below 12~GHz [REF]. It is for this reason that the phase monitor diameter was reduced to 23~mm, where only two modes are present: TM01 (\(n=0,~m=1,~p_{01}=2.4\)) and TE11 (\(n=1,~m=1,~p'_{11}=1.8\)).
 
-TM01 is referred to as the monopole mode and TE11 as the dipole mode. The induced field distribution resulting from a bunch entering the cavity for both modes is shown in Figure~\ref{f:transModes}. The precise expressions for each field distribution can be found in [REF].
-
-cylindrical cavity
-
-notch filters create resonant volume and reject 12 GHz noise (e.g. wakefields) from outside that volume
-
-beam pickup: rectangular slot then waveguide then feedthrough then 50 ohm coaxial to extract beam signal.
-
-23mm internal diameter to limit number of transverse modes to two : TM01 (monopole) and TE11 (dipole) mode (cut off frequency below 12 GHz). 
-
-Cut off frequency:
-TEnm = c/2pi * pPrimenm / a (a is radium, pPrimenm is nth zero of derivative of bessel function)
-TMmn = c/2pi * pnm / a (pnm is nth zero of bessel function)
-pPrime11 = 1.84 (cutoff for TE11 7.6 GHz)
-p01 = 2.4 (cutoff for TM01 9.96 GHz)
+TM01 is referred to as the monopole mode and TE11 as the dipole mode. The induced field distribution resulting from a bunch entering the cavity for both modes is shown in Figure~\ref{f:transModes}. The precise expressions for each field distribution can be found in [REF]. When the beam has been correctly setup it should enter the phase monitor cavity close to its centre. For small (horizontal or vertical) offsets between the beam position and the cavity centre there is no dependence of the monopole mode amplitude on the incoming beam position. However, the amplitude of the dipole mode does depend on the beam position, even for small offsets from the cavity centre. This means the amplitude of any of the four individual RF outputs from the monitor will have a position dependence. This property is used in cavity beam position monitors (BPMs) [REF], but is undesirable for a phase monitor where the measurement should be position independent. For a 1~mm beam position offset the dipole mode is expected to have around 10\% the amplitude of the monopole mode [REF].
 
 \begin{figure}
   \centering
@@ -57,24 +43,33 @@ p01 = 2.4 (cutoff for TM01 9.96 GHz)
   \label{f:transModes}
 \end{figure}
 
+To remove the unwanted dipole mode the horizontal and vertical pairs of outputs from the cavities can be combined, as the mode is symmetric and has equal magnitude but opposite sign on each side of the cavity. As the CTF3 beam is generally more stable in the vertical plane (as the majority of bends in the beam line are horizontal the energy related orbit jitter resulting from dispersion is larger in the horizontal plane) the vertical pair of RF feedthroughs from the monitors are normally used. The two outputs are summed using 180 degree hybrids [REF] installed next to the phase monitor cavities in the machine hall. The horizontal pair is also instrumented in the same way but the outputs are typically not used. For an ideal (perfectly symmetric) cavity and hybrid this would create an output with only the position independent monopole mode present. In reality small misalignments, for example in the waveguides and RF feedthroughs, cause slight asymmetries in the cavity and signal combination which leaves a small residual dipole component. The signal combination in the hybrids is expected to reduce the dipole amplitude by a further 20~dB at a 1~mm offset, giving a final amplitude around \(1\%\) of the monopole mode. The remaining position dependence of the phase measurement is discussed in Section~\ref{s:monPosition}. How the output from the hybrids is processed to calculate the phase is discussed in the next section.
 
-dipole mode can be removed by adding output of all 4 feedthroughs (why do we only add 2?), leaving only monopole. However, small misalignments in feedthroughs, cavity design etc. mean can't be removed completely.
+Figure~\ref{f:phMonCTPic} shows the installation of the upstream phase monitors in the CT line. The installation allows up to three phase monitors to be installed neighbouring each other, with the current two monitors installed in the first and third slots leaving approximately a 20~cm gap between the two. The connections between the four RF feedthroughs on the monitors and the hybrids fixed underneath the monitors can be seen in the figure, with the hybrids combining the horizontal pairs visible and two further hybrids placed on the other side of the beam line for the vertical pairs. The outputs from the hybrids are routed up to the klystron gallery on the floor above the accelerator hall, where they are processed and used for the PFF inputs. For reference the power level of the three phase monitor signals as measured once they reach the klystron gallery are quoted in Table~\ref{t:monPowers}. These are useful to interpret the results of Section~\ref{s:monSigResponse}, for example. %Mon~3 has a slightly lower power level due to a longer cable being required to transport the signal from the TBL line to the phase monitor electronics placed directly above the CT line.
 
-Hybrid - remove dipole (position dependent) mode. 19dB below monopole mode for 1mm offset (11\% amplitude). 1mm beam offset = 2.8 degrees phase offset. 180 degree hybrids to remove. Additional 20 dB attenuation in dipole mode.
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c|}
+	   \hline
+       Monitor & Power \\ \hline
+       Mon~1 & 27.6~dBm \\
+       Mon~2 & 29.8~dBm \\
+       Mon~3 & 24.5~dBm \\ \hline
+    \end{tabular}
+    \caption{Power of the phase monitor signals (hybrid sum outputs) measured in the klystron gallery prior to being processed by the phase monitor electronics.}
+  	\label{t:monPowers}
+  \end{center}
+\end{table}
 
-Bunch length sensitivity: more sensitive to variation in bunch length for longer variations. 5mm bunch length - 50\% amplitude output compared to 0mm. With 1mm bunches 16\% variation in bunch length needed to cause 1\% change in output voltage.
+%Bunch length sensitivity: more sensitive to variation in bunch length for longer variations. 5mm bunch length - 50\% amplitude output compared to 0mm. With 1mm bunches 16\% variation in bunch length needed to cause 1\% change in output voltage.
 
-what is the effect of using 3GHz beam not 12GHz beam?
-
-Mon1 24.6 dBm + 3dB
-Mon2 26.8 dBm + 3dB
-Mon3 24.5 dBm
+%what is the effect of using 3GHz beam not 12GHz beam?
 
 \begin{landscape}
 \begin{figure}
   \centering
   \includegraphics[width=0.8\hsize]{Figures/phaseMons/phMonCTPic}
-  \caption{Picture of the two upstream phase monitors installed in the machine.}
+  \caption{Annotated picture of the two upstream phase monitors installed in the machine.}
   \label{f:phMonCTPic}
 \end{figure}
 \end{landscape}
