@@ -2,6 +2,13 @@
 
 This is the introductory text. \cite{Dummy}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/commissioning/racks}
+  \caption{racks}
+  \label{f:racks}
+\end{figure}
+
 \newsection{fontSetup}{Feedforward Controller (FONT5a Board)}
 
 This section describes the design, fimrware and operational aspects of the FONT5a board, which acts as the PFF controller. Its role is to digitise the signals from the first upstream phase monitor (Mon~1), process them and calculate the appropriate voltage with which to drive the kicker amplifiers in order to correct the phase downstream. In addition it must ensure the timing of the correction output is such that the drive output from the amplifiers reaches the kickers precisely in time with the beam.
@@ -263,9 +270,7 @@ As the correction range of the PFF system is less than \(\pm10^\circ\) (Section~
 
 \newsection{amplifierSetup}{Amplifier}
 
-The amplifier takes the two DAC signals from the FONT5a board and produces four high voltage outputs from them that are connected to the downstream ends of the kicker strips (two kickers and two strips per kicker gives four connections at the downstream ends in total), creating the potential difference between the kicker strips that deflects the beam in order to correct the phase. The returning signals from the upstream ends of the kicker strips are then terminated back at the amplifier. As the amplifier is installed together with the phase monitor electronics and FONT5a board in the klystron gallery the cables between the amplifier and kickers are long and represent the single largest contribution to the overall system latency, as discussed in Section~\ref{ss:kickerCables}.
-
-This section discusses the design and performance aspects of the amplifier that are relevant to PFF operation.
+The amplifier takes the two DAC signals from the FONT5a board and produces four high voltage outputs from them that are connected to the downstream ends of the kicker strips (two kickers and two strips per kicker gives four connections at the downstream ends in total), creating the potential difference between the kicker strips that deflects the beam in order to correct the phase. The returning signals from the upstream ends of the kicker strips are then terminated back at the amplifier. As the amplifier is installed together with the phase monitor electronics and FONT5a board in the klystron gallery the cables between the amplifier and kickers are long and represent the single largest contribution to the overall system latency, as discussed in Section~\ref{ss:kickerCables}. This section discusses the design and performance aspects of the amplifier that are relevant to PFF operation.
 
 \subsection{Design}
 \label{ss:ampDesign}

@@ -1,23 +1,84 @@
 \newchapter{phaseMons}{Phase Monitor Performance}
 
-This is the introductory text.
+In order to successfully correct the phase with the PFF system it is clearly necessary to be able to accurately measure the phase, whilst meeting the low latency (380~ns for the complete system) and high bandwidth (30~MHz) requirements of the correction. Purpose-built phase monitors for the PFF system have been designed and constructed by INFN, Italy [REF]. Three of these monitors are currently installed at CTF3 --- two in the CT line at the end of the linac and one after the TL2 chicane in the TBL line. The approximate positions of the monitors are shown on the CTF3 layout in Figure~[REF]. The two ``upstream'' phase monitors in the CT line will be referred to as Mon~1 and Mon~2 (Mon~1 being before Mon~2 in the beam line) in this chapter. The ``downstream'' phase monitor in TBL will be referred to as Mon~3. Mon~1 is normally used as the PFF correction input, with the neighbouring Mon~2 used for performance cross-checks. Mon~3 is then used to measure the effect of the PFF correction. In the rest of the thesis the phase measurements are generally simply referred to as being from either one of the upstream phase monitors, or the downstream monitor. 
 
-Mon1 = first mon in CT
-Mon2 = second mon in CT
-Mon3 = mon in TBL
-
-Mon1/Mon2 = upstream phase
-Mon3 = downstream phase
+The chapter begins with an overview of the design and installation of the phase montiors themselves as well as the associated electronics. The remainder of the chapter then focuses on operational procedures, measurements of the performance of the phase monitors and the changes that have been made in order to improve it. The headline result for the chapter is the achieved resolution of below \(0.14^\circ\) in Section~\ref{s:resolutionMeas}, which is derived to be necessary to be able to achieve the targeted \(0.2^\circ\) corrected phase jitter in Section~\ref{s:resolutionEqs}. Several effects have also been identified that can still degrade the accuracy of the phase measurement, such as the position dependence seen in Section~\ref{s:monPosition}. These are the first areas that should be looked at if an improvement in phase monitor performance is necessary for future PFF tests.
 
 \newsection{phaseMonDesign}{Phase Monitor Design}
+
+The phase monitors are cylindrical cavities with a length of approximately 19~cm and an internal diamter of 23~mm, as shown in Figure~\ref{f:phMonTechDraw}. When a charged beam traverses a cavity the interaction of the beam with the cavity walls creates electromagnetic fields inside the cavity. Small ridges (called notch filters) in the cavity create a volume resonating at 12~GHz (the CLIC combined bunch frequency) that contains the beam induced fields and reflects any stray 12~GHz fields not associated with the beam outside the cavity. This is shown in Figure~\ref{f:notchFilters}. Four rectangular slots, arranged in horizontal and vertical pairs, around the mid-point of the cavity are then used to extract the beam induced resonant fields. The fields leaving the cavity are transported in short rectangular waveguides before a transition to a 50~\(\mathrm{\Omega}\) coaxial cable via an RF feedthrough [REF]. The output of the phase monitor cavities is therefore four 12~GHz signals whose time structure depends on the arrival time, or phase, of the drive beam bunches.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/phMonTechDraw}
+  \caption{Technical drawing of the phase monitor cavity design [REF]. The length and internal diameter of the monitor is shown., Around the centre of the monitor are the four evenly spaced RF feedthroughs.}
+  \label{f:phMonTechDraw}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/notchFilters}
+  \caption{Schematic of phase monitor design [REF].}
+  \label{f:notchFilters}
+\end{figure}
+
+
+The solutions to Maxwell's equations in cavities such as this give a discrete set of transverse electric (TE) and transverse magnetic (TM) modes dependent on the geometry of the cavity [REF]. TE modes are characterised by having only transverse electric field components, and no longitudinal electric field component, whereas TM modes have only transverse magnetic field components and no longitudinal magnetic field component. Each TM and TE mode has an associated cutoff frequency dependent on the number of half-period variations, \(n\) and \(m\), in the field horizontally and vertically across the cavity respectively. The amplitude of the 12~GHz signals output from the cavity will contain components of each TM and TE mode with a cutoff frequency below 12~GHz. For cylindrical cavities the cutoff frequency of the TM is defined as [REF]:
+\begin{equation}
+f_{nm} = \frac{c}{2\pi}\frac{p_{nm}}{a} 
+\end{equation}
+And for the TE modes as:
+\begin{equation}
+f_{nm} = \frac{c}{2\pi}\frac{p'_{nm}}{a} 
+\end{equation}
+Where \(a\) is the radius of the cavity, \(p_{nm}\) is the \(m^\mathrm{th}\) zero of the Bessel function \(J_n(x)\), and \(p'_{nm}\) is the \(m^\mathrm{th}\) zero of the derivative of the Bessel function \(J'_n(x)\) [REF]. The beam pipe around the location of the phase monitors at CTF3 is usually 4~cm in diameter, and a cavity of this size would support six separate TM or TE modes with a cutoff frequency below 12~GHz [REF]. It is for this reason that the phase monitor diameter was reduced to 23~mm, where only two modes are present: TM01 (\(n=0,~m=1,~p_{01}=2.4\)) and TE11 (\(n=1,~m=1,~p'_{11}=1.8\)).
+
+TM01 is referred to as the monopole mode and TE11 as the dipole mode. The induced field distribution resulting from a bunch entering the cavity for both modes is shown in Figure~\ref{f:transModes}. The precise expressions for each field distribution can be found in [REF].
+
+cylindrical cavity
+
+notch filters create resonant volume and reject 12 GHz noise (e.g. wakefields) from outside that volume
+
+beam pickup: rectangular slot then waveguide then feedthrough then 50 ohm coaxial to extract beam signal.
+
+23mm internal diameter to limit number of transverse modes to two : TM01 (monopole) and TE11 (dipole) mode (cut off frequency below 12 GHz). 
+
+Cut off frequency:
+TEnm = c/2pi * pPrimenm / a (a is radium, pPrimenm is nth zero of derivative of bessel function)
+TMmn = c/2pi * pnm / a (pnm is nth zero of bessel function)
+pPrime11 = 1.84 (cutoff for TE11 7.6 GHz)
+p01 = 2.4 (cutoff for TM01 9.96 GHz)
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/monopole}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/dipole}
+  \caption{Field distribution of Monopole (TM01) and dipole (TE11) modes in the phase monitor cavities. The dipole mode has both horizontal and vertical components - only the horizontal component is shown.}
+  \label{f:transModes}
+\end{figure}
+
+
+dipole mode can be removed by adding output of all 4 feedthroughs (why do we only add 2?), leaving only monopole. However, small misalignments in feedthroughs, cavity design etc. mean can't be removed completely.
 
 Hybrid - remove dipole (position dependent) mode. 19dB below monopole mode for 1mm offset (11\% amplitude). 1mm beam offset = 2.8 degrees phase offset. 180 degree hybrids to remove. Additional 20 dB attenuation in dipole mode.
 
 Bunch length sensitivity: more sensitive to variation in bunch length for longer variations. 5mm bunch length - 50\% amplitude output compared to 0mm. With 1mm bunches 16\% variation in bunch length needed to cause 1\% change in output voltage.
 
+what is the effect of using 3GHz beam not 12GHz beam?
+
 Mon1 24.6 dBm + 3dB
 Mon2 26.8 dBm + 3dB
 Mon3 24.5 dBm
+
+\begin{landscape}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\hsize]{Figures/phaseMons/phMonCTPic}
+  \caption{Picture of the two upstream phase monitors installed in the machine.}
+  \label{f:phMonCTPic}
+\end{figure}
+\end{landscape}
+
 
 \newsection{monElectronics}{Phase Monitor Electronics}
 
@@ -28,7 +89,7 @@ Mon3 24.5 dBm
   \label{f:phaseMonDiagram}
 \end{figure}
 
-LO should have 5fs stability? What is the source of the LO?
+LO should have 5fs stability (0.02 degrees jitter)? What is the source of the LO?
 
 Mixer output
 \begin{align}
@@ -83,6 +144,8 @@ Latest power measurements:
 LO1 22.6 dBm
 LO2 23.6 dBm
 LO3 25.5 dBm
+
+latency monitor -> hybrid -> electronics -> out = 50 ns
 
 \newsection{resolutionEqs}{Resolution Definition}
 
