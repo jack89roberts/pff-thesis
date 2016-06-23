@@ -330,9 +330,9 @@ Measurements have been taken using a 12~GHz signal generator to determine the pe
 \subsection{Experimental Setup}
 \label{ss:sigGenSetup}
 
-Two changes were made to the setup shown in Figure~[REF] for these tests. Firstly, the beam induced signal from the phase monitors usually connected to the RF port of the mixers is replaced by the output from a 12~GHz signal generator. To be able to reach the same input power levels as the beam signals the signal generator output is amplified using a [TODO:amplifierInfo]. This allows the input power to the mixers to be varied in a wide range between 0 and 33dBm, or between 0.2 and 10.0~V in terms of voltage. The precise power sent to the mixer is verified between each measurement using a power meter. 
+Two changes were made to the setup shown in Figure~\ref{f:phaseMonDiagram} for these tests. Firstly, the beam induced signal from the phase monitors usually connected to the RF port of the mixers is replaced by the output from a 12~GHz signal generator. To be able to reach the same input power levels as the beam signals the signal generator output is amplified. This allowed the input power to the mixers to be varied in a wide range between 0 and 33dBm, or between 0.2 and 10.0~V in terms of voltage. The precise power sent to the mixer is verified between each measurement using a power meter. 
 
-Secondly, the diode outputs were amplified during these tests (using the same amplifier introduced in Section~\ref{ss:sisNoise}) by a factor 10 in voltage to reduce digitiser noise in the measurement. The non-amplified peak diode output is therefore 170~mV, rather than the 1.7~V seen in the plots in this section. The \(\pm500\)~mV mixer outputs have not been amplified. Usually the mixer output is amplified and the diode not amplified, as in Figure~[REF], for reasons that will become clear later in this chapter.
+Secondly, the diode outputs were amplified during these tests (using the same amplifier introduced in Section~\ref{ss:sisNoise}) by a factor 10 in voltage to reduce digitiser noise in the measurement. The non-amplified peak diode output is therefore 170~mV, rather than the 1.7~V seen in the plots in this section. The \(\pm500\)~mV mixer outputs have not been amplified. Usually the mixer output is amplified and the diode not amplified, as in Figure~\ref{f:phaseMonDiagram}, for reasons that will become clear later in this chapter.
 
 There are some differences between the properties of the generated signal and the beam signal that would be used in normal operation. Firstly, unlike the pulsed beam signal the used generated signal is continuous. It has been verified that the response of the mixers is equivalent for both the continuous and pulsed signals, at least in terms of output power and saturation levels [REF]. The cross-talk properties are difficult to characterise with beam based measurements alone, but assumed to be similar.
 
@@ -394,7 +394,7 @@ Where \(V_{MIXER}(t)\) and \(V_{FIT}(t)\) are the mixer voltage and fitted volta
   \caption{Sinusoidal fit to mixer responses at 27~dBm input power.}
   \label{f:mixersFit27dBm}
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/mixersFitResid27dBm}
-  \caption{Residuals to sinusoidal fit at 27dBm.[TODO: sample numbers don't relate to previous plots]}
+  \caption{Residuals to sinusoidal fit at 27dBm.}
   \label{f:mixersFitResid27dBm}
 \end{figure}
 
@@ -921,9 +921,10 @@ For the downstream phase the differences are larger, including up to \(1.5^\circ
 
 As discussed in Section~\ref{s:phaseMonDesign} the phase monitor output from the two vertical RF feedthroughs are summed in hybrids, and it is this sum signal that is connected to the mixers. This reduces, but does not remove completely, the dependence of the phase monitor signal power on the beam position in the monitor. In this section the remaining position dependence of the phase measurement is determined. Understanding the magnitude of the effect is particularly important considering the diodes are no longer used to power normalise the mixer output as originally intended.
 
-The magnetic corrector placed roughly 1~m prior to Mon~1 (labelled CT.DHD0360) has been used to scan the beam position in the upstream phase monitors both horizontally and vertically. Around 1~m following Mon~2 there is a quadrupole (CT.QFF0420) followed by a beam position monitor or BPM (CT.BPM0430). For the purposes of this measurement the quadrupole is turned off so that the whole 3.5~m length of beam line between the corrector and the BPM is a drift space. It is then straightforward to reconstruct the position offset in the two phase monitors based on the BPM measurement without having to rely on the MADX model to take in to account the effect of the quadrupole on the beam orbit. A diagram of the locations of the correctors, phase monitors, quadrupole and BPM is shown in Figure~[REF]. Distances between the elements are shown in Table~\ref{t:distanceFromCT360}.
+The magnetic corrector placed roughly 1~m prior to Mon~1 (labelled CT.DHD0360) has been used to scan the beam position in the upstream phase monitors both horizontally and vertically. Around 1~m following Mon~2 there is a quadrupole (CT.QFF0420) followed by a beam position monitor or BPM (CT.BPM0430). For the purposes of this measurement the quadrupole is turned off so that the whole 3.5~m length of beam line between the corrector and the BPM is a drift space. It is then straightforward to reconstruct the position offset in the two phase monitors based on the BPM measurement without having to rely on the MADX model to take in to account the effect of the quadrupole on the beam orbit. The position of the corrector with respect to the phase monitors can be seen in Figure~\ref{f:phMonCTPic}. Distances between the elements are shown in Table~\ref{t:distanceFromCT360}.
 
-[TODO: Diagram of corrector, mon1, mon2, quad, bpm locations]
+%A diagram of the locations of the correctors, phase monitors, quadrupole and BPM is shown in Figure~[REF]. Distances between the elements are shown in Table~\ref{t:distanceFromCT360}.
+%[TODO: Diagram of corrector, mon1, mon2, quad, bpm locations]
 
 \begin{table}
   \begin{center}
