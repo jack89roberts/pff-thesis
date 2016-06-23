@@ -43,9 +43,9 @@ TM01 is referred to as the monopole mode and TE11 as the dipole mode. The induce
   \label{f:transModes}
 \end{figure}
 
-To remove the unwanted dipole mode the horizontal and vertical pairs of outputs from the cavities can be combined, as the mode is symmetric and has equal magnitude but opposite sign on each side of the cavity. As the CTF3 beam is generally more stable in the vertical plane (as the majority of bends in the beam line are horizontal the energy related orbit jitter resulting from dispersion is larger in the horizontal plane) the vertical pair of RF feedthroughs from the monitors are normally used. The two outputs are summed using 180 degree hybrids [REF] installed next to the phase monitor cavities in the machine hall. The horizontal pair is also instrumented in the same way but the outputs are typically not used. For an ideal (perfectly symmetric) cavity and hybrid this would create an output with only the position independent monopole mode present. In reality small misalignments, for example in the waveguides and RF feedthroughs, cause slight asymmetries in the cavity and signal combination which leaves a small residual dipole component. The signal combination in the hybrids is expected to reduce the dipole amplitude by a further 20~dB at a 1~mm offset, giving a final amplitude around \(1\%\) of the monopole mode. The remaining position dependence of the phase measurement is discussed in Section~\ref{s:monPosition}. How the output from the hybrids is processed to calculate the phase is discussed in the next section.
+To remove the unwanted dipole mode the horizontal and vertical pairs of outputs from the cavities can be combined, as the mode is symmetric and has equal magnitude but opposite sign on each side of the cavity. As the CTF3 beam is generally more stable in the vertical plane (as the majority of bends in the beam line are horizontal the energy related orbit jitter resulting from dispersion is larger in the horizontal plane) the vertical pair of RF feedthroughs from the monitors are normally used. The two outputs are summed using 180 degree hybrids [REF] installed next to the phase monitor cavities in the machine hall. The horizontal pair is also instrumented in the same way but the outputs are typically not used. For an ideal (perfectly symmetric) cavity and hybrid this would create an output with only the position independent monopole mode present. In reality small misalignments, for example in the waveguides and RF feedthroughs, cause slight asymmetries in the cavity and signal combination which leaves a small residual dipole component. The signal combination in the hybrids is expected to reduce the dipole amplitude by a further 20~dB at a 1~mm offset, giving a final amplitude around \(1\%\) of the monopole mode [REF]. The remaining position dependence of the phase measurement is discussed in Section~\ref{s:monPosition}. How the output from the hybrids is processed to calculate the phase is discussed in the next section.
 
-Figure~\ref{f:phMonCTPic} shows the installation of the upstream phase monitors in the CT line. The installation allows up to three phase monitors to be installed neighbouring each other, with the current two monitors installed in the first and third slots leaving approximately a 20~cm gap between the two. The connections between the four RF feedthroughs on the monitors and the hybrids fixed underneath the monitors can be seen in the figure, with the hybrids combining the horizontal pairs visible and two further hybrids placed on the other side of the beam line for the vertical pairs. The outputs from the hybrids are routed up to the klystron gallery on the floor above the accelerator hall, where they are processed and used for the PFF inputs. For reference the power level of the three phase monitor signals as measured once they reach the klystron gallery are quoted in Table~\ref{t:monPowers}. These are useful to interpret the results of Section~\ref{s:monSigResponse}, for example. %Mon~3 has a slightly lower power level due to a longer cable being required to transport the signal from the TBL line to the phase monitor electronics placed directly above the CT line.
+Figure~\ref{f:phMonCTPic} shows the installation of the upstream phase monitors in the CT line. The installation allows up to three phase monitors to be installed neighbouring each other, with the current two monitors installed in the first and third slots leaving approximately a 20~cm gap between the two. The connections between the four RF feedthroughs on the monitors and the hybrids fixed underneath the monitors can be seen in the figure, with the hybrids combining the horizontal pairs visible and two further hybrids placed on the other side of the beam line for the vertical pairs. The outputs from the hybrids are routed up to the klystron gallery on the floor above the accelerator hall, where they are processed and used for the PFF inputs. The overall phase monitor setup including the cables adds around 50~ns to the overall PFF latency [REF]. For reference the power level of the three phase monitor signals as measured once they reach the klystron gallery are quoted in Table~\ref{t:monPowers}. These are useful to interpret the results of Section~\ref{s:monSigResponse}, for example. %Mon~3 has a slightly lower power level due to a longer cable being required to transport the signal from the TBL line to the phase monitor electronics placed directly above the CT line.
 
 \begin{table}
   \begin{center}
@@ -77,70 +77,96 @@ Figure~\ref{f:phMonCTPic} shows the installation of the upstream phase monitors 
 
 \newsection{monElectronics}{Phase Monitor Electronics}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/phaseMonDiagram}
-  \caption{Simplified schematic of the phase monitor electronics setup.}
-  \label{f:phaseMonDiagram}
-\end{figure}
+The output of the phase monitor cavities (or more precisely the combined output from the hybrids) is a sinusoidal signal with a frequency of \(\omega_{RF} = 11.994\)~GHz (the precise CLIC combined drive beam bunch frequency is 11.994~GHz rather than 12~GHz). This can be expressed as follows:
+\begin{equation}
+RF(t) = A_{RF}(t)\cos[\omega_{RF} t + \phi(t)]
+\end{equation}
+Where \(A_{RF}(t)\) is the time dependent amplitude (voltage) of the phase monitor signal and \(\phi(t)\) is the time dependent beam phase of interest for the PFF system. The beam based signals from the phase monitors are refereed to as the RF signals.
 
-LO should have 5fs stability (0.02 degrees jitter)? What is the source of the LO?
+This high frequency signal cannot by digitised directly so in order to extract the phase dependence it is combined with a similar reference signal to create a low, or intermediate, frequency signal that can be digitised and preserves the beam phase information. The devices that ``mix'' the beam signal with the reference signal are called mixers. The reference signal is referred to as the local oscillator or LO signal. The LO is usually a continuous sinusoidal signal with constant amplitude \(A_{LO}\) and frequency \(\omega_{LO}\):
+\begin{equation}
+LO(t) = A_{LO}\cos[\omega_{LO} t]
+\end{equation}
 
-Mixer output
-\begin{align}
-RF(t) &= A_{RF}(t)\cos[\omega_{RF} t + \phi(t)] \\
-LO(t) &= A_{LO}\cos[\omega_{LO} t]
-\end{align}
-mixer multiplies
+The mixer multiplies the RF and LO signals, to create an output with the following dependence on each signal:
 \begin{align}
 \mathrm{Mixer}(t) &= RF(t) \times LO(t) \\
 \mathrm{Mixer}(t) &= A_{RF}(t)A_{LO}\cos[\omega_{RF} t + \phi(t)]\cos[\omega_{LO} t]
 \end{align}
-trig identities
+Using trigonometric identities this can be expressed in terms of a high frequency component, with a frequency of \((\omega_{LO} + \omega_{RF})\), and a low frequency component, with a frequency of  \((\omega_{LO} - \omega_{RF})\):
 \begin{equation}
 \mathrm{Mixer}(t) = \frac{A_{RF}(t)A_{LO}}{2}\left\lbrace\cos[(\omega_{LO} + \omega_{RF})t + \phi(t)] + \cos[(\omega_{LO} - \omega_{RF})t + \phi(t)]\right\rbrace
 \end{equation}
-filter high frequency
+The high frequency component can then easily be removed using a low pass filter, so that the mixer output becomes:
 \begin{equation}
 \mathrm{Mixer}(t) = \frac{A_{RF}(t)A_{LO}}{2}\cos[(\omega_{LO} - \omega_{RF})t + \phi(t)]
 \label{e:mixOutAnyFreq} 
 \end{equation}
-LO frequency and RF frequency are the same
+Finally, by using a reference LO signal which has the same frequency as the RF signal, which is the case for the phase monitor electronics presented here, this simplifies to:
 \begin{equation}
 \mathrm{Mixer}(t) = \frac{A_{RF}(t)A_{LO}}{2}\cos[\phi(t)]
 \label{e:mixOutSameFreq} 
 \end{equation}
-Diode used to measure \(A_{RF}\)
+The resulting mixer output is therefore a low frequency signal that depends only on the amplitude of the RF signal and the phase (as well as the constant LO amplitude).
+
+To use the mixer output to calculate the phase the voltage of the RF signal, \(A_{RF}\), must  be known. This can be determined by splitting the RF signal between the mixer and a diode detector, whose output is dependent on the power of the signal (the square of the voltage):
 \begin{equation}
 \mathrm{Diode}(t) = A_{RF}(t)^2
 \label{e:idealDiode}
 \end{equation}
-The phase can be reconstructed by
+The phase can then be reconstructed from the mixer and diode outputs as follows:
 \begin{align}
 &\frac{\mathrm{Mixer}(t)}{\sqrt{\mathrm{Diode}(t)}} = A\cos[\phi(t)] \label{e:mixOverSqrtDio} \\
 &\phi(t) = \arccos\left[\frac{\mathrm{Mixer(t)}}{A\sqrt{\mathrm{Diode(t)}}}\right]
 \label{e:phaseRecIdeal} 
 \end{align}
+Where \(A\) is a calibration constant dependent on the relative amplitudes of the mixer and diode outputs. The electronics for the three PFF phase monitors use mixers and diodes as described above to produce signals that are dependent on the phase and amplitude of the output from the phase monitor cavities. Figure~\ref{f:mixerFrontPanel} shows the front panel of one of the sets of the electronics, showing the RF and LO inputs and mixer and diode outputs. The mixer and diode outputs are digitised, with the phase calculation above performed after the digitisation rather than by the phase monitor electronics themselves. 
 
-Beam/monitor frequency is 11.994 GHz.
+In order to achieve resolutions below \(0.2^\circ\), as necessary for the PFF system (Section~\ref{s:resolutionEqs}), the electronics do not work exactly as described above but instead use multiple mixers and diodes. Non-linearities in the response of mixers and diodes are typically worse at higher input powers [REF], but higher input powers are desirable to improve the signal to noise ratio of the output. With a single mixer and diode a compromise must therefore be made between the accuracy (linearity) and resolution (noise) of the device. To be able to operate the mixers at low power whilst maintaining a good signal to noise ratio eight separate mixers and diodes are used in each set of electronics [REF]. The RF and LO inputs are split between the eight mixers and diodes, and then the eight outputs of each type are added together to create the final mixer and diode outputs from the electronics. Figure~\ref{f:phaseMonDiagram} shows a simplified example of this with two mixers and diodes.
 
-Performance limited by:
-Device non-linearity -- normally better for lower input power
-Signal to noise -- better for high power
-Therefore, split signal to 8 mixers -- low input power to each one -- to reduce effect of non-linearities. Then sum up results of each mixer to improve signal to noise.
+Figure~\ref{f:phaseMonDiagram} also shows all the elements present in the generation of the LO reference signal for the electronics. The LO signal for all three sets of electronics is generated from a common 3~GHz source that is locked to the timing of the CTF3 drive beam (which has a 3~GHz acceleration frequency). The 3~GHz signal is split in to three to provide the LO input for each set of electronics. After the split each LO chain includes a phase shifter, bandpass filter, frequency multiplier and an amplifier. The phase shifters are required for the calibration process as discussed in Section~\ref{s:monCalibrations}. Initially these were 3~GHz digital phase shifters of type [REF], but these were later replaced with passive mechanical phase shifters for the reasons seen in Section~\ref{s:shifters}. The mechanical shifters are of type [REF], and can be changed in units of 0.02 degrees at 4~GHz. After the shifters, a bandpass filter [REF] removes any unwanted out of frequency noise in the LO signal, the frequency multiplier [REF] increases the frequency of the LO to 11.994~GHz and finally the amplifier [REF] is used to boost the power of the LO signals to the level seen in Table~\ref{t:loPowers}. The LO is designed to have a stability of 5~fs, or 0.02 degrees at 12~GHz [REF].
 
-Monitor -> attenuator? -> Hybrid sum -> attenuator? -> attenuator in gallery -> mixer RF input
-LO -> phase shifter -> multiplier -> amplifier -> mixer LO input
-Mixer output -> attenuator -> amplifier -> SiS OR -> attenuator->FONT
-Diode output -> SiS/FONT
+Figure~\ref{f:phaseMonRack} finally shows the complete phase monitor electronics installation in the racks in the klystron gallery.
 
-Latest power measurements:
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c|}
+	   \hline
+       LO & Power \\ \hline
+       LO~1 & 22.6~dBm \\
+       LO~2 & 23.6~dBm \\
+       LO~3 & 25.5~dBm \\ \hline
+    \end{tabular}
+    \caption{Power of the LO inputs to the phase monitor electronics.}
+  	\label{t:loPowers}
+  \end{center}
+\end{table}
 
-LO1 22.6 dBm
-LO2 23.6 dBm
-LO3 25.5 dBm
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Figures/phaseMons/mixerFrontPanel}
+  \caption{Front panel of the phase monitor electronics boxes containing the mixers and diodes. The connectors labelled LO and RF take the signals from the LO source and the phase monitors respectively. The connectors labelled \(A^2\) and \(A\sin(\mathrm{phi})\) are the diode and mixer outputs respectively.}
+  \label{f:mixerFrontPanel}
+\end{figure}
 
-latency monitor -> hybrid -> electronics -> out = 50 ns
+\begin{landscape}
+\begin{figure}
+  \centering
+  \includegraphics[width=\hsize]{Figures/phaseMons/phaseMonDiagram}
+  \caption{Simplified schematic of the phase monitor electronics setup. The components involved in the generation of the LO are shown in blue, the phase monitor beam signal in green and the outputs in red. For the purposes of the diagram only two individual mixers and diodes are shown. In the actual design the input signals are split between eight mixers and diodes, and then combined in the same way to create the two outputs. The outputs are digitised on either the FONT5a board or the SiS digitisers.}
+  \label{f:phaseMonDiagram}
+\end{figure}
+\end{landscape}
+
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Figures/phaseMons/phaseMonRack}
+  \caption{Annotated picture of the phase monitor electronics rack in the klystron gallery..}
+  \label{f:phaseMonRack}
+\end{figure}
+
 
 \newsection{resolutionEqs}{Resolution Definition}
 
@@ -803,19 +829,13 @@ However, for the PFF system the phase resolution only needs to be guaranteed wit
 
 \newsection{monBandwidth}{Bandwidth}
 
-The overall targeted bandwidth for the prototype PFF correction is 30~MHz, which means each individual hardware component must have a bandwidth in excess of 30~MHz. [TODO: What was the bandwidth target for the phase monitors? Some mentions of 100~MHz when talking about some reflection parameter in design paper. Maybe electronics is the main limitation?]
+The overall targeted bandwidth for the prototype PFF correction is 30~MHz, which means each individual hardware component must have a bandwidth in excess of 30~MHz. To estimate the bandwidth of the phase measurement the delay loop has been used to create a sharp jump in the phase mid-way along the pulse. Normally the delay loop (whose length is 140~ns) is used with 1.5~GHz beam at CTF3, with seven 180 degree phase switches in the bunching at 140~ns intervals. Alternating 140~ns sub-trains are deflected in to the delay loop with a 1.5~GHz RF deflector, and then recombine with the 140~ns sub-trains bypassing the delay loop to double the drive beam current [REF]. If the delay loop is instead used with 3~GHz beam alternating bunches, rather than sub-trains, enter the delay loop. The first 140~ns of the pulse after the delay loop contains only bunches that bypassed the loop, so is a 1.5~GHz beam with half the initial beam current. After the first 140~ns there is a fast transition back to 3~GHz beam with the same initial current as delayed bunches merge with the bypassing bunches. By varying the length of the delay loop (using a wiggler [REF]) the phase of the bunches leaving the delay loop can be changed, also creating a fast phase jump at the transition to 3~GHz beam.
 
-To estimate the bandwidth of the phase measurement the delay loop can be used to create a sharp jump in the phase mid-way along the pulse. [TODO: don't understand how to create a 280~ns continuous pulse with half delayed beam and half straight beam.] As Mon~1 and Mon~2 are prior to the delay loop only the bandwidth of Mon~3 can be verified in this way.
-
-Figure~\ref{f:bandwidthPlot} shows the response of Mon~3 mixer to a beam pulse with a phase step setup in this way, where the first 140~ns of the pulse corresponds to the beam bypassing the delay loop and the second half of the pulse corresponding to the beam entering the delay loop.
-
-The time taken for the mixer output to respond to the fast phase change can be related to the bandwidth by this approximate relationship [REF]:
+Figure~\ref{f:bandwidthPlot} shows the response of the Mon~3 mixer to a beam pulse with a phase step setup in this way. The first 140~ns of the pulse contains only bunches bypassing the delay loop, as described, followed by the fast transition to 3~GHz beam and the phase step. The time taken for the mixer output to respond to the fast phase change can be related to the bandwidth by this approximate relationship [REF]:
 \begin{equation}
 \mathrm{BW} = \frac{350}{t}
 \end{equation}
-Where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the signal in ns.
-
-The transition between the two phase states as seen on the mixer output occurs between 156.6~ns and 167.0~ns, a rise time of 10.4~ns corresponding to a bandwidth of approximately 34~MHz. In addition, the falling edge of the mixer output at the end of the pulse also takes around a 10~ns, also leading to a bandwidth estimate in the region of 35~MHz.
+Where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the signal in ns. The transition between the two phase states as seen on the mixer output occurs between 156.6~ns and 167.0~ns, a rise time of 10.4~ns corresponding to a bandwidth of approximately 34~MHz. In addition, the falling edge of the mixer output at the end of the pulse also takes around a 10~ns, also leading to a bandwidth estimate in the region of 35~MHz.
 
 \begin{figure}
   \centering
