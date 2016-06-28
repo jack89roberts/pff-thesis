@@ -1,6 +1,73 @@
-\newchapter{tl2Optics}{Optics for the PFF Prototype}
+\newchapter{tl2Optics}{Design of the PFF Chicane}
 
 This is the introductory text.
+
+\newsection{opticsIntro}{Introduction to Optics}
+
+basics of a lattice: dipoles, quadrupoles, fodo cell. quick mention of use of sextupoles etf. correctors
+
+twiss parameters: beta function, alpha, emittance
+
+dispersion
+
+matrix formalism: coordinates, r56
+
+A basic beam line consists of focusing magnets (quadrupoles) and bending magnets (dipoles) connected by straight sections. A practical ``real world'' beam line must also include many diagnostic devices (such as beam position monitors, or BPMs) and additional elements (such as magnetic correctors) to be able to measure and remove the effects of small misalignments and imperfections in the beam line. The arrangement of devices along the line is referred to as the lattice. The collective settings (strengths) of each focusing element and the beam conditions they produce are referred to as the machine ``optics''. The performance of the PFF system depends heavily on the lattice and optics of the correction chicane in the TL2 line (discussed in this chapter), and also in other sections at CTF3 (discussed in Chapter~\ref{c:phasePropagation}). This section presents basic aspects of lattice design and optics to introduce the terms used in the remainder of the thesis.
+
+Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\) that defines how it transforms the initial coordinates of a particle [REF]:
+\begin{equation}
+\vec{x_f} = \mathbf{R}\vec{x_i}
+\end{equation}
+Where \(\vec{x_i}\) and \(\vec{x_f}\) are vectors describing the initial and final state of the particle. They are six dimensional vectors and the above equation can be expanded to become:
+\begin{equation}
+\left( \begin{array}{c} x_f \\ x_f' \\ y_f \\ y_f' \\ t_f \\ \Delta p_f/p_0 \end{array} \right)
+=
+\left( \begin{array}{cccccc} 
+R_{11} & R_{12} & R_{13} & R_{14} & R_{15} & R_{16}\\ 
+R_{21} & R_{22} & R_{23} & R_{24}  & R_{25} & R_{26}\\ 
+R_{31} & R_{32} & R_{33} & R_{34}  & R_{35} & R_{36}\\
+R_{41} & R_{42} & R_{43} & R_{44}  & R_{45} & R_{46}\\
+R_{51} & R_{52} & R_{53} & R_{54}  & R_{55} & R_{56}\\
+R_{61} & R_{62} & R_{63} & R_{64}  & R_{65} & R_{66}\\
+\end{array} \right)
+\left( \begin{array}{c} x_i \\ x_i' \\ y_i \\ y_i' \\ t_i \\ \Delta p_i/p_0 \end{array} \right)
+\end{equation}
+In the transverse plane the vectors \(\vec{x}\) contain the horizontal and vertical offsets (\(x\), \(y\)) and divergences (\(x'\), \(y'\)) of the particle with respect to the nominal or reference orbit. This defines a curvilinear set of coordinates that follows the trajectory of the beam through bends, for example [REF]. The final two longitudinal coordinates are the time offset (\(t\)) and momentum offset \(\Delta p_i/p_0\) of the particle with respect to the reference or ideal particle. The time \(t\) is analogus to the phase of interest for the PFF system. The coefficients \(R_{ij}\) of the \(6\times6\) transfer matrix \(\mathbf{R}\) define how the final value of the \(i^{\mathrm{th}}\) coordinate after passing through the element is influenced by the initial value of the \(j^{\mathrm{th}}\) coordinate prior to the element.
+
+\begin{equation}
+\left( \begin{array}{c} x_f \\ x_f' \\ y_f \\ y_f' \end{array} \right)
+=
+\left( \begin{array}{cccc} R_{11} & R_{12} & R_{13} & R_{14} \\ R_{21} & R_{22} & R_{23} & R_{24} \\ R_{31} & R_{32} & R_{33} & R_{34} \\ R_{41} & R_{42} & R_{43} & R_{44} \end{array} \right)
+\left( \begin{array}{c} x_i \\ x_i' \\ y_i \\ y_i' \end{array} \right)
+\end{equation}
+
+The pole shape and field inside a quadrupole magnet is shown in Figure~[REF]. For small horizontal or vertical offsets from the quadrupole centre the magnetic field linearly increases with the offset [REF]. The effect of a particle travelling through a quadrupolar field is analogus to a focusing lens with a focal length \(1/kl\) where \(l\) is the length of the quadrupole and \(k\) is the strength of the quadrupole dependent on its design [REF]. 
+
+
+figure of quadrupole poles/field
+
+Coordinates - just transverse initially?
+
+Matrix formalism (single particle)
+
+Quadrupole matrix - focusing one plane, defocusing other plane
+
+The simplest and most widely used type of accelerator lattice is a FODO cell, consisting of equally spaced focusing and defocusing quadrupoles with equal strength.
+
+figure of FODO cell structure
+
+betatron oscillations - beta, alpha, gamma. Phase advance. Stability. Emittance.
+
+Longitudinal
+
+Dispersion
+
+R56 or save it for later?
+
+\subsection{MADX}
+\label{ss:madx}
+
+what madx is, what it's used for, model of TL2, matching
 
 \newsection{kickers}{Kicker Design}
 
@@ -16,19 +83,12 @@ why drive downstream end
 
 phase shift per volt applied to strips
 
-\newsection{opticsIntro}{Introduction to Optics}
-
-basics of a lattice: dipoles, quadrupoles, fodo cell. quick mention of use of sextupoles etf. correctors
-
-twiss parameters: beta function, alpha, emittance
-
-dispersion
-
-matrix formalism: coordinates, r56
-
-\newsection{madx}{MADX}
-
-what madx is, what it's used for, model of TL2, matching
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/optics/kickerSchematic}
+  \caption{Technical drawing of the kicker design. The strips have a length of 960~mm and an internal separation of 40~mm. The four connectors for each strip}
+  \label{f:kickerSchematic}
+\end{figure}
 
 \newsection{tl2}{TL2}
 
@@ -44,7 +104,7 @@ picture?
 \begin{landscape}
 \begin{figure}
   \centering
-  \includegraphics[width=\hsize]{Figures/newTL2Lattice}
+  \includegraphics[width=\hsize]{Figures/optics/newTL2Lattice}
   \caption{New TL2 lattice for PFF. Changes highlighted yellow.}
   \label{f:newTL2Lattice}
 \end{figure}
@@ -61,11 +121,11 @@ move bpms
 
 pictures/diagram of kickers in quadrupole
 
-\subsection{Optics Constraints}
-\label{ss:tl2OpticsReqs}
+\newsection{tl2OpticsReqs}{TL2 Optics Constraints}
 
-\subsubsection{Nominal Optics}
-\label{sss:nominalOpticsReqs}
+
+\subsection{Nominal Optics}
+\label{ss:nominalOpticsReqs}
 
 matching from CR and in to CLEX
 
@@ -75,8 +135,8 @@ beta functions
 
 r56
 
-\subsubsection{PFF Optics}
-\label{sss:pffOpticsReqs}
+\subsection{PFF Optics}
+\label{ss:pffOpticsReqs}
 
 between kickers: 
 r52
@@ -125,7 +185,7 @@ something about the process? mixture of by hand/matching
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/opticsCorrVsOrig}
+  \includegraphics[width=0.8\textwidth]{Figures/optics/opticsCorrVsOrig}
   \caption{Mean phase along.}
   \label{f:opticsCorrVsOrig}
 \end{figure}

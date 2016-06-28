@@ -46,9 +46,7 @@ Finally, the FONT5a board is controlled using a LabVIEW data acquisition system 
 
 The diagram in Figure~\ref{f:fontDiagram} shows all the connections to and from the FONT5a board that were introduced in the previous section, from the phase monitor and timing inputs on the left side of the diagram to the outputs for the amplifier and DAQ on the right side of the figure. The central portion of the figure shows a simplified version of how the FONT5a firmware calculates and applies the PFF correction. All the parameters shown in blue, and several others not shown in the diagram but described later in this section, must be correctly set (via the DAQ) for operation of the PFF system.
 
-The basic logic of the firmware is as follows. The ADC timing, sampling rate and start time, are determined by the input trigger and external 357~MHz clock. Duiring the set sampling window the ADC outputs are processed, including a number of channel offsets and filters. The processed ADC~2 (Mixer) output is then split in to two, to create the two strands that become the DAC~1 and DAC~2 outputs. Note that as the Mixer is used directly (rather than \(\arcsin(\mathrm{Mixer})\)) this uses the small angle approximation. The effect of this is discussed in Section~\ref{ss:fontSmallAng}. If the diode (ADC~1) is being used in the calculation the ADC~2 output is also multiplied by 1/sqrt(ADC~1), with values taken from a lookup table rather than being calculated directly to save latency [REF]. Prior to being sent to the DACs the two output strands are multiplied by set gain factors and then can be delayed by a set amount of time. The two calculated DAC outputs are then connected to the signal inputs on the amplifiers, where they are amplified and eventually sent to the kickers to deflect the beam and correct the phase. Meanwhile the input trigger for the FONT5a board is used to derive the trigger for the amplifier, with a variable delay that can also be set in the DAQ.
-
-[TODO: latency of calculation (no. clock cycles)]
+The basic logic of the firmware is as follows. The ADC timing, sampling rate and start time, are determined by the input trigger and external 357~MHz clock. Duiring the set sampling window the ADC outputs are processed, including a number of channel offsets and filters. The processed ADC~2 (Mixer) output is then split in to two, to create the two strands that become the DAC~1 and DAC~2 outputs. Note that as the Mixer is used directly (rather than \(\arcsin(\mathrm{Mixer})\)) this uses the small angle approximation. The effect of this is discussed in Section~\ref{ss:fontSmallAng}. If the diode (ADC~1) is being used in the calculation the ADC~2 output is also multiplied by 1/sqrt(ADC~1), with values taken from a lookup table rather than being calculated directly to save latency [REF]. Prior to being sent to the DACs the two output strands are multiplied by set gain factors and then can be delayed by a set amount of time. The two calculated DAC outputs are then connected to the signal inputs on the amplifiers, where they are amplified and eventually sent to the kickers to deflect the beam and correct the phase. Meanwhile the input trigger for the FONT5a board is used to derive the trigger for the amplifier, with a variable delay that can also be set in the DAQ. The overall latency of the FONT5a board, from the arrival of the signal at the ADCs to the output of the calculated correction at the DACs, is around 22 clock cycles (at 357~MHz) or 60~ns [REF].
 
 \begin{landscape}
 \begin{figure}
@@ -61,15 +59,13 @@ The basic logic of the firmware is as follows. The ADC timing, sampling rate and
 
 All the parameters and controls that must be adjusted during the PFF system setup, and their respective values where relevant, are listed below for reference. These are only introduced in brief here, but parameters that are either non-trivial to derive or are critical for the PFF performance are described in more detail in later sections and chapters as indicated. The values given are in FONT units as they are set in the DAQ with each parameter expressed by up to a 14~bit number, and the size of each control chosen to give a reasonable degree of flexibility around the expected set point. 
 
-[TODO: what do the font values correspond to in actual times etc.?]
-
 \subsubsection{Input Timing}
 
 The following parameters must be adjusted in order to set the properties of the ADC sampling as desired:
 
-\textbf{Trig in delay:} The Trig in delay allows the start of the ADC sampling window to be delayed with respect to the arrival of the external trigger. Timing of the trigger and correction outputs to the amplifier (Trig out delay and K1/K2 delay) are relative to this delay, therefore changing the Trig in delay value does not effect the synchronisation of the correction output with the beam. The only requirement is to ensure that the full acquired upstream phase monitor signals arrive within the sampling window. A value of 2500 is typically used to achieve this. [TODO: Check value is correct.]
+\textbf{Trig in delay:} The Trig in delay allows the start of the ADC sampling window to be delayed with respect to the arrival of the external trigger. Timing of the trigger and correction outputs to the amplifier (Trig out delay and K1/K2 delay) are relative to this delay, therefore changing the Trig in delay value does not effect the synchronisation of the correction output with the beam. The only requirement is to ensure that the full acquired upstream phase monitor signals arrive within the sampling window, and that the trigger arrives early enough to account for the 10~\(\mathrm{\mu}\)s warmup time of the ADCs [REF]. The trigger is set to arrive 17~\(\mathrm{\mu}\)s before the beam [REF], so a trig in delay of around 2500 clock cycles of 357~MHz, or 7~\(\mathrm{\mu}\)s, is used to define the time at whcih the ADCs are turned on (with them then ready 10~\(\mathrm{\mu}\)s later when the beam arrives).
 
-\textbf{Enabled channels:} The FONT5a board has 9~ADCs but only two are usually needed for the PFF system (for the mixer and diode of Mon~1 connected to ADC1 and ADC2, with the other two monitors normally connected to the SiS digitisers, see Section~\ref{monDigitisers}). To avoid hitting the limits of the baud rate  [TODO: value?] of the RS232 port on the PC the remaining ADC channels can be disabled so their data is not transmitted.
+\textbf{Enabled channels:} The FONT5a board has 9~ADCs but only two are usually needed for the PFF system (for the mixer and diode of Mon~1 connected to ADC1 and ADC2, with the other two monitors normally connected to the SiS digitisers, see Section~\ref{monDigitisers}). To avoid hitting the limits of the baud rate  of the RS232 port on the PC the remaining ADC channels can be disabled so their data is not transmitted.
 
 \textbf{No. samples:} The length of the ADC sampling window, in number of samples, can also be varied. Typically 900~samples are used, covering a time window of \(2.5~\mathrm{\mu}\)s with the 357~MHz clock. If the signal from more than two ADCs is needed the number of samples can be reduced to avoid hitting the baud rate limit of the RS232 port on the PC, the only requirement is that the time window is long enough to encompass the full \(1.1~\mathrm{\mu}\)s beam pulse length.
 
@@ -77,7 +73,7 @@ The following parameters must be adjusted in order to set the properties of the 
 
 The following parameters must be correctly set in order to remove offsets and droop in the ADC outputs:
 
-\textbf{Trim DACs:} As mentioned in Section~\ref{s:fontSetup} the FONT5a board includes trim DACs in order to remove intrinsic voltage offsets in the output of each ADC. The trim DAC output is added to the ADC inputs, and each trim DAC value must be set correctly in the DAQ. For ADC1 (Diode) and ADC2 (Mixer) the Trim DAC values are 1650 and 1400 counts, respectively.
+\textbf{Trim DACs:} As mentioned in Section~\ref{s:fontSetup} the FONT5a board includes trim DACs in order to remove intrinsic voltage offsets in the output of each ADC. The trim DAC output is added to the ADC inputs, and each trim DAC value must be set correctly in the DAQ. For ADC1 (Diode) and ADC2 (Mixer) the Trim DAC values are 1650 and 1400 counts, corresponding to 8~mV and 7~mV [REF], respectively.
 
 \textbf{Filter Weights:} IIR filters are implemented in the FONT5a firmware in order to remove droop in the ADC response, see Section~\ref{ss:droopCorr}. The filter weights for each ADC can be adjusted in the DAQ. The correct values are 50 for ADC1 (Diode) and 56 for ADC2 (Mixer).
 
@@ -107,7 +103,7 @@ The following parameters control the timing of the DAC output signals:
 
 \textbf{Trig out enable:} The trigger sent to the amplifier can be enabled or disabled as required. Clearly the trigger must be enabled for any correction output to have an effect on the beam (the PFF correction output can be turned on with the amplifier trigger disabled for testing purposes).
 
-\textbf{Trig out delay:} The timing of the trigger sent to the amplifier can be delayed with respect to the start of the ADC sampling window. This must be adjusted so that the arrival of the \(1.1~\mathrm{\mu}\)s beam pulse at the kickers is aligned with the \(1.4~\mathrm{\mu}\)s time during which the amplifier is powered and the correction output can be applied [REF]. A value of 110 is typically used. The precise correction timing is set by the K1 and K2 delays below.
+\textbf{Trig out delay:} The timing of the trigger sent to the amplifier can be delayed with respect to the start of the ADC sampling window. This must be adjusted so that the arrival of the \(1.1~\mathrm{\mu}\)s beam pulse at the kickers is aligned with the \(1.4~\mathrm{\mu}\)s time during which the amplifier is powered and the correction output can be applied [REF]. The trig out delay can be varied between 0 and 127, where each unit corresponds to 26 clock cycles or around 70~ns [REF]. With a trig out delay of zero the trigger is output when the ADCs turn on, or around 10~\(\mathrm{\mu}\)s before the beam (see Input Timing above). The trigger to the amplifier must arrive around 1.5~\(\mathrm{\mu}\)s before the beam, so a trig out delay of 110 is typically used. The precise correction timing is set by the K1 and K2 delays below.
 
 \textbf{K1, K2 delay}: The K1 and K2 delay are used to fine tune the timing of the two correction outputs (DAC1/K1 for the first kicker and DAC2/K2 for the second kicker), and can be varied by up to 32 ADC clock cycles (2.8~ns per clock cycle at 357~MHz). The optimal delays are 7~clock~cycles for K1 and 7--8~clock~cycles for K2. The importance of the correction timing and derivation of these values is presented in Section~\ref{s:timing}.
 
@@ -248,8 +244,6 @@ The difference between the measured phase using these two reconstruction methods
 
 With larger offsets between the beam phase and the LO (large Mixer output) the small angle approximation is no longer valid and the difference between the two methods rises to up to \(35^\circ\). Most importantly the measured phase, and therefore the correction output, is no longer linearly dependent on the incoming beam phase when there is a large offset between the beam and LO phases. In the most extreme case, the measured phase difference between two pulses with a beam-LO phase offset of \(80^\circ\) and \(90^\circ\) would only be \(1^\circ\) with the FONT algorithm instead of the expected \(10^\circ\), for example. In turn, the difference in the correction applied to the two pulses would only be \(1^\circ\) instead of \(10^\circ\), degrading the achievable corrected phase jitter.
 
-[TODO: Change legend labels to FONT and FULL, rather than FONT and SiS. And beam-LO rather than Beam-Shifter phase offset]
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseRecDiff}
@@ -292,7 +286,7 @@ The description of the amplifier here represents the version of the amplifier th
 \begin{figure}
   \centering
   \includegraphics[width=0.9\hsize]{Figures/commissioning/AmplifierPanelPic}
-  \caption{Front panel of the amplifier. Inputs to the amplifier are highlighted in green, drive outputs in red and monitoring outputs in blue. Inputs to the control module are the trigger (T) and the two DAC outputs from the FONT5a board used to determine the drive to the left (L) and right (R) sides. Each side of the amplifier has two pairs of drive outputs and terminators, A and B. The signal returning to each of the terminators can be observed on their corresponding monitoring outputs. The monitoring output on the control module (ON) shows the 1.4~\(\mathrm{\mu}\)s time during which the amplifiers are able to provide their output. Not highlighted in the figure are the 24~V, 1.1~A power connector at the top of the control module, and also the three [TODO: what type?] connectors used to communicate between the control module and drive modules.}
+  \caption{Front panel of the amplifier. Inputs to the amplifier are highlighted in green, drive outputs in red and monitoring outputs in blue. Inputs to the control module are the trigger (T) and the two DAC outputs from the FONT5a board used to determine the drive to the left (L) and right (R) sides. Each side of the amplifier has two pairs of drive outputs and terminators, A and B. The signal returning to each of the terminators can be observed on their corresponding monitoring outputs. The monitoring output on the control module (ON) shows the 1.4~\(\mathrm{\mu}\)s time during which the amplifiers are able to provide their output. Not highlighted in the figure are the 24~V, 1.1~A power connector at the top of the control module, and also the three custom connectors used to communicate between the control module and drive modules.}
   \label{f:AmplifierPanelPic}
 \end{figure}
 \end{landscape}
@@ -398,12 +392,7 @@ As for the mean output voltage, the second way variations in the amplifier outpu
   \label{f:ampClosureFlatness}
 \end{figure}
 
-\newsection{daqSigProc}{Data Acquisition and Signal Processing}
-
-\subsection{SiS Digitiser Setup}
-\label{ss:sisSetup}
-
-(already discussed in ph mon chapter)
+\newsection{daqSigProc}{Data Acquisition}
 
 \subsection{Acquisition Tools}
 \label{ss:acqTools}
@@ -412,13 +401,6 @@ As for the mean output voltage, the second way variations in the amplifier outpu
 \label{ss:monTools}
 
 Online display
-
-\subsection{Time Alignment of Signals}
-\label{ss:timeAlignment}
-
-\subsection{Definition of Zero Phase}
-\label{ss:zeroPhase}
-
 
 
 \newsection{constKicks}{Kicker and Optics Performance Verification}
@@ -536,18 +518,12 @@ The full MADX orbit propagated through all elements is shown, with the eight rea
 
 The true explanation for the non-closed orbit is that the quadrupole strengths used in the machine setup are not exactly nominal. Although every effort has been made to keep the TL2 optics as close to nominal as possible, particularly inside the chicane, it is an extremely sensitive area for the setup of CTF3 and beam transport in to the CLEX area downstream of TL2 (including the location of the downstream phase monitor in the TBL line) is always difficult. Minor modifications have therefore been necessary in order to achieve full beam transmission to the downstream area, both for PFF and other experiments at CTF3. The largest changes have been made to the four quadrupoles following the chicane but one quadrupole inside the chicane, CC.IQFL0730 (just prior to the 2nd kicker) has a set value \(10\%\) lower than the nominal optics, as well as differences up to \(2\%\) in the other quadrupoles. Using the real quadrupole strengths used in the machine gives the result shown in Figure \ref{f:orbClosureVsQuadModel}. In this case the agreement between the model and the data is also extremely good after the chicane. It may still be possible to compensate for these differences by outputting different voltages to each kicker and this will be investigated. Alternatively, a completely nominal optics can be set in the chicane purely for the purposes of verifying orbit closure, reverting back to non-nominal optics and closure if needed to achieve good beam transmission for normal PFF operation.
 
-[TODO: Not enough detail r.e. why beam transport there is difficult etc.?]
-
-[TODO: Do have data with different ratios of kicker strengths. Can analyse to see effect on closure. Considering quad currents don't think it adds anything to discussion here, though.]
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
   \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data, nominal model and model taking in to account the quadrupole currents in the real machine setup.}
   \label{f:orbClosureVsQuadModel}
 \end{figure}
-
-[Comment for Piotr: With these quad currents also expect to see some dispersion leaking  out of the chicane. Up to 0.3 m in girder 9.]
 
 \newsection{timing}{Correction Output Timing}
 
@@ -736,7 +712,7 @@ Figure~\ref{f:relDelay_sim} shows a simulated example of the expected effect of 
   \label{f:relDelay_sim}
 \end{figure}
 
-By varying the relative timing of the two correction outputs on the FONT5a board (K1 and K2 delay) and using a BPM after the TL2 chicane to measure the size of the peaks at the start and end of the pulse resulting from the offset kicks (in the same way as Figure~\ref{f:relDelay_sim}) the optimal relative delay can be determined. The optimal relative delay is the point that minimises the size of the peaks on the rising/falling edge of the pulse, with the peak magnitude  approximately linearly dependent on the delay. Figure~\ref{f:relDelay_traces} shows the result of doing this, using a constant DAC output from the FONT5a board applied across a 168~ns portion of the pulse. The horizontal position in a BPM after the TL2 chicane is plotted for relative K2 delays ranging between -10 (K1 output delayed with respect to K2) to +10 (K2 output delayed with respect to K1) clock~cycles. Aside from the asymmetry between the size of the peaks at the start and end of the pulse the result is as expected from the example previously discussed. [TODO: Why asymmetry? Differences in output along pulse?]. Note the non-zero position offset in the central part of the pulse. Based on the orbit closure results in Section~\ref{ss:orbitClosure} this is predominantly due to optics differences leading to a non-closed orbit, rather than the small difference in amplifier output voltage to each kicker.
+By varying the relative timing of the two correction outputs on the FONT5a board (K1 and K2 delay) and using a BPM after the TL2 chicane to measure the size of the peaks at the start and end of the pulse resulting from the offset kicks (in the same way as Figure~\ref{f:relDelay_sim}) the optimal relative delay can be determined. The optimal relative delay is the point that minimises the size of the peaks on the rising/falling edge of the pulse, with the peak magnitude  approximately linearly dependent on the delay. Figure~\ref{f:relDelay_traces} shows the result of doing this, using a constant DAC output from the FONT5a board applied across a 168~ns portion of the pulse. The horizontal position in a BPM after the TL2 chicane is plotted for relative K2 delays ranging between -10 (K1 output delayed with respect to K2) to +10 (K2 output delayed with respect to K1) clock~cycles. Aside from the asymmetry between the size of the peaks at the start and end of the pulse the result is as expected from the example previously discussed. Note the non-zero position offset in the central part of the pulse. Based on the orbit closure results in Section~\ref{ss:orbitClosure} this is predominantly due to optics differences leading to a non-closed orbit, rather than the small difference in amplifier output voltage to each kicker.
 
 \begin{figure}
   \centering
@@ -745,7 +721,7 @@ By varying the relative timing of the two correction outputs on the FONT5a board
   \label{f:relDelay_traces}
 \end{figure}
 
-Figure~\ref{f:relDelay_fit} then shows the peak beam offset in the BPM versus the relative K2 delay using the falling edge of the pulse. The peak beam offset is defined as the difference between the maximum and minimum beam position after the chicane between sample 458 and 477 (as seen in Figure~\ref{f:relDelay_traces} [TODO: Add vertical lines to show ranges?]). As the K2 delay approaches the optimal value the difference in beam position in this range converges to the 0.3~mm offset in the flat central part of the kicked pulse. The point of intersection between the two linear fits shown (one for the points with a positive peak position and the other for points with a negative peak) gives the optimal relative K2 offset to be \(0.1\pm0.5\)~clock~cycles. Repeating the procedure for the peaks at the rising edge of the pulse gives a result of \(1.9\pm2.0\)~clock~cycles, and the two results combine to give an optimal value of \(0.5\pm0.6\)~clock~cycles.
+Figure~\ref{f:relDelay_fit} then shows the peak beam offset in the BPM versus the relative K2 delay using the falling edge of the pulse. The peak beam offset is defined as the difference between the maximum and minimum beam position after the chicane between sample 458 and 477 (as seen in Figure~\ref{f:relDelay_traces}). As the K2 delay approaches the optimal value the difference in beam position in this range converges to the 0.3~mm offset in the flat central part of the kicked pulse. The point of intersection between the two linear fits shown (one for the points with a positive peak position and the other for points with a negative peak) gives the optimal relative K2 offset to be \(0.1\pm0.5\)~clock~cycles. Repeating the procedure for the peaks at the rising edge of the pulse gives a result of \(1.9\pm2.0\)~clock~cycles, and the two results combine to give an optimal value of \(0.5\pm0.6\)~clock~cycles.
 
 \begin{figure}
   \centering
