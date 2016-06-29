@@ -4,17 +4,9 @@ This is the introductory text.
 
 \newsection{opticsIntro}{Introduction to Optics}
 
-basics of a lattice: dipoles, quadrupoles, fodo cell. quick mention of use of sextupoles etf. correctors
+A basic beam line consists of focusing magnets (quadrupoles) and bending magnets (dipoles) connected by straight sections. A practical ``real world'' beam line must also include many diagnostic devices (such as beam position monitors, or BPMs) and additional elements (such as magnetic correctors) to be able to measure and remove the effects of small misalignments and imperfections in the beam line. The arrangement of devices along the line is referred to as the lattice. The collective settings (strengths) of each focusing element and the beam conditions they produce are referred to as the machine optics. The performance of the PFF system depends heavily on the lattice and optics of the correction chicane in the TL2 line (discussed in this chapter), and also in other sections at CTF3 (discussed in Chapter~\ref{c:phasePropagation}). This section presents basic aspects of lattice design and optics to introduce the terms used in the remainder of the thesis.
 
-twiss parameters: beta function, alpha, emittance
-
-dispersion
-
-matrix formalism: coordinates, r56
-
-A basic beam line consists of focusing magnets (quadrupoles) and bending magnets (dipoles) connected by straight sections. A practical ``real world'' beam line must also include many diagnostic devices (such as beam position monitors, or BPMs) and additional elements (such as magnetic correctors) to be able to measure and remove the effects of small misalignments and imperfections in the beam line. The arrangement of devices along the line is referred to as the lattice. The collective settings (strengths) of each focusing element and the beam conditions they produce are referred to as the machine ``optics''. The performance of the PFF system depends heavily on the lattice and optics of the correction chicane in the TL2 line (discussed in this chapter), and also in other sections at CTF3 (discussed in Chapter~\ref{c:phasePropagation}). This section presents basic aspects of lattice design and optics to introduce the terms used in the remainder of the thesis.
-
-Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\) that defines how it transforms the initial coordinates of a particle [REF]:
+Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\) that defines how it transforms the initial coordinates of a particle in the beam [REF]:
 \begin{equation}
 \vec{x_f} = \mathbf{R}\vec{x_i}
 \end{equation}
@@ -32,27 +24,37 @@ R_{61} & R_{62} & R_{63} & R_{64}  & R_{65} & R_{66}\\
 \end{array} \right)
 \left( \begin{array}{c} x_i \\ x_i' \\ y_i \\ y_i' \\ t_i \\ \Delta p_i/p_0 \end{array} \right)
 \end{equation}
-In the transverse plane the vectors \(\vec{x}\) contain the horizontal and vertical offsets (\(x\), \(y\)) and divergences (\(x'\), \(y'\)) of the particle with respect to the nominal or reference orbit. This defines a curvilinear set of coordinates that follows the trajectory of the beam through bends, for example [REF]. The final two longitudinal coordinates are the time offset (\(t\)) and momentum offset \(\Delta p_i/p_0\) of the particle with respect to the reference or ideal particle. The time \(t\) is analogus to the phase of interest for the PFF system. The coefficients \(R_{ij}\) of the \(6\times6\) transfer matrix \(\mathbf{R}\) define how the final value of the \(i^{\mathrm{th}}\) coordinate after passing through the element is influenced by the initial value of the \(j^{\mathrm{th}}\) coordinate prior to the element.
+In the transverse plane the vectors \(\vec{x}\) contain the horizontal and vertical offsets (\(x\), \(y\)) and divergences (\(x' = \mathrm{d}x/\mathrm{d}s\), \(y' = \mathrm{d}y/\mathrm{d}s\), where \(s\) is the longitudinal position along the beam line). This parameters (\(x, y, s\)) define a curvilinear set of coordinates that measure the position of the particle with respect to the nominal or reference orbit, following the trajectory of the beam through bending magnets, for example [REF]. The final two longitudinal coordinates are the time offset (\(t\)) and momentum offset (\(\Delta p_i/p_0\)) of the particle with respect to the reference or ideal particle. The time \(t\) is analogus to the phase of interest for the PFF system. The coefficients \(R_{ij}\) of the \(6\times6\) transfer matrix \(\mathbf{R}\) define how the final value of the \(i^{\mathrm{th}}\) coordinate after passing through the element is influenced by the initial value of the \(j^{\mathrm{th}}\) coordinate prior to the element.
+
+The simplest and most widely used type of accelerator lattice is a FODO cell, consisting of an equally spaced focusing and defocusing quadrupole with equal strength, as shown in Figure[REF]. For small horizontal or vertical offsets from the quadrupole centre the magnetic field linearly increases with the offset [REF]. The effect of a particle travelling through a quadrupolar field is analogus to a focusing lens with a focal length \(1/kl\) where \(l\) is the length of the quadrupole and \(k\) is the strength of the quadrupole dependent on its design [REF]. Using the thin lens approximation the transfer matrix for a quadrupole is defined as [REF]:
+\begin{equation}
+\mathbf{R_{quad}}
+=
+\left( \begin{array}{cccccc} 
+1 & 0 & 0 & 0 & 0 & 0\\
+\pm kl & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & \mp kl & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+\end{array} \right)
+\end{equation}
+The final horizontal divergences of a particle after traversing a quadrupole, using the above matrix, are \(x_f' = x_i' \pm klx_i\) and \(y_f' = y_i' \mp kly_i\). A quadrupole that focuses the beam in one plane therefore defocuses the beam in the other transverse plane. In a FODO cell a horizontally focusing quadrupole and horizontally defocusing quadrupole are used together to give a net focusing effect in both planes [REF]. The complete effect of a FODO cell on a particle can be determined by multiplying the transfer matrices of each element:
+\begin{equation}
+\mathbf{R_{FODO}} = \mathbf{R_{F} \times R_{drift} \times R_{D}}
+\end{equation}
+\begin{equation}
+\vec{x_f} = \mathbf{R_{FODO}}\vec{x_i}
+\end{equation}
+Where \(R_{F}\) and \(R_{D}\) are the transfer matrices of the focusing and defocusing quadrupoles respectively and \(R_{drift}\) is the transfer matrix for the drift space between the quadrupoles. 
+
+The same approach can be used to construct the transfer matrix for any complete beam line, and several of the transfer matrix coefficients are of particular interest for the PFF system both in the TL2 and TL1 transfer lines at CTF3. These will be explained in more detail later in this chapter but include mostly the coefficients related to horizontally deflecting (or ``kicking'') the beam, so the \(R_{2j}\) and \(R_{i2}\) terms including the horizontal divergence, and the coefficients related to the final beam phase, so the \(R_{5j}\) terms. At CTF3 optics and transfer matrices are calculated using a MADX model of the machine [REF]. MADX is one of the leading tools avilable for the design and simulation of particle accelerators [REF]. All the optics terms presented in this thesis use MADX coordinates and units [REF]. In some cases these are slightly modified from the coordinates defined above, and these differences are explained later when relevant.
+
+The previous discussion shows how the propagation of a single particle through a beam line can be modelled. The matrix formalism above can be adjusted to describe the trajectories of many particles by replacing the column vectors \(\vec{x}\) with matrices of many column vectors describing each particle. However, to understand the properties of a complete beam it is more useful to consider the equations of motion that apply to each particle. 
 
 \begin{equation}
-\left( \begin{array}{c} x_f \\ x_f' \\ y_f \\ y_f' \end{array} \right)
-=
-\left( \begin{array}{cccc} R_{11} & R_{12} & R_{13} & R_{14} \\ R_{21} & R_{22} & R_{23} & R_{24} \\ R_{31} & R_{32} & R_{33} & R_{34} \\ R_{41} & R_{42} & R_{43} & R_{44} \end{array} \right)
-\left( \begin{array}{c} x_i \\ x_i' \\ y_i \\ y_i' \end{array} \right)
+x_i(s) = \sqrt{\beta_x(s)\epsilon_x}\cos[\mu_x(s) + \delta_{xi}]
 \end{equation}
-
-The pole shape and field inside a quadrupole magnet is shown in Figure~[REF]. For small horizontal or vertical offsets from the quadrupole centre the magnetic field linearly increases with the offset [REF]. The effect of a particle travelling through a quadrupolar field is analogus to a focusing lens with a focal length \(1/kl\) where \(l\) is the length of the quadrupole and \(k\) is the strength of the quadrupole dependent on its design [REF]. 
-
-
-figure of quadrupole poles/field
-
-Coordinates - just transverse initially?
-
-Matrix formalism (single particle)
-
-Quadrupole matrix - focusing one plane, defocusing other plane
-
-The simplest and most widely used type of accelerator lattice is a FODO cell, consisting of equally spaced focusing and defocusing quadrupoles with equal strength.
 
 figure of FODO cell structure
 
