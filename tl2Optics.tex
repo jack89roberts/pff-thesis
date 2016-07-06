@@ -123,14 +123,15 @@ Other features along the TL2 line that are important for the derivation of optic
 
 Due to building and cost constraints the PFF prototype had to make use of the pre-existing layout of the TL2 horizontal chicane, with only minor modifications possible to accommodate the PFF hardware. These changes are highlighted in yellow in Figure~\ref{f:newTL2Lattice}.
 
-As the chicane was already densely packed with quadrupoles and other devices the integration of the two kickers was not straightforward. To maintain the functionality of the lattice quadrupoles could not be removed, and thus instead the kickers have been installed inside wide aperture `H-type' quadrupoles [REF]. Two `L-type' quadrupoles (now CC.QDL0330 and CC.QDL0370) from the horizontal chicane were swapped with two `H-type' quadrupoles (now CC.QDH0490 and CC.QDH0790) from the vertical chicane. The two PFF kickers, CC.KHD0480 and CC.KHD0780, are then installed inside the aperture of these quadrupoles, prior to the first and last dipole of the horizontal chicane. In addition, two magnetic correctors (now CC.DHF0465 and CC.DHF0765) were installed around the PFF kickers to facilitate a complementary, large range but low bandwidth, slow phase correction [REF]. A schematic of the installation of one of the kickers inside the quadrupole and corrector is shown in Figure~[REF].
+As the chicane was already densely packed with quadrupoles and other devices the integration of the two kickers was not straightforward. To maintain the functionality of the lattice quadrupoles could not be removed, and thus instead the kickers have been installed inside wide aperture `H-type' quadrupoles [REF]. Two `L-type' quadrupoles (now CC.QDL0330 and CC.QDL0370) from the horizontal chicane were swapped with two `H-type' quadrupoles (now CC.QDH0490 and CC.QDH0790) from the vertical chicane. The two PFF kickers, CC.KHD0480 and CC.KHD0780, are then installed inside the aperture of these quadrupoles, prior to the first and last dipole of the horizontal chicane. In addition, two magnetic correctors (now CC.DHF0465 and CC.DHF0765) were installed around the PFF kickers to facilitate a complementary, large range but low bandwidth, slow phase correction [REF]. A schematic of the installation of one of the kickers inside the quadrupole and corrector is shown in Figure~[REF]. The kicker CC.KHD0480 will also be referred to as the first kicker (or K1), and CC.KHD0780 as the second kicker (or K2).
 
-Apart from the quadrupoles and correctors two BPMs (now CC.BPI0435 and CC.BPI0735) had to be moved slightly to vacate the area now occupied by the kickers. Finally, a slot near the start of TL2 (CC.PHM0245) was reserved for the installation of an additional phase monitor to verify the beam phase prior to the correction. Eventually this was not necessary and has not been pursued as the 2~cm aperture of the phase monitors (Section~\ref{s:phaseMonDesign}) compared to the [4 or 10?~cm] aperture of the neighbouring beam pipe would have created beam setup difficulties for normal operation at CTF3 [REF].
+Apart from the quadrupoles and correctors two BPMs (now CC.BPI0435 and CC.BPI0735) had to be moved slightly to vacate the area now occupied by the kickers. Finally, a slot near the start of TL2 (CC.PHM0245) was reserved for the installation of an additional phase monitor to verify the beam phase prior to the correction. Eventually this was not necessary and has not been pursued as the 2~cm aperture of the phase monitors (Section~\ref{s:phaseMonDesign}) compared to the 4~cm aperture of the neighbouring beam pipe would have created beam setup difficulties for normal operation at CTF3 [REF].
 
 [TODO: pictures/diagram of kickers in quadrupole]
 
 \newsection{tl2OpticsReqs}{TL2 Optics Constraints}
 
+To take in to account the changes made to the TL2 lattice new optics were needed. This section summarises the various optics constraints that must be met in TL2. These can be split in to two types -- the nominal optics constraints, required to recover the same (or similar) beam conditions as before the changes, and the new optics constraints for operation of the PFF system, required to create the desired phase shifting behaviour in the chicane.
 
 \subsection{Nominal Optics}
 \label{ss:nominalOpticsReqs}
@@ -155,6 +156,32 @@ r52
 r12
 
 r22
+
+For zero length kickers, no quadrupole -- R22 = \(\pm1\), R12=0 works (R11 and R21 not needed as x=0 for zero length kicker). For non-zero length kicker with quadrupole around things more complicated -> MADX.
+
+exit of first kicker to entrance of 2nd kicker:
+
+\(x_{K2} = R_{11}x_{K1} + R_{12}x_{K1}'\)
+
+\(x_{K2}' = R_{21}x_{K1} + R_{22}x_{K1}'\)
+
+position end 1st kicker can be related to kick
+
+\(x_{K1} = \alpha x_{K1}'\)
+
+then equations above become
+
+\(x_{K2} = \left(R_{11} + \frac{R_{12}}{\alpha}\right)x_{K1}\)
+
+\(x_{K2}' = (\alpha R_{21} + R_{22})x_{K1}'\)
+
+want \(x_{K2} = \mp x_{K1}\) and \(x_{K2}' = \pm x_{K1}'\), so:
+
+\(R_{11} + \frac{R_{12}}{\alpha} = \mp 1\)
+
+\(\alpha R_{21} + R_{22} = \pm 1\)
+
+now many possible solutions. This doesn't consider quadrupole around 2nd kicker which is more difficult to model (split in to parts) and adds a perturbation to requirements for x, x' to be same at entrance to 2nd kicker as entrance to 1st kicker.
 
 \newsection{opticsMeas}{TL2 Optics Measurements}
 
