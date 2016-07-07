@@ -150,11 +150,25 @@ long drifts
 \subsection{PFF Optics}
 \label{ss:pffOpticsReqs}
 
-The additional PFF optics constraints all place requirements on the transfer matrix coefficients between the two kickers, from the exit of the first kicker to the entrance of the second kicker.
+All the additional PFF optics constraints place requirements on the transfer matrix coefficients between the two kickers, from the exit of the first kicker to the entrance of the second kicker. There are two sets of constraints, one to maximise the correction range of the PFF system and the other to ensure the PFF system does not degrade the orbit stability of the beam after the chicane.
 
-r52 between kickers
+\subsubsection{Correction Range}
 
-The PFF system should not change the beam orbit after the chicane, which means the beam position and divergence after the second kicker must be independent of the applied kicks. In other words, the second kicker must close the horizontal orbit bump created by the first kicker. To understand the additional optics constraints this places the position, \(x_{K2}\), and divergence \(x_{K2}'\) of the beam at the entrance to the second kicker will be considered first. These can be expressed as:
+The PFF system clearly requires the path length between the two kickers to depend on the applied kick. This difference in path length dependent on the voltage applied to the kickers is what shifts the time or phase of the beam to form the correction. The transfer matrix coefficient that relates the time variable to the deflection induced by the kickers is \(R_{52}\):
+\begin{equation}
+t_{K2} = t_{K1} + R_{52}x_{K1}'
+\end{equation}
+Where \(t_{K1}\) and \(t_{K2}\) are the time offset of the particle at the exit of the first kicker and at the entrance to the second kicker respectively. \(x_{K1}\) is the divergence at the exit of the first kicker resulting from the applied kick. MADX uses units of metres for its `time' variable [REF]. To convert these distances in to 12~GHz degrees they must be multiplied by the constant factor \(360/\lambda_{\mathrm{12GHz}}\), where \(\lambda_{\mathrm{12GHz}} = 2.5\)~cm is the 12~GHz wavelength. Directly in terms of phase (in degrees) the equation above therefore becomes:
+\begin{equation}
+\phi_{K2} = \phi_{K1} + R_{52}\left(\frac{360}{\lambda_{\mathrm{12GHz}}}\right)x_{K1}'
+\end{equation}
+Where \(\phi_{K2}\) is the phase at the entrance to the second kicker (the corrected phase) and \(\phi_{K1}\) is the initial uncorrected phase at the exit of the first kicker. The maximum value of \(x_{K1}'\) is fixed by the peak voltage output from the kicker amplifiers and the design of the kickers themselves. To obtain the largest possible correction range for the PFF system given the parameters of the hardware, the \(R_{52}\) transfer matrix coefficient should be as large as possible. For example, with \(R_{52} = 1\)~m and a maximal kick of \(x_{K1}' = \pm 1\)~mrad, the correction range of the PFF system would be \(\pm 14.4\)~degrees.
+
+The path length difference in the chicane largely results from differing trajectories in the dipoles. In this way it is somewhat analogus to the dispersion, which describes the energy dependent difference in beam orbit after dipoles. This has the unfortunate consequence of leading to optics with high \(R_{52}\) values also tending to have high peak dispersion values in the chicane. The PFF optics must therefore be a compromise that achieves a reasonable correction range whilst keeping the dispersion small enough to avoid beam losses in the chicane.
+
+\subsubsection{Orbit Closure}
+
+The PFF system should not change the beam orbit after the chicane, which means the beam position and divergence after the second kicker must be independent of the applied kicks. In other words, the second kicker must close the horizontal orbit bump created by the first kicker. To understand the further constraints this places on the optics the position, \(x_{K2}\), and divergence \(x_{K2}'\) of the beam at the entrance to the second kicker will be considered first. These can be expressed as:
 \begin{eqnarray}
 x_{K2} &=& R_{11}x_{K1} + R_{12}x_{K1}' \\
 x_{K2}' &=& R_{21}x_{K1} + R_{22}x_{K1}'
@@ -180,7 +194,7 @@ Comparing these two expressions to the previously derived equations for \(x_{K2}
 R_{11} + \frac{R_{12}}{\alpha} &=& -1  \label{e:orbClosConst1} \\
 \alpha R_{21} + R_{22} &=& +1 \label{e:orbClosConst2}
 \end{eqnarray}
-There are many possible solutions to these expressions, with the simplest example being \(R_{11} = 1\), \(R_{12} = 0\), \(R_{21} = 0\) and \(R_{22} = 1\). However, the optics matching (Section~\ref{s:matchedOptics}) allows the quadrupoles CC.QDH0490 and CC.QDH0790 to have different strengths. MADX is then used to model the actual beam orbit in the chicane and the figure of merit is for the simulated orbit to be closed after the second kicker, rather than for the above constraints to be met. Nevertheless, the optics eventually created do satisfy Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} within several percent [REF].
+There are many possible solutions to these expressions, with the simplest example being \(R_{11} = -1\), \(R_{12} = 0\), \(R_{21} = 0\) and \(R_{22} = 1\). However, the optics matching (Section~\ref{s:matchedOptics}) allows the quadrupoles CC.QDH0490 and CC.QDH0790 to have different strengths. MADX is then used to model the actual beam orbit in the chicane and the figure of merit is for the simulated orbit to be closed after the second kicker, rather than for the above constraints to be met. Nevertheless, the optics eventually created do satisfy Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} within several percent [REF].
 
 %First assuming a simplified case of zero length kickers (with only the divergence changing in the kicker and not the beam position), the position \(x_{K2}\), and divergence, \(x_{K2}'\), of the beam at the entrance to the second kicker can be expressed as:
 %\begin{eqnarray}
