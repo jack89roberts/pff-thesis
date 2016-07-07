@@ -133,21 +133,35 @@ Apart from the quadrupoles and correctors two BPMs (now CC.BPI0435 and CC.BPI073
 
 To take in to account the changes made to the TL2 lattice new optics were needed. This section summarises the various optics constraints that must be met in TL2. These can be split in to two types -- the nominal optics constraints, required to recover the same (or similar) beam conditions as before the changes, and the new optics constraints for operation of the PFF system, required to create the desired phase shifting behaviour in the chicane.
 
-\subsection{Nominal Optics}
+\subsection{Nominal Optics Constraints}
 \label{ss:nominalOpticsReqs}
+
+
+
+\subsubsection{Dispersion}
+
+The trajectory of a particle through a dipole depends on its energy, with lower energy particles following a smaller radius of curvature and high energy particles a larger radius. After a dipole the orbit of a particle though the following elements therefore depends on its energy. This effect is characterised using the horizontal and vertical dispersion, \(D_x\) and \(D_y\), which are defined as follows (considering only the energy component of the beam orbit):
+\begin{eqnarray}
+x(s) &=& D_x(s)\left(\frac{\Delta p}{p}\right) \\
+y(s) &=& D_y(s)\left(\frac{\Delta p}{p}\right)
+\end{eqnarray}
+The dispersions \(D_x(s)\) and \(D_y(s)\) vary along the lattice and are equivalent to the transfer matrix coefficients \(R_{16} = D_x\) and \(R_{36} = D_y\). 
+
+Optics are usually created so that there is no dispersion (\(D_{x} = D_{y} = 0\)) in straight sections. However, inside chicanes and rings the dispersion can never always be zero. To give zero dispersion in the straight sections the dispersion must therefore be closed at the exit of all bending sections. Dispersion closure means that both the dispersion and its derivative (\(D_x' = \mathrm{d}D_x/\mathrm{d}s\), and \(D_y' = \mathrm{d}D_y/\mathrm{d}s\)) are zero at the exit from the chicane or ring. In TL2 this condition applies after the bend CC.BHH0200 at the start of the line and at the exit of the horizontal chicane (CC.BHG0800) for the horizontal dispersion, and at the exit of the vertical chicane (CC.BVB0400) for the vertical dispersion.
+
+Within the bending sections the magnitude of the dispersion should be kept as small as possible. At CTF3 there can be peak-to-peak energy offsets at around the \(\pm1\%\) level [REF]. Dispersion is then usually the dominant contribution to the beam size, with a dispersion of 1~m giving excursions up to 1~cm in the beam orbit, for example. The diameter of the beam pipe in bending sections at CTF3 is 10~cm in most cases, as opposed to 4~cm in straight sections, in order to minimise the effects of dispersion dependent beam size growth on the beam transport [REF]. However, the second kicker installed in the chicane for the PFF system (CC.KHD0780) only has the normal 4~cm aperture (2~cm radius).  Dispersion around the second kicker must therefore be kept well below 2~m to avoid losing a small fraction of off-energy particles on the kicker strips.
+
+\subsubsection{Twiss Functions}
+beta functions
 
 matching from CR and in to CLEX
 
-dispersion
-In addition the coefficients \(R_{16}\) and \(R_{36}\) are of critical importance for optics at CTF3 and they are usually referred to as the horizontal and vertical dispersion respectively. The dispersion relates the transverse position of a particle to its energy
-
-beta functions
-
-r56
-
 long drifts
 
-\subsection{PFF Optics}
+
+\subsubsection{R56}
+
+\subsection{PFF Optics Constraints}
 \label{ss:pffOpticsReqs}
 
 All the additional PFF optics constraints place requirements on the transfer matrix coefficients between the two kickers, from the exit of the first kicker to the entrance of the second kicker. There are two sets of constraints, one to maximise the correction range of the PFF system and the other to ensure the PFF system does not degrade the orbit stability of the beam after the chicane.
