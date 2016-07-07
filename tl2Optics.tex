@@ -150,38 +150,49 @@ long drifts
 \subsection{PFF Optics}
 \label{ss:pffOpticsReqs}
 
-between kickers: 
-r52
+The additional PFF optics constraints all place requirements on the transfer matrix coefficients between the two kickers, from the exit of the first kicker to the entrance of the second kicker.
 
-r12
+r52 between kickers
 
-r22
+The PFF system should not change the beam orbit after the chicane, which means the beam position and divergence after the second kicker must be independent of the applied kicks. In other words, the second kicker must close the horizontal orbit bump created by the first kicker. To understand the additional optics constraints this places the position, \(x_{K2}\), and divergence \(x_{K2}'\) of the beam at the entrance to the second kicker will be considered first. These can be expressed as:
+\begin{eqnarray}
+x_{K2} &=& R_{11}x_{K1} + R_{12}x_{K1}' \\
+x_{K2}' &=& R_{21}x_{K1} + R_{22}x_{K1}'
+\end{eqnarray}
+Where \(x_{K1}\) and \(x_{K1}'\) are the position and divergence at the exit of the first kicker, and \(R_{11}\), \(R_{12}\), \(R_{21}\) and \(R_{22}\) are transfer matrix coefficients for the optics between the exit of the first kicker and the entrance to the second kicker. The beam position at the exit of the first kicker is proportional to the applied kick:
+\begin{equation}
+x_{K1} = \alpha x_{K1}'
+\end{equation}
+Here \(\alpha\) is a constant that depends on the properties of the kicker and also on the strength of the quadrupole CC.QDH0490 within which the kicker is installed (Section~\ref{ss:tl2PFFIntegration}). Substituting this expression in to the equations for \(x_{K2}\) and \(x_{K2}'\) gives:
+\begin{eqnarray}
+x_{K2} &=& \left(R_{11} + \frac{R_{12}}{\alpha}\right)x_{K1} \\
+x_{K2}' &=& (\alpha R_{21} + R_{22})x_{K1}'
+\end{eqnarray}
+As stated \(x_{K2}\) and \(x_{K2}'\) are defined above at the entrance to the second kicker. The requirement for the PFF chicane optics is that the position and divergence at the exit of the second kicker are zero independent of the applied kicks. However, a derivation of the exact expression for the optics requirements between the kickers in order to close the orbit at the exit of the second kicker is complicated by the fact that the quadrupole around the second kicker, CC.QDH0790, can have a different strength to the quadrupole around the first kicker. 
 
-For zero length kickers, no quadrupole -- R22 = \(\pm1\), R12=0 works (R11 and R21 not needed as x=0 for zero length kicker). For non-zero length kicker with quadrupole around things more complicated -> MADX.
+For the purpose of the discussion here the simplified case where CC.QDH0790 has the same strength but opposite polarity (focuses in the opposite plane) as CC.QDH0490 will be considered. The ideal case where the two kickers can be powered with the same magnitude voltage but opposite polarity is also assumed. With these conditions, the second quadrupole/kicker effectively have precisely the opposite effect on the beam as the first quadrupole/kicker. To close the orbit after the second kicker the position and divergence at the entrance to the second kicker must therefore meet the following criteria:
+\begin{eqnarray}
+x_{K2} &=& -x_{K1} \\
+x_{K2}' &=& x_{K1}'
+\end{eqnarray}
+Comparing these two expressions to the previously derived equations for \(x_{K2}\) and \(x_{K2}'\) then yields the following optics constraints:
+\begin{eqnarray}
+R_{11} + \frac{R_{12}}{\alpha} &=& -1  \label{e:orbClosConst1} \\
+\alpha R_{21} + R_{22} &=& +1 \label{e:orbClosConst2}
+\end{eqnarray}
+There are many possible solutions to these expressions, with the simplest example being \(R_{11} = 1\), \(R_{12} = 0\), \(R_{21} = 0\) and \(R_{22} = 1\). However, the optics matching (Section~\ref{s:matchedOptics}) allows the quadrupoles CC.QDH0490 and CC.QDH0790 to have different strengths. MADX is then used to model the actual beam orbit in the chicane and the figure of merit is for the simulated orbit to be closed after the second kicker, rather than for the above constraints to be met. Nevertheless, the optics eventually created do satisfy Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} within several percent [REF].
 
-exit of first kicker to entrance of 2nd kicker:
-
-\(x_{K2} = R_{11}x_{K1} + R_{12}x_{K1}'\)
-
-\(x_{K2}' = R_{21}x_{K1} + R_{22}x_{K1}'\)
-
-position end 1st kicker can be related to kick
-
-\(x_{K1} = \alpha x_{K1}'\)
-
-then equations above become
-
-\(x_{K2} = \left(R_{11} + \frac{R_{12}}{\alpha}\right)x_{K1}\)
-
-\(x_{K2}' = (\alpha R_{21} + R_{22})x_{K1}'\)
-
-want \(x_{K2} = \mp x_{K1}\) and \(x_{K2}' = \pm x_{K1}'\), so:
-
-\(R_{11} + \frac{R_{12}}{\alpha} = \mp 1\)
-
-\(\alpha R_{21} + R_{22} = \pm 1\)
-
-now many possible solutions. This doesn't consider quadrupole around 2nd kicker which is more difficult to model (split in to parts) and adds a perturbation to requirements for x, x' to be same at entrance to 2nd kicker as entrance to 1st kicker.
+%First assuming a simplified case of zero length kickers (with only the divergence changing in the kicker and not the beam position), the position \(x_{K2}\), and divergence, \(x_{K2}'\), of the beam at the entrance to the second kicker can be expressed as:
+%\begin{eqnarray}
+%x_{K2} &=& R_{12} x_{K1}' \\
+%x_{K2}' &=& R_{22} x_{K1}'
+%\end{eqnarray}
+%Where \(x_{K1}\) and \(x_{K1}'\) are the position and divergence at the exit of the first kicker, and \(R_{12}\) and \(R_{22}\) are transfer matrix coefficients for the optics between the exit of the first kicker and the entrance to the second kicker. The position and divergence after the second kicker, \(x_f\) and \(x_f'\) are then given by:
+%\begin{eqnarray}
+%x_{f} &=& x_{K2} \\
+%x_{f}' &=& x_{K2}' \mp x_{K1}'
+%\end{eqnarray}
+%The equation for the divergence assumes the ideal case where both kickers are powered with the same magnitude voltage. Inserting the expressions for \(x_{K2}\) and \(x_{K2}'\) above places the optics requirements \(R_{12} = 0\) and \(R_{22} = \pm 1\) to ensure orbit closure after the second kicker.
 
 \newsection{opticsMeas}{TL2 Optics Measurements}
 
