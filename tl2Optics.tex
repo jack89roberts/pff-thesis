@@ -149,7 +149,7 @@ The dispersions \(D_x(s)\) and \(D_y(s)\) vary along the lattice and are equival
 
 Optics are usually created so that there is no dispersion (\(D_{x} = D_{y} = 0\)) in straight sections. However, inside chicanes and rings the dispersion can never always be zero. To give zero dispersion in the straight sections the dispersion must therefore be closed at the exit of all bending sections. Dispersion closure means that both the dispersion and its derivative (\(D_x' = \mathrm{d}D_x/\mathrm{d}s\), and \(D_y' = \mathrm{d}D_y/\mathrm{d}s\)) are zero at the exit from the chicane or ring. In TL2 this condition applies after the bend CC.BHH0200 at the start of the line and at the exit of the horizontal chicane (CC.BHG0800) for the horizontal dispersion, and at the exit of the vertical chicane (CC.BVB0400) for the vertical dispersion.
 
-Within the bending sections the magnitude of the dispersion should be kept as small as possible. At CTF3 there can be peak-to-peak energy offsets at around the \(\pm1\%\) level [REF]. Dispersion is then usually the dominant contribution to the beam size, with a dispersion of 1~m giving excursions up to 1~cm in the beam orbit, for example. The diameter of the beam pipe in bending sections at CTF3 is 10~cm in most cases, as opposed to 4~cm in straight sections, in order to minimise the effects of dispersion dependent beam size growth on the beam transport [REF]. However, the second kicker installed in the chicane for the PFF system (CC.KHD0780) only has the normal 4~cm aperture (2~cm radius).  Dispersion around the second kicker must therefore be kept well below 2~m to avoid losing a small fraction of off-energy particles on the kicker strips.
+Within the bending sections the magnitude of the dispersion should be kept as small as possible whilst meeting the other optics constraints. At CTF3 there can be peak-to-peak energy offsets at around the \(\pm1\%\) level [REF]. Dispersion is then usually the largest contribution to the beam size, with a dispersion of 1~m giving excursions up to \(\pm1\)~cm in individual particle orbits, for example. The diameter of the beam pipe in bending sections at CTF3 is 10~cm in most cases, as opposed to 4~cm in straight sections, in order to minimise the effects of dispersion dependent beam size growth on the beam transport [REF]. However, the second kicker installed in the chicane for the PFF system (CC.KHD0780) only has the normal 4~cm aperture (2~cm radius).  Dispersion around the second kicker must therefore be kept well below 2~m to avoid losing a fraction of off-energy particles on the kicker strips.
 
 \subsubsection{Twiss Functions}
 beta functions
@@ -158,8 +158,37 @@ matching from CR and in to CLEX
 
 long drifts
 
+Normalised emittance around 150 micrometres (best case?)
+Gamma is 135 MeV/0.5 MeV = 270 at CTF3
+Normalised emittance is beta*gamma*emittance
+real emittance is 0.5555 micrometres
+50~m beta function gives around +/- 0.5 cm beam size
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c|}
+	   \hline
+       Parameter & Value \\
+       \hline
+       \(\beta_x\) & 7.26~m\\
+	   \(\beta_y\) & 5.90~m\\
+	   \(\alpha_x\) & -4.84\\
+	   \(\alpha_y\) & -1.27\\
+	   \hline
+    \end{tabular}
+    \caption{Initial twiss parameters for the TL2 line, taken at the entrance to CC.QFH0210.}
+  	\label{t:tl2InitTwiss}
+  \end{center}
+\end{table}
 
 \subsubsection{R56}
+
+The dispersion describes how the transverse orbit of a particle is changed by its energy in bending sections as already discussed. These differences can also change the longitudinal path length of the particle's trajectory, thereby shifting the particle's phase (described by the time \(t\), the fifth coordinate in the matrix formalism). This effect is described by the transfer matrix coefficient \(R_{56}\):
+\begin{equation}
+t_{f} = t_{i} + R_{56}\left(\frac{\Delta p}{p}\right)
+\end{equation}
+
+The \(R_{56}\) value between the entrance and exit of all bending sections at CTF3 is nominally zero so that there is no transformation of energy jitter in to phase jitter. In TL2 this places the constraints for \(R_{56}\) to be zero between the entrance and exit of the vertical chicane (CC.BVA0300 to CC.BVB0400) and between the entrance and exit of the horizontal chicane (CC.BHG0500 to CC.BHG0800).
 
 \subsection{PFF Optics Constraints}
 \label{ss:pffOpticsReqs}
@@ -189,12 +218,12 @@ x_{K2}' &=& R_{21}x_{K1} + R_{22}x_{K1}'
 \end{eqnarray}
 Where \(x_{K1}\) and \(x_{K1}'\) are the position and divergence at the exit of the first kicker, and \(R_{11}\), \(R_{12}\), \(R_{21}\) and \(R_{22}\) are transfer matrix coefficients for the optics between the exit of the first kicker and the entrance to the second kicker. The beam position at the exit of the first kicker is proportional to the applied kick:
 \begin{equation}
-x_{K1} = \alpha x_{K1}'
+x_{K1} = m x_{K1}'
 \end{equation}
-Here \(\alpha\) is a constant that depends on the properties of the kicker and also on the strength of the quadrupole CC.QDH0490 within which the kicker is installed (Section~\ref{ss:tl2PFFIntegration}). Substituting this expression in to the equations for \(x_{K2}\) and \(x_{K2}'\) gives:
+Here \(m\) is a constant that depends on the properties of the kicker and also on the strength of the quadrupole CC.QDH0490 within which the kicker is installed (Section~\ref{ss:tl2PFFIntegration}). Substituting this expression in to the equations for \(x_{K2}\) and \(x_{K2}'\) gives:
 \begin{eqnarray}
-x_{K2} &=& \left(R_{11} + \frac{R_{12}}{\alpha}\right)x_{K1} \\
-x_{K2}' &=& (\alpha R_{21} + R_{22})x_{K1}'
+x_{K2} &=& \left(R_{11} + \frac{R_{12}}{m}\right)x_{K1} \\
+x_{K2}' &=& (m R_{21} + R_{22})x_{K1}'
 \end{eqnarray}
 As stated \(x_{K2}\) and \(x_{K2}'\) are defined above at the entrance to the second kicker. The requirement for the PFF chicane optics is that the position and divergence at the exit of the second kicker are zero independent of the applied kicks. However, a derivation of the exact expression for the optics requirements between the kickers in order to close the orbit at the exit of the second kicker is complicated by the fact that the quadrupole around the second kicker, CC.QDH0790, can have a different strength to the quadrupole around the first kicker. 
 
@@ -205,8 +234,8 @@ x_{K2}' &=& x_{K1}'
 \end{eqnarray}
 Comparing these two expressions to the previously derived equations for \(x_{K2}\) and \(x_{K2}'\) then yields the following optics constraints:
 \begin{eqnarray}
-R_{11} + \frac{R_{12}}{\alpha} &=& -1  \label{e:orbClosConst1} \\
-\alpha R_{21} + R_{22} &=& +1 \label{e:orbClosConst2}
+R_{11} + \frac{R_{12}}{m} &=& -1  \label{e:orbClosConst1} \\
+m R_{21} + R_{22} &=& +1 \label{e:orbClosConst2}
 \end{eqnarray}
 There are many possible solutions to these expressions, with the simplest example being \(R_{11} = -1\), \(R_{12} = 0\), \(R_{21} = 0\) and \(R_{22} = 1\). However, the optics matching (Section~\ref{s:matchedOptics}) allows the quadrupoles CC.QDH0490 and CC.QDH0790 to have different strengths. MADX is then used to model the actual beam orbit in the chicane and the figure of merit is for the simulated orbit to be closed after the second kicker, rather than for the above constraints to be met. Nevertheless, the optics eventually created do satisfy Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} within several percent [REF].
 
@@ -280,3 +309,64 @@ maybe not needed? but nice to compare to pff. plots of dx, betas, r56
 something about the process? different sets of optics with larger dispersion etc.?
 
 final result
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+	   \hline
+       Parameter & Constraint & Value \\ \hline
+       \(\beta_x\) & (Max \(<100\)~m) & 55.3~m at CC.QFL0270\\
+	   \(\beta_y\) & (Max \(<100\)~m) & 72.1~m at CC.QDL0330\\
+	   \(|\alpha_x|\) & (Max \(<30\)) & 43.3 at CC.QFL0270\\
+	   \(|\alpha_y|\) & (Max \(<30\)) & 75.9 at CC.QFL0330\\
+	   \(|D_x|\) & Max \(<2.5\)~m & 1.16~m at CC.QDL0650\\
+	   \(|D_y|\) & Max \(<1\)~m & 0.11~m at CC.QDL0330\\
+	   \(|D_x|\) & \(\ll 2\)~m at K2 & 0.98~m\\
+	   \(D_x\) & 0~m at CC.BHG0800 & \(9\times10^{-7}\)~m\\
+	   \(D_x'\) & 0 at CC.BHG0800 & \(-6\times10^{-6}\)\\
+	   \(D_y\) & 0~m at CC.BVB0400 & \(4\times10^{-5}\)~m\\
+	   \(D_y'\) & 0 at CC.BVB0400 & \(-6\times10^{-5}\)\\
+	   \(|R_{52}|\) & \(\gg 0\)~m from K1 to K2 & 0.74~m\\
+	   \(x\) & 0~m after K2 & \(3\times10^{-7}\)~m (1~mrad kick)\\
+	   \(x'\) & 0 after K2 & \(-5\times10^{-7}\) (1~mrad kick)\\
+	   \(R_{56}\) & 0~m from CC.BHG0500 to CC.BHG0800 & -0.18~m\\
+	   \hline
+    \end{tabular}
+    \caption{Summary of constraints and their matched values in the new TL2 PFF optics.}
+  	\label{t:pffOpticsVals}
+  \end{center}
+\end{table}
+
+
+\begin{landscape}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsBeta}
+  \caption{Horizontal and vertical beta functions in the new TL2 optics.}
+  \label{f:pffOpticsBeta}
+  \centering
+  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsAlpha}
+  \caption{Horizontal and vertical alpha functions in the new TL2 optics.}
+  \label{f:pffOpticsAlpha}
+\end{figure}
+
+\begin{figure}
+  \centering
+   \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsDisp}
+  \caption{Horizontal and vertical dispersion in the new TL2 optics.}
+  \label{f:pffOpticsDisp}
+  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsR56}
+  \caption{\(R_{56}\) in the new TL2 optics.}
+  \label{f:pffOpticsR56}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsX}
+  \caption{Horizontal orbit in the TL2 chicane with a 1~mrad kick applied.}
+  \label{f:pffOpticsX}
+  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsPhase}
+  \caption{Phase in the TL2 chicane with a 1~mrad kick applied.}
+  \label{f:pffOpticsPhase}
+\end{figure}
+\end{landscape}
