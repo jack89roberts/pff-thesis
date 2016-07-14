@@ -136,7 +136,7 @@ To take in to account the changes made to the TL2 lattice new optics were needed
 \subsection{Nominal Optics Constraints}
 \label{ss:nominalOpticsReqs}
 
-
+The nominal optics constraints are mostly put in place to minimise the transverse beam size along the line by restricting the magnitude of the dispersion and twiss functions. The final constraints, on the \(R_{56}\) transfer matrix coefficient, relates to the longitudinal stability of the beam.
 
 \subsubsection{Dispersion}
 
@@ -152,17 +152,16 @@ Optics are usually created so that there is no dispersion (\(D_{x} = D_{y} = 0\)
 Within the bending sections the magnitude of the dispersion should be kept as small as possible whilst meeting the other optics constraints. At CTF3 there can be peak-to-peak energy offsets at around the \(\pm1\%\) level [REF]. Dispersion is then usually the largest contribution to the beam size, with a dispersion of 1~m giving excursions up to \(\pm1\)~cm in individual particle orbits, for example. The diameter of the beam pipe in bending sections at CTF3 is 10~cm in most cases, as opposed to 4~cm in straight sections, in order to minimise the effects of dispersion dependent beam size growth on the beam transport [REF]. However, the second kicker installed in the chicane for the PFF system (CC.KHD0780) only has the normal 4~cm aperture (2~cm radius).  Dispersion around the second kicker must therefore be kept well below 2~m to avoid losing a fraction of off-energy particles on the kicker strips.
 
 \subsubsection{Twiss Functions}
-beta functions
 
-matching from CR and in to CLEX
+%Normalised emittance around 150 micrometres (best case?)
+%Gamma is 135 MeV/0.5 MeV = 270 at CTF3
+%Normalised emittance is beta*gamma*emittance
+%real emittance is 0.5555 micrometres
+%50~m beta function gives around +/- 0.5 cm beam size
 
-long drifts
+The twiss beta functions define the energy independent component of the transverse beam size and the alpha functions define the rate of change of the beta function along the line, as discussed in Section~\ref{s:opticsIntro}. The transverse beam size at any point in the lattice is related to the beta function and emittance via the relationship \(\sqrt{\beta_x(s)\epsilon_x}\) (and the vertical equivalent). At CTF3 the beam emittance is usually around 0.5~\(\mathrm{\mu m}\), but may be up to a factor two larger than this in the horizontal plane depending on the beam setup [REF]. With an emittance of 0.5~\(\mathrm{\mu m}\) a beta value of 50~m at one point in the lattice corresponds to a transverse beam size of 0.5~cm at that location, for example. The beta and alpha functions should be kept as small as possible to minimise the beam size along the line. Beta is usually kept below 50~m, but values up to 100~m can be accepted if necessary [REF]. As mentioned previously there are long drift spaces with no focusing elements at the start and end of TL2, and it is most difficult to maintain low beta and alpha values following these regions.
 
-Normalised emittance around 150 micrometres (best case?)
-Gamma is 135 MeV/0.5 MeV = 270 at CTF3
-Normalised emittance is beta*gamma*emittance
-real emittance is 0.5555 micrometres
-50~m beta function gives around +/- 0.5 cm beam size
+At the start of TL2 the initial values of the twiss parameters are also constrained by the optics of the combiner ring. In other words, the beta and alpha values at the start of TL2 should be the same as the beta and alpha values at the exit of the combiner ring. This avoids discontinuities between sections in the complete CTF3 optics. The TL2 optics have usually been matched (Section~\ref{s:matchedOptics}) starting from CC.QFH0210, and the required initial conditions at this location are summarised in Table~\ref{t:tl2InitTwiss}.
 
 \begin{table}
   \begin{center}
@@ -253,62 +252,167 @@ There are many possible solutions to these expressions, with the simplest exampl
 
 \newsection{opticsMeas}{TL2 Optics Measurements}
 
+As seen above there are many optics constraints in TL2 that must be met both to ensure that the beam can be transported efficiently in to the CLEX area as well as to obtain the desired behaviour in the horizontal chicane for the PFF system. MADX can be used to create optics that meet these criteria (Section~\ref{s:matchedOptics}), but they will be of no use if the model of TL2 does not accurately desribe the actual characteristics of the line. As such, a series of measurements has been taken to determine and improve the accuracy of the TL2 MADX model. Measurements of this type had not previously been completed for the TL2 line at CTF3, thus any errors identified in the model are not limited to only the hardware changes made for the PFF system.
+
 \subsection{Method}
 \label{ss:opticsMethod}
 
+The TL2 line includes 11 magnetic correctors, as shown in Figure~\ref{f:newTL2Lattice}. An electric current can be applied to horizontal or vertical coils on the corrector, creating independently adjustable horizontal and electric fields that deflect the beam. The primary purpose of the correctors is to compensate differences in beam orbit resulting from small misalignments of devices along the line. However, they can also be used to test the accuracy of the TL2 model, as follows.
+
 change all correctors along line in h and v
+
+all correctors in TL2 can deflect H and V - they are the same device but have different H or V in name.
 
 compare measured orbit in bpms to expectation from madx model
 
 \subsection{Results}
 \label{ss:opticsResults}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/optics/modelOriginalH}
+  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 compared to the original MADX model of TL2.}
+  \label{f:modelOriginalH}
+  \includegraphics[width=0.9\textwidth]{Figures/optics/modelOriginalV}
+  \caption{Vertical orbit due to a kick from the corrector CC.DVF0175 compared to the original MADX model of TL2.}
+  \label{f:modelOriginalV}
+\end{figure}
+
 plots from near start tl2 in H and V showing large discrepancy
+
+model line is position from BPMs
+measurement line is simulated position in BPMs calculated from MADX model
+full line is simulated position in all elements along line from MADX model
 
 \subsection{Sources of Errors in MADX Model}
 \label{ss:modelErrorSources}
 
-\subsubsection{Dipole Edge Focusing}
-\label{sss:edgeFocusing}
-
-theory of edge focusing with different types of dipole
-
 \subsubsection{Quadrupole Strengths}
 \label{sss:quadStrengths}
 
-not measured/error for one type
+not measured/error for L-type (from CELSIUS)
+
+K1 = FQL*CURRENT/ENERGY
+
+
+\subsubsection{Dipole Focusing}
+\label{sss:edgeFocusing}
+
+200,300,400,500,600,700,800 -> group in to types
+
+RBEND
+
+SBEND
+
+-> which gives what sort of focusing and why
+
+FINT
+
+HGAP
+
+K1
 
 \subsection{Corrections to MADX Model}
 \label{ss:modelCorrections}
 
-plot of effect of adjusting edge focusing
+By varying the parameters of the dipole focusing and the L-type quadrupole strengths described above it has been possible to find a solution that gives much better agreement between the corrector kick measurements and the expected response in the MADX model. The new values for the parameters do not necessarily represent their true real world characteristics (for example the dipole pole separation), but are rather a set of values that adjusts the simulated MADX focusing in a way that matches the actual behaviour. An iterative process was used, with a mixture of automatic optimisations via algorithms in MATLAB and MADX [REF] and manual interventions to drive the calculated adjustments towards a reasonble solution and away from any local minima.
 
-plot of effect of adjusting quad strengths
-
-statistics, sum sq diff in bpms?
-
-something about the process? mixture of by hand/matching
+The first adjustment made was to the modelled strength of the L-type quadrupoles. As the majority of quadrupoles along TL2 are of this type the focusing and calculated transfer matrices in the MADX model are very sensitive to any change in their strength. It was quickly determined that the focusing strength of the L-type quadrupoles needed to be increased to improve the agreement between the measurement and the model. Figure~\ref{f:modelCorrQuadH} shows an example of a horizontal kick from the corrector CC.DHF0175 with an optimal increase of \(7\%\) in the L-type quadrupole strength. This can be directly compared to the original model in Figure~\ref{f:modelOriginalH}. By increasing the focusing from the L-type quadrupoles the largest discrepancies between the MADX model and the measurement are removed. In particular the region from inside the vertical chicane (CC.BPM0365) to inside the horizontal chicane (CC.BPI0735) originally showed large differences including sign flips in the horizontal plane. With the adjusted L-type strength these are removed and the agreement is excellent.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/optics/opticsCorrVsOrig}
-  \caption{Mean phase along.}
-  \label{f:opticsCorrVsOrig}
+  \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrQuadH}
+  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 with the L-type quadrupole strengths increased by \(7\%\).}
+  \label{f:modelCorrQuadH}
+\end{figure}
+
+Figures~\ref{f:modelOrigBendV} and \ref{f:modelCorrBendV} then show an example of adjusting the focusing of the four dipoles in the horizontal chicane (the outer 500/800 pair and inner 600/700 pair) to remove remaining differences between the measurement and the model. In this case the beam is kicked from the CC.DVF0525 corrector just after the first dipole in the horizontal chicane, making the measurement insensitive to any optics errors prior to CC.DVF0525 in the line. In both figures the \(7\%\) increase in the L-type quadrupole strength has been applied in the MADX model. With the quadrupole correction in place but no adjustment to the dipole focusing, in Figure~\ref{f:modelOrigBendV}, the simulated orbit has the same overall shape as the measured orbit inside the chicane (up until CC.BPI0735). However, there are still offsets between the two and these eventually lead to a large discrepancy between the model and the measurement still being present in the two BPMs following the chicane (CC.BPIM0845 and CC.BPM0930), which is also seen in Figure~\ref{f:modelCorrQuadH}. 
+
+By adjusting the HGAP, FINT and quadrupole K1 component of the dipoles in the horizontal chicane a solution is found that reduces the difference between the model and the measurement in the chicane, and then also gives much better agreement between the two after the chicane. This is shown in Figure~\ref{f:modelCorrBendV}. Repeating this process with correctors prior to the vertical chicane, and prior to the CC.BHH0200 bend at the start of TL2, yields the focusing parameters for the seven dipoles in the line summarised in Table~\ref{t:tl2ModelChanges}. The largest quadrupolar component of K1 = 0.425~\(\mathrm{m^{-2}}\) for the CC.BHH0600 and CC.BHH0700 dipoles corresponds to a focusing strength of roughly \(2\%\) of a typical quadrupole magnet in TL2 [REF].
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/optics/modelOrigBendV}
+  \caption{Vertical orbit due to a kick from the corrector CC.DVF0525 with the default MADX  model of the dipole focusing.}
+  \label{f:modelOrigBendV}
+  \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrBendV}
+  \caption{Vertical orbit due to a kick from the corrector CC.DVF0525 with the corrected model of the dipole focusing.}
+  \label{f:modelCorrBendV}
+\end{figure}
+
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c c c c|}
+	    \hline
+        Device & Parameter & Original Value & Corrected Value\\ \hline
+		CC.BHH0200 & HGAP & 0~m & 0.084~m \\
+		 	       & FINT & 0 & 0.79 \\
+		           & K1 & 0~\(\mathrm{m^{-2}}\) & 0~\(\mathrm{m^{-2}}\) \\ \hline
+		CC.BVA0300   & HGAP & 0~m & 0~m \\
+		 	 \&      & FINT & 0 & 0 \\
+		CC.BVB0400   & K1 & 0~\(\mathrm{m^{-2}}\) & -0.125~\(\mathrm{m^{-2}}\) \\ \hline
+		CC.BHG0500   & HGAP & 0~m & 0.06~m \\
+		 	 \&      & FINT & 0 & 0.4 \\
+		CC.BHG0800   & K1 & 0~\(\mathrm{m^{-2}}\) & 0.15~\(\mathrm{m^{-2}}\) \\ \hline
+		CC.BHH0600   & HGAP & 0~m & 0.06~m \\
+		 	 \&      & FINT & 0 & 0.2 \\
+		CC.BHH0700   & K1 & 0~\(\mathrm{m^{-2}}\) & 0.425~\(\mathrm{m^{-2}}\) \\ \hline
+		L-type Quadrupoles & FQL & 31.78 & 34.03 \\
+	   \hline
+    \end{tabular}
+    \caption{Changes made to the dipole focusing and quadrupole strength parameters in the TL2 MADX model in order to improve the agreement with the kick measurements.}
+  	\label{t:tl2ModelChanges}
+  \end{center}
+\end{table}
+
+Figures~\ref{f:modelCorrectedH}~and~\ref{f:modelCorrectedV} compare the measured horizontal and vertical orbit to the new MADX model of TL2 with all the corrections from Table~\ref{t:tl2ModelChanges} in place. The same corrector, CC.DHF0175, and data are used as for the examples from the original model in Figures~\ref{f:modelOriginalH}~and~\ref{f:modelOriginalV}. The new version of the model is a clear improvement. In both the horizontal and vertical planes the measured and modelled beam orbit now agree along the full length of the line within a small margin of error. With the original MADX model the mean absolute difference between the measured and simulated positions in the ten BPMs following CC.DHF0175 was \(3.9\pm1.0\)~mm in the horizontal plane and \(3.1\pm0.8\)~mm in the vertical plane. The corrected model reduces these differences by an order of magnitude, to \(0.2\pm0.1\)~mm in the horizontal plane and \(0.3\pm0.1\)~mm in the vertical plane.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrectedH}
+  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 compared to the corrected MADX model of TL2.}
+  \label{f:modelCorrectedH}
+  \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrectedV}
+  \caption{Vertical orbit due to a kick from the corrector CC.DVF0175 compared to the corrected MADX model of TL2.}
+  \label{f:modelCorrectedV}
 \end{figure}
 
 \newsection{matchedOptics}{Matched TL2 Optics}
 
-\subsection{Nominal Optics}
-\label{ss:nominalMatched}
+With the corrected MADX model of TL2 in place the new optics for the PFF system were created. The optics were obtained using MADX matching libraries [REF], in which many desired constraints can be defined for the line (each with its own weight) and then one of several optimisation algorithms can be used to change the quadrupole strengths and derive an optics that meets those constraints. Two sets of optics were created for TL2 -- a nominal set of optics containing only the constraints from Section~\ref{ss:nominalOpticsReqs} [REF], and a set of PFF otpics containing the additional \(R_{52}\) and orbit closure related constraints for the PFF system from Section~\ref{ss:pffOpticsReqs}. Without the additional PFF constraints roughly a factor two smaller maximum dispersion and beta values can be achieved in the nominal optics. However, the beam quality achieved with the PFF optics has been sufficient to use routinely at CTF3 (including for non-PFF running), and so only this optics is documented here.
 
-maybe not needed? but nice to compare to pff. plots of dx, betas, r56
+For the purposes of the matching the TL2 line was split in to three parts -- from the beginning of the line to the exit of the vertical chicane (CC.BHH0210 to CC.BVB0400), the first PFF kicker and the horizontal chicane (CC.BVB0400 to CC.BHG0800) and the end of the line (CC.BHG0800 to the beam lines in CLEX).
 
-\subsection{PFF Optics}
-\label{ss:pffMatched}
+The initial twiss parameters at the start of the first part are fixed by the properties of the beam leaving the combiner ring. 
 
-something about the process? different sets of optics with larger dispersion etc.?
 
-final result
+Each part is matched seprately...
+initial conditions first part defined by combiner ring
+intermediate parts can be changed to get the desired optics (but must match up)
+start horizontal chicane and make sure can get the other parts to match
+
+the previous lattice/model optics could be used as starting point
+
+iterative process - change weights etc. to eventually move towards wanted solution
+
+constraints on betas, alphas etc. in certain areas (before long drifts) to ensure they don't run away
+
+kicker/quad combination modelled as zero length kickers inserted between quadrupole quarters
+
+optics is compromise more towards low dispersion than high r52.
+
+In the figure blue convex/concave(?) lenses show the position of focusing/defocusing(?) quadrupoles, red shows dipoles, green the PFF kickers.
+
+beta and alpha functions - had to accept larger (up to around 70~m) around vertical chicane (just after long drift) to give small (up to 30~m) in horizontal chicane?
+
+dispersion 0.11~m in vertical chicane. about e-5 closure.
+horizontal maximum -1.16~m in horizontal chicane, -0.98~m at K2. about e-6 closure.
+
+orbit closure at e-7 level exit k2 with 1~mrad kick. Max orbit offset from 1~mrad kick is about -3.5(?) mm.
+
+biggest issue - had to accept R56 not zero. So energy jitter incoming to TL2 chicane expected to create additional phase jitter after TL2. Becomes focus of phase propagation chapter.
+
 
 \begin{table}
   \begin{center}
@@ -351,8 +455,8 @@ final result
     \begin{tabular}{|c c c|}
 	   \hline
        Parameter & Constraint & Value \\ \hline
-       \(\beta_x\) & (Max \(<100\)~m) & 55.3~m at CC.QFL0270\\
-	   \(\beta_y\) & (Max \(<100\)~m) & 72.1~m at CC.QDL0330\\
+       \(\beta_x\) & Max \(<100\)~m & 55.3~m at CC.QFL0270\\
+	   \(\beta_y\) & Max \(<100\)~m & 72.1~m at CC.QDL0330\\
 	   \(|\alpha_x|\) & (Max \(<30\)) & 43.3 at CC.QFL0270\\
 	   \(|\alpha_y|\) & (Max \(<30\)) & 75.9 at CC.QFL0330\\
 	   \(|D_x|\) & Max \(<2.5\)~m & 1.16~m at CC.QDL0650\\
