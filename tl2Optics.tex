@@ -6,7 +6,7 @@ This is the introductory text.
 
 A basic beam line consists of focusing magnets (quadrupoles, as well as sextupoles and higher order magnets) and bending magnets (dipoles) connected by straight sections. A practical ``real world'' beam line must also include many diagnostic devices (such as beam position monitors, or BPMs) and additional elements (such as magnetic correctors) to be able to measure and remove the effects of small misalignments and imperfections in the beam line. The arrangement of devices along the line is referred to as the lattice. The collective settings (strengths) of each focusing element and the beam conditions they produce are referred to as the machine optics. The performance of the PFF system depends heavily on the lattice and optics of the correction chicane in the TL2 line (discussed in this chapter), and also in other sections at CTF3 (discussed in Chapter~\ref{c:phasePropagation}). This section presents basic aspects of lattice design and optics to introduce the terms used in the remainder of the thesis.
 
-Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\) that defines how it transforms the initial coordinates of a particle in the beam [REF]:
+Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\) (sometimes also called a response matrix) that defines how it transforms the initial coordinates of a particle in the beam [REF]:
 \begin{equation}
 \vec{x_f} = \mathbf{R}\vec{x_0}
 \end{equation}
@@ -38,6 +38,7 @@ The simplest and most widely used type of accelerator lattice is a FODO cell, co
 0 & 0 & 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 0 & 0 & 1 \\
 \end{array} \right)
+\label{e:quadTransfer}
 \end{equation}
 The final horizontal divergences of a particle after traversing a quadrupole, using the above matrix, are \(x_f' = x_i' \pm klx_i\) and \(y_f' = y_i' \mp kly_i\). A quadrupole that focuses the beam in one plane therefore defocuses the beam in the other transverse plane. In a FODO cell a horizontally focusing quadrupole and horizontally defocusing quadrupole are used together to give a net focusing effect in both planes [REF]. The complete effect of a FODO cell on a particle can be determined by multiplying the transfer matrices of each element:
 \begin{equation}
@@ -95,7 +96,7 @@ With the voltage correctly applied to the downstream end of the strips the force
 
 \newsection{tl2}{TL2}
 
-The transfer line TL2 at CTF3 transports the beam from the exit of the combiner ring to the experimental area CLEX (see Figure~\ref{f:ctfLayout}). The whole line is approximately 35~m long and contains both vertical and horizontal chicanes to align the outgoing combiner ring beam line to the CLEX entrance. The PFF system attempts to correct the beam phase using the horizontal chicane at the end of TL2, where the two kickers are installed. Further details of the design of TL2 can be found in [REF].
+The transfer line TL2 at CTF3 transports the beam from the exit of the combiner ring to the experimental area CLEX (see Figure~\ref{f:ctfLayout}). The whole line is approximately 45~m long and contains both vertical and horizontal chicanes to align the outgoing combiner ring beam line to the CLEX entrance. The PFF system attempts to correct the beam phase using the horizontal chicane at the end of TL2, where the two kickers are installed. Further details of the design of TL2 can be found in [REF].
 
 The diagram in Figure~\ref{f:newTL2Lattice} shows a birds-eye view of the TL2 line and the lattice of the line. To interpret the diagram it is useful to introduce the device naming convention at CTF3. Devices have names of the form:
 \begin{center}
@@ -257,16 +258,18 @@ As seen above there are many optics constraints in TL2 that must be met both to 
 \subsection{Method}
 \label{ss:opticsMethod}
 
-The TL2 line includes 11 magnetic correctors, as shown in Figure~\ref{f:newTL2Lattice}. An electric current can be applied to horizontal or vertical coils on the corrector, creating independently adjustable horizontal and electric fields that deflect the beam. The primary purpose of the correctors is to compensate differences in beam orbit resulting from small misalignments of devices along the line. However, they can also be used to test the accuracy of the TL2 model, as follows.
+The TL2 line includes 12 magnetic correctors, as shown in Figure~\ref{f:newTL2Lattice} (plus one at the end of TL2 in the CLEX area, which is not shown in the figure). An electric current can be applied to horizontal or vertical coils on the corrector, creating independently adjustable horizontal and vertical fields that deflect the beam. The primary purpose of the correctors is to compensate differences in beam orbit resulting from small misalignments of devices along the line. However, they can also be used to test the accuracy of the TL2 model.
 
-change all correctors along line in h and v
+Measurements were taken in which the current applied to one of the correctors was changed, causing the beam to be deflected on to a new trajectory along the rest of the line. The new orbit is observed in the BPMs downstream of the corrector, with a total of 12 BPMs in TL2 (also shown in Figure~\ref{f:newTL2Lattice}). The position offset in each BPM depends on the transfer matrix between the corrector and that BPM, and therefore on the focusing properties of all the magnetic elements between the corrector and the BPM. By deflecting the beam with each corrector along the line, and in both planes, the response of the whole line as well as individual parts of the line can be determined.
 
-all correctors in TL2 can deflect H and V - they are the same device but have different H or V in name.
+The same process can then be repeated in the MADX model, applying a current to one of the correctors and creating a simulated deflected orbit. All the BPMs are included in the model, allowing the real measured position in each BPM to be compared to the simulated position from the MADX model. Any difference between the two highlights inaccuracies in the modelled properties of the TL2 lattice.
 
-compare measured orbit in bpms to expectation from madx model
-
-\subsection{Results}
+\subsection{Results with Original MADX Model}
 \label{ss:opticsResults}
+
+Figures~\ref{f:modelOriginalH}~and~\ref{f:modelOriginalV} show an example of the results obtained with the original version of the TL2 MADX model, in the horizontal and vertical planes respectively. One of the first correctors in TL2, CC.DHF0175 (or the equivalent CC.DVF0175 in the vertical plane), is used, so the results are sensitive to errors in the model along the full length of the line. Three lines are shown in each figure -- the red line labelled ``Measurement'' corresponds to the actual measured position in the BPMs, the dashed blue line ``Model'' shows the simulated position in the BPMs from MADX, and the final black line ``Full'' shows the simulated MADX orbit propagated through all elements along the line (not restricted to only the BPM positions). In a perfect model of the line the blue ``Model'' and red ``Measurement'' lines would be identical.
+
+In the horizontal plane there is good agreement between the model and the measurement in the three BPMs following the corrector (up until CC.BPM0275). After this point the response in the model is clearly completely different to the measurement. For example, the measured position shifts by 10~mm between CC.BPM0275 and CC.BPM0365 in the measurement, but only 6~mm in the model. Towards the end of the line the model is close to being the inverse of the measurement. There is also poor agreement between the model and the measurement in the vertical plane, with a large difference already visible at CC.BPM0275 in this case. The peak-to-peak vertical orbit offset in the model is roughly a factor two larger than the measurement.
 
 \begin{figure}
   \centering
@@ -278,22 +281,21 @@ compare measured orbit in bpms to expectation from madx model
   \label{f:modelOriginalV}
 \end{figure}
 
-plots from near start tl2 in H and V showing large discrepancy
-
-model line is position from BPMs
-measurement line is simulated position in BPMs calculated from MADX model
-full line is simulated position in all elements along line from MADX model
-
 \subsection{Sources of Errors in MADX Model}
 \label{ss:modelErrorSources}
+
+The results described above immediately demonstrated large discrepancies between the model and the actual response of TL2. Based on previous experience from corrections made to the MADX model for other sections of CTF3 [REF] two key areas were identified to investigate to try to improve the model --- the properties of the ``L-type'' quadrupoles in TL2, and the focusing effects from the dipoles in TL2.
 
 \subsubsection{Quadrupole Strengths}
 \label{sss:quadStrengths}
 
-not measured/error for L-type (from CELSIUS)
+16 out of the 27 quadrupoles in TL2 are of the ``L-type'', with labels of the form CC.QDLxxxx or CC.QFLxxxx. This includes all the quadrupoles in the horizontal chicane apart from the two wide aperture ``H-type'' quadrupoles within which the PFF kickers are installed. These quadrupoles were reclaimed from the CELSIUS project in Uppsala, Sweden [REF]. In the MADX model of TL2 the focusing strength of these magnets, \(K1\) is defined by the following parameters:
+\begin{equation}
+\mathrm{K1} = \frac{\mathrm{FQL}\times I}{E}
+\end{equation}
+Where \(\mathrm{FQL} = 31.78\) is a constant defined by the properties of the quadrupole, \(I\) is the current delivered to the quadrupole from its power supply a larger focusing effect) and \(E\) is the beam energy. The \(\mathrm{K1}\) value is analogus to the constant \(k\) in the quadrupole transfer matrix previously seen in Equation~\ref{e:quadTransfer}. This must be multiplied by the 30~cm active magnetic length of the quadrupole to determine the equivalent focal length of the quadrupole.
 
-K1 = FQL*CURRENT/ENERGY
-
+As the properties of the ``L-type'' quadrupoles were not measured in place at CERN prior to their use in CTF3 there was a large uncertainty on the correct value of \(\mathrm{FQL}\) to use. Changing the \(\mathrm{FQL}\) value was therefore a good candidate to try to reduce errors in the MADX model.
 
 \subsubsection{Dipole Focusing}
 \label{sss:edgeFocusing}
