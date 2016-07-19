@@ -300,19 +300,17 @@ As the properties of the ``L-type'' quadrupoles were not measured in place at CE
 \subsubsection{Dipole Focusing}
 \label{sss:edgeFocusing}
 
-200,300,400,500,600,700,800 -> group in to types
+Although the primary purpose of dipole magnets is to bend the beam they also give focusing effects that depend on the design of the magnet, and in particular the orientation of the pole faces. The seven dipoles in TL2 can be roughly split in to two types in terms of the focusing effects they are expected to produce --- sector magnets (SBENDs) and rectangular magnets (RBENDs). Figure~[REF] compares the geometry of the pole faces for SBEND and RBEND dipoles. In SBEND magnets the ends of the pole faces are oriented such that the reference trajectory of the beam enters and leaves the magnet perpendicular to the pole face. Alternatively, in RBEND dipoles the pole faces at the entrance and exit of the magnet are parallel to each other. In this case the reference trajectory forms an angle \(\theta/2\) with the pole faces, where \(theta\) is the angle through which the beam is deflected by the magnet [REF]. In TL2 the CC.BHH0200, CC.BHG0500, CC.BHH0600, CC.BHH0700 and CC.BHG0800 dipoles are RBENDs, and the CC.BVA0300 and CC.BVB0400 dipoles are SBENDs [REF].
 
-RBEND
+[TODO: SBEND and RBEND geometry diagram].
 
-SBEND
+The first focusing effect from dipoles relates to the path length of the beam through the magnet. In SBEND magnets this length depends on the position offset in the (horizontal or vertical) bending plane. Particles entering the magnet experience the dipole field for a longer length on one side of the reference trajectory, and a shorter length on the other side of the reference trajectory, producing a focusing effect in the bending plane. This is also shown in Figure~[REF]. In RBEND magnets the length of the trajectory is the same for all incoming position offsets, so this focusing effect is not present.
 
--> which gives what sort of focusing and why
+Another way in which dipoles produce focusing effects is via their fringe fields. The fringe fields describe the increase in magnetic field from zero to the peak bending field as the beam approaches the entrance to the dipole, and from the peak field back to zero as the beam leaves the dipole [REF]. The extent and rate of increase of the fringe fields depends on the design of the dipole, in particular the pole separation [REF]. In MADX the nature of the fringe fields are defined by the variables HGAP, the pole separation, and FINT, which describes the shape of the increase up to the peak field (e.g. linear) [REF].
 
-FINT
+RBEND - distance in fringe field depends on position offset. Defocusing in bend plane. Focusing other plane.
 
-HGAP
-
-K1
+Finally - add a pure quadrupole component.
 
 \subsection{Corrections to MADX Model}
 \label{ss:modelCorrections}
