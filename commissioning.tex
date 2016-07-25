@@ -48,14 +48,14 @@ The diagram in Figure~\ref{f:fontDiagram} shows all the connections to and from 
 
 The basic logic of the firmware is as follows. The ADC timing, sampling rate and start time, are determined by the input trigger and external 357~MHz clock. Duiring the set sampling window the ADC outputs are processed, including a number of channel offsets and filters. The processed ADC~2 (Mixer) output is then split in to two, to create the two strands that become the DAC~1 and DAC~2 outputs. Note that as the Mixer is used directly (rather than \(\arcsin(\mathrm{Mixer})\)) this uses the small angle approximation. The effect of this is discussed in Section~\ref{ss:fontSmallAng}. If the diode (ADC~1) is being used in the calculation the ADC~2 output is also multiplied by 1/sqrt(ADC~1), with values taken from a lookup table rather than being calculated directly to save latency [REF]. Prior to being sent to the DACs the two output strands are multiplied by set gain factors and then can be delayed by a set amount of time. The two calculated DAC outputs are then connected to the signal inputs on the amplifiers, where they are amplified and eventually sent to the kickers to deflect the beam and correct the phase. Meanwhile the input trigger for the FONT5a board is used to derive the trigger for the amplifier, with a variable delay that can also be set in the DAQ. The overall latency of the FONT5a board, from the arrival of the signal at the ADCs to the output of the calculated correction at the DACs, is around 22 clock cycles (at 357~MHz) or 60~ns [REF].
 
-\begin{landscape}
+\afterpage{\begin{landscape}
 \begin{figure}
   \centering
   \includegraphics[width=\hsize]{Figures/commissioning/fontDiagram}
   \caption{Schematic of connections to and outputs from the FONT5a board, as well as the PFF calculation in firmware in the case where the diode is used. If the diode is not used the ADC1 input is not required. }
   \label{f:fontDiagram}
 \end{figure}
-\end{landscape}
+\end{landscape}}
 
 All the parameters and controls that must be adjusted during the PFF system setup, and their respective values where relevant, are listed below for reference. These are only introduced in brief here, but parameters that are either non-trivial to derive or are critical for the PFF performance are described in more detail in later sections and chapters as indicated. The values given are in FONT units as they are set in the DAQ with each parameter expressed by up to a 14~bit number, and the size of each control chosen to give a reasonable degree of flexibility around the expected set point. 
 
@@ -282,23 +282,23 @@ The high voltage signals leaving the upstream ends of the kicker strips are term
 
 The description of the amplifier here represents the version of the amplifier that was used for the latest PFF tests, and for almost all results in this thesis. A first version of the amplifier, with around half the output voltage at up to \(\pm350\)~V was used for early PFF tests. Additional FETs were added in the second version described above to boost the output voltage to \(\pm700\)~V. A third version of the amplifier was forseen but ultimately deemed unnecessary for the application at CTF3. This would have provided a voltage of up to \(\pm1400\)~V by combining the output of four individual drive modules [REF].
 
-\begin{landscape}
+\afterpage{\begin{landscape}
 \begin{figure}
   \centering
   \includegraphics[width=0.9\hsize]{Figures/commissioning/AmplifierPanelPic}
   \caption{Front panel of the amplifier. Inputs to the amplifier are highlighted in green, drive outputs in red and monitoring outputs in blue. Inputs to the control module are the trigger (T) and the two DAC outputs from the FONT5a board used to determine the drive to the left (L) and right (R) sides. Each side of the amplifier has two pairs of drive outputs and terminators, A and B. The signal returning to each of the terminators can be observed on their corresponding monitoring outputs. The monitoring output on the control module (ON) shows the 1.4~\(\mathrm{\mu}\)s time during which the amplifiers are able to provide their output. Not highlighted in the figure are the 24~V, 1.1~A power connector at the top of the control module, and also the three custom connectors used to communicate between the control module and drive modules.}
   \label{f:AmplifierPanelPic}
 \end{figure}
-\end{landscape}
+\end{landscape}}
 
-\begin{landscape}
+\afterpage{\begin{landscape}
 \begin{figure}
   \centering
   \includegraphics[width=\hsize]{Figures/commissioning/amplifierDiagram}
   \caption{Simplified flow diagram showing the connections between the FONT5a board, the amplifier and the kickers. The kickers are inserted between the drive and terminator modules for the purposes of the diagram, but in reality the terminator modules neighbour the drive modules in the same unit as seen in Figure~\ref{f:AmplifierPanelPic}. Note that the A and B outputs on each side always have opposite polarity, as needed to create a large potential difference between the kicker strips.}
   \label{f:amplifierDiagram}
 \end{figure}
-\end{landscape}
+\end{landscape}}
 
 \subsection{Linearity}
 \label{ss:ampLin}

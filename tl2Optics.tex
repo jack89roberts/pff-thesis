@@ -108,14 +108,14 @@ Other features along the TL2 line that are important for the derivation of optic
 
 [TODO: picture of TL2/chicane]
 
-\begin{landscape}
+\afterpage{\begin{landscape}
 \begin{figure}
   \centering
   \includegraphics[width=\hsize]{Figures/optics/newTL2Lattice}
   \caption{New TL2 lattice for PFF. Changes highlighted yellow.}
   \label{f:newTL2Lattice}
 \end{figure}
-\end{landscape}
+\end{landscape}}
 
 \subsection{Integration of PFF Hardware}
 \label{ss:tl2PFFIntegration}
@@ -396,7 +396,7 @@ Suitable initial values for the quadrupole strengths (defined by the current sen
 
 To accurately simulate the effect of a kick applied at the PFF kickers they must be modelled together with the quadrupoles within which they are installed but this can not be directly defined in MADX. Instead the quadrupole definition in MADX has been split in to quarters, with zero length kicker elemnets inserted between each quadrupole quarter [REF]. Each kicker element provides a quarter of the angular deflection of the complete kicker. This allows the focusing effect of the quadrupole on the applied kick to be approximated.
 
-ALl the constraints for each section (taken from Section~\ref{s:tl2OpticsReqs}) are implemented in the matching scripts. The largest weight is given to achieving a non-zero \(R_{52}\) value between the kickers, as without this the optics would be of no use for the PFF system. The next strongest constraints are placed on the dispersion, both ensuring the dispersion is closed and keeping the dispersion well below 2~m around the second kicker. The remaining constraints, for example on the orbit closure, \(R_{56}\) and maximum twiss functions, are also included but with lower weights as a useful PFF demonstration could still be achieved if they are not precisely met.
+All the constraints for each section (taken from Section~\ref{s:tl2OpticsReqs}) are implemented in the matching scripts. The largest weight is given to achieving a non-zero \(R_{52}\) value between the kickers, as without this the optics would be of no use for the PFF system. The next strongest constraints are placed on the dispersion, both ensuring the dispersion is closed and keeping the dispersion well below 2~m around the second kicker. The remaining constraints, for example on the orbit closure, \(R_{56}\) and maximum twiss functions, are also included but with lower weights as a useful PFF demonstration could still be achieved if they are not precisely met.
 
 As there are relatively few variables (quadrupoles) compared to the number of constraints  it is not straightforward to match optics that meet most of the constraints. The final derivation of the optics in the following section required many matching steps, with the weights altered between each step to drive the optics closer to the desired solution. The matched quadrupole currents and twiss parameters for each matching section are used as the initial conditions for the following matching iteration. Ultimately a compromise had to be accepted that met most, but not all, of the constraints as described below.
 
@@ -407,13 +407,13 @@ The PFF optics for TL2 that has been used for all the tests presented in this th
 
 Figures~\ref{f:pffOpticsBeta}~and~\ref{f:pffOpticsAlpha} shows the twiss alpha and beta functions along TL2. The largest beta and alpha functions in both the horizontal and vertical planes are found in the region around the beginning of the vertical chicane, as a result of the long drift space between CC.QFH0230 and CC.QFL0270 (2~m to 9~m on the horizontal axis) preceding it. In this area the maximum beta value is 72.1~m, and the maximum alpha is 75.9. The alpha value is above the desired target of keeping alpha below a magnitude of 30 everywhere along the line. This constraint is primarily placed to minimise the strength of focusing in the line in order to reduce the effect of any remaining optics errors in the model. The vertical chicane therefore becomes a sensitive area for achieving good beam transport through TL2. However, in the rest of the line the beta (up to 32~m) and alpha functions (up to 18) are much smaller than their constrained maximums.
 
-Figure~\ref{f:pffOpticsDisp} shows the horizontal and vertical dispersion along the line. The disperions and their derivatives are closed at the \(10^{-5}\) level in the vertical chicane, and the \(10^{-6}\) level in the horizontal chicane. This leaves no residual dispersion in the straight sections, as desired. In the vertical chicane the dispersion reaches a peak magnitude of 0.11~m, whilst in the horizontal chicane the peak is 1.16~m. Both are much smaller than the constrained maximums. In addition, the dispersion in the region of the second kicker (K2), which is an aperture restriction as described previously, is 0.98~m and much smaller than the constrained maximum of 2~m.
+Figure~\ref{f:pffOpticsDisp} shows the horizontal and vertical dispersion along the line. The dispersions and their derivatives are closed at the \(10^{-5}\) level in the vertical chicane, and the \(10^{-6}\) level in the horizontal chicane. This leaves no residual dispersion in the straight sections, as desired. In the vertical chicane the dispersion reaches a peak magnitude of 0.11~m, whilst in the horizontal chicane the peak is 1.16~m. Both are much smaller than the constrained maximums. In addition, the dispersion in the region of the second kicker (K2), which is an aperture restriction as described previously, is 0.98~m and much smaller than the constrained maximum of 2~m.
 
 The key constraint that is not met in the matched PFF optics is \(R_{56}\), where a non-zero value had to be accepted in order to meet the remaining constraints. As seen in Figure~\ref{f:pffOpticsR56} the \(R_{56}\) transfer matrix coefficient across the horizontal chicane is -0.18~m. This leads to additional energy dependent phase jitter following the chicane that is not present prior to the chicane, which has severe consequences for the performance of the PFF system. The extent and mitigation of this effect is the focus of Chapter~\ref{c:phasePropagation}.
 
 The last two figures, \ref{f:pffOpticsX}~and~\ref{f:pffOpticsPhase}, show the effect of kicking the beam with the PFF kickers. A deflection of +1~mrad is applied from the first kicker, and -1~mrad from the second kicker. This leads to a peak horizontal orbit offset of 3.5~mm inside the horizontal chicane. The orbit is closed at the \(10^{-7}\) level following the chicane, so that the beam's trajectory following the PFF system is independent of the applied kick. The values from the approximated orbit closure expressions in Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} are -1.03 and 1.04 respectively (with \(R_{11} = 1.2\), \(R_{12} = -0.9\), \(R_{21} = -0.7\), \(R_{22} = 1.3\) and \(m = 0.4\)). The 3--4\% difference from the expected values of -1 and +1 is explained by the 4\% stronger strength of CC.IQDH0790 compared to CC.IQDH0490, which was not taken in to account in the derivation of the simplified equations.
 
-Finally, the \(R_{52}\) value between the two kickers is 0.74~m. This defines the phase shift resulting from kicking the beam in the chicane, which is the key figure of merit for the PFF system. As shown in Figure~\ref{f:pffOpticsPhase} a kick of 1~mrad provides a phase shift of \(-10.6^\circ\) in this optics. This is converted in to the actual range of the PFF system taking in to account the specifications of the kicker amplifiers in Chapter~\ref{c:commissioning}. Verifications of the performance of the optics are presented in Chapters~\ref{c:phasePropagation}~\ref{c:commisioning}.
+Finally, the \(R_{52}\) value between the two kickers is 0.74~m. This defines the phase shift resulting from kicking the beam in the chicane, which is the key figure of merit for the PFF system. As shown in Figure~\ref{f:pffOpticsPhase} a kick of 1~mrad provides a phase shift of \(-10.6^\circ\) in this optics. This is converted in to the actual range of the PFF system taking in to account the specifications of the kicker amplifiers in Chapter~\ref{c:commissioning}. Verifications of the performance of the optics are presented in Chapters~\ref{c:phasePropagation}~and~\ref{c:commissioning}.
 
 \begin{table}
   \begin{center}
@@ -449,9 +449,7 @@ Finally, the \(R_{52}\) value between the two kickers is 0.74~m. This defines th
     \caption{Quadrupole power supply currents to set in the new PFF TL2 optics for a beam energy of 135~MeV.}
   	\label{t:pffOpticsQuads}
   \end{center}
-\end{table}
 
-\begin{table}
   \begin{center}
     \begin{tabular}{|c c c|}
 	   \hline
@@ -479,7 +477,7 @@ Finally, the \(R_{52}\) value between the two kickers is 0.74~m. This defines th
 \end{table}
 
 
-\begin{landscape}
+\afterpage{\begin{landscape}
 \begin{figure}
   \centering
   \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsBeta}
@@ -510,4 +508,4 @@ Finally, the \(R_{52}\) value between the two kickers is 0.74~m. This defines th
   \caption{Phase in the TL2 chicane with a 1~mrad kick applied.}
   \label{f:pffOpticsPhase}
 \end{figure}
-\end{landscape}
+\end{landscape}}
