@@ -50,6 +50,8 @@ basic parameters: 3GHz/1.5GHz beam, up to factor 8, initial 3-4A, final up to 26
 
 sections: linac, CT, DL, TL1, CR, TL2, CLEX (TBL/TBTS), CALIFES
 
+The CLIC Test Facility CTF3 at CERN has been in oepration since [WHEN], aiming to prove the feasibility of the CLIC concept. Includes - drive beam recombination, 12 GHz cavities, extraction power drive beam/transfer to main beam.
+
 \afterpage{\begin{landscape}
 \begin{figure}
   \centering
@@ -63,13 +65,9 @@ sections: linac, CT, DL, TL1, CR, TL2, CLEX (TBL/TBTS), CALIFES
 
 The layout of the PFF prototype at CTF3 is shown in Figure~\ref{f:ctfpffLayout}. The overall concept is the same as the CLIC proposal -- the beam phase is measured prior to a turnaround and then corrected by changing the path length through a chicane using kickers. At CTF3 the PFF input is the phase measured in the CT line (\(\phi_1\) in the figure). The phase is then corrected using two kickers installed in the ``dog-leg'' shaped chicane in the TL2 transfer line. 
 
-A 3~GHz, uncombined beam is used, bypassing the delay loop (DL) and completing only half a turn in the combiner ring (CR). With this setup the time of flight between the phase monitor (\(\phi_1\)) and the first kicker (K1) is approximately 380~ns. Like the proposed CLIC system, the PFF prototype aims to apply the correction downstream (in TL2) to exactly the same pulse that was initially measured upstream (in the CT line), which is possible as the correction signals travel a shorter distance than the beam. The latency of the whole system, including the signal transit times in cables and hardware latencies, must therefore be less than 380~ns. The system latency and correction timing are discussed in Section~\ref{s:timing}.
+A 3~GHz, uncombined beam is used, bypassing the delay loop (DL) and completing only half a turn in the combiner ring (CR). With this setup the time of flight between the phase monitor (\(\phi_1\)) and the first kicker (K1) is approximately 380~ns. Like the proposed CLIC system, the PFF prototype aims to apply the correction downstream (in TL2) to exactly the same pulse that was initially measured upstream (in the CT line), which is possible as the correction signals travel a shorter distance than the beam. The latency of the whole system, including the signal transit times in cables and hardware latencies, must therefore be less than 380~ns.
 
-location of hardware - CT phase mons, TL2 kickers, TBL phase mon.
-
-diagram of hardware locations
-
-correction range/general targets
+The primary goal of the PFF prototype is to demonstrate a reduction in phase jitter to close to the CLIC requirement of \(0.2^\circ\)~at~12~GHz, with a correction bandwidth above 17.5~MHz. The pursuit of this goal has required the development and installation of new hardware, as well as modifications and improvements to the setup and stability of the whole CTF3 drive beam complex.
 
 \afterpage{\begin{landscape}
 \begin{figure}
@@ -83,26 +81,42 @@ correction range/general targets
 \subsection{Hardware}
 \label{ss:ctfPFFHardware}
 
-who built the hardware
+The major hardware components of the PFF prototype are three phase monitors, two kickers, three sets of electronics for the phase monitors, a digitiser/feedforward controller and amplifiers to power the kickers (referred to as the kicker amplifiers). All the hardware components were designed, built and newly installed at CTF3 for the PFF prototype. The same components could be used at CLIC, with some important differences as described in Section~\ref{ss:ctfVsCLIC}. Each piece of hardware and its role is briefly introduced here, with more detail provided for each component in the remainder of the thesis.
 
-references to chapters/sections where they are discussed
+The kickers and phase monitors are installed in the beam line at the locations shown in Figure~\ref{f:ctfpffLayout}, whereas the phase monitor electronics, feedforward controller and kicker amplifiers are installed in the CTF3 ``klystron gallery'', on the floor above the accelerator hall, for easier access. The cable lengths between the phase monitors and their electronics, and between the amplifiers and the kickers, are therefore longer than they appear in Figure~\ref{f:ctfpffLayout}.
+
+As already described, the first phase monitor (\(\phi_1\)), in the CT line, provides the PFF input. The neighbouring second phase monitor (\(\phi_2\)), also in the CT line, is used to cross-check and verify the performance of the phase monitors. The final phase monitor (\(\phi_3\)), in the TBL line, measures the corrected phase jitter following the chicane in TL2. The phase monitors are designed by INFN, Italy [REF] to give a resolution below \(0.2^\circ\) at 12~GHz with a bandwidth above 30MHz, also taking in to account the  design of the phase monitor electronics [REF].
+
+The processed signals from the first phase monitor are sent to the ``FONT5a board'', the feedforward controller designed and built by the Oxford University group of the John Adams Institute (JAI) [REF]. With a low latency of around 60~ns [REF], the FONT5a board digitises the phase monitor signals, calculates the appropriate correction to apply and provides the drive signal for the kicker amplifiers.
+
+The kicker amplifiers have also been designed and built by Oxford University/JAI, and provide the voltage that produces the electric and magnetic fields that deflect the beam when applied to the kickers. Each amplifier module provides a power of around 20~kW with a bandwidth close to 50~MHz for small variations [REF]. 
+
+Finally, the two kickers that provide the correction were designed and built by INFN, Italy. The are installed prior to the first and last dipoles in the TL2 dog-leg chicane, and deflect the CTF3 beam through an angle of 1~mrad for an applied voltage of around 1.3~kV [REF].
 
 
-\subsection{Differences Between PFF at CTF and CLIC}
+\subsection{Differences Between PFF at CTF3 and CLIC}
 \label{ss:ctfVsCLIC}
 
 The goal of the prototype is to prove the general PFF concept and the feasibility of using it to achieve \(0.2^\circ\) drive beam phase stability. It is neither necessary nor possible for the proposed CLIC and CTF3 systems to be identical, and there are a number of differences between the two that are summarised here. 
 
-The most obvious difference is the design of the correction chicane -- with a four bend C--shaped chicane with four PFF kickers installed proposed for CLIC, compared to the four bend dog leg chicane at CTF3 with two PFF kickers installed for the correction. The freedom to design a purpose built chicane with additional kickers in the CLIC design somewhat simplifies the challenges of obtaining a suitable layout for the prototype chicane at CTF3 using pre-existing beam lines (Chapter~\ref{c:tl2Optics}).
+The most obvious difference between the applications at CTF3 and CLIC are the different beam energies and scale of the two complexes. CLIC will have a drive beam energy of 2.4~GeV, compared to the 135~MeV CTF3 drive beam. The CLIC PFF system therefore requires much higher power from the kicker amplifiers to deflect the beam by the same amount as the CTF3 prototype. CLIC requires up to 500~kW peak power from the amplifiers, compared to 20~kW at CTF3. Multiple amplifier modules with similar design to the CTF3 amplifiers could be combined to meet the CLIC power requirements [REF].
+
+The CLIC proposal requires 48 separate PFF systems, with one in each of the 24 decelerator sections for each of the two drive beams. Aside from the vast difference in the quantity of required hardware components , the CLIC application also presents the challenge of synchronising the reference timing of the 48 systems along the 50~km facility with femtosecond stability. This is not adressed in the CTF3 prototype but feasible solutions have been proposed [REF].
+
+Although both the CTF3 and CLIC schemes use chicanes to vary the beam trajectory the design of the chicanes used are different -- with a four bend C--shaped chicane with sixteen PFF kickers proposed in the CLIC CDR, compared to the four bend dog leg chicane at CTF3 with two PFF kickers installed for the correction. The freedom to design a purpose built chicane with additional kickers in the CLIC design somewhat simplifies the challenges of obtaining a suitable layout for the prototype chicane at CTF3 using pre-existing beam lines (Chapter~\ref{c:tl2Optics}).
 
 Another key difference is that at CTF3 the PFF prototype is operated on uncombined beam, bypassing the delay loop and completing only half a turn in the combiner ring. At CLIC the complete PFF system (including the PFF input) is placed after the drive beam recombination, and therefore would operate on combined beam. At CTF3 as the PFF input is placed prior to the delay loop any attempt to operate the PFF prototype with combined beam would be complicated by having to use the measured uncombined beam pulse to correct the combined pulse following the combiner ring. Nevertheless, operation of the prototype with combined beam could be possible and may be attempted in future tests.
 
 The main effect of using the uncombined pulse at CTF3 rather than the combined pulse as forseen for CLIC is that the beam pulse lengths are different. At CLIC \(0.2^\circ\) phase stability is needed across the 240~ns combined beam pulse. At CTF3 the uncombined pulse is much longer, up to 1.2~\(\mathrm{\mu s}\). It is therefore not necessary to demonstrate \(0.2^\circ\) phase stability across the full CTF3 pulse length to fulfill the CLIC requirements.
 
-In fact, it is in any case impossible to demonstrate \(0.2^\circ\) phase stability across the full CTF3 pulse length with the PFF prototype due to the large phase sag that is present along the beam pulse. The RF pulse compression system at CTF3 [REF] results in an approximately parabolic variation of roughly \(40^\circ\) along the pulse. This would not be present at CLIC. The phase sag is much larger than the correction range of the PFF prototype, which is designed to remove smaller, fast offsets. The PFF correction is therefore focused on the flatter, central part of the pulse around the peak of the phase sag, where the phase variations across the pulse length relevant for CLIC are within the correction range.
+In fact, it is in any case impossible to demonstrate \(0.2^\circ\) phase stability across the full CTF3 pulse length with the PFF prototype due to the large phase sag that is present along the beam pulse. The RF pulse compression system at CTF3 [REF] results in an approximately parabolic variation of roughly \(40^\circ\) along the pulse which would not be present at CLIC. The phase sag is much larger than the correction range of the PFF prototype, which is designed to remove smaller, fast offsets. The PFF correction is therefore focused on the flatter, central part of the pulse around the minimum in the phase sag, where the phase variations across the pulse length relevant for CLIC are within the correction range. This is shown in Figure~\ref{f:ctfPhaseSag}.
 
-\subsection{Goals for the PFF Prototype at CTF3}
-\label{ss:pffGoals}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/introduction/phaseSag}
+  \caption{Phase sag along the 1.2~\(\mathrm{\mu s}\) CTF3 beam pulse. The dashed black lines mark show the 240~ns combined CLIC pulse length centred around the region where the phase sag is flattest.}.
+  \label{f:ctfPhaseSag}
+\end{figure}
 
 \newsection{phaseJitDefs}{Definitions of Different Phase Statistics}
 
