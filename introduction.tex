@@ -41,16 +41,9 @@ required specifications - hardware power, bandwidth, latency etc.
 
 \newsection{ctfIntro}{The CLIC Test Facility CTF3}
 
+The CLIC design requires the use of many new concepts and technologies. Therefore, to prove the feasibility of CLIC the test facility CTF3 at CERN has been in operation since 2001. It aims to demonstrate the generation of a high intensity drive beam using the bunch recombination process, as well as the extraction of power from this drive beam and the use of the extracted power to accelerate another beam. CTF3 also hosts many related activities in areas such as the development of 12~GHz accelerating cavities and beam instrumentation, for example [REF]. The main goals of CTF3 have been achieved and 2016 will be its last year of operation [REF].
 
-prove main CLIC concepts, drive beam generation, accelerating cavities, etc.
-
-PFF prototype
-
-basic parameters: 3GHz/1.5GHz beam, up to factor 8, initial 3-4A, final up to 26A(?)
-
-sections: linac, CT, DL, TL1, CR, TL2, CLEX (TBL/TBTS), CALIFES
-
-The CLIC Test Facility CTF3 at CERN has been in oepration since [WHEN], aiming to prove the feasibility of the CLIC concept. Includes - drive beam recombination, 12 GHz cavities, extraction power drive beam/transfer to main beam.
+A diagram of the CTF3 facility is found in Figure~\ref{f:ctfLayout},  showing the layout of buildings (purple) and beam lines (red) with the names and extent of the main sections labelled in black. The source of the CTF3 beam, at the top left of the figure in the linac, is a thermionic electron gun [REF] that produces a \(1.4~\mathrm{\mu s}\) beam pulse with an intensity of 4~A and a repetition rate of 0.8~Hz. The first 200~ns of the pulse contains a sharp energy transient and is eventually lost in the first bending sections of the facility, creating a usable pulse length of around \(1.2~\mathrm{\mu s}\). The continous beam pulse from the gun is bunched at either 1.5~GHz or 3~GHz depending on the mode of operation [REF].
 
 \afterpage{\begin{landscape}
 \begin{figure}
@@ -61,13 +54,17 @@ The CLIC Test Facility CTF3 at CERN has been in oepration since [WHEN], aiming t
 \end{figure}
 \end{landscape}}
 
+The beam is accelerated along the linac in 3~GHz RF cavities powered by conventional klystrons combined with RF pulse compressors which double their output power [REF]. The accelerating cavities are operated in the fully loaded mode, in which almost all the RF power sent to the cavity is absorbed by the beam for high power efficiency [REF]. At the end of the linac the beam reaches an energy of approximately 135~MeV.
+
+Following the linac the beam intensity can be increased by up to a factor 8 using the delay loop and combiner ring, which both function in the same way as described for CLIC in Section~\ref{s:clicIntro}. Experiments at CTF3 are usually performed with either a 3~GHz factor 1 (4~A) or factor 4 (16~A) beam, or a 1.5~GHz factor 8 (28~A) beam. For the setups with 3~GHz bunching the delay loop is bypassed. The number of times the beam circulates around the combiner ring can be varied between 0.5 and 3.5 turns to give an increase in beam intensity by a factor 1, 2, 3 or 4. With 1.5~GHz beam a 1.5~GHz RF deflector [REF] is used at the delay loop entrance to inject alternating 140~ns sub-trains in to the loop. The sub-trains exiting the loop merge with the 140~ns trains bypassing the loop to give a factor 2 increase in beam intensity. The intensity of this factor 2 beam can then also be increased by additional factor 4 in the combiner ring, to give the total increase of a factor 8.
+
+Following the combiner ring the beam enters the transfer line TL2, which transports the beam to the CLIC experimental area (CLEX). In CLEX the CTF3 drive beam can be directed to two different beam lines - TBL (Test Beam Line) and TBM (Two Beam Module). In TBL a series of PETS are installed to test the extraction of power from the drive beam and to measure the properties of the produced RF power [REF]. In TBM a prototype CLIC accelerating module is installed, in which RF power is extracted from the drive beam and used to accelerate a second beam, called CALIFES. The CALIFES beam also hosts many experiments independent from the CTF3 drive beam [REF].
+
 \newsection{pffCTFIntro}{The PFF Prototype at CTF3}
 
-The layout of the PFF prototype at CTF3 is shown in Figure~\ref{f:ctfpffLayout}. The overall concept is the same as the CLIC proposal -- the beam phase is measured prior to a turnaround and then corrected by changing the path length through a chicane using kickers. At CTF3 the PFF input is the phase measured in the CT line (\(\phi_1\) in the figure). The phase is then corrected using two kickers installed in the ``dog-leg'' shaped chicane in the TL2 transfer line. 
+The phase feedforward system proposed for CLIC (Section~\ref{s:}) presents many challenges in terms of the required hardware latencies, resolutions, power and bandwidth. As a result, one of the key activities at CTF3 since 2013 has been the design, installation and operation of a prototype PFF system. The primary goal of the PFF prototype is to demonstrate the feasibility of the PFF concept, with the ultimate aim of reducing the CTF3 phase jitter to close to the CLIC requirement of \(0.2^\circ\)~at~12~GHz, with a correction bandwidth above 17.5~MHz. The pursuit of this goal has required the development and installation of new hardware, as well as modifications and improvements to the setup and stability of the whole CTF3 drive beam complex.
 
-A 3~GHz, uncombined beam is used, bypassing the delay loop (DL) and completing only half a turn in the combiner ring (CR). With this setup the time of flight between the phase monitor (\(\phi_1\)) and the first kicker (K1) is approximately 380~ns. Like the proposed CLIC system, the PFF prototype aims to apply the correction downstream (in TL2) to exactly the same pulse that was initially measured upstream (in the CT line), which is possible as the correction signals travel a shorter distance than the beam. The latency of the whole system, including the signal transit times in cables and hardware latencies, must therefore be less than 380~ns.
-
-The primary goal of the PFF prototype is to demonstrate a reduction in phase jitter to close to the CLIC requirement of \(0.2^\circ\)~at~12~GHz, with a correction bandwidth above 17.5~MHz. The pursuit of this goal has required the development and installation of new hardware, as well as modifications and improvements to the setup and stability of the whole CTF3 drive beam complex.
+The layout of the PFF prototype is shown in Figure~\ref{f:ctfpffLayout}. The overall concept is the same as the CLIC proposal -- the beam phase is measured prior to a turnaround and then corrected by changing the path length through a chicane using kickers. At CTF3 the PFF input is the phase measured in the CT line (\(\phi_1\) in the figure). The phase is then corrected using two kickers installed in the ``dog-leg'' shaped chicane in the TL2 transfer line.  A 3~GHz, uncombined beam is used, bypassing the delay loop (DL) and completing only half a turn in the combiner ring (CR). With this setup the time of flight between the phase monitor (\(\phi_1\)) and the first kicker (K1) is approximately 380~ns. Like the proposed CLIC system, the PFF prototype aims to apply the correction downstream (in TL2) to exactly the same pulse that was initially measured upstream (in the CT line), which is possible as the correction signals travel a shorter distance than the beam. The latency of the whole system, including the signal transit times in cables and hardware latencies, must therefore be less than 380~ns.
 
 \afterpage{\begin{landscape}
 \begin{figure}
@@ -101,7 +98,7 @@ The goal of the prototype is to prove the general PFF concept and the feasibilit
 
 The most obvious difference between the applications at CTF3 and CLIC are the different beam energies and scale of the two complexes. CLIC will have a drive beam energy of 2.4~GeV, compared to the 135~MeV CTF3 drive beam. The CLIC PFF system therefore requires much higher power from the kicker amplifiers to deflect the beam by the same amount as the CTF3 prototype. CLIC requires up to 500~kW peak power from the amplifiers, compared to 20~kW at CTF3. Multiple amplifier modules with similar design to the CTF3 amplifiers could be combined to meet the CLIC power requirements [REF].
 
-The CLIC proposal requires 48 separate PFF systems, with one in each of the 24 decelerator sections for each of the two drive beams. Aside from the vast difference in the quantity of required hardware components , the CLIC application also presents the challenge of synchronising the reference timing of the 48 systems along the 50~km facility with femtosecond stability. This is not adressed in the CTF3 prototype but feasible solutions have been proposed [REF].
+The CLIC proposal requires 48 separate PFF systems, with one in each of the 24 decelerator sections for each of the two drive beams. Aside from the vast difference in the quantity of required hardware components, the CLIC application also presents the challenge of synchronising the reference timing of the 48 systems along the 50~km facility with femtosecond stability. This is not adressed in the CTF3 prototype but feasible solutions have been proposed [REF].
 
 Although both the CTF3 and CLIC schemes use chicanes to vary the beam trajectory the design of the chicanes used are different -- with a four bend C--shaped chicane with sixteen PFF kickers proposed in the CLIC CDR, compared to the four bend dog leg chicane at CTF3 with two PFF kickers installed for the correction. The freedom to design a purpose built chicane with additional kickers in the CLIC design somewhat simplifies the challenges of obtaining a suitable layout for the prototype chicane at CTF3 using pre-existing beam lines (Chapter~\ref{c:tl2Optics}).
 
