@@ -1,31 +1,109 @@
 \newchapter{intro}{Introduction}
 
-This is the introductory text.
+\newsection{partPhys}{Particle Physics}
 
-%\newsection{partPhys}{Particle Physics}
+Particle physics is the study of the building blocks of the universe. At its heart is the standard model, which defines a small number of fundamental particles, spin half fermions, that form the constituents of all visible matter in the universe, as well integer spin bosons that mediate the forces between the fermions. Tables~\ref{t:fermions}~and~\ref{t:bosons} list all the standard model fermions and bosons, respectively. 
 
-%\newsection{accelIntro}{Particle Colliders}
+The fermions are split in to two types -- leptons with an integer charge of -1 (charged leptons) or 0 (neutrinos), and quarks with fractional charges of +2/3 or -1/3. The fermions are also split in to three generations, each with a charged lepton, neutrino, positively charged quark and negatively charged quark. The mass of the particles increases with the generation, and all stable matter is comprimsed of the first generation particles. Every particle in the standard model has an associated anti-particle, with the same mass but opposite charge. 
 
-\newsection{linColliderIntro}{Motivation for Future Linear Colliders}
+The fermions in the standard model interact via three fundamental forces -- the electromagnetic force, mediated by the photon, the weak force, mediated by the W and Z bosons, and the strong force, mediated by the gluon. The strong force binds quarks together to form hadrons, which are either a quark---anti-quark pair (mesons), or a bound state of three quarks (hadrons). Protons are hadrons comprising of two up quarks and one down quark. Quarks also interact via the electromagnetic and weak forces. Leptons do not interact with the strong force -- neutrinos only interact via the weak force, and the charged leptons interact via the weak and electromagnetic forces. The final component of the standard model is the Higgs field,  which is responsible for giving particles their masses, and its associated Higgs boson [REF].
 
-what colliders are/what they are for
+The standard model has been the subject of extensive theoretical and experimental research over the last 50 years. This culminated in 2012 with the discovery of the final standard model particle yet to be observed experimentally, the Higgs Boson, at the Large Hadron Collider (LHC), CERN, Switzerland [REF]. Despite the incredible success of the standard model there are several known phenomena it cannot explain. For example, it does not include the gravitational force nor have viable particles or mechanisms to describe dark matter and dark energy, which are required to explain observations in cosmology such as the increasing rate of expansion of the universe [REF]. The LHC and other experiments around the world aim to discover new particles or find discrepancies in the standard model to explain these effects.
 
-why want a e+ e- collider
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c | c c | c c|}
+	   \hline
+       Generation & \multicolumn{2}{c|}{Leptons} & \multicolumn{2}{c|}{Quarks} \\
+       \hline
+       1 & Electron (\(e^-\)) & Electron neutrino (\(\nu_e\)) & Up (\(u\)) & Down (\(d\)) \\
+       2 & Muon (\(\mu^-\)) & Muon neutrino (\(\nu_\mu\)) & Charm (\(c\)) & Strange (\(s\)) \\
+       3 & Tau (\(\tau^-\)) & Tau neutrino (\(\nu_\tau\)) & Top (\(t\)) & Bottom (\(b\)) \\
+	   \hline
+	   Charge & -1 & 0 & +2/3 & -1/3 \\
+	   \hline
+    \end{tabular}
+    \caption{Standard model fermions.}
+  	\label{t:fermions}
+  	\vspace{0.5 cm}
+  	\begin{tabular}{| c c |}
+	   \hline
+       Force & Bosons \\
+       \hline
+       Electromagnetic & Photon (\(\gamma\)) \\
+       Weak & \(W^{\pm}\) and \(Z^0\) Bosons \\
+       Strong & Gluon (\(g\)) \\
+	   \hline
+	   Higgs Field & Higgs Boson (\(H^0\)) \\
+	   \hline
+    \end{tabular}
+    \caption{Standard model bosons.}
+  	\label{t:bosons}
 
-why linear better for e+ e-
+  \end{center}
+\end{table}
+
+\newsection{colliderIntro}{Colliders}
+
+The driving force behind recent discoveries in particle physics has been colliders, in which two beams of particles are accelerated to high energy and then brought in to collision with one another. 
+
+Recent history of particle physics verifying standard model
+
+collide two high energy beams
+
+high energy because de broglie wavelength/heavier particles
+
+two beams to maximise energy for particle production
+
+electrons or protons, circular or linear
+
+LHC/discovery of higgs
+
+\newsection{futureColliders}{Motiveation for Future Linear Colliders}
+
+why want a e+ e- collider - fundamental particles, no QCD backgrounds etc.
+
+why linear better for e+ e- - synchrotron radiation. LHC vs. LEP energy.
+
+challenges of linear collider - one pass, luminosity -> beam size
 
 two proposals - ILC and CLIC. ILC up to 1 TeV. CLIC up to 3 TeV. ILC more mature/could be built now. CLIC more challenging.
 
-\newsection{clicIntro}{CLIC}
+\newsection{clicIntro}{The Compact Linear Collider (CLIC)}
 
 basics of main beam, length etc.
 
 accelerating gradient - why need it to be high, why 12 GHz chosen
 
-drive beam - why (efficiency/cost vs. 12 GHz klystrons), combination process, PETS
+drive beam - why (efficiency/cost vs. 12 GHz klystrons), PETS
 
+\afterpage{\begin{landscape}
+\begin{figure}
+  \centering
+  \includegraphics[width=\hsize]{Figures/introduction/clicLayout}
+  \caption{Layout of the CLIC complex.}.
+  \label{f:clicLayout}
+\end{figure}
+\end{landscape}}
 
-%\newsection{fontIntro}{FONT}
+\subsection{Drive Beam Recombination}
+\label{ss:clicCombination}
+
+24 times
+
+delay loop
+
+combiner ring
+
+\afterpage{\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/introduction/delayLoop}
+  \caption{Drive beam recombination in the delay loop.}.
+  \label{f:delayLoop}
+    \includegraphics[width=0.9\textwidth]{Figures/introduction/combinerRing}
+  \caption{Drive beam recombination in the second combiner ring.}.
+  \label{f:combinerRing}
+\end{figure}}
 
 \newsection{clicPFF}{Phase Feedforward for CLIC}
 
