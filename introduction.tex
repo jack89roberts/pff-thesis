@@ -47,7 +47,7 @@ The standard model has been the subject of extensive theoretical and experimenta
 
 The driving force behind recent discoveries in particle physics has been colliders, in which two beams of particles are accelerated to high energy and then brought in to collision with one another. Longitudinal electric fields are used to accelerate the two beams, with the fields created by injecting RF power in to cavities placed along the beam line. The source of the RF power is usually klystrons [REF], in which a low power RF input is amplified using a low energy electron beam (contained within the klystron and independent of the colliding beams). Due to the use of RF accelerating fields, the colliding beams are bunched with a frequency related to the RF frequency, rather than being continuous. Each bunch of particles can then experience the same accelerating field.
 
-The interaction of the two beams when they are brought in to collision produces new particles that are observed in large detectors surrounding the interaction point. The types of interaction that can take place and the particles that can be produced depends on the centre of mass energy of the collision. Colliding a single beam in to a fixed target reduces the available energy for the interaction as the final state must have high kinetic energy to conserve momentum. Colliding two opposing beams head on with zero net momentum therefore maximises the centre of mass energy available to produce new particles.
+The interaction of the two beams when they are brought in to collision produces new particles that are observed in large detectors surrounding the interaction point (IP). The types of interaction that can take place and the particles that can be produced depends on the centre of mass energy of the collision. Colliding a single beam in to a fixed target reduces the available energy for the interaction as the final state must have high kinetic energy to conserve momentum. Colliding two opposing beams head on with zero net momentum therefore maximises the centre of mass energy available to produce new particles.
 
 The rate at which a given interaction \(X\) occurs when the beams collide can be defined as:
 \begin{equation}
@@ -67,7 +67,7 @@ In synchrotrons the two beams are bent around a path of fixed radius using magne
 
 Proton collisions present a number of challenges for the particle detectors and data analysis, however. Protons are not fundamental particles, but rather contain quarks and gluons. Therefore the interactions that occur in proton colliders are in reality between the constituents of the protons, rather than the protons themselves. The precise energy of each quark or gluon is not known, which leads to increased uncertainties in the measurements. In addition, strong interactions between the quarks and gluons lead to high background noise in the collision events, making particle identification in the detectors more difficult. As electrons are (in our current knowledge) fundamental and do not partake in the strong interaction the resulting collisions in a electron (or electron--positron) collider are much cleaner and the uncertainties smaller. This motivates research in to a future high energy electron collider, where the properties of recently discovered heavy particles such as the Higgs boson and top quark, or any new particles discovered by the LHC in the coming years, could be studied with high precision. 
 
-Electron machines present a different challenge to protons due to their approximately 2000 times lower mass, however. Charged particles bent in a magnetic field emit radiation, known as synchrotron radiation, that depends on the bending radius, \(r\), the particle's energy, \(E\), and the particle's rest mass, \(m_0\), as follows [REF]:
+Electron machines present a different challenge to protons due to their approximately 2000 times lower mass. Charged particles bent in a magnetic field emit radiation, known as synchrotron radiation, that depends on the bending radius, \(r\), the particle's energy, \(E\), and the particle's rest mass, \(m_0\), as follows [REF]:
 \begin{equation}
 P \propto \frac{1}{r^2} \frac{E^4}{m_0^4}
 \end{equation}
@@ -79,11 +79,44 @@ Currently there are two separate proposals for the design of a future electron--
 
 \newsection{clicIntro}{The Compact Linear Collider (CLIC)}
 
-basics of main beam, length etc.
+The parameters of CLIC, summarised in Table~\ref{t:clicParams}, are chosen to optimise the cost of an electron--positron collider with a centre of mass energy of 3~TeV whilst providing similar or higher luminosity than the LHC. Superconducting RF cavities are limited in the peak fields they can achieve, and so room temperature normal conducting cavities are used to achieve an accelerating gradient of 100~MV/m. This reduces the site length, and associated civil engineering costs, by roughly a factor 3 compared to what would be necessary with a superconducting 3~TeV machine. Studies and cost optimisations of the cavities necessary to support the high peak fields, taking in to account the RF field breakdown rate for example, lead to the choice of a 12~GHz RF frequency with a beam pulse length of 156~ns [REF]. Each accelerating cavity requires an RF input power of around 65~MW [REF].
 
-accelerating gradient - why need it to be high, why 12 GHz chosen
+Conventional klystrons cannot produce the short pulse lengths and high peak powers required for CLIC [REF]. To achieve the necessary specifications with klystrons RF pulse compressors would have to be used to increase their output power and decrease their pulse length by roughly a factor 5 [REF]. This would require a prohibitively large number of klystrons, approximately 35000, and yeild a low RF power efficiency of about 40\% [REF]. To solve this problem CLIC proposes to use a novel two beam acceleration concept, in which the high energy main beam is accelerated using RF power extracted from a secondary, high intensity but low energy, drive beam.
+
+Figure~\ref{f:clicLayout} shows the layout of the CLIC complex. The bottom half of the figure shows the generation of the main colliding beams. The electron and positron beams are generated in dedicated injectors at the bottom of the figure, where they are accelerated to an energy of 2.86~GeV in conventional linacs. They are then transported to a series of damping rings, in which the effects synchrotron radiation are used to decrease the beam size [REF]. After leaving the damping rings they are accelerated further to 9~GeV before being transported to each end of the main linac. Here both beams are accelerated through 21~km of 100 MV~m, reaching an energy of 1.5~TeV. Finally, the beam size is squeezed further in the beam delivery system (BDS), down to the nanometre sizes necesarry to achieve high peak luminosity, before being brought in to collision at the interaction point.
+
+The top half of the figure shows the beam lines involved in the generation of the high intensity drive beams. The drive beam accelerators are conventional linacs with an RF frequency of 1~GHz, a beam pulse length of around 140~\(\mathrm{\mu s}\), a beam current of 4.2~A and a final energy of 2.4~GeV. The longer beam pulse length and lower power requirements means klystrons can be used with high efficiencies, unlike the main beams. Following the linac the drive beams enter a series of ``delay loops'' and ``combiner rings'' in which the drive beam is interleaved with itself to increase its intensity by a factor 24 (to 100~A) in a series of shorter 240~ns beam pulses. This drive beam recombination process is described in Section~\ref{ss:clicCombination}.
+
+The 100~A drive beam is then directed in to 24 decelerator sections. Here a series of specially designed cavities, Power Extraction and Transfer Structures (PETS), are installed which decelerate, and extract power from, the drive beam. The PETS extract 90\% of the energy of the drive beam [REF], creating an RF pulse with the necessary properties to accelerate the main beam at 100~MV/m. The extracted RF power from the PETS is transferred to the main beam accelerating cavities via short waveguides.
 
 drive beam - why (efficiency/cost vs. 12 GHz klystrons), PETS
+
+\begin{table}
+  \begin{center}
+  	\begin{tabular}{| c c |}
+	   \hline
+       Parameter & CLIC 3~TeV\\
+       \hline
+       Peak Luminosity [\(\mathrm{cm^{-2}s^{-1}}\)] & \(5.9\times10^{34}\) \\
+       Site Length [km] & 48.4 \\
+       Accelerating Gradient [MV/m] & 100 \\
+	   RF Frequency [GHz] & 12 \\
+	   Number of Bunches & 312 \\
+	   Number of Particles per Bunch & \(3.72\times10^9\) \\
+	   Bunch Separation [ns] & 0.5 \\
+	   Bunch Length [\(\mathrm{\mu m}\)] & 44 \\
+	   Beam Pulse Length [ns]  & 156 \\
+	   Repetition Rate [Hz] & 50 \\
+	   Horizontal Beam Size at IP [nm] & 40 \\
+	   Vertical Beam Size at IP [nm] & 1 \\
+	   AC Power Consumption [MW] & 582 \\
+	   \hline
+    \end{tabular}
+    \caption{Parameters of the CLIC main beam for a collision energy of 3~TeV [REF].}
+  	\label{t:clicParams}
+  \end{center}
+\end{table}
+
 
 \afterpage{\begin{landscape}
 \begin{figure}
