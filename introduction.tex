@@ -81,16 +81,6 @@ Currently there are two separate proposals for the design of a future electron--
 
 The parameters of CLIC, summarised in Table~\ref{t:clicParams}, are chosen to optimise the cost of an electron--positron collider with a centre of mass energy of 3~TeV whilst providing similar or higher luminosity than the LHC. Superconducting RF cavities are limited in the peak fields they can achieve, and so room temperature normal conducting cavities are used to achieve an accelerating gradient of 100~MV/m. This reduces the site length, and associated civil engineering costs, by roughly a factor 3 compared to what would be necessary with a superconducting 3~TeV machine. Studies and cost optimisations of the cavities necessary to support the high peak fields, taking in to account the RF field breakdown rate for example, lead to the choice of a 12~GHz RF frequency with a beam pulse length of 156~ns [REF]. Each accelerating cavity requires an RF input power of around 65~MW [REF].
 
-Conventional klystrons cannot produce the short pulse lengths and high peak powers required for CLIC [REF]. To achieve the necessary specifications with klystrons RF pulse compressors would have to be used to increase their output power and decrease their pulse length by roughly a factor 5 [REF]. This would require a prohibitively large number of klystrons, approximately 35000, and yeild a low RF power efficiency of about 40\% [REF]. To solve this problem CLIC proposes to use a novel two beam acceleration concept, in which the high energy main beam is accelerated using RF power extracted from a secondary, high intensity but low energy, drive beam.
-
-Figure~\ref{f:clicLayout} shows the layout of the CLIC complex. The bottom half of the figure shows the generation of the main colliding beams. The electron and positron beams are generated in dedicated injectors at the bottom of the figure, where they are accelerated to an energy of 2.86~GeV in conventional linacs. They are then transported to a series of damping rings, in which the effects synchrotron radiation are used to decrease the beam size [REF]. After leaving the damping rings they are accelerated further to 9~GeV before being transported to each end of the main linac. Here both beams are accelerated through 21~km of 100 MV~m, reaching an energy of 1.5~TeV. Finally, the beam size is squeezed further in the beam delivery system (BDS), down to the nanometre sizes necesarry to achieve high peak luminosity, before being brought in to collision at the interaction point.
-
-The top half of the figure shows the beam lines involved in the generation of the high intensity drive beams. The drive beam accelerators are conventional linacs with an RF frequency of 1~GHz, a beam pulse length of around 140~\(\mathrm{\mu s}\), a beam current of 4.2~A and a final energy of 2.4~GeV. The longer beam pulse length and lower power requirements means klystrons can be used with high efficiencies, unlike the main beams. Following the linac the drive beams enter a series of ``delay loops'' and ``combiner rings'' in which the drive beam is interleaved with itself to increase its intensity by a factor 24 (to 100~A) in a series of shorter 240~ns beam pulses. This drive beam recombination process is described in Section~\ref{ss:clicCombination}.
-
-The 100~A drive beam is then directed in to 24 decelerator sections. Here a series of specially designed cavities, Power Extraction and Transfer Structures (PETS), are installed which decelerate, and extract power from, the drive beam. The PETS extract 90\% of the energy of the drive beam [REF], creating an RF pulse with the necessary properties to accelerate the main beam at 100~MV/m. The extracted RF power from the PETS is transferred to the main beam accelerating cavities via short waveguides.
-
-drive beam - why (efficiency/cost vs. 12 GHz klystrons), PETS
-
 \begin{table}
   \begin{center}
   	\begin{tabular}{| c c |}
@@ -117,7 +107,6 @@ drive beam - why (efficiency/cost vs. 12 GHz klystrons), PETS
   \end{center}
 \end{table}
 
-
 \afterpage{\begin{landscape}
 \begin{figure}
   \centering
@@ -127,16 +116,22 @@ drive beam - why (efficiency/cost vs. 12 GHz klystrons), PETS
 \end{figure}
 \end{landscape}}
 
+Conventional klystrons cannot produce the short pulse lengths and high peak powers required for CLIC [REF]. To achieve the necessary specifications with klystrons RF pulse compressors would have to be used to increase their output power and decrease their pulse length by roughly a factor 5 [REF]. This would require a prohibitively large number of klystrons, approximately 35000, and yeild a low RF power efficiency of about 40\% [REF]. To solve this problem CLIC proposes to use a novel two beam acceleration concept, in which the high energy main beam is accelerated using RF power extracted from a secondary, high intensity but low energy, drive beam.
+
+Figure~\ref{f:clicLayout} shows the layout of the CLIC complex. The bottom half of the figure shows the generation of the main colliding beams. The electron and positron beams are generated in dedicated injectors at the bottom of the figure, where they are accelerated to an energy of 2.86~GeV. They are then transported to a series of damping rings, in which the effects synchrotron radiation are used to decrease the beam size [REF]. After leaving the damping rings they are accelerated further to 9~GeV before being transported to each end of the main linac. Here both beams are accelerated in 21~km linacs containing the 100 MV/m accelerating structures, reaching an energy of 1.5~TeV. Finally, the beam size is squeezed further in the beam delivery system (BDS), down to the nanometre sizes necesarry to achieve high peak luminosity, before being brought in to collision at the interaction point.
+
+The top half of the figure shows the beam lines involved in the generation of the high intensity drive beams. The drive beam accelerators are conventional linacs with an RF frequency of 1~GHz, a beam pulse length of 142~\(\mathrm{\mu s}\), a beam current of 4.2~A and a final energy of 2.4~GeV. The longer beam pulse length and lower power requirements means klystrons can be used with high efficiencies, unlike the main beams. Following the linac the drive beams enter a series of ``delay loops'' and ``combiner rings'' in which the drive beam is interleaved with itself to increase its intensity by a factor 24 (to 100~A) in a series of shorter 240~ns beam pulses. This drive beam recombination process is described in Section~\ref{ss:clicCombination}.
+
+The 100~A drive beam is then directed in to 24 decelerator sections. Here a series of specially designed cavities, Power Extraction and Transfer Structures (PETS), are installed which decelerate, and extract power from, the drive beam. The PETS extract 90\% of the energy of the drive beam [REF], creating an RF pulse with the necessary properties to accelerate the main beam at 100~MV/m. The extracted RF power from the PETS is transferred to the main beam accelerating cavities via short waveguides.
+
+
+
 \subsection{Drive Beam Recombination}
 \label{ss:clicCombination}
 
-24 times
+The combination process used to produce the high intensity drive beam pulses is a unique feature of CLIC. The intensity is increased by a factor 2 in the delay loop, a factor three in the first combiner ring (CR1) and a factor 4 in the second combiner ring (CR2) to give the overall increase of \(2 \times 3 \times 4 = 24\) in beam current. 
 
-delay loop
-
-combiner ring
-
-\afterpage{\begin{figure}
+\begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/introduction/delayLoop}
   \caption{Drive beam recombination in the delay loop [REF].}.
@@ -144,7 +139,13 @@ combiner ring
     \includegraphics[width=0.9\textwidth]{Figures/introduction/combinerRing}
   \caption{Drive beam recombination in the second combiner ring [REF].}.
   \label{f:combinerRing}
-\end{figure}}
+\end{figure}
+
+Figure~\ref{f:delayLoop} shows the recombination process in the delay loop. Although the drive beam acceleration frequency is 1~GHz it is bunched at 0.5~GHz. At 240~ns intervals along the \(142~\mathrm{\mu s}\) drive beam pulse the phase of the bunching is switched by \(180^\circ\) at 0.5~GHz. This phase switching is performed by sub-harmonic bunchers (SHBs) powered by travelling wave tubes (TWTs). As \(180^\circ\) at 0.5~GHz is a full \(360^\circ\) at the acceleration frequency of 1~GHz the phase switching has no effect on the acceleration of the drive beam. 
+
+At the entrance of the delay loop a 0.5~GHz RF deflector is used. The 240~ns sub-trains alternate between having bunches that arrive when the field in the RF delfector is positive or negative. Sub-trains arriving when the field is positive are deflected in to the delay loop, whereas the remaining sub-trains bypass it. The length of the delay loop is also precisely tuned to be 240~ns, so that the sub-trains leaving the delay loop merge with the following sub-train bypassing the delay loop. The bunch frequency and beam current following the delay loop are therefore doubled to 1~GHz and 8.4~A respecitvely. The resulting beam structure consists of 240~ns pulses separated by 240~ns gaps.
+
+A similar process takes place in the two combiner rings to give the final 12~GHz bunch frequency and 100~A beam current. Figure~\ref{f:combinerRing} shows the recombination of a factor 4 in CR2. RF deflectors are again used to inject the beam in to the ring, this time with a higher frequency 3~GHz deflecting field to match the bunch frequency of the drive beam following CR1. The first drive beam sub-train entering CR2 circulates the ring for four turns. The length of the ring is chosen so that the second sub-train arrives just as the first sub-train has completed one turn in the ring, with a delay of one quarter of the 3~GHz wave length. Repeating this for a further two turns, interleaving a new sub-train with the beam in the ring after each turn, yields the factor 4 increase in bunch frequency and therefore beam current. CR1 operates in the same way, but the beam circulates for three turns and the required path length difference is one third of the 1~GHz wavelength.
 
 \newsection{clicPFF}{Phase Feedforward for CLIC}
 
