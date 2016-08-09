@@ -5,10 +5,15 @@
 \baselineskip=3ex
 
 \newcommand{\BIBand}{\&}
-\bibliographystyle{thesis}
+
+\begingroup
+\let\itshape\upshape
+
+\bibliographystyle{unsrt}%{thesis}
 
 \pagestyle{myheadings}
 \markboth{Bibliography}{Bibliography}
 
 \bibliography{references}
 
+\endgroup
