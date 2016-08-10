@@ -9,7 +9,7 @@ In the PFF system the voltage sent to the kickers in the TL2 chicane is varied d
 \phi_{PFF} = \phi_d - g\phi_u
 \label{e:pffEq1}
 \end{equation}
-Where \(g\) is the applied correction gain. The corrected downstream phase jitter, \(\sigma_{PFF}\), can then be defined using the standard result of subtracting correlated variances [REF]:
+Where \(g\) is the applied correction gain. The corrected downstream phase jitter, \(\sigma_{PFF}\), can then be defined using the standard result of subtracting correlated variances \cite{sumVar}:
 \begin{equation}
 \sigma_{PFF}^2 = \sigma_d^2 + g^2\sigma_u^2 - 2g\rho_{ud}\sigma_u\sigma_d
 \label{e:pffEq2}
@@ -107,7 +107,7 @@ It should be noted that whilst this provides an accurate measurement of the rela
 
 \subsubsection{Mean Beam Energy}
 
-Figure~\ref{f:enJitter_mean} shows an example of variations in the mean beam energy on medium to long timescales at CTF3, in this case 500 pulses or roughly 10 minutes. Relative energy jitter on the mean is typically at the level of \(1 \times 10^{-3}\), and varies by roughly \(\pm50\%\) about this value. For shorter timescales, in datasets up to a couple of hundred pulses or a few minutes in length, the relative energy jitter is routinely closer to the \(0.5 \times 10^{-3}\) level (seen later in Figure~\ref{f:r56Scan_upstreamParams}, for example). The main sources of drifts in the mean energy at CTF3 are variations in beam current and temperature dependent effects on the klystron phase and RF power feedback loops [REF]. Recent improvements have demonstrated below \(1 \times 10^{-3}\) energy stability also on longer timescales (see Section~\ref{ss:t566Mitigation}), which will aid future PFF tests.
+Figure~\ref{f:enJitter_mean} shows an example of variations in the mean beam energy on medium to long timescales at CTF3, in this case 500 pulses or roughly 10 minutes. Relative energy jitter on the mean is typically at the level of \(1 \times 10^{-3}\), and varies by roughly \(\pm50\%\) about this value. For shorter timescales, in datasets up to a couple of hundred pulses or a few minutes in length, the relative energy jitter is routinely closer to the \(0.5 \times 10^{-3}\) level (seen later in Figure~\ref{f:r56Scan_upstreamParams}, for example). The main sources of drifts in the mean energy at CTF3 are variations in beam current and temperature dependent effects on the klystron phase and RF power feedback loops \cite{lukasIPAC16}. Recent improvements have demonstrated below \(1 \times 10^{-3}\) energy stability also on longer timescales (see Section~\ref{ss:t566Mitigation}), which will aid future PFF tests.
 
 \begin{figure}
   \centering
@@ -222,7 +222,7 @@ All these quantities have been derived above and inserting them in to this equat
 \sigma_{PFF} = \left|R_{56}\right|\sigma_p\sqrt{1-\rho_{up}^2}
 \label{e:r56PFFJit}
 \end{equation}
-As expected the achievable corrected downstream phase jitter is minimised when \(R_{56}~=~0\). Note that this equation does not take in to account the effects of the phase monitor resolution, which in reality limits the minimum achievable downstream phase jitter to \(\sigma_{PFF}=0.2^\circ\) [REF]. 
+As expected the achievable corrected downstream phase jitter is minimised when \(R_{56}~=~0\). Note that this equation does not take in to account that the minimum achievable downstream phase jitter is limited to \(\sqrt{2}\) times the phase monitor resolution [REF].
 
 In principle, the beam conditions for the PFF correction can also be improved by reducing the relative energy jitter (\(\sigma_p\)) or by increasing the upstream phase-energy correlation (\(\rho_{up}\)). Reducing the relative energy jitter decreases the additional phase jitter created by non-zero R56. Increasing the upstream phase-energy correlation (\(\rho_{up}\)) reduces the effect that non-zero R56 has on the upstream-downstream phase correlation (\(\rho_{ud}\)). For example, if \(\rho_{up}=1\) the source of all upstream phase jitter is energy jitter. In that case although non-zero R56 would further increase the downstream phase jitter, the additional jitter would be well correlated with the upstream phase and the upstream-downstream phase correlation would not be affected. In practice \(\sigma_p\) and \(\rho_{up}\) are defined by the CTF3 injector and can not be varied with a great degree of flexibility, so having zero R56 is the only way to obtain ideal conditions for the PFF correction. However, recent improvements at CTF3 have reduced the relative energy jitter, as discussed later in Section~\ref{ss:t566Mitigation}. High upstream phase-energy correlations can also be created at CTF3 but not without greatly amplifying the upstream phase jitter, which causes issues for the PFF system due to its limited correction range (Section~\ref{s:pffNovelSetups}).
 
@@ -231,7 +231,7 @@ An interesting side note of Equations~\ref{e:r56JitEq}~and~\ref{e:r56PFFJit} is 
 \subsection{Effect of R56 in TL2}
 \label{ss:r56TL2Effect}
 
-Unfortunately, it was not possible to find optics for the TL2 chicane that met all the PFF requirements and thus an R56 in the chicane of close to -0.2~m had to be accepeted (Section~\ref{ss:pffMatched}). All other lines at CTF3 nominally have zero R56 [REF], and therefore don't introduce additional phase jitter via energy, at least to first order and to within the accuracy of the CTF3 MADX model. The overall R56 between the upstream phase monitors (in the CT line) and the downstream phase monitors (in the TBL line, labelled CB, after the TL2 chicane) is therefore -0.2~m also. Whether this can explain the low upstream-downstream phase correlation and high downstream phase jitter seen in Section~\ref{s:origJitter}, as well as what residual R56 between the two monitors can be tolerated to be able to achieve CLIC-level phase stability at CTF3, is discussed in this section.
+Unfortunately, it was not possible to find optics for the TL2 chicane that met all the PFF requirements and thus an R56 in the chicane of close to -0.2~m had to be accepeted (Section~\ref{ss:pffMatched}). All other lines at CTF3 nominally have zero R56 \cite{CTF3}, and therefore don't introduce additional phase jitter via energy, at least to first order and to within the accuracy of the CTF3 MADX model. The overall R56 between the upstream phase monitors (in the CT line) and the downstream phase monitors (in the TBL line, labelled CB, after the TL2 chicane) is therefore -0.2~m also. Whether this can explain the low upstream-downstream phase correlation and high downstream phase jitter seen in Section~\ref{s:origJitter}, as well as what residual R56 between the two monitors can be tolerated to be able to achieve CLIC-level phase stability at CTF3, is discussed in this section.
 
 Equations~\ref{e:r56JitEq}~and~\ref{e:r56CorrDefFinal} can be used to estimate the downstream phase jitter and upstream-downstream phase correlation in the conditions at CTF3. Typical values for the various parameters in the equations have already been presented in previous sections, and these values are summarised in Table~\ref{t:r56Params}. The value \(R_{56}\simeq -0.2\) was obtained in Section~\ref{ss:pffMatched} as previously mentioned, the value \(\sigma_u\simeq0.8^\circ\) in Section~\ref{s:origJitter} and the values \(\rho_{up}\simeq 0.2\) and \(\sigma_p\simeq 0.001\) in Section~\ref{ss:corrPhaseEnergy}.
 
@@ -298,7 +298,7 @@ Preliminary attempts to reduce the residual R56 between the upstream and downstr
 	\begin{figure}
   		\centering
   		\includegraphics[height=\textwidth]{Figures/propagation/TL1}
-  		\caption{TL1 [REF].}
+  		\caption{TL1 \cite{tl1Layout}.}
   		\label{f:tl1Layout}
 	\end{figure}
 \end{landscape}}
@@ -656,7 +656,7 @@ Differences in the phase jitter along the pulse between two different \(R_{56}\)
 \subsection{Mitigation of Higher Order Dependencies}
 \label{ss:t566Mitigation}
 
-The first order energy dependent effects on the downstream phase due to the \(R_{56}\) in TL2 have largely been successfully removed by adding positive \(R_{56}\) to the TL1 line. If necessary, further improvements could be made by creating further sets of TL1 optics in smaller \(R_{56}\) steps. Although the higher order energy dependent effects due to \(T_{566}\) have been identified they are more difficult to remove or reduce. To remove the effect completely new optics would have to be matched with constraints included to zero the \(T_{566}\) value between the usptream and downstream phase monitors. This would likely require the use of sextupoles, which are typically left unpowered at CTF3 due to difficulties in commissioning optics that include them [REF]. It also depends on the accuracy of the MADX model of CTF3 to second order, although the result in Figure~\ref{f:R56ScanGunWiggle_T566Fit} is promising in this regard, at least in the \(R_{56}\) range of interest.
+The first order energy dependent effects on the downstream phase due to the \(R_{56}\) in TL2 have largely been successfully removed by adding positive \(R_{56}\) to the TL1 line. If necessary, further improvements could be made by creating further sets of TL1 optics in smaller \(R_{56}\) steps. Although the higher order energy dependent effects due to \(T_{566}\) have been identified they are more difficult to remove or reduce. To remove the effect completely new optics would have to be matched with constraints included to zero the \(T_{566}\) value between the usptream and downstream phase monitors. This would likely require the use of sextupoles, which are typically left unpowered at CTF3 due to difficulties in commissioning optics that include them \cite{piotrPriv}. It also depends on the accuracy of the MADX model of CTF3 to second order, although the result in Figure~\ref{f:R56ScanGunWiggle_T566Fit} is promising in this regard, at least in the \(R_{56}\) range of interest.
 
 Alternatively, the second order effects can be reduced by decreasing the energy jitter and variaitions along the pulse at CTF3. Many improvements have recently been made at CTF3 to achieve this via the implementation of several new feedbacks [REF LukasIPAC]. New feedbacks on the phases of each klystron in the CTF3 injector as well as on the beam gun current are now routinely in operation, and these have already improved the mean energy jitter to \(0.5\times10^{-3}\) on short time scales of several minutes, or \(0.8\times10^{-3}\) on longer time scales. Hardware changes and further improvements to the implementation of these feedbacks should allow the mean energy stability to be improved further in 2016.
 
