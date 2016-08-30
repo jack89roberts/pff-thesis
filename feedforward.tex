@@ -12,7 +12,7 @@ The results presented here show the best corrected downstream phase jitter obtai
 %(higher correlations can be achieved by adding an additional jitter source upstream, as seen in Section~\ref{s:pffNovelSetups}).
 At the same time the phase monitor resolution was improved to below \(0.13^\circ\) after switching to mechanical phase shifters (Section~\ref{s:shifters}). Finally, updates to the kicker amplifiers (Section~\ref{s:amplifierSetup}), which doubled the correction range compared to earlier tests, were an important improvement .
 
-The data was taken as one of a sequence of short measurements fine-tuning the gain around the optimal value. Results from the other datasets in this sequence are discussed in the following section to demonstrate the phase stability achieved on longer time scales. The individual dataset shown here comprises 150 pulses taken in interleaved mode, with the correction applied to alternating pulses as described in Section~\ref{ss:pffFirmware}. The gain was set to 800 units, corresponding to an actual applied correction of 1.3 times the upstream phase using the conversion factor calculated in Section~\ref{ss:fontSetup}.
+The data was taken as one of a sequence of short measurements, with small changes to the gain made between datasets in an attempt to empirically determine the optimal gain. Results from the other datasets in this sequence are discussed in the following section to demonstrate the phase stability achieved on longer time scales and to discuss the current limitations of the correction. The individual dataset shown here comprises 150 pulses taken in interleaved mode, with the correction applied to alternating pulses as described in Section~\ref{ss:pffFirmware}. The gain was set to 800 units, corresponding to an actual applied correction of 1.3 times the upstream phase using the conversion factor calculated in Section~\ref{ss:fontSetup}.
 
 \subsection{Correction of Mean Phase}
 \label{ss:bestMeanJitter}
@@ -74,6 +74,7 @@ Figure~\ref{f:BestFF_Flatness} expresses the effect of the PFF system on the pha
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/feedforward/BestFF_Flatness}
+  %\includestandalone[width=0.75\textwidth]{Figures/feedforward/BestFF_Flatness}
   \caption{Flatness of the initial (blue) and corrected (red) downstream phase along the pulse.}
   \label{f:BestFF_Flatness}
 \end{figure}
@@ -103,7 +104,22 @@ The sample by sample phase jitter along the pulse is the true figure of merit wh
 
 The remainder of this chapter discusses remaining operational issues for the PFF system largely resulting from drifts in the CTF3 beam conditions. This section therefore discusses the status of the correction across longer time scales, presenting both the level of corrected phase jitter that can currently be achieved routinely and to highlight areas where improvements are still needed both in the PFF setup itself and the beam conditions. Being able to regularly demonstrate and maintain corrected downstream phase jitters at the level achieved in the best dataset shown previously (below \(0.3^\circ\)) on the mean phase, is one of the key remaining goals for the PFF prototype. To be concise this section focuses on the mean phase jitter, though exactly the same arguments can be applied to the correction of the jitter along the pulse and the pulse shape.
 
-Figure~\ref{f:longFF_noMeanSubHistory} shows the history of the mean phases upstream and downstream with the correction on and off during one afternoon of data taking. The PFF system was not operated continuously throughout this two and a half hour period but 15 individual datasets of a few hundred pulses each were taken and these results have been combined to create a large sample of 3083 interleaved pulses (1541 with the correction on and 1542 with the correction off). The time span of each individual dataset is marked by vertical black lines and the times displayed on the plot represent the start time of each dataset. [TODO: Pulse no. from 1-3083 rather than 1-1500 and offset odd/even by one]. The data presented in Section~\ref{s:jitterRecord}, showing the lowest downstream phase jitter achieved to date, was taken from the 15:38 dataset on this afternoon. Note that the large jump in the downstream phase between the 16:00 and 16:04 datasets was caused by changes made to magnetic correctors in the TL2 chicane in order to re-optimise the beam orbit and transmission to the downstream phase monitors at this time. In Figure~\ref{f:longFF_histDownstreamPhase} the mean phase is subtracted (separately for the upstream, downstream PFF off and downstream PFF on phase) from each dataset to remove this effect, making a comparison between datasets easier. It is important to emphasise that, apart from this jump in the downstream phase, the overall picture is a fair reflection of the (uncorrected) phase stability at CTF3 in optimal conditions.
+\subsection{Phase Monitor Resolution}
+\label{ss:longFF_phMonRes}
+
+The quoted initial and corrected phase jitters throughout this chapter and the thesis as a whole are the measured phase jitters including the contribution of the phase monitor resolution. The true achieved corrected downstream beam phase jitter is therefore slightly less than these measured values. The actual beam jitter can be given by (using Equation~\ref{e:measJitWithRes}):
+\begin{equation}
+\sigma_b^2 = \sqrt{\sigma_m^2 - \sigma_n^2}
+\end{equation}
+Where \(\sigma_b\) is the actual phase jitter of the beam, \(\sigma_m\) is the usually quoted measured phase jitter, and \(\sigma_n\) is the phase monitor resolution.
+
+For the mean phase the phase monitor resolution is around \(0.11^\circ\), whereas it is \(0.13^\circ\) for the measured phase point by point along the pulse for which the electronics noise makes a slightly larger contribution (Section~\ref{s:resolutionMeas}). As these are much lower than the achieved corrected phase jitters to date they only have a small contribution to the total measured jitter. Excluding the effects of the phase monitor resolution the actual mean downstream phase jitter achieved in Section~\ref{s:jitterRecord} is reduced from \(0.28\pm0.02^\circ\) to \(0.26\pm0.02^\circ\). The point by point jitter along the pulse is reduced from \(0.36\pm0.01^\circ\) to \(0.34\pm0.01^\circ\).
+
+The minimum achievable corrected phase jitter is a factor sqrt(2) larger than the phase monitor resolution (Equation~\ref{e:pffVsResolution}). This effect is included in the theoretical predictions and simulations presented in this chapter via the measured upstream-downstream phase correlation, which also has a dependence on the phase monitor resolution (Equation~\ref{e:corrVsResolution}). Again, with the corrected phase jitter currently achieved this is only a small effect, with the main limitations coming from the beam conditions and phase propagation.
+
+
+\subsection{Beam Conditions}
+\label{ss:longFF_beamConds}
 
 \afterpage{\begin{landscape}
 
@@ -114,7 +130,6 @@ Figure~\ref{f:longFF_noMeanSubHistory} shows the history of the mean phases upst
   \label{f:longFF_noMeanSubHistory}
 \end{figure}
 
-
 \begin{figure}
   \centering
   \includegraphics[width=\hsize]{Figures/feedforward/longFF_history}
@@ -123,6 +138,22 @@ Figure~\ref{f:longFF_noMeanSubHistory} shows the history of the mean phases upst
 \end{figure}
 
 \end{landscape}}
+
+Figure~\ref{f:longFF_noMeanSubHistory} shows the history of the mean phases upstream and downstream with the correction on and off during one afternoon of data taking. The PFF system was not operated continuously throughout this two and a half hour period but 15 individual datasets of a few hundred pulses each were taken and these results have been combined to create a large sample of 3083 interleaved pulses (1541 with the correction on and 1542 with the correction off). The time span of each individual dataset is marked by vertical black lines and the times displayed on the plot represent the start time of each dataset. [TODO: Pulse no. from 1-3083 rather than 1-1500 and offset odd/even by one]. The data presented in Section~\ref{s:jitterRecord}, showing the lowest downstream phase jitter achieved to date, was taken from the 15:38 dataset on this afternoon. Note that the large jump in the downstream phase between the 16:00 and 16:04 datasets was caused by changes made to magnetic correctors in the TL2 chicane in order to re-optimise the beam orbit and transmission to the downstream phase monitors at this time. In Figure~\ref{f:longFF_histDownstreamPhase} the mean phase is subtracted (separately for the upstream, downstream PFF off and downstream PFF on phase) from each dataset to remove this effect, making a comparison between datasets easier. It is important to emphasise that, apart from this jump in the downstream phase, the overall picture is a fair reflection of the (uncorrected) phase stability at CTF3 in optimal conditions.
+
+Figure~\ref{f:longFF_enDrifts} shows how the mean beam energy and the beam energy jitter varied during the afternoon. The mean relative beam energy offset varies between \(1.8\pm0.1\times10^{-3}\) and \(-1.9\pm0.1\times10^{-3}\), with an overall trend of decreasing energy with time. Meanwhile the relative energy jitter varies by up to a factor 3 between datasets, between \(0.56\pm0.05\times10^{-3}\) (in the record 15:38 dataset) and \(1.6\pm0.1\times10^{-3}\) (in the 16:44 dataset). In Section~\ref{ss:t566Sim} it is shown that mean energy offsets and energy jitters at this level are by themselves expected to reduce the upstream-downstream phase correlation to below 90\% due to the effects of \(T_{566}\) (second order phase-energy dependencies). The remainder of this section and Section~\ref{s:longFF_singleResults} focuses on how various drifts and changes during this afternoon effect the performance of the PFF system, largely in terms of the system setup. However, like the phase monitor resolution it will be seen that deviations from the optimal PFF system setup have only a small effect compared to the limitations placed by the phase propagation (initial upstream-downstream phase correlation and jitters). The phase propagation has been discussed extensively in Chapter~\ref{c:phasePropagation}, thus is only mentioned in brief here.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{Figures/feedforward/enOffsetJitter}
+  \caption{Mean energy (top) and energy jitter (bottom) in each dataset during the data taking period.}
+  \label{f:longFF_enDrifts}
+  \includegraphics[width=0.75\textwidth]{Figures/feedforward/enCorrVsPhasCorr}
+  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) plotted against the difference between the upstream phase-energy and downstream phase-energy correlation (\(\rho_{dp} - \rho_{up}\)).}
+  \label{f:enCorrVsPhasCorr}
+\end{figure}
+
+Figure~\ref{f:enCorrVsPhasCorr} shows that these energy variations and drifts do indeed change the energy dependence of the downstream phase. The horizontal axis shows the difference between the phase-energy correlation upstream and downstream, which should be zero in the ideal case. For large differences between \(\rho_{dp}\) (downstream phase-energy correlation) and \(\rho_{up}\) (upstream phase-energy correlation) the upstream-downstream phase correlation (\(\rho_{ud}\)), plotted on the vertical axis, is degraded. Section~\ref{ss:t566Mitigation} discusses new feedbacks being implemented at CTF3 in order to improve the energy stability, which is likely to be the most significant area of improvement for future PFF tests.
 
 \subsection{Upstream Phase Drifts}
 \label{ss:longFF_upDrifts}
@@ -153,7 +184,9 @@ Figure~\ref{f:longFF_fractInRange} shows the fraction of pulses for which the op
 
 However, as to date this offset has been set manually small deviations from the ideal case are possible. Figure~\ref{f:longFF_fractInRange} also shows the fraction of pulses within the correction range if there is a static two degree offset in the upstream phase. In this case as many as 39\% of pulses are outside the correction range within the normally correctable central region of the pulse. To mitigate these effects and to get the largest reduction in jitter possible within each individual dataset the centring of the upstream phase in the correction range on the FONT5a board is normally adjusted between datasets. As a consequence of this, differences in the upstream phase between datasets are not removed in the corrected downstream phase, as the zero point for the PFF correction is effectively moving with the phase drifts during the data taking period. These remaining slow drifts could be removed at CTF3 using a secondary ``slow phase feedback", also utilising the TL2 chicane \cite{jackLCWS14}.
 
-The accuracy to which the channel offset for the upstream phase has been set can be inferred by comparing the mean downstream phase in each dataset with the correction on (red) and off (blue) in Figure~\ref{f:longFF_noMeanSubHistory}. In the ideal case the mean phase should be identical with the PFF system on and off, so that the full correction range is being used to correct jitter about the mean as mentioned previously. Although this is the case for some datasets, such as the 15:38 dataset, a clear difference between the two is often present, most visible in the datasets between 16:39 and 16:50 in which the corrected phase is clearly shifted several degrees with respect to the uncorrected phase. The absolute offset in each dataset is plotted in Figure~\ref{f:longFF_phaseOffset}. In the region between 16:22 and 16:50 the offset rises above \(2^\circ\). The mean offset across the combined dataset is \(1.5\pm0.2^\circ\). In the following sections it will be shown that the effect of the non-optimal set point for the offset is small overall, although there is a noticeable degradation in the jitter that can be achieved in the datasets with the largest offsets. In any case, implementing an automatic procedure to set the zero point for the correction optimally in the FONT5a DAQ would be a useful improvement to the PFF setup procedure and it is planned to pursue this for future PFF attempts.
+The accuracy to which the channel offset for the upstream phase has been set can be inferred by comparing the mean downstream phase in each dataset with the correction on (red) and off (blue) in Figure~\ref{f:longFF_noMeanSubHistory}. In the ideal case the mean phase should be identical with the PFF system on and off, so that the full correction range is being used to correct jitter about the mean as mentioned previously. Although this is the case for some datasets, such as the 15:38 dataset, a clear difference between the two is often present, most visible in the datasets between 16:39 and 16:50 in which the corrected phase is clearly shifted several degrees with respect to the uncorrected phase. The absolute offset in each dataset is plotted in Figure~\ref{f:longFF_phaseOffset}. In the region between 16:22 and 16:50 the offset rises above \(2^\circ\). The mean offset across the combined dataset is \(1.5\pm0.2^\circ\). 
+
+In the following sections it will be shown that the effect of the non-optimal set point for the offset is small overall, although there is a noticeable degradation in the jitter that can be achieved in the datasets with the largest offsets. In any case, implementing an automatic procedure to set the zero point for the correction optimally in the FONT5a DAQ would be a useful improvement to the PFF setup procedure. This would involve adding a new module to the LabVIEW DAQ that keeps a history of the mean upstream phase (ADC2 output), and then slowly updates the ADC2 channel offset at regular intervals in order to zero the measured phase. For example, if the mean ADC2 output across the previous time period was +300 counts, the new LabVIEW module would change the ADC2 channel offset by -300 counts so that the mean is brought to zero. The full range of the PFF system can then be used to correct jitter about the mean, rather than removing static phase offsets. However, if the zero point for the correction was regularly updated in this way slow drifts in the phase would not be removed by the PFF system. To remove these drifts a complimentary slow phase feedback, utilising magnetic correctors in the TL2 chicane, would have to be run in parallel with the PFF system \cite{jackLCWS14}.
 
 \begin{figure}
   \centering
@@ -162,13 +195,12 @@ The accuracy to which the channel offset for the upstream phase has been set can
   \label{f:longFF_phaseOffset}
 \end{figure}
 
-
 \subsection{Gain Stability}
 \label{ss:longFF_gain}
 
-Another PFF parameter that has been mostly set up empirically to date is the feedforward gain. Historically, the gain set point for the PFF prototype has been determined by a combination of viewing the results of gain scans (Section~\ref{s:gainScans}) and by observing the flatness of the corrected downstream phase in online displays of the phase monitor signals. If, for example, the applied gain is too large this can be quickly seen in the online monitors as the PFF system will act to invert the original phase sag along the pulse. In this way it is relatively simple to find the approximate gain set point and to further fine-tune it by varying the gain in small steps between datasets. In later PFF attempts this approach was complimented by implementing an online display of the optimal gain, given the latest values for the upstream and downstream phase jitters and correlation (Section~\ref{ss:sisSetup}). However, in this section it will be shown that due to drifts in the beam conditions at CTF3 there are large variations in the optimal gain between datasets, and these variations are rarely accurately followed in the PFF setup when using this empirical approach. An automatic gain optimisation procedure is therefore another area of improvement for future PFF attempts. Particularly if the gain were automatically updated in real time during long datasets a significant reduction in jitter could be achieved, as will be seen in the remainder of this chapter. Of course, in the ideal case the stability of beam conditions at CTF3 would be improved so that the variations in optimal gain over the course of a few hours are much smaller than those shown here.
+Another PFF parameter that has been mostly set up empirically to date is the feedforward gain. Historically, the gain set point for the PFF prototype has been determined by a combination of viewing the results of gain scans (Section~\ref{s:gainScans}) and by observing the flatness of the corrected downstream phase in online displays of the phase monitor signals. If, for example, the applied gain is too large this can be quickly seen in the online monitors as the PFF system will act to invert the original phase sag along the pulse. In this way it is relatively simple to find the approximate gain set point and to further fine-tune it by varying the gain in small steps between datasets. In later PFF attempts this approach was complimented by implementing an online display of the optimal gain, given the latest values for the upstream and downstream phase jitters and correlation (Section~\ref{ss:sisSetup}). However, in this section it will be shown that due to drifts in the beam conditions at CTF3 there are large variations in the optimal gain between datasets, and these variations are rarely accurately followed in the PFF setup when using this empirical approach.
 
-The optimal gain depends on the downstream-upstream phase jitter ratio and the correlation (Section~\ref{ss:theoryGain}). In Figures~\ref{f:longFF_noMeanSubHistory} and~\ref{f:longFF_history} large differences in the phase stability in each dataset are clearly visible, comparing for example the large phase jumps in the 15:26 and 16:50 datasets to the comparatively calm periods at 15:38 and 16:17. This is summarised in Figure~\ref{f:longFF_jitFFOff}, which shows the upstream and downstream (PFF off) phase jitter across the 5--10 minute time period of each dataset. Over the course of the data taking period the mean upstream and downstream phase jitter both vary by around a factor two --- the upstream jitter between \(0.61\pm0.04^\circ\) in the 16:17 dataset and \(1.08\pm0.08^\circ\) at 16:22, and the downstream jitter between \(0.74\pm0.06^\circ\) at 15:38 and \(1.89\pm^0.13\circ\) at 16:50. Given the same correlation, a factor two increase in the uncorrected downstream jitter also doubles the corrected downstream phase jitter that can be achieved with the PFF system. [TODO: explain why double jitter means double corrected jitter/refer back to prev sec].
+The optimal gain depends on the downstream-upstream phase jitter ratio and the correlation (Section~\ref{ss:theoryGain}). In Figures~\ref{f:longFF_noMeanSubHistory} and~\ref{f:longFF_history} large differences in the phase stability in each dataset are clearly visible, comparing for example the large phase jumps in the 15:26 and 16:50 datasets to the comparatively calm periods at 15:38 and 16:17. This is summarised in Figure~\ref{f:longFF_jitFFOff}, which shows the upstream and downstream (PFF off) phase jitter across the 5--10 minute time period of each dataset. Over the course of the data taking period the mean upstream and downstream phase jitter both vary by around a factor two --- the upstream jitter between \(0.61\pm0.04^\circ\) in the 16:17 dataset and \(1.08\pm0.08^\circ\) at 16:22, and the downstream jitter between \(0.74\pm0.06^\circ\) at 15:38 and \(1.89\pm0.13^\circ\) at 16:50. Given the same correlation, a factor two increase in the uncorrected downstream jitter also doubles the corrected downstream phase jitter that can be achieved with the PFF system. [TODO: explain why double jitter means double corrected jitter/refer back to prev sec].
 
 Also of key importance for the PFF correction is that not only are there large variations in jitter between datasets but additionally in the downstream-upstream jitter ratio (dashed line in Figure~\ref{f:longFF_jitFFOff}). In fact, the only dataset in which the upstream and downstream jitter are comparable is the record 15:38 dataset (with a ratio of \(1.1\pm0.1\)). In all other datasets the downstream jitter is more than 1.3 times larger than the upstream jitter, reaching a maximum amplification of \(2.2\pm0.2\) in the 16:50 dataset. The mean ratio across the 15 datasets is \(1.48\pm0.04\).
 
@@ -192,7 +224,6 @@ There is no observed dependence of the phase jitter ratio on the phase correlati
 The PFF system was designed under the assumption that the correct system gain would be approximately constant with time.
 As a result, although in places the empirically derived gain that was used follows the trend of the optimal gain, the changes are much smaller and it is clear that the real gain was systematically non-optimal. 
 The smallest gain actually used was 1.2 (at 15:51) and the largest 1.5 (15:26 and 16:00). However, the overall mean of the used gain across the data taking period of \(1.3\pm0.1\) agrees with the mean of the optimal values (\(1.4\pm0.3\)). 
-The impact of the real system using non-optimal gain is discussed in the next section.
 
 \begin{figure}
   \centering
@@ -208,10 +239,9 @@ The impact of the real system using non-optimal gain is discussed in the next se
   \label{f:longFF_gain}
 \end{figure}
 
+The impact of the real system using non-optimal gain is discussed in Section~\ref{s:longFF_singleResults}. Of course, in the ideal case the stability of beam conditions at CTF3 would be improved so that the variations in optimal gain over the course of a few hours are much smaller than those shown here. Nevertheless, an automatic gain optimisation procedure could be another area of interest for future PFF attempts. Particularly if the gain were automatically updated in real time during long datasets a significant reduction in jitter could be achieved. Like the offset this could be achieved by adding a new module to the LabVIEW DAQ. In this case the module would measure the current beam conditions (upstream-downstream phase correlation, upstream jitter and downstream jitter) and then use Equation~\ref{e:fontOptGain} to calculate, and set, the optimal gain. This process would only work for interleaved data, in which the initial correlations and jitters can be calculated using the alternating pulses for which the PFF correction is not applied. With the PFF system turned on permanently a different gain optimisation technique would be required, such as an iterative procedure aiming to zero the correlation between the upstream and corrected downstream phase.
 
-
-\subsection{Achieved and Simulated Corrected Phase Jitter}
-\label{ss:longFF_singleResults}
+\newsection{longFF_singleResults}{Achieved and Simulated Corrected Phase Jitter}
 
 It has been shown that the frequent drifts in both phase and downstream-upstream phase jitter ratio have not been optimally taken in to account in the PFF setup in terms of the actual offset and used gain. Nevertheless, even with a sub-optimal setup a large reduction in the downstream phase jitter can be achieved in all datasets. In the remainder of this section it will be shown that considering these constraints the PFF system is achieving close to peak performance, as well as highlighting the benefit that more accurate gain and offset control would have.
 
@@ -323,8 +353,6 @@ Alternatively, rather than showing each individual dataset Figures~\ref{f:longFF
 
 Overall, the actual system is able to reduce an initial downstream jitter of \(1.40\pm0.03^\circ\) by a factor of two, down to \(0.72\pm0.01^\circ\) (Figures~\ref{f:longFF_histDownstreamPhase},~\ref{f:longFF_scatterFFOff} and~\ref{f:longFF_scatterFFOn}). Due to the non-optimal setup in some datasets as shown the PFF system does not remove all correlation between the upstream and corrected downstream phase, with the initial correlation of \(0.89\pm0.01\) reduced only to \(0.48\pm0.02\). With a completely optimal setup and unlimited correction range all the correlation would be removed and the jitter could have been reduced further to \(0.61\pm0.01^\circ\) (Figure~\ref{f:longFF_scatterFFSimOpt}). However, considering the constraints of the actual system and non-optimal setup, the achieved downstream jitter and residual correlation are as expected (Figure~\ref{f:longFF_scatterFFSimReal}).
 
-%To achieve better than this improved beam conditions are required, including more stable and higher upstream-downstream phase correlation and lower and more stable phase jitters.
-
 Optimisations to the PFF system setup can therefore yield around a 15\% reduction in corrected downstream phase jitter in a typical dataset. To demonstrate a larger reduction and achieve CLIC level phase stability both on short and long time scales at CTF3 the beam conditions are more critical. Further improvements not only to the best phase propagation (downstream phase jitter and upstream-downstream phase correlation) achieved so far but also clearly to the stability of these conditions are required.
 
 \begin{figure}
@@ -377,11 +405,3 @@ Optimisations to the PFF system setup can therefore yield around a 15\% reductio
   	\label{t:LongFF}
   \end{center}
 \end{table}
-
-\newsection{pffPosImprovements}{Possible Areas for Future Improvement}
-
-\begin{figure}
-  \centering
-  \includegraphics{Figures/feedforward/tikztest}
-  \caption{tikztest}
-\end{figure}

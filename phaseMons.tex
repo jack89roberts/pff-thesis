@@ -179,7 +179,7 @@ The precise derivation of the resolution dependent on the measurement of two mon
 \end{align}
 Where \(\phi_b(t)\) is the true beam phase and \(n_x(t)\) and \(n_y(t)\) is the noise on the measurement at that time. The time dependence will not be written explicitly from this point. These equations assume the beam phase is identical in each monitor, as should be the case for Mon~1 and Mon~2. The variance of each phase monitor measurement can then be derived from the equations above by adding the variance of the beam phase and the noise in quadrature:
 \begin{align}
-\sigma_x^2 &= \sigma_b^2 + \sigma_{nx}^2 \\
+\sigma_x^2 &= \sigma_b^2 + \sigma_{nx}^2 \label{e:measJitWithRes} \\
 \sigma_y^2 &= \sigma_b^2 + \sigma_{ny}^2
 \end{align}
 Where \(\sigma_x\) and \(\sigma_y\) are the phase jitters measured by each phase monitor, \(\sigma_b\) is the true beam phase jitter and \(\sigma_{nx}\) and \(\sigma_{ny}\) are the phase monitor resolutions. Assuming each phase monitor has the same resolution, \(\sigma_n\), this can be simplified to \(\sigma_x^2~=~\sigma_y^2~=~\sigma_b^2~+~\sigma_n^2\).
