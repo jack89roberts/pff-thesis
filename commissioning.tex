@@ -118,7 +118,7 @@ Although the FONT5a (and previous FONT5) boards have been used extensively for I
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn}
-  \caption{Diode output along the pulse with the IIR filter off and on.}
+  \caption{Diode output on the FONT5a board with the IIR filter off (blue) and on (red).}
   \label{f:iirDiodefiltOffOn}
 \end{figure}
 
@@ -129,14 +129,14 @@ In the simplest case the droop should be well described by an exponential decay 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFit}
-  \caption{Exponential fit to diode droop.}
+  \caption{Exponential fit (red) to droop on the measured diode output (blue).}
   \label{f:iirDiodeFit}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFitResid}
-  \caption{Residuals between diode exponential fit and actual diode output.}
+  \caption{Residuals between the measured diode output and the exponential fit to the droop shown in Figure~\ref{f:iirDiodeFit}.}
   \label{f:iirDiodeFitResid}
 \end{figure}
 
@@ -163,7 +163,7 @@ Where \(y(t)\) is the filtered ADC output at sample \(t\), \(x(t)\) is the origi
 	   9 & 49 \\
  	   \hline
     \end{tabular}
-    \caption{IIR filter weights for the FONT5a board ADCs.}
+    \caption{Fitted IIR filter weights for the FONT5a board ADCs.}
   	\label{t:filtWeights}
   \end{center}
 \end{table}
@@ -173,14 +173,14 @@ With the IIR filters enabled on the FONT5a board the droop on the diode (ADC1) i
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
-  \caption{Diode output along the pulse with the IIR filter off and on. Zoomed in.}
+  \caption{Meausred diode output on the FONT5a board with the IIR filter off (blue) and on (red). Zoomed in to show deviations from the ideal square wave that are not visible in Figure~\ref{f:iirDiodefiltOffOn}.}
   \label{f:iirDiodefiltOffOn_zoom}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirPhaseFiltOffOn}
-  \caption{Phase along the pulse with the IIR filter off and on.}
+  \caption{Meausred phase on the FONT5a board with the IIR filter off (blue) and on (red).}
   \label{f:iirPhasefiltOffOn}
 \end{figure}
 
@@ -248,7 +248,7 @@ With larger offsets between the beam phase and the LO (large Mixer output) the s
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseRecDiff}
-  \caption{Difference between the phase reconstruction method used in the PFF algorithm on the FONT5a board (with the small angle approximation) and the full reconstruction used with data acquired from the SiS digitisers.}
+  \caption{Difference (green) between a phase reconstruction method using the small angle approximation (blue), and the full reconstruction method taking in to account non-linearities in the mixer output for large phase offsets (red).}
   \label{f:phaseRecDiff}
 \end{figure}
 
@@ -257,7 +257,7 @@ Figure~\ref{f:phaseRecJitSim} shows a simulation of the theoretical downstream j
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseRecJitSim}
-  \caption{Achievable PFF jitter versus phase offset for full phase reconstruction and with the small angle approximation.}
+  \caption{Achievable PFF jitter versus phase offset for the full phase reconstruction method (red), and the phase reconstruction using the small angle approximation (blue).}
   \label{f:phaseRecJitSim}
 \end{figure}
 
@@ -320,14 +320,14 @@ Discrepancies between the four amplifier outputs are also visible in Figure~\ref
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpOutvsDAC}
-  \caption{Amplifier output vs. input.}
+  \caption{Mean output of each amplifier channel vs. the input voltage. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). Markers show the measured output, and lines a linear fit to the output in the \(\pm1.2\)~V input range.}
   \label{f:AmpOutvsDAC}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpOutvsDAC_residual}
-  \caption{Residual between amplifier output and linear fit.}
+  \caption{Residuals between the amplifier output voltage and the linear fits seen in Figure~\ref{f:AmpOutvsDAC}. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). }
   \label{f:AmpOutvsDAC_residual}
 \end{figure}
 
@@ -342,7 +342,7 @@ Discrepancies between the four amplifier outputs are also visible in Figure~\ref
 	   RB & \(+409\pm3\)~V \\
  	   \hline
     \end{tabular}
-    \caption{Feedforward results using combined data from 20th November 2015.}
+    \caption{Fitted output voltage at an input voltage of +1~V for each amplifier channel.}
   	\label{t:AmpOutVsDAC}
   \end{center}
 \end{table}
@@ -355,14 +355,14 @@ In the previous section the linearity of the mean output was considered but the 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpL_Traces}
-  \caption{Amp L along pulse at 1 V input}
+  \caption{The full output pulse of the A (blue) and B (green) channels for the left side of the amplifier, at an input voltage of 1~V. The difference between the A and B output is shown in red.}
   \label{f:ampLTraces}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpR_Traces}
-  \caption{Amp R along pulse at 1 V input}
+  \caption{The full output pulse of the A (blue) and B (green) channels for the right side of the amplifier, at an input voltage of 1~V. The difference between the A and B output is shown in red.}
   \label{f:ampRTraces}
 \end{figure}
 
@@ -373,7 +373,7 @@ The PFF algorithm on the FONT5a board uses a single gain value across the whole 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpFlatness}
-  \caption{Flatness of potential difference sent to kickers.}
+  \caption{Peak-to-peak (dashed lines) and mean (solid lines) deviation from a flat output along the full amplifier output pulses for the left (blue) and right (red) side of the amplifier. The values are calculated using the difference between the A and B outputs of each side, the quantity relevant for kick experienced by the beam.}
   \label{f:ampFlatness}
 \end{figure}
 
@@ -382,14 +382,14 @@ As for the mean output voltage, the second way variations in the amplifier outpu
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/residualKick_Traces}
-  \caption{Residual kick along pulse.}
+  \caption{Residual kick experienced by the beam after traversing the two kickers as a result of differences between the amplifier channels. The residual kick is the difference \((LA-LB)+(RA-RB)\) at each sample point. The residual is plotted for the full range of input voltages, as indicated by the colour scale.}
   \label{f:ampClosure}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/residualKick_Flatness}
-  \caption{Residual kick along pulse: deviation from flat.}
+  \caption{Peak-to-peak (dashed) and average (solid) deviation of the residual kick from Figure~\ref{f:ampClosure}. An ideal flat output pulse would give a deviation of zero.}
   \label{f:ampClosureFlatness}
 \end{figure}
 
@@ -416,14 +416,14 @@ Figure \ref{f:phaseVsAmpVoltage} shows the mean phase shift after the chicane (i
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage}
-  \caption{Phase shift versus amplifier input voltage.}
+  \caption{Measured downstream phase shift versus amplifier input voltage (blue markers). The blue line shows a linear fit to the measured phase shift for inputs between \(\pm1.2\)~V. The red line shows the expected phase shift taking in to account the TL2 chicane optics, amplifier output voltage and kicker design.}
   \label{f:phaseVsAmpVoltage}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage_residuals}
-  \caption{Phase shift versus amplifier input voltage.}
+  \caption{Residuals between the measured phase shift and the expected (red) and fitted (blue) lines from Figure~\ref{f:phaseVsAmpVoltage}.}
   \label{f:phaseVsAmp_resid}
 \end{figure}
 
@@ -436,7 +436,7 @@ Figure \ref{f:phaseVsAmpVoltage} shows the mean phase shift after the chicane (i
 	   Model & \(3.6^\circ\) & \(5.6^\circ\) \\
  	   \hline
     \end{tabular}
-    \caption{Phase shift at +1 volt input to the amplifier.}
+    \caption{Downstream phase shift resulting from an amplifier input of 1~V. The ``Data'' row shows the fitted gradient from the actual measured phase shift. The ``Model'' row shows the expected result given the known hardware and optics parameters.}
   	\label{t:PhaseVsDAC}
   \end{center}
 \end{table}
@@ -464,21 +464,17 @@ Outside the linear range some discrepancies appear, although at the maximum \(\p
 
 However, the overall conclusion is as expected --- the phase shift in the chicane linearly depends on the amplifier input in the \(\pm1.2\)~V (\(\pm2500\) DAC counts) region thus a close to optimal correction can be applied in this range, corresponding to a \(\pm4.2\pm0.1^\circ\) phase shift. However, when the calculated optimal correction is between an absolute input voltage of 1.2~V and 2.0~V, 2500 to 4096 DAC counts, or \(\pm4.2\pm0.1^\circ\) to \(\pm7.0\pm0.2^\circ\), the actual phase shift in the chicane is lower, only up to \(\pm5.5\pm0.3^\circ\), due to the amplifier entering saturation (and possibly other effects to be determined ). Any calculated correction outside \(\pm5.5\pm0.3^\circ\) receives a static phase shift of \(\pm5.5\pm0.3^\circ\) in the chicane. In the limit where all pulses are outside this range the PFF system can only induce a static shift in the mean phase and makes no improvement to the phase jitter. Understanding the impact of the limited correction range on the PFF results was particularly critical for interpreting the early correction attempts with the first version of the amplifier, giving approximately half the ranges shown in this section. This is discussed using simulations of the PFF system in Chapters~\ref{c:earlyFFSim} and \ref{c:feedforward}.
 
-http://accelconf.web.cern.ch/accelconf/ipac2011/papers/tupc007.pdf
-1.4 kV to each strip = 1 mrad kick at 150 MeV
-1.26 kV to each strip = 1 mrad kick at 135 MeV
-
-\subsection{Variations Along Pulse}
-\label{ss:kickPulseVar}
-
-[TODO: In this section I intended to check the stability of the constant kick along the pulse, as I did for the "Shape" section with the amplifier above. The results from the constant kick data do not look good, though - the errors are quite large and there are some nasty oscillations along the pulse, such as in the example Figure~\ref{f:phaseShiftAlongConstKick}. With the phase stability downstream a much longer scan would probably be needed to draw conclusions here, though even on longer time scales I think it needs to be checked that the difference between odd and even pulses converges to zero. As it is I would probably choose to skip this section, or possibly just show one of the better plots.]
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseShiftAlong}
-  \caption{Traces relative timing scan.}
-  \label{f:phaseShiftAlongConstKick}
-\end{figure}
+%\subsection{Variations Along Pulse}
+%\label{ss:kickPulseVar}
+%
+%[TODO: In this section I intended to check the stability of the constant kick along the pulse, as I did for the "Shape" section with the amplifier above. The results from the constant kick data do not look good, though - the errors are quite large and there are some nasty oscillations along the pulse, such as in the example Figure~\ref{f:phaseShiftAlongConstKick}. With the phase stability downstream a much longer scan would probably be needed to draw conclusions here, though even on longer time scales I think it needs to be checked that the difference between odd and even pulses converges to zero. As it is I would probably choose to skip this section, or possibly just show one of the better plots.]
+%
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseShiftAlong}
+%  \caption{Traces relative timing scan.}
+%  \label{f:phaseShiftAlongConstKick}
+%\end{figure}
 
 \subsection{Shape}
 \label{ss:kickShape}
@@ -488,7 +484,7 @@ http://accelconf.web.cern.ch/accelconf/ipac2011/papers/tupc007.pdf
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/pffKickShape}
-  \caption{Traces relative timing scan.}
+  \caption{Comparison between the upstream phase (blue), used as the PFF input, the resulting DAC output from the FONT5a board (red) and the measured downstream phase shift as a result of the applied kick (green).}
   \label{f:pffKickShape}
 \end{figure}
 
@@ -502,7 +498,7 @@ Using the same constant kick data as Section~\ref{ss:corrRange} Figure~\ref{f:HO
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/HOrbitVsInput}
-  \caption{Horizontal orbit offset in and around the TL2 chicane at different input voltages sent to the amplifier.}
+  \caption{Horizontal orbit offset in and around the TL2 chicane at different input voltages sent to the amplifier. The approximate position of the chicane entrance and exit are indicated by vertical black lines.}
   \label{f:HOrbitVsInput}
 \end{figure}
 
@@ -513,7 +509,7 @@ The full MADX orbit propagated through all elements is shown, with the eight rea
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/orbClosureVsAmpModel}
-  \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data, nominal model and model taking in to account the difference in amplifier output voltage to each kicker.}
+  \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data (red markers), nominal model (black line) and the model taking in to account the small differences between each amplifier output (dashed green line).}
   \label{f:orbClosureVsAmpModel}
 \end{figure}
 
@@ -522,7 +518,7 @@ The true explanation for the non-closed orbit is that the quadrupole strengths u
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
-  \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data, nominal model and model taking in to account the quadrupole currents in the real machine setup.}
+  \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data (red markers), nominal model (black line) and the model taking in to account the actual quadrupole currents used in TL2 at this time (dashed blue line).}
   \label{f:orbClosureVsQuadModel}
 \end{figure}
 
@@ -597,7 +593,7 @@ Finally, the patch panel connectors are simply labelled from 1 to 8 from left to
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{Figures/commissioning/kickerCables}
-  \caption{Cabling setup for cables between the amplifier and kickers.}
+  \caption{Cable connections between the amplifier, patch panel and kickers.}
   \label{f:kickerCables}
 \end{figure}
 
@@ -627,7 +623,7 @@ Figure~\ref{f:beamPickup_noKick} shows the beam pickup at the start and end of t
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/beamPickup_noKick}
-  \caption{Beam pickup on kicker strips as seen on amplifier monitoring signals.}
+  \caption{Beam pickup on the kicker strips as seen on amplifier monitoring signals.}
   \label{f:beamPickup_noKick}
 \end{figure}
 
@@ -636,7 +632,7 @@ An example of this is shown in Figure~\ref{f:absDelay0_all}. A constant DAC outp
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay0_all}
-  \caption{Output delay of 0 clock cycles. Full pulse.}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 0~ns (0 clock cycles).}
   \label{f:absDelay0_all}
 \end{figure}
 
@@ -645,21 +641,21 @@ The firmware for the FONT5a board includes an output delay parameter that can be
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelayAll_endPulse}
-  \caption{Output delay scan, end of pulse.}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) across the full range of possible output delays (as indicated by the colour scale).}
   \label{f:absDelayAll_endPulse}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay7_all}
-  \caption{Output delay of 7 clock cycles. Full pulse.}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 19.6~ns (7 clock cycles).}
   \label{f:absDelay7_all}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay7_end}
-  \caption{Output delay of 7 clock cycles. End of pulse.}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 19.6~ns (7 clock cycles), zoomed in to the end of the pulse.}
   \label{f:absDelay7_end}
 \end{figure}
 
@@ -678,7 +674,7 @@ By taking the difference of the PFF off and PFF on data in the BPM any residual 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absTimBeam_d0}
-  \caption{Kick output with no delay as seen on BPM and phase signals.}
+  \caption{Alignment of the upstream (green) and downstream (red) phase compared to the applied kick as measured in a BPM after the TL2 chicane (blue) for an output delay of 0~ns. Vertical black lines indicate the time shift between the phase and the kick for the clearest feature visible in all three signals.}
   \label{f:absTimBeam_d0}
 \end{figure}
 
@@ -687,14 +683,14 @@ This measurement was repeated with four different correction output delays appli
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absTimBeam_fit}
-  \caption{Fit time offset between kick and beam at different output delays.}
+  \caption{Fitted time offset between the applied kick and the beam at different output delays.}
   \label{f:absTimBeam_fit}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absTimBeam_opt}
-  \caption{Alignment between BPMs and phase signals with optimal delay applied in analysis.}
+  \caption{Alignment between the applied kick as measured by a BPM after the chicane (blue) and the phase signals (red downstream and green upstream) after applying the optimal output delay in data analysis.}
   \label{f:absTimBeam_opt}
 \end{figure}
 
@@ -709,7 +705,7 @@ Figure~\ref{f:relDelay_sim} shows a simulated example of the expected effect of 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/relDelay_sim}
-  \caption{Simulated response to offset kicks.}
+  \caption{Example of the residual kick (black) experienced by a beam traversing through two kickers. A relative delay between the applied output to each kicker is applied, as well as a different magnitude kick from each kicker (shown in blue and red). Dashed blue and red lines show the kick start and end time for each kicker.}
   \label{f:relDelay_sim}
 \end{figure}
 
@@ -718,7 +714,7 @@ By varying the relative timing of the two correction outputs on the FONT5a board
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/relDelay_traces}
-  \caption{Measured BPM offset for different relative kick delays.}
+  \caption{Measured position offset in a BPM after the chicane for different relative kick delays (as indicated by the colour scale).}
   \label{f:relDelay_traces}
 \end{figure}
 
@@ -727,7 +723,7 @@ Figure~\ref{f:relDelay_fit} then shows the peak beam offset in the BPM versus th
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/relDelay_fit}
-  \caption{Fitted peak BPM offset vs. relative kick delay.}
+  \caption{Fitted peak position offset after the chicane vs. the applied relative kick delay. The shown data is for the falling edge of the pulse (around sample 467 in Figure~\ref{f:relDelay_traces}).}
   \label{f:relDelay_fit}
 \end{figure}
 
