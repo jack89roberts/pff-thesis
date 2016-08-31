@@ -84,8 +84,6 @@ Figure~\ref{f:BestFF_Flatness} expresses the effect of the PFF system on the pha
 
 Figure~\ref{f:BestFF_StdPhaseAlong} shows the overall phase jitter at each sample along the pulse upstream and downstream with the PFF system off and on. These jitter values contain components coming from both the jitter on the overall mean pulse phase discussed initially and from the variations along the pulse (the non-zero flatness of each pulse). These jitter values are therefore larger and taking the mean sample jitter within the sample range an initial downstream jitter of \(0.79\pm0.02^\circ\) is reduced to \(0.36\pm0.01^\circ\) by the correction in this case, a reduction by more than a factor two. There are also variations of up to a factor two in the jitter that was measured at each sample point, the lowest jitter being \(0.27\pm0.02^\circ\) at time 802~ns on the x-axis and the worst \(0.52\pm0.04^\circ\) at time 552~ns. The corrected jitter along the pulse within the central sample range also agrees with the simulated result of \(0.38\pm0.01^\circ\) using the interleaved pulses without the correction applied, as shown in Figure~\ref{f:BestFF_SimStdPhaseAlong}. Outside the sample range the PFF performance is degraded as the phase sag along the pulse exceeds the \(\pm5.5^\circ\) correction range. The simulation assumes infinite correction range in this case, and therefore yields lower phase jitters than the actual system at the start and end of the pulse.
 
-The sample by sample phase jitter along the pulse is the true figure of merit which must be reduced to \(0.2^\circ\) at CLIC. Although the largest component of phase jitter at CTF3 is on the pulse mean, effects such as energy variations along the pulse cause differences in the jitter and upstream-downstream phase correlation at each sample point (as seen in Section~\ref{s:bestPhaseProp}, for example). This leads to the variations in the achievable corrected downstream jitter along the pulse seen here, which can only be improved by further fine-tuning of the CTF3 injector stability and optics.
-
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/feedforward/BestFF_StdPhaseAlong}
@@ -99,6 +97,37 @@ The sample by sample phase jitter along the pulse is the true figure of merit wh
   \caption{Comparison between the achieved downstream phase jitter along the pulse (red) and a simulation of the corrected jitter using optimal gain and unlimited correction range.}
   \label{f:BestFF_SimStdPhaseAlong}
 \end{figure}
+
+Although the largest component of phase jitter at CTF3 is on the pulse mean, effects such as energy variations along the pulse cause differences in the jitter and upstream-downstream phase correlation at each sample point (as seen in Section~\ref{s:bestPhaseProp}, for example). This leads to the variations in the achievable corrected downstream jitter along the pulse seen here, which can only be improved by further fine-tuning of the CTF3 injector stability and optics.
+
+\subsection{CLIC Pulse Length}
+\label{ss:jitterCLICPulse}
+
+The phase stability requirements as needed for CLIC lie somewhere in-between the results presented
+on the mean phase and the phase point by point along the pulse so far. This section aims to express the achieved phase jitter in a way that is more relevant to CLIC.
+
+At CLIC high frequency
+variations are well filtered by the drive beam recombination scheme and the filling time
+of the accelerating structures \cite{alexThesis}. The scheme is therefore insensitive to 
+features faster than around 30~ns. As the signals at CTF3 are acquired at 192~MHz (on the
+SiS digitisers, Section~\ref{s:monDigitisers}), or 5.2~ns per sample, five samples can be
+averaged to remove any high frequency components to which CLIC would not be sensitive. The effect of doing this on the downstream phase jitter is shown in Figure~\ref{f:BestFF_CLICPulse}. Although there is a consistent reduction in jitter along the pulse the overall effect is small, up to a maximum of \(0.06^\circ\). 
+Some small peaks in jitter are removed by the averaging, although in most cases the reduction is predominantly due to reducing digitiser noise in the measurement, as opposed to actual high frequency features in the beam phase.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{Figures/feedforward/BestFF_CLICPulse}
+  \caption{Original downstream phase jitter along the pulse sampled at 192~MHz (blue) compared to
+  the phase jitter along the pulse using the average of 5 samples (red). Dashed vertical
+  blue lines mark the sample range used for Sections~\ref{ss:bestMeanJitter}--\ref{ss:bestJitterAlong}. Vertical red lines
+  show the 240~ns sample range used for calculations in this section.}
+  \label{f:BestFF_CLICPulse}
+\end{figure}
+
+Also, the results up until this point have been calculated across the longest possible
+portion of the CTF3 pulse within which the correction is not saturated -- a time span of 422~ns. At CLIC the combined pulse length is only 240~ns, and thus a further small improvement in the quoted achieved phase jitter can be achieved by using a sample range of this length. A 240~ns sample range is shown and compared to the original 422~ns range in Figure~\ref{f:BestFF_CLICPulse}.
+
+The final achieved downstream phase jitter at CTF3, across the CLIC pulse length and with high frequency features removed, is \(0.33\pm0.01^\circ\). This is the figure of merit which must be reduced to \(0.2^\circ\) at CLIC. 
 
 \newsection{longPFF}{Limitations of the PFF System Performance}
 
