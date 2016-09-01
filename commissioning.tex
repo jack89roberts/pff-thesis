@@ -37,7 +37,7 @@ Finally, the FONT5a board is controlled using a LabVIEW data acquisition system 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/DAQScreenshot}
-  \caption{Diode output along the pulse with the IIR filter off and on.}
+  \caption{Screenshot of the LabVIEW DAQ used to control the FONT5a board when setting up the PFF system. The right panel shows plots of the current ADC and DAC outputs. Parameters for the correction can be changed in the left panel.}
   \label{f:DAQScreenshot}
 \end{figure}
 
@@ -250,16 +250,14 @@ With larger offsets between the beam phase and the LO (large Mixer output) the s
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseRecDiff}
   \caption{Difference (green) between a phase reconstruction method using the small angle approximation (blue), and the full reconstruction method taking in to account non-linearities in the mixer output for large phase offsets (red).}
   \label{f:phaseRecDiff}
-\end{figure}
-
-Figure~\ref{f:phaseRecJitSim} shows a simulation of the theoretical downstream jitter that can be achieved with both phase reconstruction methods with \(0.8^\circ\) initial upstream and downstream phase jitter and an upstream-downstream phase correlation of \(97\%\). These values are chosen to represent the beam conditions that will need to be achieved in order to demonstrate \(0.2^\circ\) phase stability at CTF3. In the \(\pm10^\circ\) region where the small approximation holds there is no degradation in the achievable corrected phase jitter using the simplified method in the PFF algorithm. Outside this region the jitter is degraded, increasing from below \(0.2^\circ\) to \(0.3^\circ\) for a beam-LO phase offset of \(50^\circ\). 
-
-\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseRecJitSim}
   \caption{Achievable PFF jitter versus phase offset for the full phase reconstruction method (red), and the phase reconstruction using the small angle approximation (blue).}
   \label{f:phaseRecJitSim}
 \end{figure}
+
+Figure~\ref{f:phaseRecJitSim} shows a simulation of the theoretical downstream jitter that can be achieved with both phase reconstruction methods with \(0.8^\circ\) initial upstream and downstream phase jitter and an upstream-downstream phase correlation of \(97\%\). These values are chosen to represent the beam conditions that will need to be achieved in order to demonstrate \(0.2^\circ\) phase stability at CTF3. In the \(\pm10^\circ\) region where the small approximation holds there is no degradation in the achievable corrected phase jitter using the simplified method in the PFF algorithm. Outside this region the jitter is degraded, increasing from below \(0.2^\circ\) to \(0.3^\circ\) for a beam-LO phase offset of \(50^\circ\). 
+
 
 As the correction range of the PFF system is less than \(\pm10^\circ\) (Section~\ref{ss:corrRange}) there should be no degradation in the PFF performance resulting from the use of the small angle approximation in the PFF algorithm, providing the LO phase shifter in the phase monitor electronics has been set correctly. This highlights the importance to adjust the phase shifters to zero the Mixer output not only in order to maximise the phase monitor resolution (Section~\ref{s:resolution}) but also to ensure the correction calculation itself is valid. However, it is perhaps interesting to note that it would not be possible to correct the full CTF3 pulse length to \(0.2^\circ\) jitter with this implementation of the PFF algorithm even if the correction range were large enough to encompass the \(40^\circ\) phase sag.
 
@@ -322,10 +320,6 @@ Discrepancies between the four amplifier outputs are also visible in Figure~\ref
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpOutvsDAC}
   \caption{Mean output of each amplifier channel vs. the input voltage. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). Markers show the measured output, and lines a linear fit to the output in the \(\pm1.2\)~V input range.}
   \label{f:AmpOutvsDAC}
-\end{figure}
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpOutvsDAC_residual}
   \caption{Residuals between the amplifier output voltage and the linear fits seen in Figure~\ref{f:AmpOutvsDAC}. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). }
   \label{f:AmpOutvsDAC_residual}
@@ -357,10 +351,6 @@ In the previous section the linearity of the mean output was considered but the 
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpL_Traces}
   \caption{The full output pulse of the A (blue) and B (green) channels for the left side of the amplifier, at an input voltage of 1~V. The difference between the A and B output is shown in red.}
   \label{f:ampLTraces}
-\end{figure}
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpR_Traces}
   \caption{The full output pulse of the A (blue) and B (green) channels for the right side of the amplifier, at an input voltage of 1~V. The difference between the A and B output is shown in red.}
   \label{f:ampRTraces}
@@ -384,10 +374,6 @@ As for the mean output voltage, the second way variations in the amplifier outpu
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/residualKick_Traces}
   \caption{Residual kick experienced by the beam after traversing the two kickers as a result of differences between the amplifier channels. The residual kick is the difference \((LA-LB)+(RA-RB)\) at each sample point. The residual is plotted for the full range of input voltages, as indicated by the colour scale.}
   \label{f:ampClosure}
-\end{figure}
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/residualKick_Flatness}
   \caption{Peak-to-peak (dashed) and average (solid) deviation of the residual kick from Figure~\ref{f:ampClosure}. An ideal flat output pulse would give a deviation of zero.}
   \label{f:ampClosureFlatness}
@@ -418,10 +404,6 @@ Figure \ref{f:phaseVsAmpVoltage} shows the mean phase shift after the chicane (i
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage}
   \caption{Measured downstream phase shift versus amplifier input voltage (blue markers). The blue line shows a linear fit to the measured phase shift for inputs between \(\pm1.2\)~V. The red line shows the expected phase shift taking in to account the TL2 chicane optics, amplifier output voltage and kicker design.}
   \label{f:phaseVsAmpVoltage}
-\end{figure}
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage_residuals}
   \caption{Residuals between the measured phase shift and the expected (red) and fitted (blue) lines from Figure~\ref{f:phaseVsAmpVoltage}.}
   \label{f:phaseVsAmp_resid}
@@ -498,29 +480,25 @@ Using the same constant kick data as Section~\ref{ss:corrRange} Figure~\ref{f:HO
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/HOrbitVsInput}
-  \caption{Horizontal orbit offset in and around the TL2 chicane at different input voltages sent to the amplifier. The approximate position of the chicane entrance and exit are indicated by vertical black lines.}
+  \caption{Horizontal orbit offset in and around the TL2 chicane at different amplifier input voltages (as indicated by the colour scale). The approximate positions of the chicane entrance and exit are indicated by vertical black lines.}
   \label{f:HOrbitVsInput}
 \end{figure}
-
-During this scan the input sent to both sides of the amplifier was the same magnitude. However, in Section~\ref{ss:ampLin} it was seen that the right side of the amplifier, sent to the second kicker, gave 4\% lower output than the left side. This could explain why the orbit after the chicane was not closed during this scan, and during PFF operation which has typically used equal gain for both correction outputs to date. Figure~\ref{f:orbClosureVsAmpModel} shows the expected orbit in the TL2 chicane in the case where both kickers are driven with the same voltage (``nominal optics'') and with the 2nd driven with a 4\% lower voltage (``real amplifier ratio'').
-\footnote{The term ``nominal optics" is used in this section to refer to the nominal PFF optics, not the nominal optics created in Chapter~\ref{c:tl2Optics} to use when the PFF system is not under operation.}
-The full MADX orbit propagated through all elements is shown, with the eight real measured BPM offsets also included at their respective positions. Each BPM point represents the gradient of a linear fit using the variation with input voltage seen previously in Figure~\ref{f:HOrbitVsInput}. Before and inside the chicane the agreement between the BPM data and the model is excellent. As seen before, the BPM orbit is not closed after the chicane, unlike the nominal optics. If the actual kicker voltage ratio is taken in to account the MADX orbit after the chicane is not closed either, but the offset has opposite polarity to the real data in the last BPM.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/orbClosureVsAmpModel}
   \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data (red markers), nominal model (black line) and the model taking in to account the small differences between each amplifier output (dashed green line).}
   \label{f:orbClosureVsAmpModel}
-\end{figure}
-
-The true explanation for the non-closed orbit is that the quadrupole strengths used in the machine setup are not exactly nominal. Although every effort has been made to keep the TL2 optics as close to nominal as possible, particularly inside the chicane, it is an extremely sensitive area for the setup of CTF3 and beam transport in to the CLEX area downstream of TL2 (including the location of the downstream phase monitor in the TBL line) is always difficult. Minor modifications have therefore been necessary in order to achieve full beam transmission to the downstream area, both for PFF and other experiments at CTF3. The largest changes have been made to the four quadrupoles following the chicane but one quadrupole inside the chicane, CC.IQFL0730 (just prior to the 2nd kicker) has a set value \(10\%\) lower than the nominal optics, as well as differences up to \(2\%\) in the other quadrupoles. Using the real quadrupole strengths used in the machine gives the result shown in Figure \ref{f:orbClosureVsQuadModel}. In this case the agreement between the model and the data is also extremely good after the chicane. It may still be possible to compensate for these differences by outputting different voltages to each kicker and this will be investigated. Alternatively, a completely nominal optics can be set in the chicane purely for the purposes of verifying orbit closure, reverting back to non-nominal optics and closure if needed to achieve good beam transmission for normal PFF operation.
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
   \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data (red markers), nominal model (black line) and the model taking in to account the actual quadrupole currents used in TL2 at this time (dashed blue line).}
   \label{f:orbClosureVsQuadModel}
 \end{figure}
+
+During this scan the input sent to both sides of the amplifier was the same magnitude. However, in Section~\ref{ss:ampLin} it was seen that the right side of the amplifier, sent to the second kicker, gave 4\% lower output than the left side. This could explain why the orbit after the chicane was not closed during this scan, and during PFF operation which has typically used equal gain for both correction outputs to date. Figure~\ref{f:orbClosureVsAmpModel} shows the expected orbit in the TL2 chicane in the case where both kickers are driven with the same voltage (``nominal optics'') and with the 2nd driven with a 4\% lower voltage (``real amplifier ratio'').
+\footnote{The term ``nominal optics" is used in this section to refer to the nominal PFF optics, not the nominal optics created in Chapter~\ref{c:tl2Optics} to use when the PFF system is not under operation.}
+The full MADX orbit propagated through all elements is shown, with the eight real measured BPM offsets also included at their respective positions. Each BPM point represents the gradient of a linear fit using the variation with input voltage seen previously in Figure~\ref{f:HOrbitVsInput}. Before and inside the chicane the agreement between the BPM data and the model is excellent. As seen before, the BPM orbit is not closed after the chicane, unlike the nominal optics. If the actual kicker voltage ratio is taken in to account the MADX orbit after the chicane is not closed either, but the offset has opposite polarity to the real data in the last BPM.
+
+The true explanation for the non-closed orbit is that the quadrupole strengths used in the machine setup are not exactly nominal. Although every effort has been made to keep the TL2 optics as close to nominal as possible, particularly inside the chicane, it is an extremely sensitive area for the setup of CTF3 and beam transport in to the CLEX area downstream of TL2 (including the location of the downstream phase monitor in the TBL line) is always difficult. Minor modifications have therefore been necessary in order to achieve full beam transmission to the downstream area, both for PFF and other experiments at CTF3. The largest changes have been made to the four quadrupoles following the chicane but one quadrupole inside the chicane, CC.IQFL0730 (just prior to the 2nd kicker) has a set value \(10\%\) lower than the nominal optics, as well as differences up to \(2\%\) in the other quadrupoles. Using the real quadrupole strengths used in the machine gives the result shown in Figure \ref{f:orbClosureVsQuadModel}. In this case the agreement between the model and the data is also extremely good after the chicane. It may still be possible to compensate for these differences by outputting different voltages to each kicker and this will be investigated. Alternatively, a completely nominal optics can be set in the chicane purely for the purposes of verifying orbit closure, reverting back to non-nominal optics and closure if needed to achieve good beam transmission for normal PFF operation.
 
 \newsection{timing}{Correction Output Timing}
 
@@ -634,26 +612,18 @@ An example of this is shown in Figure~\ref{f:absDelay0_all}. A constant DAC outp
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay0_all}
   \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 0~ns (0 clock cycles).}
   \label{f:absDelay0_all}
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelayAll_endPulse}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) across the full range of possible output delays (as indicated by the colour scale).}
+  \label{f:absDelayAll_endPulse}
 \end{figure}
 
 The firmware for the FONT5a board includes an output delay parameter that can be used to fine-tune the timing of the correction output sent to the amplifier. This can be done independently for each of the two correction outputs so that it can be ensured the correction arrives in sync with the beam in each kicker individually (the relative timing of the two kickers is discussed in the next section). The delay can be varied between 0~and~31~clock~cycles in integer steps, with one clock cycle corresponding to one period of the 357~MHz ADC clock frequency, or 2.8~ns. A delay of up to 86.8~ns can therefore be added to the correction outputs. Figure~\ref{f:absDelayAll_endPulse} shows the effect of varying the output delay across the full range of possible values, zoomed in on the end of the pulse. For all output delays the beam pickup remains at sample 493, as expected. Meanwhile, the end of the amplifier pulse is moved from before the beam pickup (output too early) to after the beam pickup (output too late). To achieve the optimal correction timing the end of the amplifier pulse must be aligned with the beam pickup and this is achieved with a delay of 7~clock~cycles, or 19.6~ns, as shown in Figures~\ref{f:absDelay7_all}~and~\ref{f:absDelay7_end}. This delay has been used for the latest PFF runs presented in Chapter~\ref{c:feedforward}. Due to ambiguity in which point along the falling edge of the amplifier pulse the beam pickup should be aligned to there may be a remaining error of up 3 clock cycles in the exact alignment, and this can only be verified by beam based measurements (not using the amplifier monitoring outputs). 
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelayAll_endPulse}
-  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) across the full range of possible output delays (as indicated by the colour scale).}
-  \label{f:absDelayAll_endPulse}
-\end{figure}
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay7_all}
   \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 19.6~ns (7 clock cycles).}
   \label{f:absDelay7_all}
-\end{figure}
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absDelay7_end}
   \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 19.6~ns (7 clock cycles), zoomed in to the end of the pulse.}
   \label{f:absDelay7_end}
@@ -676,12 +646,6 @@ By taking the difference of the PFF off and PFF on data in the BPM any residual 
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absTimBeam_d0}
   \caption{Alignment of the upstream (green) and downstream (red) phase compared to the applied kick as measured in a BPM after the TL2 chicane (blue) for an output delay of 0~ns. Vertical black lines indicate the time shift between the phase and the kick for the clearest feature visible in all three signals.}
   \label{f:absTimBeam_d0}
-\end{figure}
-
-This measurement was repeated with four different correction output delays applied in the FONT5 board, at delays of 0, 10, 20 and 30~clock~cycles (0 to 84~ns), which includes points where the correction is applied both early and late. Fitting the measured time offset between the peaks in the BPM and the phase in the same way as before yields an optimal correction output delay to apply of \(39\pm7\)~ns (Figure \ref{f:absTimBeam_fit}), or \(14\pm3\)~clock~cycles. Applying this delay in data analysis gives the result shown in Figure~\ref{f:absTimBeam_opt}, in which the similarity of the three signals becomes clear.
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/absTimBeam_fit}
   \caption{Fitted time offset between the applied kick and the beam at different output delays.}
   \label{f:absTimBeam_fit}
@@ -694,6 +658,7 @@ This measurement was repeated with four different correction output delays appli
   \label{f:absTimBeam_opt}
 \end{figure}
 
+This measurement was repeated with four different correction output delays applied in the FONT5 board, at delays of 0, 10, 20 and 30~clock~cycles (0 to 84~ns), which includes points where the correction is applied both early and late. Fitting the measured time offset between the peaks in the BPM and the phase in the same way as before yields an optimal correction output delay to apply of \(39\pm7\)~ns (Figure \ref{f:absTimBeam_fit}), or \(14\pm3\)~clock~cycles. Applying this delay in data analysis gives the result shown in Figure~\ref{f:absTimBeam_opt}, in which the similarity of the three signals becomes clear.
 
 \subsection{Relative Kicker Timing}
 \label{ss:relativeTiming}
@@ -718,12 +683,12 @@ By varying the relative timing of the two correction outputs on the FONT5a board
   \label{f:relDelay_traces}
 \end{figure}
 
-Figure~\ref{f:relDelay_fit} then shows the peak beam offset in the BPM versus the relative K2 delay using the falling edge of the pulse. The peak beam offset is defined as the difference between the maximum and minimum beam position after the chicane between sample 458 and 477 (as seen in Figure~\ref{f:relDelay_traces}). As the K2 delay approaches the optimal value the difference in beam position in this range converges to the 0.3~mm offset in the flat central part of the kicked pulse. The point of intersection between the two linear fits shown (one for the points with a positive peak position and the other for points with a negative peak) gives the optimal relative K2 offset to be \(0.1\pm0.5\)~clock~cycles. Repeating the procedure for the peaks at the rising edge of the pulse gives a result of \(1.9\pm2.0\)~clock~cycles, and the two results combine to give an optimal value of \(0.5\pm0.6\)~clock~cycles.
+Figure~\ref{f:relDelay_fit} then shows the peak beam offset in the BPM versus the relative K2 delay. The peak beam offset is defined as the difference between the maximum and minimum beam position after the chicane between sample 425 and 447 for the rising edge, or sample 458 and 477 for the falling edge of the pulse (as seen in Figure~\ref{f:relDelay_traces}). As the K2 delay approaches the optimal value the difference in beam position in this range converges to the 0.3~mm offset in the flat central part of the kicked pulse. The point of intersection between the two linear fits shown (one for the points with a positive peak position and the other for points with a negative peak) gives the optimal relative K2 offset to be \(0.1\pm0.5\)~clock~cycles for the falling edge of the pulse. Repeating the procedure for the peaks at the rising edge of the pulse gives a result of \(1.9\pm2.0\)~clock~cycles, and the two results combine to give an optimal value of \(0.5\pm0.6\)~clock~cycles.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/relDelay_fit}
-  \caption{Fitted peak position offset after the chicane vs. the applied relative kick delay. The shown data is for the falling edge of the pulse (around sample 467 in Figure~\ref{f:relDelay_traces}).}
+  \caption{Fitted peak position offset after the chicane vs. the applied relative kick delay. Fits to the peaks at both the rising edge (blue) and falling edge (red) of the pulse are shown. Dashed vertical lines show the fitted optimal delay in each case.}
   \label{f:relDelay_fit}
 \end{figure}
 
