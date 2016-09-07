@@ -402,9 +402,12 @@ However, for input powers in the range from 15--21~dBm the non-ideal characteris
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/mixersFit18dBm}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/mixersFit18dBm}
   \caption{Sinusoidal fit to mixer responses at 18~dBm input power.}
   \label{f:mixersFit18dBm}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/LinFitMixerVsVolts}
+  \caption{Linear fit to mixer output voltage vs. input voltage.}
+  \label{f:LinFitMixerVsVolts}
 \end{figure}
 
 \subsubsection{Dependence on Input Power}
@@ -412,13 +415,6 @@ However, for input powers in the range from 15--21~dBm the non-ideal characteris
 The mixer output is expected to linearly depend on the input voltage and the diode on the square of the input voltage. Both these dependencies must hold in order to use Equation~\ref{e:phaseRecIdeal} and obtain a phase measurement that does not depend on the input voltage to the electronics (therefore making the calculated phase insensitive to any possible variations in power along the pulse from the beam signal, for example). For these measurements the input voltage can be calculated using the known input power and 50~\(\Omega\) impedance of the electronics.
 
 Figure~\ref{f:LinFitMixerVsVolts} shows the dependence of the mixer output amplitudes on the input voltage. As seen previously the first mixer gives a larger output than the other two mixers. The 2nd and 3rd mixers give a similar response up to an input voltage of 3.5~V (24~dBm). Dashed lines in the figure show a linear fit to the mixer output restricted to the range between 0.45~V and 1.75~V (6~dBm to 18~dBm) in each case, as marked by the vertical black lines. All three mixers give a linear response up to an input voltage of around 3~V (23~dBm), after which the effects of saturation begin to appear. By an input voltage of 5~V (27~dBm) the first and third mixers are almost fully saturated with almost no remaining power dependence in the output. The second mixer begins to enter saturation at the same voltage as the other two mixers but retains a strong power dependence up to a higher input voltage of 7~V (30~dBm).
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/LinFitMixerVsVolts}
-  \caption{Linear fit to mixer output voltage vs. input voltage.}
-  \label{f:LinFitMixerVsVolts}
-\end{figure}
 
 
 \subsubsection{Asymmetry in Output}
@@ -436,6 +432,7 @@ Figure~\ref{f:MixerVsVolts} shows how the mixer amplitude at maximum and minimum
   \caption{Relative amplitude vs. input power of cross-talk on the mixer from the diode.}
   \label{f:MixerAsymmetryVsVolts}
 \end{figure}
+
 For input voltages between 0.45~V and 1.25~V (6~dBm to 15~dBm) the mixer asymmetry has an approximate quadratic dependence on the input voltage, as shown in Figure~\ref{f:MixerAsymmetryVsVolts}. Outside this range there is no simple relationship that can explain the dependence of the asymmetry on the input voltage. One explanation for the asymmetry in the mixer outputs is cross-talk coming from the diode signals. Above 15~dBm the diodes enter saturation, as discussed in the next section, which may explain why the quadratic fit to the mixer asymmetry is only valid at power levels up to this value. 
 
 Taking the power dependent asymmetry in to account the actual mixer response can be modified from Equation~\ref{e:mixOutSameFreq} to become:
@@ -491,6 +488,9 @@ Figure~\ref{f:RelativeDiodeXTalkVsPower} shows the dependence of the relative am
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/RelativeDiodeXTalkVsPower}
   \caption{Dependence of the relative amplitude of cross-talk on the diode versus the input power.}
   \label{f:RelativeDiodeXTalkVsPower}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/PhaseDiodeVsMixer}
+  \caption{Comparison of the oscillation on the mixer and the diode, showing a relative phase offset between the two.}
+  \label{f:PhaseDiodeVsMixer}
 \end{figure}
 
 Finally, Figure~\ref{f:PhaseDiodeVsMixer} compares the oscillation on the diode to the oscillation on the mixer. It can be seen that there is a phase shift between the two, which adds a further complication to the necessary phase reconstruction method. Taking in to account the actual characteristics of the diodes, including the cross-talk and quadratic dependence on the input power, the expected expression for the diode output from Equation~\ref{e:idealDiode} can be modified to:
@@ -500,12 +500,7 @@ Finally, Figure~\ref{f:PhaseDiodeVsMixer} compares the oscillation on the diode 
 \end{equation}
 Where \(d_1\), \(d_2\), \(d_3\), \(d_4\) and \(\delta\) are calibration constants.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/PhaseDiodeVsMixer}
-  \caption{Comparison of the oscillation on the mixer and the diode, showing a relative phase offset between the two.}
-  \label{f:PhaseDiodeVsMixer}
-\end{figure}
+
 
 \subsection{Consequences for Normal Operation}
 \label{ss:sigGenConsq}
@@ -711,41 +706,35 @@ The first hint towards identifying the cause of the degraded resolution came by 
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon1_Mix2Mon2}
   \caption{Phase jitter along the pulse with the nominal electronics setup -- Mon~1 connected to the first mixer, and Mon~2 connected to the second mixer.}
   \label{f:Mix1Mon1_Mix2Mon2}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon2_Mix2Mon1}
+  \caption{Phase jitter along pulse with Mon~2 connected to the first mixer and Mon~1 connected to the second mixer.}
+  \label{f:Mix1Mon2_Mix2Mon1}
 \end{figure}
 
 The overall phase monitor and electronics setup can be roughly split in to three systems -- the RF signal from the beam (dependent on the phase monitors themselves and the hybrids), the LO reference signal and the mixers. An issue with any one of these systems could explain the larger phase jitter measured from Mon~2 (usually connected to Mixer~2 and LO~2) compared to the phase jitter from Mon~1 (usually connected to Mixer~1 and LO~1). To determine whether the issue was with the RF signal of one of the monitors measurements were taken with Mon~1 and Mon~2 swapped between the three mixers.
 
 Figure~\ref{f:Mix1Mon2_Mix2Mon1} shows the measured phase jitter along the pulse when Mon~2 is moved on to Mixer~1 (and LO~1) and with Mon~1 moved on to Mixer~2 (and LO~2). The colours in all the plots in this section correspond to the mixer that measurement is from -- blue for Mixer~1, red for Mixer~2 and green for Mixer~3. With the phase monitors swapped the higher measured phase jitter stays with Mixer~2 with the same ratio of 1.7, in this case \(1.48\pm0.01^\circ\) on Mixer~2 (connected to Mon~1) and \(0.89\pm0.01^\circ\) on Mixer~1 (connected to Mon~2). This rules out that the difference in phase jitter is coming from the phase monitors themselves, and suggests the problem is with either Mixer~2 or the reference signal LO~2 for that mixer. The same exercise can then be repeated with Mon~2 moved on to Mixer~3 (and LO~3) and the nominal setup used for Mon~1. Mixer~3 gives similar results to Mixer~2, with 1.7~times larger phase jitter than Mixer~1. This is seen in Figure~\ref{f:Mix1Mon1_Mix3Mon2}. The remaining task is therefore to identify whether the additional source of noise is from Mixer~2 or LO~2, and from Mixer~3 or LO~3.
 
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon2_Mix2Mon1}
-  \caption{Phase jitter along pulse with Mon~2 connected to the first mixer and Mon~1 connected to the second mixer.}
-  \label{f:Mix1Mon2_Mix2Mon1}
-\end{figure}
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon1_Mix3Mon2}
   \caption{Phase jitter along pulse with Mon~1 connected to the first mixer and Mon~2 connected to the third mixer.}
   \label{f:Mix1Mon1_Mix3Mon2}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon1PhShft2_Mix2Mon2PhShft1}
+  \caption{Phase jitter along pulse with the LO swapped between the first mixer and the second mixer.}
+  \label{f:Mix1Mon1PhShft2_Mix2Mon2PhShft1}
 \end{figure}
 
 This was determined by swapping the LO reference signals between the mixers. Figure~\ref{f:Mix1Mon1PhShft2_Mix2Mon2PhShft1} shows the measured phase jitter with LO~2 connected to Mixer~1, and LO~1 connected to Mixer~2. In this case the lower measured phase jitter stays with LO~1, with \(1.10\pm0.01^\circ\) jitter on Mixer~2 (with LO~1) and \(1.68\pm0.01^\circ\) on Mixer~1 (with LO~2). In Figure~\ref{f:Mix1Mon1PhShft3_Mix3Mon2PhShft1} the same is seen with LO~3 connected to Mixer~1, and LO~1 connected to Mixer~3, with the lower phase jitter coming from Mixer~3 (LO~1) in this case. In Table~\ref{t:elecSwapResults} it can also be seen that the lowest phase jitter in every dataset always comes from the phase monitor for which LO~1 was used.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon1PhShft2_Mix2Mon2PhShft1}
-  \caption{Phase jitter along pulse with the LO swapped between the first mixer and the second mixer.}
-  \label{f:Mix1Mon1PhShft2_Mix2Mon2PhShft1}
-\end{figure}
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon1PhShft3_Mix3Mon2PhShft1}
   \caption{Phase jitter along pulse with the LO swapped between the third mixer and the first mixer.}
   \label{f:Mix1Mon1PhShft3_Mix3Mon2PhShft1}
+  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/jitterMechanicalShifters}
+  \caption{Phase jitter along pulse after installation of the mechanical phase shifters.}
+  \label{f:jitterMechanicalShifters}
 \end{figure}
 
 \begin{table}
@@ -768,12 +757,6 @@ This was determined by swapping the LO reference signals between the mixers. Fig
 
 In this way an issue with LO~2 and LO~3 was identified. The generation of the LO reference signals (Section~\ref{s:monElectronics}) consists of a 3~GHz source that is common to all three signals, plus separate phase shifters, frequency multipliers (to create the 12~GHz reference) and amplifiers for each LO signal. The digital phase shifters were thought to be the most likely culprit to be adding noise in to the system, and preliminary tests replacing one of the digital phase shifters with a mechanical alternative provided an immediate gain in resolution. Finally, all three digital shifters were replaced with mechanical phase shifters (the specifications of the shifters were introduced in Section~\ref{s:monElectronics}). With this setup the measured phase jitter for Mon~1 and Mon~2 is the same irrespective of which mixer or LO the signal is connected to, as shown in Figure~\ref{f:jitterMechanicalShifters}. The final achieved resolution is presented in the next section.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/jitterMechanicalShifters}
-  \caption{Phase jitter along pulse after installation of the mechanical phase shifters.}
-  \label{f:jitterMechanicalShifters}
-\end{figure}
 
 
 \newsection{resolutionMeas}{Resolution Measurements}
@@ -899,10 +882,6 @@ For the downstream phase the differences are larger, including up to \(1.5^\circ
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/multiSampMon2Along}
   \caption{Effect of using a varying calibration constant on the upstream phase.}
   \label{f:multiSampMon2Along}
-\end{figure}
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/multiSampMon3Along}
   \caption{Effect of using a varying calibration constant on the downstream phase.}
   \label{f:multiSampMon3Along}

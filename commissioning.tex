@@ -609,21 +609,21 @@ output compared to the DAC1 output on the FONT5a board).
 
 \newsection{timing}{Correction Output Timing}
 
-Most the results based on the amplifier outputs and kicked beam presented so far have used a constant output voltage from the FONT5a board applied across the full \(1.4~\mathrm{\mu s}\) time window that the amplifier is powered for. As the \(1.4~\mathrm{\mu s}\) amplifier output sent to the kickers is longer than the \(1.1~\mathrm{\mu s}\) CTF3 beam pulse it is relatively straightforward to ensure that the full length of the pulse experiences the constant kick with this setup. However, for operation of the PFF system precise control of the correction output timing becomes critical. 
-
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\textwidth]{Figures/commissioning/simCorrDelay}
+  \includegraphics[width=0.75\textwidth]{Figures/commissioning/simCorrDelay}
   \caption{Simulated effect of a 78~ns timing misalignment between the beam and the applied correction. Top: The initial downstream phase (blue) and the correction signal (red), sign flipped for easier comparison. Bottom: The resulting corrected downstream phase (green). A 57~ns width feature is added at time 546~ns in the initial phase, as marked by vertical dashed lines. }
   \label{f:simCorrDelay}
 \end{figure}
 
+Most the results based on the amplifier outputs and kicked beam presented so far have used a constant output voltage from the FONT5a board applied across the full \(1.4~\mathrm{\mu s}\) time window that the amplifier is powered for. As the \(1.4~\mathrm{\mu s}\) amplifier output sent to the kickers is longer than the \(1.1~\mathrm{\mu s}\) CTF3 beam pulse it is relatively straightforward to ensure that the full length of the pulse experiences the constant kick with this setup. However, for operation of the PFF system precise control of the correction output timing becomes critical. 
 
 In order to remove phase variations along the pulse with the PFF system the output correction signal, shaped by the upstream phase, must arrive at the kickers exactly synchronised with the beam. Timing misalignments between the beam and correction signal arrival will result in residual offsets in the corrected downstream phase, which in the ideal case should be zero across the full pulse length. 
 %Approximating the phase sag along the pulse to be quadratic, \(\phi_{u}(t) \sim \phi_{d}(t) \sim t^2\), a misaligned correction would yield a corrected downstream phase with a linear increase in phase along the pulse with time, \(\phi_{PFF}(t)~\sim~\phi_d(t)-\phi_u(t+\delta)~\sim -2\delta t - \delta^2\), for example, where \(\phi_{PFF}\) is the corrected phase, \(\phi_{d}\) the uncorrected downstream phase, \(\phi_{u}\) the upstream phase, \(t\) the time and \(\delta\) the time misalignment in the applied correction. Also, the effect is particularly significant for any higher frequency variations in phase along the pulse. If a 40~ns oscillation is present in the upstream phase but the correction is applied with a 50~ns delay, for example, a second 40~ns oscillation with opposite sign would be introduced to the ``corrected'' downstream phase at a later time with no change to the initial oscillation. 
 Figure~\ref{f:simCorrDelay} shows a simulated example of this for a correction applied 78~ns later than the beam. The resulting corrected downstream phase (the sum of the initial phase and the correction output) is clearly non-zero, with different behaviour for slow and fast variations in the initial phase. Considering the phase sag along the CTF3 beam pulse (a low frequency effect), applying the correction late (early) results in an approximately linear increase (decrease) in the corrected downstream phase along the pulse. Alternatively, faster features, with similar or smaller width than the timing mis-alignment, are introduced with opposite sign in the corrected downstream phase rather than being removed (also shown in Figure~\ref{f:simCorrDelay}).
 
 Although the effects are most visible along the pulse, any mis-timing of the correction will also degrade the achievable mean phase jitter. This section gives an overview of the main methods that have been used to ensure that the correction output to the two kickers arrives in time with the beam. 
+
 
 \subsection{Kicker Cable Lengths}
 \label{ss:kickerCables}
@@ -790,7 +790,7 @@ This result therefore proves that the PFF system just meets the latency requirem
 
 The firmware for the FONT5a board includes an output delay parameter that can be used to fine-tune the timing of the correction output sent to the amplifier (Section~\ref{ss:pffFirmware}). This can be done independently for each of the two correction outputs so that it can be ensured the correction arrives in time with the beam in each kicker individually (the relative timing of the two kickers is discussed in the Section~\ref{ss:relativeTiming}). 
 The delay can be varied in integer steps between 0~and~31~cycles of the system clock, so up to 86.8~ns, in steps of 2.8~ns, for a 357~MHz clock. 
-Figure~\ref{f:absDelayAll_endPulse} shows the effect of varying the output delay across the full range of possible values, zoomed in on the end of the pulse. For all output delays the beam pickup remains at sample 493, as expected. Meanwhile, the end of the amplifier pulse is moved from before the beam pickup (output too early) to after the beam pickup (output too late). To achieve the optimal correction timing the end of the amplifier pulse must be aligned with the beam pickup and this is achieved with a delay of 7~clock~cycles, or 19.6~ns, as shown in Figures~\ref{f:absDelay7_all}~and~\ref{f:absDelay7_end}. This delay has been used for the latest PFF runs presented in Chapter~\ref{c:feedforward}. Due to ambiguity in which point along the falling edge of the amplifier pulse the beam pickup should be aligned to there may be a remaining error of up 3 clock cycles in the exact alignment, and this can only be verified by beam based measurements (not using the amplifier monitoring outputs). 
+Figure~\ref{f:absDelayAll_endPulse} shows the effect of varying the output delay across the full range of possible values, zoomed in on the end of the pulse. For all output delays the beam pickup remains at sample 493, as expected. Meanwhile, the end of the amplifier pulse is moved from before the beam pickup (output too early) to after the beam pickup (output too late). To achieve the optimal correction timing the end of the amplifier pulse must be aligned with the beam pickup and this is achieved with a delay of 7~clock~cycles, or 19.6~ns, as shown in Figures~\ref{f:absDelay7_all}~and~\ref{f:absDelay7_end}. This delay has been used for the latest PFF runs presented in Chapter~\ref{c:feedforward}. Due to ambiguity in which point along the falling edge of the amplifier pulse the beam pickup should be aligned to there may be a remaining error of up 3 clock cycles (8.4~ns) in the exact alignment, and this can only be verified by beam based measurements (not using the amplifier monitoring outputs). 
 
 \begin{figure}
   \centering
@@ -856,7 +856,7 @@ By varying the relative timing of the two correction outputs on the FONT5a board
   \label{f:relDelay_traces}
 \end{figure}
 
-Figure~\ref{f:relDelay_fit} shows the peak beam offset in the BPM versus the relative K2 delay. The peak beam offset is defined as the difference between the maximum and minimum beam position after the chicane between sample 425 and 447 for the rising edge, or sample 458 and 477 for the falling edge of the pulse (as seen in Figure~\ref{f:relDelay_traces}). As the K2 delay approaches the optimal value the difference in beam position in this range converges to the 0.3~mm offset in the flat central part of the kicked pulse. The point of intersection between the two linear fits shown (one for the points with a positive peak position and the other for points with a negative peak) gives the optimal relative K2 offset to be \(0.1\pm0.5\)~clock~cycles (\(0.3\pm1.4\)~ns) for the falling edge of the pulse. Repeating the procedure for the peaks at the rising edge of the pulse gives a result of \(1.9\pm2.0\)~clock~cycles (\(5.3\pm5.6\)~ns), and the two results combine to give an optimal value of \(0.5\pm0.6\)~clock~cycles (\(1.4\pm1.7\)~ns).
+Figure~\ref{f:relDelay_fit} shows the peak beam offset in the BPM versus the relative K2 delay. The peak beam offset is defined as the difference between the maximum and minimum beam position after the chicane between sample 425 and 447 for the rising edge, or sample 458 and 477 for the falling edge of the pulse (as seen in Figure~\ref{f:relDelay_traces}). As the K2 delay approaches the optimal value the difference in beam position in this range converges to the 0.3~mm offset in the flat central part of the kicked pulse. The point of intersection between the two linear fits shown (one for the points with a positive peak position and the other for points with a negative peak) gives the optimal relative K2 offset to be \(0.3\pm1.4\)~ns (\(0.1\pm0.5\)~clock~cycles)  for the falling edge of the pulse. Repeating the procedure for the peaks at the rising edge of the pulse gives a result of \(5.3\pm5.6\)~ns (\(1.9\pm2.0\)~clock~cycles), and the two results combine to give an optimal value of \(1.4\pm1.7\)~ns (\(0.5\pm0.6\)~clock~cycles).
 
 \begin{figure}
   \centering
@@ -865,10 +865,10 @@ Figure~\ref{f:relDelay_fit} shows the peak beam offset in the BPM versus the rel
   \label{f:relDelay_fit}
 \end{figure}
 
-Relative K2 delays of both 0 and 1 clock~cycles have been used during PFF operation, with no measurable difference in the PFF results between the two to date although this will have to be verified with further orbit closure tests. Adding the absolute delay of 7~clock~cycles derived in Section~\ref{ss:absTiming}, the final delays to apply in the FONT5a board are:
+Relative K2 delays of both 0~and~2.8~ns (0~and~1 clock~cycles have been used during PFF operation, with no measurable difference in the PFF results between the two to date although this will have to be verified with further orbit closure tests. Adding the absolute delay of 19.6~ns (7~clock~cycles) derived in Section~\ref{ss:absTiming}, the final delays to apply in the FONT5a board are:
 \begin{itemize}
-\item \textbf{K1 delay}: 7 clock~cycles.
-\item \textbf{K2 delay}: 7 or 8 clock~cycles.
+\item \textbf{K1 delay}: 7 clock~cycles (19.6~ns).
+\item \textbf{K2 delay}: 7 or 8 clock~cycles (19.6~or~22.4~ns).
 \end{itemize}
 
 %\newsection{earlyFFSim}{Early Phase Feedforward Attempts and Simulations}
