@@ -287,6 +287,27 @@ Figure~\ref{f:phaseRecJitSim} shows a simulation of the theoretical downstream j
 
 As the correction range of the PFF system is less than \(\pm10^\circ\) (Section~\ref{ss:corrRange}) there should be no degradation in the PFF performance resulting from the use of the small angle approximation in the PFF algorithm, providing the LO phase shifter in the phase monitor electronics has been set correctly. This highlights the importance to adjust the phase shifters to zero the Mixer output not only in order to maximise the phase monitor resolution (Section~\ref{ss:resVsShifter}) but also to ensure the correction calculation itself is valid. However, it is perhaps interesting to note that it would not be possible to correct the full CTF3 pulse length to \(0.2^\circ\) jitter with this implementation of the PFF algorithm even if the correction range were large enough to encompass the \(40^\circ\) phase sag.
 
+\subsection{Channel Offset}
+\label{ss:channelOffset}
+
+
+Gain 624
+Max DAC 4095
+Output gain/64 * ADC2
+Max ADC2 420 counts before saturation
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{Figures/commissioning/offsetADCs}
+  \caption{ADC~2 input (connected to the Mon~1 mixer) with the channel offset optimised to give zero output at sample~421 (blue), and with a non-optimal channel offset giving 200~counts output at sample~421 (red). The location of sample~421 is marked by the vertical dashed line.}
+  \label{f:offsetADCs}
+  \centering
+  \includegraphics[width=0.75\textwidth]{Figures/commissioning/offsetDACs}
+  \caption{Simulated DAC output resulting from the ADC~2 inputs in Figure~\ref{f:offsetADCs} and using a set correction gain of 624~units in the DAQ.  Blue: Channel offset optimised to give zero output at sample~421. Red: Non-optimal channel offset giving 200~counts output at sample~421. The location of sample~421 is marked by the vertical dashed line.}
+  \label{f:offsetDACs}
+\end{figure}
+
+
 \newsection{amplifierSetup}{Amplifier}
 
 The amplifier takes the two DAC signals from the FONT5a board and

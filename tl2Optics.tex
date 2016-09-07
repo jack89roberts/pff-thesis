@@ -270,10 +270,10 @@ In the horizontal plane there is good agreement between the model and the measur
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelOriginalH}
-  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 compared to the original MADX model of TL2.}
+  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the expected orbit in the original MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelOriginalH}
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelOriginalV}
-  \caption{Vertical orbit due to a kick from the corrector CC.DVF0175 compared to the original MADX model of TL2.}
+  \caption{Vertical orbit due to a kick from the corrector CC.DHF0175 (red) compared to the expected orbit in the original MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelOriginalV}
 \end{figure}
 
@@ -323,7 +323,7 @@ The first adjustment made was to the modelled strength of the L-type quadrupoles
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrQuadH}
-  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 with the L-type quadrupole strengths increased by \(7\%\).}
+  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the orbit in the MADX model of TL2 with the L-type quadrupole strengths increased by \(7\%\). The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelCorrQuadH}
 \end{figure}
 
@@ -334,10 +334,10 @@ By adjusting the HGAP, FINT and quadrupole K1 component of the dipoles in the ho
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelOrigBendV}
-  \caption{Vertical orbit due to a kick from the corrector CC.DVF0525 with the default MADX  model of the dipole focusing.}
+  \caption{Vertical orbit due to a kick from the corrector CC.DVF0525 (red) with the default MADX model of the dipole focusing. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelOrigBendV}
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrBendV}
-  \caption{Vertical orbit due to a kick from the corrector CC.DVF0525 with the corrected model of the dipole focusing.}
+  \caption{Vertical orbit due to a kick from the corrector CC.DVF0525 (red) with the corrected MADX model of the dipole focusing. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelCorrBendV}
 \end{figure}
 
@@ -372,10 +372,10 @@ Figures~\ref{f:modelCorrectedH}~and~\ref{f:modelCorrectedV} compare the measured
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrectedH}
-  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 compared to the corrected MADX model of TL2.}
+  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the corrected MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelCorrectedH}
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrectedV}
-  \caption{Vertical orbit due to a kick from the corrector CC.DVF0175 compared to the corrected MADX model of TL2.}
+  \caption{Vertical orbit due to a kick from the corrector CC.DVF0175 (red) compared to the corrected MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelCorrectedV}
 \end{figure}
 
@@ -478,32 +478,33 @@ Finally, the \(R_{52}\) value between the two kickers is 0.74~m. This defines th
 \afterpage{\begin{landscape}
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsBeta}
-  \caption{Horizontal and vertical beta functions in the new TL2 optics.}
+  \includegraphics[width=0.75\hsize]{Figures/optics/pffOpticsBeta}
+  \caption{Horizontal (blue) and vertical (red) beta functions in the new TL2 optics. Blue convex lenses indicate focusing quadrupoles and blue concave lenses defocusing quadrupoles. Red rectangles mark the position of dipoles, and green squares the
+position of the two PFF kickers.}
   \label{f:pffOpticsBeta}
   \centering
-  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsAlpha}
-  \caption{Horizontal and vertical alpha functions in the new TL2 optics.}
+  \includegraphics[width=0.75\hsize]{Figures/optics/pffOpticsAlpha}
+  \caption{Horizontal (blue) and vertical (red) alpha functions in the new TL2 optics. Blue convex lenses indicate focusing quadrupoles and blue concave lenses defocusing quadrupoles. Red rectangles mark the position of dipoles, and green squares the position of the two PFF kickers.}
   \label{f:pffOpticsAlpha}
 \end{figure}
 
 \begin{figure}
   \centering
-   \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsDisp}
-  \caption{Horizontal and vertical dispersion in the new TL2 optics.}
+   \includegraphics[width=0.75\hsize]{Figures/optics/pffOpticsDisp}
+  \caption{Horizontal (blue) and vertical (red) dispersion in the new TL2 optics. Blue convex lenses indicate focusing quadrupoles and blue concave lenses defocusing quadrupoles. Red rectangles mark the position of dipoles, and green squares the position of the two PFF kickers.}
   \label{f:pffOpticsDisp}
-  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsR56}
-  \caption{\(R_{56}\) in the new TL2 optics.}
+  \includegraphics[width=0.75\hsize]{Figures/optics/pffOpticsR56}
+  \caption{\(R_{56}\) in the new TL2 optics. Blue convex lenses indicate focusing quadrupoles and blue concave lenses defocusing quadrupoles. Red rectangles mark the position of dipoles, and green squares the position of the two PFF kickers.}
   \label{f:pffOpticsR56}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsX}
-  \caption{Horizontal orbit in the TL2 chicane with a 1~mrad kick applied.}
+  \includegraphics[width=0.75\hsize]{Figures/optics/pffOpticsX}
+  \caption{Horizontal orbit in the TL2 chicane with a 1~mrad kick from the PFF kickers. Blue convex lenses indicate focusing quadrupoles and blue concave lenses defocusing quadrupoles. Red rectangles mark the position of dipoles, and green squares the position of the two PFF kickers.}
   \label{f:pffOpticsX}
-  \includegraphics[width=0.85\hsize]{Figures/optics/pffOpticsPhase}
-  \caption{Phase in the TL2 chicane with a 1~mrad kick applied.}
+  \includegraphics[width=0.75\hsize]{Figures/optics/pffOpticsPhase}
+  \caption{Phase in the TL2 chicane with a 1~mrad kick from the PFF kickers. Blue convex lenses indicate focusing quadrupoles and blue concave lenses defocusing quadrupoles. Red rectangles mark the position of dipoles, and green squares the position of the two PFF kickers.}
   \label{f:pffOpticsPhase}
 \end{figure}
 \end{landscape}}
