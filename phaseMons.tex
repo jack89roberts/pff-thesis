@@ -849,26 +849,26 @@ Figure~\ref{f:phaseAlongAll} shows an example of the measured phase along the pu
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/phaseAlongAll}
   \caption{Comparison of phase along the pulse in the three PFF phase monitors and an alternative downstream phase measurement from a PETS. Blue: Mon~1, Red: Mon~2, Green: Mon~3 and Dashed Black: PETS.}
   \label{f:phaseAlongAll}
-\end{figure}
-
-Nevertheless, there are differences between the measurements. As described later in Chapter~\ref{c:phasePropagation} there are many mechanisms by which the beam phase can change between the upstream and downstream monitors. Small discrepancies between the Mon~1 and Mon~2 phase compared to the Mon~3 and PETS phase are therefore not unexpected.  However, as Mon~1 and Mon~2 are neighbouring each other in the beam line their measurements are expected to agree almost perfectly but this is not the case. At the start of the pulse the Mon~2 phase is around \(6^\circ\) lower than the Mon~1 phase, whereas at the end of the pulse the Mon~2 phase is around \(2^\circ\) higher than the Mon~1 phase, for example. 
-
-Two possible explanations could have been an error in the fitted calibration amplitude or a time offset between the two signals. The fact that the Mon~2 phase is lower at one end of the pulse but higher at the other means that the difference is not simply a scale factor between the two, and therefore cannot be described by an error in calibration amplitude. Neither can it be explained by differences in the calibration constants along the pulse, as seen in the next section. Similarly, by observing small variations along the pulse, for example at the end of the pulse after a time of 1000~ns in the figure, it can be seen that the two measurements are well aligned in time.
-
-The blue line in Figure~\ref{f:DiffMon1Mon2Along} shows the difference between the Mon~1 and Mon~2 phase along the pulse. The offset between the two has a clear linear dependence on the time along the pulse. As a result, one way in which the agreement between the two measurements can be improved is by rotating Mon~2 with respect to Mon~1 about a time of 850~ns where the offset between the two is zero. With an optimal rotation of \(2.1^\circ\) the mean absolute offset between Mon~1 and Mon~2 between 370~ns and 1080~ns can be reduced from \(1.44\pm0.08^\circ\) to \(0.12\pm0.01^\circ\). The red line in the figure shows the difference along the pulse after performing this rotation. Figure~\ref{f:phaseAlongAll} then shows a comparison between the mean phase along the pulse in Mon~1 and Mon~2 after the rotation, with the original measurement from Mon~2 also shown for reference. The agreement in shape between the two is now excellent, with only a slight discrepancy at the end of the pulse. 
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/mon2Rotated}
-  \caption{Comparison of Mon~1 (blue) and Mon~2 (red) phase along the pulse, with Mon~2 rotated by \(2.1^\circ\) about a time of 850~ns on the horizontal axis. The initial Mon~2 phase before the rotation is shown by the dashed red line.}
-  \label{f:mon2Rotated}
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/DiffMon1Mon2Along}
-  \caption{Difference between Mon~1 and Mon~2 phase along the pulse with (red) and without (blue) Mon~2 rotated.}
+  \caption{Difference between the measured Mon~1 and Mon~2 phase along the pulse with.}
   \label{f:DiffMon1Mon2Along}
 \end{figure}
 
-The source of this apparent rotation between Mon~1 and Mon~2 is not clear and could be an effect of the monitors themselves, the calibration process or a real difference between the beam phase in each monitor. If there was a real rotation in the phase sag between monitors or if there was an issue with Mon~1, used as the PFF correction input, it would not be possible to completely flatten the phase sag along the pulse with the PFF system. The excellent flattening of the pulse that has in reality been achieved with the PFF system (Chapter~\ref{c:feedforward}) suggests this may be an issue affecting only Mon~2, as the correction input is based solely on Mon~1. An issue with the measured pulse shape from Mon~2 may also help to explain differences between the shape of the applied kick and the upstream phase (measured by Mon~2) seen later in Section~\ref{ss:kickShape}.
+Nevertheless, there are differences between the measurements. As described later in Chapter~\ref{c:phasePropagation} there are many mechanisms by which the beam phase can change between the upstream and downstream monitors. Small discrepancies between the Mon~1 and Mon~2 phase compared to the Mon~3 and PETS phase are therefore not unexpected. A detailed comparison between the upstream and downstream phase is left to Chapter~\ref{c:phasePropagation} rather than being discussed here. 
 
+However, as Mon~1 and Mon~2 are neighbouring each other in the beam line their measurements are expected to agree almost perfectly but this is not the case. Figure~\ref{f:DiffMon1Mon2Along} shows the difference between the Mon~1 and Mon~2 phase along the pulse. The offset between the two has almost a linear dependence on the time along the pulse, varying by close to \(10^\circ\) across the full pulse length. Two possible explanations for the difference could have been an error in the fitted calibration amplitude or a time offset between the two signals. The fact that the Mon~2 phase is lower at one end of the pulse but higher at the other means that the difference is not simply a scale factor between the two, and therefore cannot be described by an error in calibration amplitude. Neither can it be explained by differences in the calibration constants along the pulse, as seen in the next section. Similarly, by observing small variations along the pulse, for example at the end of the pulse after a time of 1000~ns in Figure~\ref{f:phaseAlongAll}, it can be seen that the two measurements are well aligned in time.
+
+If there was a real difference in the phase sag between monitors (rather than it being a measurement effect) or if there was an issue with Mon~1, used as the PFF correction input, it would not be possible to completely flatten the phase sag along the pulse with the PFF system. The excellent flattening of the pulse that has in reality been achieved with the PFF system (Chapter~\ref{c:feedforward}) suggests this may be an issue affecting only Mon~2, as the correction input is based solely on Mon~1. Although the effect is not yet understood, recent measurements have suggested the source of the difference may be intermittent noise on the LO phase used by the second mixer, and not present or at least much weaker on the first and third LO sources used for Mon~1 and Mon~3 \cite{jackFONTAug16}. The noise appears to be correlated with the phase and power of the two klystrons nearest the phase monitor electronics in the klystron gallery, suggesting a possible grounding issue in the electronics.
+
+%\begin{figure}
+%  \centering
+%%  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/mon2Rotated}
+%%  \caption{Comparison of Mon~1 (blue) and Mon~2 (red) phase along the pulse, with Mon~2 rotated by \(2.1^\circ\) about a time of 850~ns on the horizontal axis. The initial Mon~2 phase before the rotation is shown by the dashed red line.}
+%%  \label{f:mon2Rotated}
+%  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/DiffMon1Mon2Along}
+%  \caption{Difference between the measured Mon~1 and Mon~2 phase along the pulse with.}
+%  \label{f:DiffMon1Mon2Along}
+%\end{figure}
 
 \newsection{effectsMultiSampCal}{Effect of Variations in Calibration Constant}
 
