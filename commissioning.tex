@@ -290,11 +290,16 @@ As the correction range of the PFF system is less than \(\pm10^\circ\) (Section~
 \subsection{Channel Offset}
 \label{ss:channelOffset}
 
+The channel offset for ADC~2 (to which the PFF input, the Mon~1 mixer, is connected) allows the zero point for the correction to be adjusted. In other words it allows the user to decide which phase the PFF system should correct to. 
 
-Gain 624
-Max DAC 4095
-Output gain/64 * ADC2
-Max ADC2 420 counts before saturation
+In the PFF algorithm on the FONT5a board the DAC output is proportional to the ADC~2 input, multiplied by the set gain and other constants (Equation~\ref{e:fontGain1}). However, the ADC~2 input used in the algorithm is not only dependent on the Mon~1 mixer, but rather the sum of the mixer and the channel offset: 
+\begin{equation}
+\mathrm{ADC2}(t) = M(t) + \delta
+\label{e:chanOffset}
+\end{equation}
+Here \(M(t)\) is the Mon~1 mixer input, in ADC counts, which varies with time \(t\) along the pulse, and \(\delta\) is the channel offset, which is a constant offset applied to the full pulse length.
+
+Adjusting the channel offset is important as the \(\pm5.5^\circ\) correction range of the PFF prototype is much smaller than the \(\sim40^\circ\) phase sag along the pulse. The PFF correction output is therefore saturated for most of the pulse length, apart from the region  of the pulse that gives close to zero ADC~2 input. Using an effective system gain of unity, or 624 in the units used in the DAQ as derived in Section~\ref{ss:fontGain}, an ADC~2 input of 420~counts gives the maximum DAC ouput of 4095~counts (Equation~\ref{e:fontGain1}). Parts of the pulse where the ADC~2 input is above 420~counts therefore receive a constant kick resulting from the maximum 4095~counts (2~V) output to the amplifier, but the PFF system can no longer correct variations in phase along the pulse or reduce the phase jitter in these regions. In practice the limit is less than 420~counts, as the optimal gain values are typically larger than unity and the amplifier begins to enter saturation for DAC outputs below 4095~counts (Section~\ref{ss:ampLin}).
 
 \begin{figure}
   \centering
@@ -307,6 +312,11 @@ Max ADC2 420 counts before saturation
   \label{f:offsetDACs}
 \end{figure}
 
+Figure~\ref{f:offsetADCs} shows an example of the measured ADC~2 input with the channel offset optimised to give zero output at the mid-point of the pulse. The phase sag results in ADC~2 inputs of above 2500~counts at the start and end of the pulse. Figure~\ref{f:offsetDACs} shows a simulation of what the DAC~output would be in the PFF system (with unit gain), with this ADC~2 input. The DAC output matches the shape of the input between samples 346 and 506 (a 450~ns period), but is saturated for the rest of the pulse length. Figures~\ref{f:offsetADCs}~and~\ref{f:offsetDACs} also show the effect of using a non-optimal channel offset giving an ADC~2 input of 200~counts at the mid-point of the pulse. In this case the region of the pulse where the DAC output is not saturated is redcued to between sample 367 and 486 (a 330~ns period). 
+
+With the non-optimal channel offset the central point of the pulse receives a constant kick of -1950~DAC~counts. This reduces the range of the PFF system for correcting jitter about the mean phase at the mid-point of the pulse. With the optimal channel offset, giving a mean ADC~2 input of zero at sample 421, the PFF system can correct jitter of \(\pm420\)~ADC~counts about the mean (to give \(\pm4095\)~counts DAC output). With the non-optimal offset, giving a mean ADC~2 input of 200~ADC~counts at sample 421, this is changed to a correctable range of \(+220/-620\)~ADC~counts about the mean. The range of the system is therefore almost halved for phase jitter giving positive offsets in the ADC~2 input.
+
+The adjustment of the channel offset and its effect for the PFF system is discussed further in Section~\ref{ss:longFF_upDrifts}. It is important to note that the the mixer output can also be zeroed in the region of the pulse where the correction is desired by varying the phase shifters in the phase monitor electronics, as is done after calibrations (Section~\ref{ss:calZeroCross}). As the phase monitor resolution is degraded for large phase offsets (Section~\ref{ss:resVsShifter}) the channel offset should only be used to make small adjustments remotely. For large mixer outputs (corresponding to phase offsets above \(20^\circ\)) the phase shifters should be adjusted in the klystron gallery to reset the zero crossing instead.  
 
 \newsection{amplifierSetup}{Amplifier}
 
@@ -431,15 +441,15 @@ Variations in the amplifier output along the pulse can also lead to imperfect or
   \label{f:ampClosureFlatness}
 \end{figure}
 
-\newsection{daqSigProc}{Data Acquisition}
-
-\subsection{Acquisition Tools}
-\label{ss:acqTools}
-
-\subsection{Monitoring Tools}
-\label{ss:monTools}
-
-Online display
+%\newsection{daqSigProc}{Data Acquisition}
+%
+%\subsection{Acquisition Tools}
+%\label{ss:acqTools}
+%
+%\subsection{Monitoring Tools}
+%\label{ss:monTools}
+%
+%Online display
 
 
 \newsection{constKicks}{Kicker and Optics Performance Verification}
