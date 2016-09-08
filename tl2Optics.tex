@@ -70,6 +70,13 @@ The Courant-Snyder invariant defines an ellipse with area \(\pi\epsilon_x\) in \
 
 The two electromagnetic kickers provide the phase correction in the PFF system by deflecting the beam on to longer or shorter paths in the TL2 chicane. They have been designed and built by INFN, Italy \cite{infn}, based on a similar design used at the DA\(\mathrm{\Phi}\)NE collider \cite{dafneKick}. A schematic of the kicker design is shown in Figure~\ref{f:kickerSchematic}. It consists of two parallel conducting strips placed along the left and right side of the beam pipe. Each strip is approximately one metre in length and the horizontal separation between the strips is 40~mm. The strips are tapered at their ends to reduce coupling impedance (to reduce the voltage induced on the strips by the beam) \cite{kickerIPAC11}.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/optics/kickerSchematic}
+  \caption{Technical drawing of the kicker design. The kicker is shown in a vertical orientation with the strips on the top and bottom. When installed in the beam line the kicker is oriented with the strips on the left and right, in order to create a horizontal electric field between the strips.}
+  \label{f:kickerSchematic}
+\end{figure}
+
 At each end of each strip there is a transition to a 50~\(\mathrm{\Omega}\) HN-type connector. A voltage is applied to the downstream end of each kicker strip, with opposite polarity on each side, for example \(+V\) to the left strip and \(-V\) to the right strip. The voltage is produced by the amplifier discussed in Section~\ref{s:amplifierSetup}, and the voltage leaving the upstream ends of the kicker strips is also terminated back at the amplifier. The applied voltage \(V(t)\) creates a horizontal, position independent, electric field and vertical magnetic field between the strips with related amplitudes as follows \cite{byrdKicker}:
 \begin{eqnarray}
 E_x &\sim& V(t) \\
@@ -83,16 +90,21 @@ Where \(e\) is the charge of an electron and \(\beta = v/c\). The final expressi
 
 With the voltage correctly applied to the downstream end of the strips the force is as above and the kicker imparts a horizontal deflection to the beam. The kicker design gives a horizontal deflection of 1~mrad for an applied voltage of \(\pm1.26~kV\) to each strip \cite{kickerIPAC11}, assuming the CTF3 beam energy of around 135 MeV. This value together with the peak voltage output from the amplifier and the optics of the TL2 chicane (as described below) defines the maximum phase offset that can bwe corrected by the PFF system (Section~\ref{ss:corrRange}).
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/optics/kickerSchematic}
-  \caption{Technical drawing of the kicker design. The kicker is shown in a vertical orientation with the strips on the top and bottom. When installed in the beam line the kicker is oriented with the strips on the left and right, in order to create a horizontal electric field between the strips.}
-  \label{f:kickerSchematic}
-\end{figure}
+
 
 \newsection{tl2}{TL2}
 
 The transfer line TL2 at CTF3 transports the beam from the exit of the combiner ring to the experimental area CLEX (see Figure~\ref{f:ctfLayout}). The whole line is approximately 45~m long and contains both vertical and horizontal chicanes to align the outgoing combiner ring beam line to the CLEX entrance. The PFF system attempts to correct the beam phase using the horizontal chicane at the end of TL2, where the two kickers are installed. Further details of the design of TL2 can be found in \cite{tl2}.
+
+\afterpage{\begin{landscape}
+\begin{figure}
+  \centering
+  \includegraphics[width=\hsize]{Figures/optics/newTL2Lattice}
+  \caption{New TL2 lattice for PFF. Changes highlighted yellow. Adapted from \cite{tl2Layout}}
+  \label{f:newTL2Lattice}
+\end{figure}
+\end{landscape}}
+
 
 The diagram in Figure~\ref{f:newTL2Lattice} shows a birds-eye view of the TL2 line and the lattice of the line. To interpret the diagram it is useful to introduce the device naming convention at CTF3. Devices have names of the form:
 \begin{center}
@@ -106,25 +118,21 @@ Other features along the TL2 line that are important for the derivation of optic
 
 [TODO: picture of TL2/chicane]
 
-\afterpage{\begin{landscape}
-\begin{figure}
-  \centering
-  \includegraphics[width=\hsize]{Figures/optics/newTL2Lattice}
-  \caption{New TL2 lattice for PFF. Changes highlighted yellow. Adapted from \cite{tl2Layout}}
-  \label{f:newTL2Lattice}
-\end{figure}
-\end{landscape}}
-
 \subsection{Integration of PFF Hardware}
 \label{ss:tl2PFFIntegration}
 
 Due to building and cost constraints the PFF prototype had to make use of the pre-existing layout of the TL2 horizontal chicane, with only minor modifications possible to accommodate the PFF hardware. These changes are highlighted in yellow in Figure~\ref{f:newTL2Lattice}.
 
-As the chicane was already densely packed with quadrupoles and other devices the integration of the two kickers was not straightforward. To maintain the functionality of the lattice quadrupoles could not be removed, and thus instead the kickers have been installed inside wide aperture `H-type' quadrupoles \cite{tl2Magnets}. Two `L-type'  quadrupoles \cite{tl2Magnets} (now CC.QDL0330 and CC.QDL0370) from the horizontal chicane were swapped with two `H-type' quadrupoles (now CC.QDH0490 and CC.QDH0790) from the vertical chicane. The two PFF kickers, CC.KHD0480 and CC.KHD0780, are then installed inside the aperture of these quadrupoles, prior to the first and last dipole of the horizontal chicane. In addition, two magnetic correctors (now CC.DHF0465 and CC.DHF0765) were installed around the PFF kickers to facilitate a complementary, large range but low bandwidth, slow phase correction \cite{jackLCWS14}. A schematic of the installation of one of the kickers inside the quadrupole and corrector is shown in Figure~[REF]. The kicker CC.KHD0480 will also be referred to as the first kicker (or K1), and CC.KHD0780 as the second kicker (or K2).
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Figures/optics/kickerInsideQuad}
+  \caption{Schematic of the installation of the first kicker inside the quadrupole CC.QDH0490 (blue) before the first dipole in the chicane CC.BHG0500 (red). The kicker also passes through the aperture of the corrector CC.DHF0465 (brown) before the quadrupole \cite{kickInQuad}.}
+  \label{f:kickerInsideQuad}
+\end{figure}
+
+As the chicane was already densely packed with quadrupoles and other devices the integration of the two kickers was not straightforward. To maintain the functionality of the lattice quadrupoles could not be removed, and thus instead the kickers have been installed inside wide aperture `H-type' quadrupoles \cite{tl2Magnets}. Two `L-type'  quadrupoles \cite{tl2Magnets} (now CC.QDL0330 and CC.QDL0370) from the horizontal chicane were swapped with two `H-type' quadrupoles (now CC.QDH0490 and CC.QDH0790) from the vertical chicane. The two PFF kickers, CC.KHD0480 and CC.KHD0780, are then installed inside the aperture of these quadrupoles, prior to the first and last dipole of the horizontal chicane. In addition, two magnetic correctors (now CC.DHF0465 and CC.DHF0765) were installed around the PFF kickers to facilitate a complementary, large range but low bandwidth, slow phase correction \cite{jackLCWS14}. A schematic of the installation of the first kicker inside the quadrupole and corrector is shown in Figure~[REF]. The kicker CC.KHD0480 will also be referred to as the first kicker (or K1), and CC.KHD0780 as the second kicker (or K2).
 
 Apart from the quadrupoles and correctors two BPMs (now CC.BPI0435 and CC.BPI0735) had to be moved slightly to vacate the area now occupied by the kickers. Finally, a slot near the start of TL2 (CC.PHM0245) was reserved for the installation of an additional phase monitor to verify the beam phase prior to the correction. Eventually this was not necessary and has not been pursued as the 2~cm aperture of the phase monitors (Section~\ref{s:phaseMonDesign}) compared to the 4~cm aperture of the neighbouring beam pipe would have created beam setup difficulties for normal operation at CTF3 \cite{piotrPriv}.
-
-[TODO: pictures/diagram of kickers in quadrupole]
 
 \newsection{tl2OpticsReqs}{TL2 Optics Constraints}
 
