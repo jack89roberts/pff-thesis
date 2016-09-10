@@ -99,14 +99,14 @@ The transfer line TL2 at CTF3 transports the beam from the exit of the combiner 
 \afterpage{\begin{landscape}
 \begin{figure}
   \centering
-  \includegraphics[width=\hsize]{Figures/optics/newTL2Lattice}
-  \caption{New TL2 lattice for PFF. Changes highlighted yellow. Adapted from \cite{tl2Layout}}
+  \includegraphics[width=\hsize]{Figures/optics/TL2Lattice}
+  \caption{Lattice of the TL2 transfer line. The beam enters TL2 from the right hand side of the figure. Changes made to accommodate the PFF hardware are highlighted in yellow. Dipoles (BH or BV) and quadrupoles (QF or QD) are labelled below the line at their approximate positions. BPMs (BPI or BPM), correctors (DH or DV) and the PFF kickers (KH) are labelled above the line at their approximate positions. Adapted from \cite{tl2Layout}}
   \label{f:newTL2Lattice}
 \end{figure}
 \end{landscape}}
 
 
-The diagram in Figure~\ref{f:newTL2Lattice} shows a birds-eye view of the TL2 line and the lattice of the line. To interpret the diagram it is useful to introduce the device naming convention at CTF3. Devices have names of the form:
+The diagram in Figure~\ref{f:TL2Lattice} shows a birds-eye view of the TL2 line and the lattice of the line. To interpret the diagram it is useful to introduce the device naming convention at CTF3. Devices have names of the form:
 \begin{center}
 [CC].[QF][D][0840]
 \end{center}
@@ -121,7 +121,7 @@ Other features along the TL2 line that are important for the derivation of optic
 \subsection{Integration of PFF Hardware}
 \label{ss:tl2PFFIntegration}
 
-Due to building and cost constraints the PFF prototype had to make use of the pre-existing layout of the TL2 horizontal chicane, with only minor modifications possible to accommodate the PFF hardware. These changes are highlighted in yellow in Figure~\ref{f:newTL2Lattice}.
+Due to building and cost constraints the PFF prototype had to make use of the pre-existing layout of the TL2 horizontal chicane, with only minor modifications possible to accommodate the PFF hardware. These changes are highlighted in yellow in Figure~\ref{f:TL2Lattice}.
 
 \begin{figure}
   \centering
@@ -262,9 +262,9 @@ As seen above there are many optics constraints in TL2 that must be met both to 
 \subsection{Method}
 \label{ss:opticsMethod}
 
-The TL2 line includes 12 magnetic correctors, as shown in Figure~\ref{f:newTL2Lattice} (plus one at the end of TL2 in the CLEX area, which is not shown in the figure). An electric current can be applied to horizontal or vertical coils on the corrector, creating independently adjustable horizontal and vertical fields that deflect the beam. The primary purpose of the correctors is to compensate differences in beam orbit resulting from small misalignments of devices along the line. However, they can also be used to test the accuracy of the TL2 model.
+The TL2 line includes 12 magnetic correctors, as shown in Figure~\ref{f:TL2Lattice} (plus one at the end of TL2 in the CLEX area, which is not shown in the figure). An electric current can be applied to horizontal or vertical coils on the corrector, creating independently adjustable horizontal and vertical fields that deflect the beam. The primary purpose of the correctors is to compensate differences in beam orbit resulting from small misalignments of devices along the line. However, they can also be used to test the accuracy of the TL2 model.
 
-Measurements were taken in which the current applied to one of the correctors was changed, causing the beam to be deflected on to a new trajectory along the rest of the line. The new orbit is observed in the BPMs downstream of the corrector, with a total of 12 BPMs in TL2 (also shown in Figure~\ref{f:newTL2Lattice}). The position offset in each BPM depends on the transfer matrix between the corrector and that BPM, and therefore on the focusing properties of all the magnetic elements between the corrector and the BPM. By deflecting the beam with each corrector along the line, and in both planes, the response of the whole line as well as individual parts of the line can be determined.
+Measurements were taken in which the current applied to one of the correctors was changed, causing the beam to be deflected on to a new trajectory along the rest of the line. The new orbit is observed in the BPMs downstream of the corrector, with a total of 12 BPMs in TL2 (also shown in Figure~\ref{f:TL2Lattice}). The position offset in each BPM depends on the transfer matrix between the corrector and that BPM, and therefore on the focusing properties of all the magnetic elements between the corrector and the BPM. By deflecting the beam with each corrector along the line, and in both planes, the response of the whole line as well as individual parts of the line can be determined.
 
 The same process can then be repeated in the MADX model, applying a current to one of the correctors and creating a simulated deflected orbit. All the BPMs are included in the model, allowing the real measured position in each BPM to be compared to the simulated position from the MADX model. Any difference between the two highlights inaccuracies in the modelled properties of the TL2 lattice.
 
