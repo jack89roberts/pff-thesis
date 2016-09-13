@@ -38,7 +38,7 @@ Equations~\ref{e:pffEq2},~\ref{e:theoretOptGain}~and~\ref{e:theoretJitOptGain} a
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/theoretJitvsCorr}
-  \caption{Dependence of the theoretical corrected downstream phase jitter on the initial upstream-downstream phase correlation, with an initial downstream phase jitter of 1~degree.}
+  \caption{Dependence of the ratio between the theoretical corrected and initial downstream phase jitter (\(\sigma_{PFF}/\sigma_d\)) on the initial upstream-downstream phase correlation (\(\rho_{ud}\)).}
   \label{f:theoretJitvsCorr}
 \end{figure}
 
@@ -86,7 +86,7 @@ The differences between the mean upstream and downstream phase, both on the mean
 
 Assuming the initial downstream phase jitter could be reduced to the same level as the upstream phase jitter, to \(0.8^\circ\), the upstream--downstream phase correlation required to theoretically achieve \(0.2^\circ\) corrected phase jitter is 97\%. This chapter will describe the procedures developed to achieve this level of downstream phase jitter and correlation. The first effect investigated was the energy dependence of the downstream phase, for the reasons described in Section~\ref{s:r56}.
 
-\newsection{r56}{First Order Energy Dependencies}
+\newsection{r56}{First Order Energy Dependences}
 
 The transfer matrix coefficient \(R_{56}\) defines the phase shift between two points in the lattice resulting from a beam energy offset (Section~\ref{s:tl2OpticsReqs}). Due to issues with meeting all the optics constraints for the PFF system a non-zero \(R_{56}\) value had to be tolerated in the TL2 chicane (Section~\ref{s:matchedOptics}).  Therefore, a dependence of the downstream phase on the beam energy is expected, and this was the first place to look to try to understand and improve the poor upstream--downstream phase correlation and high downstream phase jitter.
 
@@ -109,7 +109,7 @@ It should be noted that whilst this provides an accurate measurement of the rela
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/enJitter_mean}
-  \caption{Example of variations in mean energy across 500 pulses, with a relative jitter of \(1.2\times 10^{-3}\).}
+  \caption{Example of variations in the mean beam energy (\(\Delta p/p\)) across 500 pulses, with a relative jitter of \(1.2\times 10^{-3}\).}
   \label{f:enJitter_mean}
 \end{figure}
 
@@ -122,10 +122,10 @@ The energy stability point-by-point along the pulse is at the same level as the 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/enJitter_along}
-  \caption{Example of relative energy jitter along the pulse. Each point is the rms energy variation at that point along the pulse across a dataset of 213 pulses.}
+  \caption{Example of relative energy jitter (\(\sigma_p\)) along the pulse. Each point is the rms energy variation at that point along the pulse across a dataset of 213 pulses.}
   \label{f:enJitter_along}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/enMeanAlong}
-  \caption{Example of variations in energy along the pulse, showing the mean taken across a dataset of 213 pulses.}
+  \caption{Example of variations in energy (\(\Delta p/p\)) along the pulse, showing the mean taken across a dataset of 213 pulses.}
   \label{f:enMeanAlong}
 \end{figure}
 
@@ -145,10 +145,10 @@ The goal of this section is to determine whether the non-zero optics \(R_{56}\) 
 \begin{figure}
   \centering
     \includegraphics[width=0.8\textwidth]{Figures/propagation/corrDownstreamEn}
-  \caption{Dependence of the mean downstream phase on the beam energy.}
+  \caption{Dependence of the mean downstream phase on the beam energy (\(\Delta p/p\)).}
   \label{f:corrDownstream_En}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/corrUpstreamEn}
-  \caption{Dependence of the mean upstream phase on the beam energy.}
+  \caption{Dependence of the mean upstream phase on the beam energy (\(\Delta p/p\)).}
   \label{f:corrUpstream_En}
 \end{figure}
 
@@ -249,10 +249,10 @@ Figure~\ref{f:jitVsR56}~and~\ref{f:corrVsR56} show the expected downstream phase
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/jitVsR56}
-  \caption{Initial (blue) and corrected (red) downstream phase jitter vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors. The horizontal black line shows the CLIC target of 0.2~degrees corrected downstream phase jitter.}
+  \caption{Initial (blue) and corrected (red) downstream phase jitter (\(\sigma_d\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)). The horizontal black line shows the CLIC target of 0.2~degrees corrected downstream phase jitter.}
   \label{f:jitVsR56}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/corrVsR56}
-  \caption{Upstream-downstream phase correlation vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors. The horizontal black line shows the 97\% correlation needed to achieve 0.2~degrees corrected phase jitter at CTF3.}
+  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)). The horizontal black line shows the 97\% correlation needed to achieve 0.2~degrees corrected phase jitter at CTF3.}
   \label{f:corrVsR56}
 \end{figure}
 
@@ -261,10 +261,10 @@ To interpret the results of \(R_{56}\) optimisation attempts (Sections~\ref{s:r5
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/corrVsR56_CTENCorr}
-  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors for different upstream phase-energy correlations: \(\rho_{up}=0.0\) (blue), \(\rho_{up}=0.2\) (red), \(\rho_{up}=0.4\) (orange) and \(\rho_{up}=0.9\) (purple).}
+  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)) for different upstream phase-energy correlations: \(\rho_{up}=0.0\) (blue), \(\rho_{up}=0.2\) (black), \(\rho_{up}=0.4\) (green) and \(\rho_{up}=0.9\) (red).}
   \label{f:corrVsR56_CTENCorr}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/jitVsR56_90ctencorr}
-  \caption{Initial (blue) and corrected (red) downstream phase jitter vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors with 90\% correlation between the upstream phase and the beam energy.}
+  \caption{Initial (blue) and corrected (red) downstream phase jitter (\(\sigma_d\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)) with 90\% correlation between the upstream phase and the beam energy.}
   \label{f:jitVsR56_90ctencorr}
 \end{figure}
 
@@ -294,7 +294,7 @@ The layout of the TL1 transfer line is shown in Figure~\ref{f:tl1Layout}. It con
 \subsection{Matched Optics for TL1}
 \label{ss:tl1Optics}
 
-Although in theory only one set of optics with \(R_{56} = +0.2\)~m in TL1 is required to compensate for the \(R_{56} = -0.2\)~m in TL2, in practice errors in the MADX model of CTF3 in addition to the effect of higher order energy dependencies (see Section~\ref{s:t566}) mean it is not possible to know precisely what the optimal \(R_{56}\) in TL1 will be, and it is also possible that this value will vary with time. To determine the optimal value it is also useful to scan the \(R_{56}\) value in TL1 across a wide range of values.% and then fit the maximum resulting upstream-downstream phase correlation.
+Although in theory only one set of optics with \(R_{56} = +0.2\)~m in TL1 is required to compensate for the \(R_{56} = -0.2\)~m in TL2, in practice errors in the MADX model of CTF3 in addition to the effect of higher order energy dependences (see Section~\ref{s:t566}) mean it is not possible to know precisely what the optimal \(R_{56}\) in TL1 will be, and it is also possible that this value will vary with time. To determine the optimal value it is also useful to scan the \(R_{56}\) value in TL1 across a wide range of values.% and then fit the maximum resulting upstream-downstream phase correlation.
 To allow this, MADX has been used to match optics for TL1 with \(R_{56}\) values ranging from -0.3~m to +0.6~m in steps of 0.5~cm (a total of 181 sets of optics). The optimal \(R_{56}\) value should always be guaranteed to be in this range, and the step size of 0.5~cm allows the residual \(R_{56}\) to be zeroed to within one centimetre as derived to be necessary in Section~\ref{ss:r56TL2Effect}. 
 
 As well as the different \(R_{56}\) values, each set of optics must maintain the same initial and final conditions, so that the injection of the beam in to the combiner ring is not affected. Values for the beta functions, alphas and dispersion at the start of TL1 and at the combiner ring injection are summarised in Table~\ref{t:tl1MatchParams}. As well as the initial and final conditions, the maximum beta functions and dispersion in TL1 are constrained to ensure a reasonable beam size throughout the line --- the horizontal and vertical beta function is limited to a maximum of 35~m, and the horizontal dispersion to a maximum absolute value of 1.25~m. Around the septum used for injection in to the combiner ring the horizontal beta function is further limited to a maximum of 10~m. The strengths of the 13 quadrupoles in TL1 are varied to meet all these constraints.
@@ -321,14 +321,14 @@ Figure~\ref{f:r56MatchedVsTarget} shows the matched \(R_{56}\) value in TL1 acro
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/r56MatchedVsTarget}
-  \caption{Matched \(R_{56}\) values for the new sets of TL1 optics.}
+  \caption{Matched \(R_{56}\) values in TL1 (\(R_{\mathrm{TL1}}\)) for the new sets of TL1 optics.}
   \label{f:r56MatchedVsTarget}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/CTQFG0750}
-  \caption{Strength (power supply current) of the CT.QFG0750 quadrupole in TL1 vs. the \(R_{56}\) value in TL1 for each set of matched optics.}
+  \caption{Strength (power supply current) of the CT.QFG0750 quadrupole in TL1 vs. the \(R_{56}\) value in TL1 (\(R_{\mathrm{TL1}}\)) for each set of matched optics.}
   \label{f:CTQFG0750}
 \end{figure}
 
@@ -378,7 +378,7 @@ Only the mean phase jitters and correlation will be considered here, features al
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/r56Scan_correlation}
-  \caption{Upstream-downstream phase correlation (red) during a scan of \(R_{56}\) in TL1. The dashed line shows a simulation of the expected downstream phase jitter given the beam conditions in each dataset.}
+  \caption{Upstream-downstream phase correlation (red) during a scan of \(R_{56}\) in TL1. The dashed line shows a simulation of the expected correlation given the beam conditions in each dataset.}
   \label{f:r56Scan_correlation}
 \end{figure}
 
@@ -398,21 +398,21 @@ Differences in the phase jitter and phase--energy correlation between datasets p
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/r56Scan2_meanJitter}
-  \caption{Upstream (blue) and downstream (red) phase jitter during an \(R_{56}\) scan in TL1 showing an optimal set point of around \(R_{56}=0.1\)~m.}
+  \caption{Upstream (blue) and downstream (red) phase jitter during an \(R_{56}\) scan in TL1 showing an optimal set point of around \(R_{TL1}=0.1\)~m.}
   \label{f:r56Scan2_meanJitter}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/r56Scan3_meanJitter}
-  \caption{Upstream (blue) and downstream (red) phase jitter during an \(R_{56}\) scan in TL1 showing an optimal set point of \(R_{56}<0.05\)~m.}
+  \caption{Upstream (blue) and downstream (red) phase jitter during an \(R_{56}\) scan in TL1 showing an optimal set point of \(R_{TL1}<0.05\)~m.}
   \label{f:r56Scan3_meanJitter}
 \end{figure}
 
 
 Figures~\ref{f:r56Scan2_meanJitter}~and~\ref{f:r56Scan3_meanJitter} show the results of two further scans of \(R_{56}\) in TL1, both taken a few days after the scan previously shown (Figures~\ref{f:r56Scan_meanPhaseJit}--\ref{f:r56Scan_upstreamParams}). For both scans the mean downstream phase jitter can again be decreased to the level of the upstream phase jitter by varying the \(R_{56}\) in TL1, and the upstream-downstream correlation increased to 80\%. However, the optimal optics is different for each scan --- the scan in Figure~\ref{f:r56Scan2_meanJitter} has an optimal \(R_{56}\) value of around 0.1~m whereas for the scan in Figure~\ref{f:r56Scan3_meanJitter} it is below 0.05~m. Both values are also different to the scan previously shown, which had an optimal \(R_{56}\) setting of 0.175~m.
 
-With \(R_{56}\) alone and the model of the phase propagation used to derive the equations in Section~\ref{ss:r56Equations} there is no mechanism for the optimal \(R_{56}\) value to vary with time. The best conditions for the phase propagation should always be provided with zero residual \(R_{56}\) between the upstream and downstream phase monitors. As the optics in all beam lines between the upstream and downstream phase monitors (apart from TL1) were unchanged between each scan, the optimal \(R_{56}\) value in TL1 should also be the same for each scan in this model, under the assumption that \(R_{56}\) explains all differences between the upstream and downstream phase. The most likely explanation is a sensitivity to higher order energy dependencies, as discussed in Section~\ref{s:t566}.
+With \(R_{56}\) alone and the model of the phase propagation used to derive the equations in Section~\ref{ss:r56Equations} there is no mechanism for the optimal \(R_{56}\) value to vary with time. The best conditions for the phase propagation should always be provided with zero residual \(R_{56}\) between the upstream and downstream phase monitors. As the optics in all beam lines between the upstream and downstream phase monitors (apart from TL1) were unchanged between each scan, the optimal \(R_{56}\) value in TL1 should also be the same for each scan in this model, under the assumption that \(R_{56}\) explains all differences between the upstream and downstream phase. The most likely explanation is a sensitivity to higher order energy dependences, as discussed in Section~\ref{s:t566}.
 
-\newsection{t566}{Higher Order Energy Dependencies}
+\newsection{t566}{Higher Order Energy Dependences}
 
-In the same way the first order optics dependencies are described by the \(6 \times 6\) R-matrix, the second order effects are described using a three dimensional \(6 \times 6 \times 6\) T-matrix. \(R_{56}\) is the relevant first order transfer matrix coefficient for the energy related effects on the phase propagation, as already discussed, and the relevant T-matrix coefficient for second order energy dependencies is \(T_{566}\). By including the second order term the dependence of the downstream phase on the energy from Equation~\ref{e:r56PhasEq} becomes:
+In the same way the first order optics dependences are described by the \(6 \times 6\) R-matrix, the second order effects are described using a three dimensional \(6 \times 6 \times 6\) T-matrix. \(R_{56}\) is the relevant first order transfer matrix coefficient for the energy related effects on the phase propagation, as already discussed, and the relevant T-matrix coefficient for second order energy dependences is \(T_{566}\). By including the second order term the dependence of the downstream phase on the energy from Equation~\ref{e:r56PhasEq} becomes:
 \begin{equation}
 \phi_d = \phi_u + R_{56}\left(\frac{\Delta p}{p}\right) + T_{566}\left(\frac{\Delta p}{p}\right)^2
 \label{e:t566}
@@ -425,7 +425,7 @@ R_{56} = -2T_{566} \left(\frac{\Delta p}{p}\right)
 \end{equation}
 This is obtained by zeroing the partial differential of Equation~\ref{e:t566} with respect to \(\Delta p/p\).
 
-The above dependence of the \(R_{56}\) value on the beam energy offset has many consequences. Firstly, it provides a mechanism by which the apparent optimal \(R_{56}\) value in TL1 can appear to vary with time (and be non-zero), as was seen comparing the results of different \(R_{56}\) scans in the previous section. CTF3 does experience drifts in beam energy (see Section~\ref{ss:longFF_beamConds}, for example), creating small offsets between the actual beam energy and the energy that the optics has been set for (i.e. the strength of bending and focusing elements in the accelerator). In other words, it is possible for the mean of \(\Delta p / p\) to be non-zero. The optimal \(R_{56}\) value to use in TL1 is then expected to drift with the beam energy when higher order phase-energy dependencies are included.
+The above dependence of the \(R_{56}\) value on the beam energy offset has many consequences. Firstly, it provides a mechanism by which the apparent optimal \(R_{56}\) value in TL1 can appear to vary with time (and be non-zero), as was seen comparing the results of different \(R_{56}\) scans in the previous section. CTF3 does experience drifts in beam energy (see Section~\ref{ss:longFF_beamConds}, for example), creating small offsets between the actual beam energy and the energy that the optics has been set for (i.e. the strength of bending and focusing elements in the accelerator). In other words, it is possible for the mean of \(\Delta p / p\) to be non-zero. The optimal \(R_{56}\) value to use in TL1 is then expected to drift with the beam energy when higher order phase-energy dependences are included.
 
 In addition, energy variations along the beam pulse and jitter in the beam energy mean that the phase propagation cannot be perfectly optimised by varying the \(R_{56}\) alone. Due to the energy dependence in Equation~\ref{e:r56t566dep}, any energy variations along the pulse cause the optimal \(R_{56}\) value to set in TL1 to also vary along the beam pulse. There are static variations in the mean energy along the pulse (e.g. as seen in Section~\ref{ss:energyVariations}) at CTF3, so this means the phase propagation can never be completely optimised along the full pulse length when \(T_{566}\) is non-zero. 
 
@@ -445,7 +445,7 @@ When only the first order effect of \(R_{56}\) is considered, the dependence of 
   \label{f:phaseVsEn_t566}
 \end{figure}
 
-By running varying the initial energy offset in MADX the expected effect of the higher order energy dependencies on the downstream phase can be seen. This is shown in Figure~\ref{f:phaseVsEn_t566}, and the impact of the higher orders is immediately clear. The optimal \(R_{56}\) to use in TL1, where the phase has the minimal dependence on the energy, now depends on the energy offset. Figure~\ref{f:optR56vsEnergy} shows that the dependence of the optimal \(R_{56}\) value on the relative energy offset is linear, as expected from Equation~\ref{e:r56t566dep}. The plotted \(R_{56}\) value does not exceed \(+0.6\)~m or go below \(-0.3\)~m as only the available sets of optics for TL1 are considered, which are restricted to this range. %This also creates small non-linearities in the central region of the plot, although there is also a contribution from effects above second order. 
+By running varying the initial energy offset in MADX the expected effect of the higher order energy dependences on the downstream phase can be seen. This is shown in Figure~\ref{f:phaseVsEn_t566}, and the impact of the higher orders is immediately clear. The optimal \(R_{56}\) to use in TL1, where the phase has the minimal dependence on the energy, now depends on the energy offset. Figure~\ref{f:optR56vsEnergy} shows that the dependence of the optimal \(R_{56}\) value on the relative energy offset is linear, as expected from Equation~\ref{e:r56t566dep}. The plotted \(R_{56}\) value does not exceed \(+0.6\)~m or go below \(-0.3\)~m as only the available sets of optics for TL1 are considered, which are restricted to this range. %This also creates small non-linearities in the central region of the plot, although there is also a contribution from effects above second order. 
 
 
 \begin{figure}
@@ -480,10 +480,10 @@ Figure~\ref{f:jitVsR56_t566} shows the downstream phase jitter versus the residu
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/jitVsR56_t566}
-  \caption{Downstream phase jitter vs. \(R_{56}\) between the upstream and downstream phase monitors. Blue lines include the effects of both \(R_{56}\) and \(T_{566}\), whereas red lines include only the first order \(R_{56}\) term. Solid lines show the initial downstream jitter, and dashed lines the achievable corrected downstream phase jitter. Beam conditions of \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\) are used for the simulation.}
+  \caption{Downstream phase jitter (\(\sigma_d\)) vs. \(R_{56}\) between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)). Blue lines include the effects of both \(R_{56}\) and \(T_{566}\), whereas red lines include only the first order \(R_{56}\) term. Solid lines show the initial downstream jitter, and dashed lines the achievable corrected downstream phase jitter. Beam conditions of \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\) are used for the simulation.}
   \label{f:jitVsR56_t566}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/corrVsR56_t566}
-  \caption{Upstream-downstream phase correlation vs. \(R_{56}\) between the upstream and downstream phase monitors. The blue line includes the effects of both \(R_{56}\) and \(T_{566}\), whereas the red line includes only the first order \(R_{56}\) term.  Beam conditions of \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\) are used for the simulation.}
+  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. \(R_{56}\) between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)). The blue line includes the effects of both \(R_{56}\) and \(T_{566}\), whereas the red line includes only the first order \(R_{56}\) term.  Beam conditions of \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\) are used for the simulation.}
   \label{f:corrVsR56_t566}
 \end{figure}
 
@@ -496,7 +496,7 @@ With the initial conditions and optics used here it would therefore be impossibl
   \label{f:maxCorrWithT566}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/corrVsEnergyOffset}
-  \caption{Simulated upstream-downstream phase correlation vs. relative beam energy offset including the second order effects of \(T_{566}\).}
+  \caption{Simulated upstream-downstream phase correlation (\(\rho_{ud}\)) vs. relative beam energy offset (\(\Delta p/p\)) including the second order effects of \(T_{566}\).}
   \label{f:corrVsEnergyOffset}
 \end{figure}
 
@@ -507,7 +507,7 @@ One final consequence of the non-zero \(T_{566}\) between the upstream and downs
 \subsection{R56 Scans whilst Varying Beam Energy}
 \label{ss:r56ScanWithEnergy}
 
-By intentionally varying the CTF3 beam energy to artificially increase the energy jitter during an \(R_{56}\) scan the energy dependent effects in both the upstream and the downstream phase are amplified. This has the benefit of increasing the visibility of the higher order effects, but it also improves the results of the scan in general by reducing the sensitivity to other small drifts in beam conditions. In this section the results of an \(R_{56}\) scan in which the \(R_{56}\) value in TL1 was varied between -0.1~m and +0.3~m whilst the beam energy was varied by approximately 1\% peak-to-peak are discussed. The resulting relative energy jitter is \(3\times10^{-3}\), or 3--6 times larger than the relative energy jitter in nominal conditions. Direct observations of the effect of higher order energy dependencies during the scan will be presented first, before discussing the overall results of the scan to expand upon the conclusions from the \(R_{56}\) scans shown in Section~\ref{ss:r56Scans}.
+By intentionally varying the CTF3 beam energy to artificially increase the energy jitter during an \(R_{56}\) scan the energy dependent effects in both the upstream and the downstream phase are amplified. This has the benefit of increasing the visibility of the higher order effects, but it also improves the results of the scan in general by reducing the sensitivity to other small drifts in beam conditions. In this section the results of an \(R_{56}\) scan in which the \(R_{56}\) value in TL1 was varied between -0.1~m and +0.3~m whilst the beam energy was varied by approximately 1\% peak-to-peak are discussed. The resulting relative energy jitter is \(3\times10^{-3}\), or 3--6 times larger than the relative energy jitter in nominal conditions. Direct observations of the effect of higher order energy dependences during the scan will be presented first, before discussing the overall results of the scan to expand upon the conclusions from the \(R_{56}\) scans shown in Section~\ref{ss:r56Scans}.
 
 \subsubsection{Energy Dependence}
 
@@ -516,17 +516,17 @@ Figure~\ref{f:R56ScanGunWiggle_PhaseVsEnergy} shows the dependence of the mean d
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/R56ScanGunWiggle_PhaseVsEnergy}
-  \caption{Measured downstream phase vs. beam energy for three different set of \(R_{56}\) optics in TL1: \(R_{56}=-0.100\)~m (red), \(R_{56}=0.075\)~m (blue), and \(R_{56}=0.300\)~m (green). Lines show quadratic fits to the data for each set of optics.}
+  \caption{Measured downstream phase vs. beam energy (\(\Delta p/p\)) for three different sets of \(R_{56}\) optics in TL1: \(R_{TL1}=-0.100\)~m (red), \(R_{TL1}=0.075\)~m (blue), and \(R_{TL1}=0.300\)~m (green). Lines show quadratic fits to the data for each set of optics.}
   \label{f:R56ScanGunWiggle_PhaseVsEnergy}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/R56ScanGunWiggle_R56Fit}
-  \caption{Fitted total \(R_{56}\) value between the upstream and downstream phase monitors for each \(R_{56}\) value applied in TL1 during the scan.}
+  \caption{Fitted total \(R_{56}\) value between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)) for each \(R_{56}\) value applied in TL1 (\(R_{\mathrm{TL1}}\)) during the scan.}
   \label{f:R56ScanGunWiggle_R56Fit}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/R56ScanGunWiggle_T566Fit}
-  \caption{Fitted \(T_{566}\) value between the upstream and downstream phase monitors for each set of \(R_{56}\) optics applied in TL1 during the scan.}
+  \caption{Fitted \(T_{566}\) value between the upstream and downstream phase monitors for each set of \(R_{56}\) optics applied in TL1 (\(R_{\mathrm{TL1}}\)) during the scan.}
   \label{f:R56ScanGunWiggle_T566Fit}
 \end{figure}
 
@@ -575,14 +575,14 @@ As well as the mean phase it is interesting to look at the effect of varying \(R
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/R56ScanGunWiggle_MeanEnergyAlong}
-  \caption{Typical example of variations in the mean energy along the pulse during the \(R_{56}\) scan.}
+  \caption{Typical example of variations in the mean energy (\(\Delta p/p\)) along the pulse during the \(R_{56}\) scan.}
   \label{f:R56ScanGunWiggle_MeanEnergyAlong}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/R56ScanGunWiggle_EnergyJitterAlong}
-  \caption{Typical energy jitter along the pulse during the \(R_{56}\) scan, amplified by varying the mean beam energy during the scan.}
+  \caption{Typical energy jitter (\(\sigma_p\)) along the pulse during the \(R_{56}\) scan, amplified by varying the mean beam energy during the scan.}
   \label{f:R56ScanGunWiggle_EnergyJitterAlong}
 \end{figure}
 
@@ -629,7 +629,7 @@ Differences in the phase jitter along the pulse between two different \(R_{56}\)
   \label{f:stdPhaseVsMeanEnergyAlong}
 \end{figure}
 
-\subsection{Mitigation of Higher Order Dependencies}
+\subsection{Mitigation of Higher Order Dependences}
 \label{ss:t566Mitigation}
 
 The first order energy dependent effects on the downstream phase due to the \(R_{56}\) in TL2 have largely been successfully removed by adding positive \(R_{56}\) to the TL1 line. If necessary, further improvements could be made by creating further sets of TL1 optics in smaller \(R_{56}\) steps. 
@@ -647,6 +647,80 @@ In addition, although they are not yet run online in normal operation, new feedb
   \label{f:beforeAfterDavideFlatten}
 \end{figure}
 
+\newsection{otherJitterSources}{Possible Other Sources of Phase Jitter}
+
+The energy related effects on the downstream phase have been the main focus of attempts to improve the phase propagation for the PFF system. As shown in the Section~\ref{s:bestPhaseProp} this by itself has allowed upstream-downstream correlations in excess of 90\% to be achieved at CTF3. Further optimisations will be needed to achieve the CLIC target of 0.2 degrees phase jitter with the PFF prototype, however. This can partly come from further improvements of the CTF3 injector setup and stability, which will help to reduce any remaining effects from \(T_{566}\) by reducing beam energy jitter, drifts and variations along the pulse. At correlations above \(90\%\) any remaining small differences in the performance of the upstream and downstream phase monitors may also become significant, but this has been adressed in Chapter~\ref{c:phaseMons} so will not be discussed again here.
+
+Preliminary measurements have been performed to investigate whether there may be any other effects at CTF3, apart from energy jitter, that can change the downstream phase and reduce the upstream-downstream phase correlation. The most likely culprits are magnetic elements between the upstream and downstream phase monitors that have a strong effect on the beam orbit. Any change in beam orbit can change the path length between the upstream and downstream phase monitors, and thus shift the downstream phase with respect to the upstream phase. The main elements for which this could be significant include the dipoles in TL1 and the combiner ring, as well as the two septum magnets used  at the combiner ring injection and extraction. Fluctuations in the power supplies for one of these devices could be an additional source of uncorrelated downstream phase jitter.
+
+The current applied from the power supplies for each of these devices has been varied to determine their effect on the downstream phase. In some cases one power supply drives multiple devices, meaning these devices can not be changed independently from each other and any jitter in their strengths should be correlated (assuming the jitter source is the power supply, rather than a separate issue with the device itself). There are four power supplies that control the strength of the devices of interest in the following groups:
+\begin{itemize}
+\item \textbf{Power supply 1:} The first (CT.0540) and second (CT.0630) dipole in TL1.
+\item \textbf{Power supply 2:} The third (CT.0670) and fourth (CT.0710) dipole in TL1.
+\item \textbf{Power supply 3:} The combiner ring injection and extraction setpa.
+\item \textbf{Power supply 4:} All combiner ring dipoles.
+\end{itemize}
+
+Figure~\ref{f:tl1670} shows the effect of changing the last two dipoles in TL1 (power supply 2 above) on the downstream phase, which is the strongest observed dependence. The fitted downstream phase shift per ampere change on this power supply is \(10\pm2^\circ\). Table~\ref{t:otherJitSources} summarises the phase shift per ampere for the other three power supplies. 
+%A linear fit to the response is also shown. For the combiner ring dipoles the response is non-linear and the fit is only applied in the central region around the nominal device setting, giving an approximate gradient that is relevant for small offsets. %In some cases, particularly for the 540/710 dipoles in TL1, the phase dependence is not clear. In all cases the goal is to determine whether there is an effect that may be significant for the PFF system, which can then be investigated further later, rather than quoting precise numbers.
+
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=0.8\textwidth]{Figures/propagation/tl1540}
+%  \caption{Phase vs. strength of first and last dipole in TL1 (CT.0540 and CT.0710).}
+%  \label{f:tl1540}
+%\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/propagation/tl1670}
+  \caption{Downstream phase vs. strength (power supply current) of the first two dipoles in TL1 (CT.0670 and CT.0710).}
+  \label{f:tl1670}
+\end{figure}
+
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=0.8\textwidth]{Figures/propagation/crSeptum}
+%  \caption{Phase vs. strength of the combiner ring injection and extraction septum magnets.}
+%  \label{f:crSeptum}
+%\end{figure}
+
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=0.8\textwidth]{Figures/propagation/crBends}
+%  \caption{Downstream phase vs. strength (power supply current) of the combiner ring dipoles).}
+%  \label{f:crBends}
+%\end{figure}
+
+The power supplies at CTF3 give a relative stability in the supplied current of approximately \(10^{-4}\). Assuming this stability the effect of each device on the downstream phase jitter can be estimated by using the fitted phase shifts per ampere and the known power supply current setting for each device. These approximate phase jitters are also summarised in Table~\ref{t:otherJitSources}. By far the strongest potential source of phase jitter appears to be the last two dipoles in TL1 (CT.0670 and CT.0710), which by themselves could contribute \(0.17\pm0.03\) degrees phase jitter. 
+The explanation for these two dipoles having a much larger effect on the phase than the first two dipoles in TL1 is not known and will need to be verified by repeated measurements and checks of the expected response in the CTF3 MADX model. The combiner ring devices contribute roughly 5 times less phase jitter than the CT.0670 and CT.0710 dipoles. 
+Combining the estimated phase jitters resulting from all the devices in qudrature gives an overall contribution of \(0.18\pm0.03^\circ\) additional downstream phase jitter.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{| c c c c |}
+	   \hline
+       Device & Current & Fit Gradient & Estimated Phase Jitter \\ \hline
+       TL1 540/630 Dipoles & 133~A & \(-0.4\pm0.3^\circ\)/A & \(0.005\pm0.004^\circ\)\\
+       TL1 670/710 Dipoles & 164~A & \(10\pm2^\circ\)/A & \(0.17\pm0.03^\circ\)\\
+       CR Septa & 890~A &  \(-0.5\pm0.1^\circ\)/A & \(0.05\pm0.01^\circ\)\\
+       CR Dipoles & 156~A & \(1.8\pm0.7^\circ\)/A & \(0.03\pm0.01^\circ\)\\ \hline 
+    \end{tabular}
+    \caption{Power supply current setting, dependence of the downstream phase on the current and estimated contribution to downstream phase jitter for the dipoles and septa in TL1 and the combiner ring.}
+  	\label{t:otherJitSources}
+  \end{center}
+\end{table}
+
+Modelling the downstream phase as \(\phi_d = \phi_u + x\), where \(x\) is a generic additional source of uncorrelated jitter, the downstream jitter and upstream-downstream phase correlation are given by:
+\begin{eqnarray}
+\sigma_d = \sqrt{\sigma_u^2 + \sigma_x^2} \\
+\rho_{ud} = \frac{\sigma_u^2}{\sigma_u^2 + \sigma_x^2}
+\end{eqnarray}
+These are equivalent to the equations derived for the phase monitor resolution in Section~\ref{s:resolutionEqs}. Assuming an initial upstream phase jitter of \(0.8^\circ\) plus a \(\sigma_x = 0.18^\circ\) source of jitter resulting from the power supply stabilities previously discussed, the downstream phase jitter is increased slightly to \(0.82^\circ\) and the upstream-downstream phase correlation reduced to \(95\%\).
+
+The effect on the predicted upstream-downstream phase correlation is significant for the PFF system, which requires correlations above \(97\%\) to achieve CLIC level phase stability at CTF3. Therefore, jitter on the power supplies may become a limiting factor for the PFF system performance and this will be verified with repeated measurements of the power supply dependences and stabilities in the future.
+
+%This by itself does not prevent the PFF system from theoretically achieving \(0.2^\circ\) phase jitter, for which \(\rho_{ud} = 0.97\) is required. However, in combination with the effects of \(R_{56}\), \(T_{566}\) and the phase monitor resolution, each of which can individually reduce the correlation to 0.97 or below depending on the conditions, this highlights that the \(0.2^\circ\) target will be very difficult to achieve with the PFF prototype at CTF3.
 
 \newsection{bestPhaseProp}{Best Phase Propagation}
 
@@ -689,20 +763,16 @@ Figure~\ref{f:bestProp_meanAlong} compares the phase along the pulse upstream an
   \includegraphics[width=0.8\textwidth]{Figures/propagation/bestProp_meanAlong}
   \caption{Phase along the pulse upstream (blue) and downstream (red) with optimised phase propagation.}
   \label{f:bestProp_meanAlong}
-\end{figure}
-
-By viewing the phase jitters and correlations along the pulse the remaining areas for improvement start to become apparent. In Figure~\ref{f:bestProp_jitAlong}, showing the phase jitter along the pulse, it is clear that the start of the pulse is less stable. For times between 100~ns and 600~ns the downstream phase jitter is as much as 60\% larger than the upstream phase jitter.  However, there is a 400~ns portion of the pulse where the downstream phase jitter has been successfully reduced to the level of the usptream phase jitter. The best PFF results can be expected in this region.
-
-\begin{figure}
-  \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/bestProp_jitAlong}
   \caption{Phase jitter along the pulse upstream (blue) and downstream (red) with optimised phase propagation.}
   \label{f:bestProp_jitAlong}
 \end{figure}
 
+By viewing the phase jitters and correlations along the pulse the remaining areas for improvement start to become apparent. In Figure~\ref{f:bestProp_jitAlong}, showing the phase jitter along the pulse, it is clear that the start of the pulse is less stable. For times between 100~ns and 600~ns the downstream phase jitter is as much as 60\% larger than the upstream phase jitter.  However, there is a 400~ns portion of the pulse where the downstream phase jitter has been successfully reduced to the level of the usptream phase jitter. The best PFF results can be expected in this region.
+
 The upstream-downstream phase correlation along the pulse (the point by point correlation between the upstream and downstream phase calculated for each individual sample along the pulse), in Figure~\ref{f:bestProp_corrAlong}, is at the same level as the mean phase correlation in the region between 450~ns and 650~ns. However, there are also parts of the pulse where the upstream-downstream phase correlation is greatly reduced -- to 55\% at 300~ns and 70\% at 700~ns, for example. Differences earlier in the pulse are not critical for the PFF system, but the feature at 700~ns is in the area where the correction is attempted.
 
-By comparing the upstream-downstream correlation along the pulse to the correlations with energy along the pulse, in Figure~\ref{f:bestProp_enCorrAlong}, the problem becomes clear. Due to energy variations along the pulse and the effect of higher order energy dependencies, as previously discussed, the phase propagation can not be optimised across the full pulse length. As a result there are parts of the pulse where the downstream phase-energy correlation is still high, up to 75\%. Areas where there is a large difference between the upstream phase-energy correlation and the downstream phase-energy correlation correspond to regions of degraded upstream-downstream phase correlation in Figure~\ref{f:bestProp_corrAlong}. This is the key area where improvements are needed to further improve the PFF performance.
+By comparing the upstream-downstream correlation along the pulse to the correlations with energy along the pulse, in Figure~\ref{f:bestProp_enCorrAlong}, the problem becomes clear. Due to energy variations along the pulse and the effect of higher order energy dependences, as previously discussed, the phase propagation can not be optimised across the full pulse length. As a result there are parts of the pulse where the downstream phase-energy correlation is still high, up to 75\%. Areas where there is a large difference between the upstream phase-energy correlation and the downstream phase-energy correlation correspond to regions of degraded upstream-downstream phase correlation in Figure~\ref{f:bestProp_corrAlong}. This is the key area where improvements are needed to further improve the PFF performance.
 
 \begin{figure}
   \centering
@@ -713,72 +783,3 @@ By comparing the upstream-downstream correlation along the pulse to the correlat
   \caption{Upstream (blue) and downstream (red) phase-energy correlation along the pulse with optimised phase propagation.}
   \label{f:bestProp_enCorrAlong}
 \end{figure}
-
-\newsection{otherJitterSources}{Possible Other Sources of Phase Jitter}
-
-The energy related effects on the downstream phase have been the main focus of attempts to improve the phase propagation for the PFF system. As shown in the Section~\ref{s:bestPhaseProp} this by itself has allowed upstream-downstream correlations in excess of 90\% to be achieved at CTF3. Further optimisations will be needed to achieve the CLIC target of 0.2 degrees phase jitter with the PFF prototype, however. This can partly come from further improvements of the CTF3 injector setup and stability, which will help to reduce any remaining effects from \(T_{566}\) by reducing beam energy jitter, drifts and variations along the pulse. At correlations above \(90\%\) any remaining small differences in the performance of the upstream and downstream phase monitors may also become significant, but this has been adressed in Chapter~\ref{c:phaseMons} so will not be discussed again here.
-
-Preliminary measurements have been performed to investigate whether there may be any other effects at CTF3, apart from energy jitter, that can change the downstream phase and reduce the upstream-downstream phase correlation. The most likely culprits are magnetic elements between the upstream and downstream phase monitors that have a strong effect on the beam orbit. Any change in beam orbit can change the path length between the upstream and downstream phase monitors, and thus shift the downstream phase with respect to the upstream phase. The main elements for which this could be significant include the dipoles in TL1 and the combiner ring, as well as the two septum magnets used  at the combiner ring injection and extraction. Fluctuations in the power supplies for one of these devices could be an additional source of uncorrelated downstream phase jitter.
-
-The current applied from the power supplies for each of these devices has been varied to determine their effect on the downstream phase. In some cases one power supply drives multiple devices, meaning these devices can not be changed independently from each other and any jitter in their strengths should be correlated (assuming the jitter source is the power supply, rather than a separate issue with the device itself). There are four power supplies that control the strength of the devices of interest in the following groups:
-\begin{itemize}
-\item \textbf{Power supply 1:} The first (CT.0540) and second (CT.0630) dipole in TL1.
-\item \textbf{Power supply 2:} The third (CT.0670) and fourth (CT.0710) dipole in TL1.
-\item \textbf{Power supply 3:} The combiner ring injection and extraction setpa.
-\item \textbf{Power supply 4:} All combiner ring dipoles.
-\end{itemize}
-Figures~\ref{f:tl1670}~and~\ref{f:crBends} show the effect of changing the last two dipoles in TL1 (power supply 2 above), and the combiner ring dipoles (power supply 4 above), on the downstream phase. A linear fit to the response is also shown. For the combiner ring dipoles the response is non-linear and the fit is only applied in the central region around the nominal device setting, giving an approximate gradient that is relevant for small offsets. %In some cases, particularly for the 540/710 dipoles in TL1, the phase dependence is not clear. In all cases the goal is to determine whether there is an effect that may be significant for the PFF system, which can then be investigated further later, rather than quoting precise numbers.
-
-%\begin{figure}
-%  \centering
-%  \includegraphics[width=0.8\textwidth]{Figures/propagation/tl1540}
-%  \caption{Phase vs. strength of first and last dipole in TL1 (CT.0540 and CT.0710).}
-%  \label{f:tl1540}
-%\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/propagation/tl1670}
-  \caption{Downstream phase vs. strength (power supply current) of the first two dipoles in TL1 (CT.0670 and CT.0710).}
-  \label{f:tl1670}
-\end{figure}
-
-%\begin{figure}
-%  \centering
-%  \includegraphics[width=0.8\textwidth]{Figures/propagation/crSeptum}
-%  \caption{Phase vs. strength of the combiner ring injection and extraction septum magnets.}
-%  \label{f:crSeptum}
-%\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/propagation/crBends}
-  \caption{Downstream phase vs. strength (power supply current) of the combiner ring dipoles).}
-  \label{f:crBends}
-\end{figure}
-
-The power supplies at CTF3 give a relative stability in the supplied current of approximately \(10^{-4}\). Assuming this stability the effect of each device on the downstream phase jitter can be determined by using the fitted gradients from the plots previously shown and the known current setting for each device. These values are summarised in Table~\ref{t:otherJitSources} for each power supply. By far the strongest potential source of phase jitter appears to be the last two dipoles in TL1 (CT.0670 and CT.0710), which by themselves could contribute \(0.17\pm0.03\) degrees phase jitter. 
-The explanation for these two dipoles having a much larger effect on the phase than the first two dipoles in TL1 is not known and will need to be verified by repeated measurements and checks of the expected response in the CTF3 MADX model. The combiner ring devices contribute roughly 5 times less phase jitter than the CT.0670 and CT.0710 dipoles. 
-Combining the estimated phase jitters resulting from all the devices in qudrature gives an overall contribution of \(0.18\pm0.03^\circ\) additional downstream phase jitter.
-
-\begin{table}
-  \begin{center}
-    \begin{tabular}{| c c c c |}
-	   \hline
-       Device & Current & Fit Gradient & Estimated Phase Jitter \\ \hline
-       TL1 540/630 Dipoles & 133~A & \(-0.4\pm0.3^\circ\)/A & \(0.005\pm0.004^\circ\)\\
-       TL1 670/710 Dipoles & 164~A & \(10\pm2^\circ\)/A & \(0.17\pm0.03^\circ\)\\
-       CR Septa & 890~A &  \(-0.5\pm0.1^\circ\)/A & \(0.05\pm0.01^\circ\)\\
-       CR Dipoles & 156~A & \(1.8\pm0.7^\circ\)/A & \(0.03\pm0.01^\circ\)\\ \hline 
-    \end{tabular}
-    \caption{Power supply current setting, dependence of the downstream phase on the current and estimated contribution to downstream phase jitter for the dipoles and septa in TL1 and the combiner ring.}
-  	\label{t:otherJitSources}
-  \end{center}
-\end{table}
-
-Modelling the downstream phase as \(\phi_d = \phi_u + x\), where \(x\) is a generic additional source of jitter, the downstream jitter and upstream-downstream phase correlation are given by:
-\begin{eqnarray}
-\sigma_d = \sqrt{\sigma_u^2 + \sigma_x^2} \\
-\rho_{ud} = \frac{\sigma_u^2}{\sigma_u^2 + \sigma_x^2}
-\end{eqnarray}
-These are equivalent to the equations derived for the phase monitor resolution in Section~\ref{s:resolutionEqs}. Assuming an initial upstream phase jitter of \(0.8^\circ\) plus a \(\sigma_x = 0.18^\circ\) source of jitter resulting from the power supply stabilities previously discussed, the downstream phase jitter is increased slightly to \(0.82^\circ\) and the upstream-downstream phase correlation reduced to \(98\%\). This by itself does not prevent the PFF system from theoretically achieving \(0.2^\circ\) phase jitter, for which \(\rho_{ud} = 0.97\) is required. However, in combination with the effects of \(R_{56}\), \(T_{566}\) and the phase monitor resolution, each of which can individually reduce the correlation to 0.97 or below depending on the conditions, this highlights that the \(0.2^\circ\) target will be very difficult to achieve with the PFF prototype at CTF3.
