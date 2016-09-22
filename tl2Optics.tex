@@ -1,15 +1,19 @@
 \newchapter{tl2Optics}{Design of the PFF Chicane}
 
-A basic beam line consists of bending magnets (dipoles) connected by straight sections with focusing magnets (quadrupoles).
-A practical ``real world'' beam line must also include many diagnostic devices (such as beam position monitors, or BPMs) and additional elements (such as magnetic correctors) to be able to measure and remove the effects of small misalignments and imperfections in the beam line. The arrangement of devices along the line is referred to as the lattice. The collective settings (strengths) of each focusing element and the beam conditions they produce are referred to as the machine optics. The performance of the PFF system depends heavily on the lattice and optics of the correction chicane in the TL2 line at CTF3. This chapter describes the design of TL2, the modifications that have been made to its lattice for the PFF system and the derivation of suitable optics for the line taking in to account new constraints for the PFF system.
+A basic beam line consists of bending magnets (dipoles) connected by straight sections with focusing magnets (quadrupoles). Quadrupole magnets focus the beam in one transverse plane but defocus the beam in the other plane \cite{wilson}. To give a net focusing effect in both planes they are usually installed in doublets or triplets, alternating between focusing and defocusing magnets in each plane.
+A practical ``real world'' beam line must also include many diagnostic devices (such as beam position monitors, or BPMs) and additional elements (such as magnetic correctors) to be able to measure and remove the effects of small misalignments and imperfections in the beam line. The arrangement of devices along the line is referred to as the lattice. The collective settings (strengths) of each focusing element and the beam conditions they produce are referred to as the machine optics. 
+
+The performance of the PFF system depends heavily on the lattice and optics of the correction chicane in the TL2 line at CTF3. This chapter describes the design of TL2, the modifications that have been made to its lattice for the PFF system and the derivation of suitable optics for the line taking in to account new constraints for the PFF system.
 
 \newsection{opticsIntro}{Introduction to Optics}
 
-This section presents basic aspects of lattice design and optics to introduce the terms used in the remainder of the thesis. Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\) that defines how it transforms the initial coordinates of a particle in the beam \cite{wilson}:
+%This section presents basic aspects of lattice design and optics to introduce the terms used in the remainder of the thesis. 
+Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\) that defines how it transforms the initial coordinates of a particle in the beam \cite{wilson}:
 \begin{equation}
 \vec{x_f} = \mathbf{R}\vec{x_i}
+\label{e:basicTransMatEq}
 \end{equation}
-where \(\vec{x_i}\) and \(\vec{x_f}\) are vectors describing the initial and final state of the particle. They are six dimensional vectors and the above equation can be expanded to become:
+where \(\vec{x_i}\) and \(\vec{x_f}\) are six dimensional vectors describing the initial and final state of the particle. In the transverse plane the vectors \(\vec{x}\) contain the horizontal and vertical offsets (\(x\), \(y\)) and divergences (\(x' = \mathrm{d}x/\mathrm{d}s\), \(y' = \mathrm{d}y/\mathrm{d}s\)), where \(s\) is the longitudinal position along the beam line. The parameters (\(x, y, s\)) define a curvilinear set of coordinates that measure the position of the particle with respect to the nominal or reference orbit, for example following the trajectory of the beam through bending magnets \cite{wilson}. The final two longitudinal coordinates are the time offset (\(t\)) and momentum offset (\(\Delta p/p_{ref}\)) of the particle with respect to the reference or ideal particle. The time \(t\) is analogous to the phase of interest for the PFF system. Equation \ref{e:basicTransMatEq} can therefore be expanded to become:
 \begin{equation}
 \left( \begin{array}{c} x_f \\ x_f' \\ y_f \\ y_f' \\ t_f \\ \Delta p_f/p_{ref} \end{array} \right)
 =
@@ -23,49 +27,64 @@ R_{61} & R_{62} & R_{63} & R_{64}  & R_{65} & R_{66}\\
 \end{array} \right)
 \left( \begin{array}{c} x_i \\ x_i' \\ y_i \\ y_i' \\ t_i \\ \Delta p_i/p_{ref} \end{array} \right)
 \end{equation}
-In the transverse plane the vectors \(\vec{x}\) contain the horizontal and vertical offsets (\(x\), \(y\)) and divergences (\(x' = \mathrm{d}x/\mathrm{d}s\), \(y' = \mathrm{d}y/\mathrm{d}s\), where \(s\) is the longitudinal position along the beam line). The parameters (\(x, y, s\)) define a curvilinear set of coordinates that measure the position of the particle with respect to the nominal or reference orbit, for example following the trajectory of the beam through bending magnets \cite{wilson}. The final two longitudinal coordinates are the time offset (\(t\)) and momentum offset (\(\Delta p/p_{ref}\)) of the particle with respect to the reference or ideal particle. The time \(t\) is analogous to the phase of interest for the PFF system. The coefficients \(R_{ij}\) of the \(6\times6\) transfer matrix \(\mathbf{R}\) define how the final value of the \(i^{\mathrm{th}}\) coordinate after passing through the element is influenced by the initial value of the \(j^{\mathrm{th}}\) coordinate prior to the element.
+Each coefficient \(R_{ij}\) of the \(6\times6\) transfer matrix \(\mathbf{R}\) defines how the final value of the \(i^{\mathrm{th}}\) coordinate after passing through the element is influenced by the initial value of the \(j^{\mathrm{th}}\) coordinate prior to the element.
 
-The simplest and most widely used type of accelerator lattice is a FODO cell, consisting of an equally spaced focusing and defocusing quadrupole with equal strength \cite{wilson}. For small horizontal or vertical offsets from the quadrupole centre the magnetic field linearly increases with the offset. The effect of a particle travelling through a quadrupole field is analogous to a focusing lens with a focal length \(1/kl\) where \(l\) is the length of the quadrupole and \(k\) is the strength of the quadrupole dependent on its design. Using the thin lens approximation the transfer matrix for a quadrupole is defined as \cite{wiedemann}:
-\begin{equation}
-\mathbf{R_{quad}}
-=
-\left( \begin{array}{cccccc} 
-1 & 0 & 0 & 0 & 0 & 0\\
-\pm kl & 1 & 0 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 \\
-0 & 0 & \mp kl & 1 & 0 & 0 \\
-0 & 0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 0 & 1 \\
-\end{array} \right)
-\label{e:quadTransfer}
-\end{equation}
-The final horizontal divergences of a particle after traversing a quadrupole, using the above matrix, are \(x_f' = x_i' \pm klx_i\) and \(y_f' = y_i' \mp kly_i\). A quadrupole that focuses the beam in one plane therefore defocuses the beam in the other transverse plane. In a FODO cell a horizontally focusing quadrupole and horizontally defocusing quadrupole are used together to give a net focusing effect in both planes \cite{wiedemann}. The complete effect of a FODO cell on a particle can be determined by multiplying the transfer matrices of each element:
-\begin{equation}
-\mathbf{R_{FODO}} = \mathbf{R_{D/2}} \times \mathbf{R_{drift}} \times \mathbf{R_{F}} \times \mathbf{R_{drift}} \times \mathbf{R_{D/2}}
-\end{equation}
-\begin{equation}
-\vec{x_f} = \mathbf{R_{FODO}}\vec{x_0}
-\end{equation}
-where \(R_{F}\) and \(R_{D}\) are the transfer matrices of the focusing and half the defocusing quadrupoles respectively and \(R_{drift}\) is the transfer matrix for the drift space between the quadrupoles. The treatment of the defocusing quadrupole is usually split between the start and end of the lattice in this way to create a symmetric cell.
+%The most common elements in a beam line are drift spaces and quadrupole magnets. Using the thin lens approximation and assuming an ultra-relativistic beam, the transfer matrices \(\mathbf{R_{drift}}\) and \(\mathbf{R_{quad}}\) for drift spaces and quadrupoles respectively can be defined as follows:
+%\begin{equation}
+%\mathbf{R_{drift}}
+%=
+%\left( \begin{array}{cccccc} 
+%1 & L & 0 & 0 & 0 & 0\\
+%0 & 1 & 0 & 0 & 0 & 0 \\
+%0 & 0 & 1 & L & 0 & 0 \\
+%0 & 0 & 0 & 1 & 0 & 0 \\
+%0 & 0 & 0 & 0 & 1 & 0 \\
+%0 & 0 & 0 & 0 & 0 & 1 \\
+%\end{array} \right)
+%\qquad
+%\mathbf{R_{quad}}
+%=
+%\left( \begin{array}{cccccc} 
+%1 & 0 & 0 & 0 & 0 & 0\\
+%\pm kl & 1 & 0 & 0 & 0 & 0 \\
+%0 & 0 & 1 & 0 & 0 & 0 \\
+%0 & 0 & \mp kl & 1 & 0 & 0 \\
+%0 & 0 & 0 & 0 & 1 & 0 \\
+%0 & 0 & 0 & 0 & 0 & 1 \\
+%\end{array} \right)
+%\label{e:quadTransfer}
+%\end{equation}
+%where \(L\) is the length of the drift space, \(k\) is a constant describing the focusing strength of the quadrupole, and \(l\) is the length of the quadrupole. The final horizontal and vertical divergences of a particle after traversing a quadrupole, using the above matrix and Equation~\ref{e:basicTransMatEq}, are \(x_f' = x_i' \pm klx_i\) and \(y_f' = y_i' \mp kly_i\), for example, with the other coordinates unaffected under the approximations made here. These expressions demonstrate that quadrupoles give a position dependent deflection to the beam, which has a focusing effect in one transverse plane and a defocusing effect in the other transverse plane.
 
-The same approach can be used to construct the transfer matrix for any complete beam line, and several of the transfer matrix coefficients are of particular interest for the PFF system both in the TL2 and TL1 transfer lines at CTF3. These will be explained in more detail later in this chapter but include mostly the coefficients related to horizontally deflecting (or ``kicking'') the beam, so the \(R_{2j}\) and \(R_{i2}\) terms including the horizontal divergence, and the coefficients related to the final beam phase, so the \(R_{5j}\) terms. At CTF3, optics and transfer matrices are calculated using a MADX model of the machine. MADX is the de facto tool available for the design and simulation of particle accelerators \cite{madx}. All the optics terms presented in this thesis use MADX coordinates and units \cite{madx}. In some cases these are slightly modified from the coordinates defined above, and these differences are explained later when relevant.
+The effect of any complete beam line on the coordinates of a particle can be determined by multiplying the transfer matrices of each individual element along the line. At CTF3, optics and transfer matrices are calculated using a MADX model of the machine. MADX is the de facto tool available for the design and simulation of particle accelerators \cite{madx}. All the optics terms presented in this thesis use MADX coordinates and units \cite{madx}. In some cases these are slightly modified from the coordinates defined above, and these differences are explained later when relevant.
+
+The values of the transfer matrix coefficients define the properties of a beam as it traverses a lattice. To give an example, the coefficients \(R_{16}\) and \(R_{36}\) are critically important, and are more commonly referred to as the horizontal dispersion, \(D_x = R_{16}\), and vertical dispersion \(D_y = R_{36}\). The dispersions \(D_x(s)\) and \(D_y(s)\) vary along the lattice and describe how the position offset, \(\Delta x(s)\) or \(\Delta y(s)\), of a particle depends on its energy:
+\begin{equation}
+\Delta x(s) = D_x(s)\left(\frac{\Delta p}{p}\right) 
+\qquad\mathrm{;}\qquad
+\Delta y(s) = D_y(s)\left(\frac{\Delta p}{p}\right)
+\end{equation}
+The source of non-zero dispersion values are dipoles, within which lower (higher) energy particles are bent through larger (smaller) angles than the reference particle. A dipole therefore creates energy dependent particle orbits that propagate through the following elements. To reduce energy dependent orbit excursions, and the associated growth in beam size, optics are usually designed to give minimal, or zero where possible, dispersion. 
+
+Several other transfer matrix coefficients are also of specific interest for the PFF system both in the TL2 and TL1 transfer lines at CTF3. These will be explained in more detail later in this chapter but include mostly the coefficients related to horizontally deflecting (or ``kicking'') the beam, so the \(R_{2j}\) and \(R_{i2}\) terms including the horizontal divergence, and the coefficients related to the final beam phase, so the \(R_{5j}\) terms.  
 
 The previous discussion shows how the propagation of a single particle through a beam line can be modelled. The matrix formalism above can be adjusted to describe the trajectories of many particles by replacing the column vectors \(\vec{x}\) with matrices of many column vectors describing each particle. However, to understand the properties of a complete beam it is also useful to introduce the general solution to the transverse equations of motion (Hill's Equation) \cite{lee}:
 \begin{equation}
 x_i(s) = \sqrt{\beta_x(s)\epsilon_x}\cos[\mu_x(s) + \delta_{xi}]
 \end{equation}
-Replacing \(x\) with \(y\) gives the equivalent solution in the vertical plane. The subscript \(i\) refers to the \(i^\mathrm{th}\) particle. The transverse motion follows a modified harmonic oscillation with amplitude \(\sqrt{\beta_x(s)\epsilon_x}\). The betatron (or beta) function \(\beta_x(s)\) varies along the beam line and depends on the lattice and optics, whilst the beam emittance \(\epsilon_x\) is a preserved quantity \cite{wolski}. The phase advance \(\mu_x(s)\) defines the phase of the oscillation at each point along the lattice, with each particle having an initial phase offset \(\delta_{xi}\).
+where the subscript \(i\) refers to the \(i^\mathrm{th}\) particle. Replacing \(x\) with \(y\) gives the equivalent solution in the vertical plane. The transverse motion follows a modified harmonic oscillation with amplitude \(\sqrt{\beta_x(s)\epsilon_x}\). The betatron (or beta) function \(\beta_x(s)\) varies along the beam line and depends on the lattice and optics, whilst the beam emittance \(\epsilon_x\) is a preserved quantity \cite{wolski}. The phase advance \(\mu_x(s)\) defines the phase of the oscillation at each point along the lattice, with each particle having an initial phase offset \(\delta_{xi}\). 
 
 The solution has a constant of motion known as the Courant-Snyder invariant \cite{courant}:
 \begin{equation}
 \gamma_x x^2 + 2\alpha_x x x' + \beta_x x'^2 = \epsilon_x 
 \end{equation}
 where the explicit dependence on \(s\) of all the parameters apart from the emittance has been dropped for readability. \(\beta_{x}\), \(\alpha_{x}\) and \(\gamma_{x}\) are collectively known as the Twiss parameters, where the \(\alpha_x\) and \(\gamma_x\) functions relate to the beta function as follows \cite{wilson}:
-\begin{align}
-\alpha_x &= -\frac{1}{2}\frac{\mathrm{d}\beta_x}{\mathrm{d}s} \\
-\gamma_x &= \frac{1+\alpha_x^2}{\beta_x}
-\end{align}
-The Courant-Snyder invariant defines an ellipse with area \(\pi\epsilon_x\) in \((x, x')\) phase space. All particles therefore follow elliptical trajectories in phase space as they progress through the beam line. At any point along the lattice the 68\% of particles (\(\pm 1\sigma\)) in a Gaussian beam are contained within an envelope of \(x(s) \leq \sqrt{\beta_x(s)\epsilon_x}\). The beta function therefore defines the beam size at any point in the lattice (considering only transverse first order effects). In a FODO cell, for example, the optics is such that the beta function is minimum at the centre of the defocusing quadrupole and maximum at the centre of the focusing quadrupole \cite{wilson}.
+\begin{equation}
+\alpha_x = -\frac{1}{2}\frac{\mathrm{d}\beta_x}{\mathrm{d}s}
+\qquad\mathrm{;}\qquad
+\gamma_x = \frac{1+\alpha_x^2}{\beta_x}
+\end{equation}
+The Courant-Snyder invariant defines an ellipse with area \(\pi\epsilon_x\) in \((x, x')\) phase space. All particles therefore follow elliptical trajectories in phase space as they progress through the beam line. At any point along the lattice the 68\% of particles (\(\pm 1\sigma\)) in a Gaussian beam are contained within an envelope of \(x(s) \leq \sqrt{\beta_x(s)\epsilon_x}\). The beta function defines the beam size at any point in the lattice, assuming a beam in which all particles have the reference energy. The dispersion previously introduced can then be used to independently determine the increase in beam size resulting from the beam's energy spread.
 
 \newsection{kickers}{Kicker Design}
 
@@ -107,13 +126,11 @@ The transfer line TL2 at CTF3 transports the beam from the exit of the combiner 
 \end{landscape}}
 
 
-The diagram in Figure~\ref{f:newTL2Lattice} shows a plan view of the TL2 line and the lattice of the line. To interpret the diagram it is useful to introduce the device naming convention at CTF3. Devices have names of the form:
-\begin{center}
-[CC].[QF][D][0840]
-\end{center}
-The first two letters refer to the section of the machine, with the prefix CC used for TL2. These are not included in the diagram to improve readability. In Chapters~\ref{c:phaseMons}~and~\ref{c:phasePropagation} the prefix CT is used to refer to the CT-line after the linac and transfer line TL1 prior to the combiner ring. The second group of letters refer to the type of device, the main ones being QF and QD for horizontally focusing and defocusing quadrupoles, BH and BV for horizontal and vertical dipoles, BP for beam position monitors (BPMs) and DH and DV for horizontal and vertical corrector magnets. The last letter indicates the type of that device, with four different designs of quadrupole used along the TL2 line (G-type, H-type, L-type and D-type), for example. The four final numbers indicate the position of that device along the line, in ascending order from the beginning to the end of the line.
+The diagram in Figure~\ref{f:newTL2Lattice} shows a plan view of the TL2 line and the lattice of the line. To interpret the diagram it is useful to introduce the device naming convention at CTF3. Devices have names of the form: \textbf{[CC].[QF][D][0840]}. The first two letters refer to the section of the machine, with the prefix CC used for TL2. These are not included in the diagram to improve readability. In Chapters~\ref{c:phaseMons}~and~\ref{c:phasePropagation} the prefix CT is used to refer to the CT-line after the linac and transfer line TL1 prior to the combiner ring. The second group of letters refer to the type of device, the main ones being QF and QD for horizontally focusing and defocusing quadrupoles, BH and BV for horizontal and vertical dipoles, BP for beam position monitors (BPMs) and DH and DV for horizontal and vertical orbit correctors. The last letter indicates the type of that device, with four different designs of quadrupole used along the TL2 line (G-type, H-type, L-type and D-type), for example. The four final numbers indicate the position of that device along the line, in ascending order from the beginning to the end of the line.
 
-The horizontal chicane of interest for the PFF system starts at the dipole CC.BHG0500 and ends at the dipole CC.BHG0800. The first (500) and last (800) dipoles bend the beam through \(+31^\circ\) and \(-31^\circ\) respectively. Inside the chicane there are two further dipoles of a different type -- CC.BHH0600 and CC.BHH0700, which deflect the beam through \(+17^\circ\) and \(-17^\circ\) respectively. Some details on the differences between the two types of dipole are given in Section~\ref{ss:modelErrorSources}. The resulting overall chicane has a ``dog leg'' shape around 12~m in length, with three straight sections around 4~m in length between the bending magnets. Each straight section contains a triplet of quadrupoles and either one (in the first and last sections) or two (in the middle section) BPMs (of the BPI type \cite{bpi}). Although the quadrupoles are labelled as horizontally focusing or defocusing the polarity of the current sent to each can be reversed so that it focuses in the opposite plane. The F or D labels refer to whether the magnet is horizontally focusing or defocusing when a positive current is sent to the quadrupole.
+The horizontal chicane of interest for the PFF system starts at the dipole CC.BHG0500 and ends at the dipole CC.BHG0800. The first (500) and last (800) dipoles bend the beam through \(+31^\circ\) and \(-31^\circ\) respectively. Inside the chicane there are two further dipoles of a different type -- CC.BHH0600 and CC.BHH0700, which deflect the beam through \(+17^\circ\) and \(-17^\circ\) respectively. 
+%Some details on the differences between the two types of dipole are given in Section~\ref{ss:modelErrorSources}. 
+The resulting overall chicane has a ``dog leg'' shape around 12~m in length, with three straight sections around 4~m in length between the bending magnets. Each straight section contains a triplet of quadrupoles and either one (in the first and last sections) or two (in the middle section) BPMs (of the BPI type \cite{bpi}). Although the quadrupoles are labelled as horizontally focusing or defocusing the polarity of the current sent to each can be reversed so that it focuses in the opposite plane. The F or D labels refer to whether the magnet is horizontally focusing or defocusing when a positive power supply current is used.
 
 Other features along the TL2 line that are important for the derivation of optics seen later in this chapter include the vertical chicane and two long drift spaces without focusing elements. The vertical chicane starts and ends at CC.BVA0300 and CC.BVB0400 respectively, and contains a triplet of quadrupoles. Between the quadrupole CC.QFD0840 (the last shown in the diagram) and CC.QFL0910, there is a long drift space of around 4~m with no focusing elements as the beam pipe passes through in to the neighbouring building where the CLEX area is located. Between the quadrupole CC.QFH0230 and CC.QFL0270 there is another long drift space, around 7~m. The Twiss beta and alpha functions entering these long drifts must be carefully chosen to avoid unrecoverable growth in the beam size.
 
@@ -142,16 +159,9 @@ The nominal optics constraints are mostly put in place to minimise the transvers
 
 \subsubsection{Dispersion}
 
-The trajectory of a particle through a dipole depends on its energy, with lower energy particles following a smaller radius of curvature and high energy particles a larger radius. After a dipole the orbit of a particle though the following elements therefore depends on its energy. This effect is characterised using the horizontal and vertical dispersion, \(D_x\) and \(D_y\), which are defined as follows (considering only the energy component of the beam orbit):
-\begin{eqnarray}
-\Delta x(s) &=& D_x(s)\left(\frac{\Delta p}{p}\right) \\
-\Delta y(s) &=& D_y(s)\left(\frac{\Delta p}{p}\right)
-\end{eqnarray}
-The dispersions \(D_x(s)\) and \(D_y(s)\) vary along the lattice and are equivalent to the transfer matrix coefficients \(R_{16} = D_x\) and \(R_{36} = D_y\). 
+The dispersion describes the energy dependent component of the beam size (Section~\ref{s:opticsIntro}). Optics are usually created so that there is no dispersion (\(D_{x} = D_{y} = 0\)) in straight sections. However, inside chicanes and rings the dispersion can never be zero everywhere. To give zero dispersion in the straight sections the dispersion must therefore be closed at the exit of all bending sections. Dispersion closure means that both the dispersion and its derivative (\(D_x' = \mathrm{d}D_x/\mathrm{d}s\), and \(D_y' = \mathrm{d}D_y/\mathrm{d}s\)) are zero at the exit from the chicane or ring. In TL2 this condition applies after the bend CC.BHH0200 at the start of the line and at the exit of the horizontal chicane (CC.BHG0800) for the horizontal dispersion, and at the exit of the vertical chicane (CC.BVB0400) for the vertical dispersion.
 
-Optics are usually created so that there is no dispersion (\(D_{x} = D_{y} = 0\)) in straight sections. However, inside chicanes and rings the dispersion can never be zero everywhere. To give zero dispersion in the straight sections the dispersion must therefore be closed at the exit of all bending sections. Dispersion closure means that both the dispersion and its derivative (\(D_x' = \mathrm{d}D_x/\mathrm{d}s\), and \(D_y' = \mathrm{d}D_y/\mathrm{d}s\)) are zero at the exit from the chicane or ring. In TL2 this condition applies after the bend CC.BHH0200 at the start of the line and at the exit of the horizontal chicane (CC.BHG0800) for the horizontal dispersion, and at the exit of the vertical chicane (CC.BVB0400) for the vertical dispersion.
-
-Within the bending sections the magnitude of the dispersion should be kept as small as possible whilst meeting the other optics constraints. At CTF3 the energy spread (standard deviation) of the beam is typically at the  level of 0.8\% -- 1.0\% \cite{CTF3}. Dispersion is then usually the largest contribution to the beam size, with a dispersion of 1~m giving excursions up to \(\pm1\)~cm in individual particle orbits, for example. The diameter of the beam pipe in bending sections at CTF3 is 10~cm in most cases, as opposed to 4~cm in straight sections, in order to minimise the effects of dispersion dependent beam size growth on the beam transport \cite{CTF3}. However, the second kicker installed in the chicane for the PFF system (CC.KHD0780) only has the normal 4~cm aperture (2~cm radius).  Dispersion around the second kicker must therefore be kept well below 2~m to avoid losing a fraction of off-energy particles on the kicker strips.
+Within the bending sections the magnitude of the dispersion should be kept as small as possible whilst meeting the other optics constraints. At CTF3 the rms energy spread of the beam is typically at the  level of 0.8\% -- 1.0\% \cite{CTF3}. Dispersion is then usually the largest contribution to the beam size, with a dispersion of 1~m giving excursions up to \(\pm1\)~cm in individual particle orbits, for example. The diameter of the beam pipe in bending sections at CTF3 is 10~cm in most cases, as opposed to 4~cm in straight sections, in order to minimise the effects of dispersion dependent beam size growth on the beam transport \cite{CTF3}. However, the second kicker installed in the chicane for the PFF system (CC.KHD0780) only has the normal 4~cm aperture (2~cm radius).  Dispersion around the second kicker must therefore be kept well below 2~m to avoid losing a fraction of off-energy particles on the kicker strips.
 
 \subsubsection{Twiss Functions}
 
@@ -161,9 +171,13 @@ Within the bending sections the magnitude of the dispersion should be kept as sm
 %real emittance is 0.5555 micrometres
 %50~m beta function gives around +/- 0.5 cm beam size
 
-The Twiss beta functions define the energy independent component of the transverse beam size and the alpha functions define the rate of change of the beta function along the line, as discussed in Section~\ref{s:opticsIntro}. The transverse beam size at any point in the lattice is related to the beta function and emittance via the relationship \(\sqrt{\beta_x(s)\epsilon_x}\) (and the vertical equivalent). At CTF3 the geometric beam emittance is usually around 0.5~\(\mathrm{\mu m}\), but may be up to a factor two larger than this in the horizontal plane depending on the beam setup \cite{davideThesis}. With an emittance of 0.5~\(\mathrm{\mu m~rad}\) a beta value of 50~m at one point in the lattice corresponds to a transverse beam size of 0.5~cm at that location, for example. The beta and alpha functions should be kept as small as possible to minimise the beam size along the line. Beta is usually kept below 50~m, but values up to 100~m can be accepted \cite{piotrPriv}. As mentioned previously there are long drift spaces with no focusing elements at the start and end of TL2, and it is most difficult to maintain low beta and alpha values following these regions.
+The Twiss beta functions define the energy independent component of the transverse beam size and the alpha functions define the rate of change of the beta function along the line (Section~\ref{s:opticsIntro}). The transverse beam size at any point in the lattice is related to the beta function and emittance via the relationship \(\sqrt{\beta_x(s)\epsilon_x}\) (and the vertical equivalent). 
 
-At the start of TL2 the initial values of the Twiss parameters are also constrained by the optics of the combiner ring. In other words, the beta and alpha values at the start of TL2 are defined by the closed solution of the combiner ring. The optics at the beginning of TL2 are fixed by these and dispersion constraints and cannot be further adjusted. As a result, the new TL2 optics (Section~\ref{s:matchedOptics}) are usually matched starting from CC.QFH0210, and the required initial conditions at this location are summarised in Table~\ref{t:tl2InitTwiss}.
+The optics constraints on the Twiss functions are a compromise between small beta and small alpha values. The beta value must be kept small enough to avoid the transverse beam size becoming similar to the aperture of the beam pipe, which would result in beam losses. At CTF3 the geometric beam emittance is usually around 0.5~\(\mathrm{\mu m}\), but may be up to a factor two larger than this in the horizontal plane depending on the beam setup \cite{davideThesis}. With an emittance of 0.5~\(\mathrm{\mu m~rad}\) a beta value of 50~m at one point in the lattice corresponds to a transverse beam size of 0.5~cm at that location, compared to the 4~cm beam pipe aperture in straight sections at CTF3, for example. Beta is usually kept below 50~m when possible, but values up to 100~m can be accepted \cite{piotrPriv}. 
+
+However, at the same time small beta values correspond to a smaller beam size and therefore stronger focusing along the line. Increasing the strength of quadrupoles also increases the magnitude of non-linear field errors in the magnets, for example, which can lead to aberrations in the beam. As a result it is desirable to have a weak optics, with the quadrupole strengths as low as possible whilst keeping beta at a tolerable level. This can be constrained in the optics by attempting to keep alpha as small as possible, typically below 30 at CTF3.
+
+As mentioned in Section~\ref{s:tl2} there are long drift spaces with no focusing elements at the start and end of TL2, and it is most difficult to maintain low beta and alpha values following these regions. At the start of TL2 the initial values of the Twiss parameters are also constrained by the optics of the combiner ring. In other words, the beta and alpha values at the start of TL2 are defined by the closed solution of the combiner ring. The optics at the beginning of TL2 are fixed by these and dispersion constraints and cannot be further adjusted. As a result, the new TL2 optics (Section~\ref{s:matchedOptics}) are usually matched starting from CC.QFH0210, and the required initial conditions at this location are summarised in Table~\ref{t:tl2InitTwiss}.
 
 \begin{table}
   \begin{center}
@@ -294,11 +308,11 @@ The results described above immediately demonstrate large discrepancies between 
 \subsubsection{Quadrupole Strengths}
 \label{sss:quadStrengths}
 
-16 out of the 27 quadrupoles in TL2 are of the ``L-type'', with labels of the form CC.QDLxxxx or CC.QFLxxxx. This includes all the quadrupoles in the horizontal chicane apart from the two wide aperture ``H-type'' quadrupoles within which the PFF kickers are installed. \footnote{These quadrupoles were reclaimed from the CELSIUS project in Uppsala, Sweden \cite{celsius}}. In the MADX model of TL2 the focusing strength of these magnets, \(k\) \footnote{This is referred to as \(K1\) in MADX. \(k\) is used here to avoid confusion with the first kicker \(K1\).} is defined by the following parameters:
+16 out of the 27 quadrupoles in TL2 are of the ``L-type'', with labels of the form CC.QDLxxxx or CC.QFLxxxx. This includes all the quadrupoles in the horizontal chicane apart from the two wide aperture ``H-type'' quadrupoles within which the PFF kickers are installed\footnote{These quadrupoles were reclaimed from the CELSIUS project in Uppsala, Sweden \cite{celsius}}. In the MADX model of TL2 the focusing strength of these magnets, \(k\), is defined by the following parameters:
 \begin{equation}
-\mathrm{k} = \frac{\mathrm{FQL}\times I}{E}
+k = \frac{\mathrm{FQL}\times I}{E}
 \end{equation}
-where \(\mathrm{FQL} = 31.78\) is a constant defined by the properties of the quadrupole, \(I\) is the current delivered to the quadrupole from its power supply and \(E\) is the beam energy. 
+where \(\mathrm{FQL} = 31.78\) is a constant defined by the properties of the quadrupole, \(I\) is the current delivered to the quadrupole from its power supply and \(E\) is the beam energy\footnote{\(k\) is referred to as \(\mathrm{K1}\) in MADX. \(k\) is used here to avoid confusion with the first kicker \(K1\).}. 
 This \(k\) value must be multiplied by the 30~cm active magnetic length of the quadrupole to determine the equivalent focal length in the quadrupole transfer matrix previously seen in Equation~\ref{e:quadTransfer}.
 %The \(\mathrm{K1}\) value is analogous to the constant \(k\) in the quadrupole transfer matrix previously seen in Equation~\ref{e:quadTransfer}. This must be multiplied by the 30~cm active magnetic length of the quadrupole to determine the equivalent focal length of the quadrupole.
 
