@@ -9,12 +9,12 @@ In the PFF system the voltage sent to the kickers in the TL2 chicane (see Figure
 \phi_{PFF} = \phi_d - g\phi_u
 \label{e:pffEq1}
 \end{equation}
-Here \(g\) is the applied correction gain. The corrected downstream phase jitter, \(\sigma_{PFF}\), can then be defined using the standard result of subtracting correlated variances \cite{sumVar}:
+where \(g\) is the applied correction gain. The corrected downstream phase jitter, \(\sigma_{PFF}\), can then be defined using the standard result of subtracting correlated variances \cite{sumVar}:
 \begin{equation}
 \sigma_{PFF}^2 = \sigma_d^2 + g^2\sigma_u^2 - 2g\rho_{ud}\sigma_u\sigma_d
 \label{e:pffEq2}
 \end{equation}
-Here \(\rho_{ud}\) is the correlation coefficient between the upstream phase and the downstream phase. 
+where \(\rho_{ud}\) is the correlation coefficient between the upstream phase and the downstream phase. 
 
 Setting the partial differential of Equation~\ref{e:pffEq2} with respect to the gain equal to zero yields an expression for the theoretical optimal gain value to apply:
 \begin{equation}
@@ -98,7 +98,7 @@ The best way to measure variations in the beam energy at CTF3 is via the beam po
 \frac{\Delta p}{p} = \frac{\Delta x}{D_x}
 \label{e:dxToEn}
 \end{equation}
-Here \(D_{x}\) is the dispersion at that location given by the machine optics. Regions where \(D_{x}\) is non-zero are referred to as dispersive regions.
+where \(D_{x}\) is the dispersion at that location given by the machine optics. Regions where \(D_{x}\) is non-zero are referred to as dispersive regions.
 
 With the beam setup used for the PFF system operation (bypassing the Frsacati chicane and delay loop, see Figure~\ref{f:ctfLayout}) the first dispersive BPM after the CTF3 linac is the BPM CT.0608 in the transfer line TL1.  TL1 is introduced in more detail in Section~\ref{ss:tl1Optics}. The BPM CT.0608 is placed roughly 1~m after the first dipole magnet in TL1, with a horizontal dispersion of \(D_{x} = -0.61\)~m at this point according to the CTF3 MADX model. There are no quadrupoles or other elements between the dipole and CT.0608, which reduces the sensitivity of this dispersion value to any inaccuracies in the model. All quoted energy measurements in this chapter are obtained using the horizontal position in BPM CT.0608, converted in to the energy using the Equation~\ref{e:dxToEn}. %The only exception is Section~\ref{ss:corrPhaseEnergy}, as this includes measurements from an earlier setup where the stretching chicane was in use. A dispersive BPM in the stretching chicane, CT.0285, is used instead in that section but both BPMs give equivalent measured energies.
 
@@ -160,26 +160,26 @@ Assuming energy is the only source of differences between the upstream and downs
 \phi_d = \phi_u + R_{56}\frac{\Delta p}{p}
 \label{e:r56PhasEq}
 \end{equation}
-Here \(\phi_u\) is the upstream phase, \(\Delta p / p\) is the relative energy offset and \(R_{56}\) is the matrix coefficient between the upstream and downstream phase monitors, defined by the machine optics. The units of \(R_{56}\) in the equation above are radians at 12~GHz per unit relative energy offset (\(\Delta p/p = 1\)). MADX uses units of metres and this value is what will be referred to in this chapter. To obtain the \(R_{56}\) value to use in the equation above the MADX value must be multiplied by the conversion factor \(2\pi/0.025\), where 0.025~m is the 12~GHz wavelength.
+where \(\phi_u\) is the upstream phase, \(\Delta p / p\) is the relative energy offset and \(R_{56}\) is the matrix coefficient between the upstream and downstream phase monitors, defined by the machine optics. The units of \(R_{56}\) in the equation above are radians at 12~GHz per unit relative energy offset (\(\Delta p/p = 1\)). MADX uses units of metres and this value is what will be referred to in this chapter. To obtain the \(R_{56}\) value to use in the equation above the MADX value must be multiplied by the conversion factor \(2\pi/0.025\), where 0.025~m is the 12~GHz wavelength.
 
 In terms of jitters Equation~\ref{e:r56PhasEq} becomes:
 \begin{equation}
 \sigma_d = \sqrt{\sigma_u^2 + R_{56}^2\sigma_{p}^2 + 2R_{56}\rho_{up}\sigma_{u}\sigma_{p}}
 \label{e:r56JitEq}
 \end{equation}
-Here \(\sigma_d\) is the downstream phase jitter, \(\sigma_u\) is the upstream phase jitter, \(\sigma_p\) is the relative energy jitter and \(\rho_{up}\) is the correlation between the upstream phase and the energy. This follows from the result of adding correlated variances. Clearly, any non-zero \(R_{56}\) between the upstream and downstream phase monitors introduces an additional energy component to the downstream phase that increases the downstream phase jitter.
+where \(\sigma_d\) is the downstream phase jitter, \(\sigma_u\) is the upstream phase jitter, \(\sigma_p\) is the relative energy jitter and \(\rho_{up}\) is the correlation between the upstream phase and the energy. This follows from the result of adding correlated variances. Clearly, any non-zero \(R_{56}\) between the upstream and downstream phase monitors introduces an additional energy component to the downstream phase that increases the downstream phase jitter.
 
 The effect of \(R_{56}\) on the upstream-downstream phase correlation, \(\rho_{ud}\), can also be defined starting from the definition of the Pearson product-moment correlation coefficient:
 \begin{equation}
 \rho_{ud} = \frac{\mathrm{cov}\left[\phi_u,\phi_d\right]}{\sigma_u\sigma_d}
 \label{e:r56CorrDef1}
 \end{equation}
-Here \(\mathrm{cov}\left[\phi_u,\phi_d\right]\) is the covariance between the upstream and downstream phase, given by:
+where \(\mathrm{cov}\left[\phi_u,\phi_d\right]\) is the covariance between the upstream and downstream phase, given by:
 \begin{equation}
  \mathrm{cov}\left[\phi_u,\phi_d\right] = \frac{1}{N} \sum_{i=1}^{N}\phi_{ui}\phi_{di}
 \label{e:r56CorrDef2}
 \end{equation} 
-Here the index \(i\) refers to the pulse number out of a dataset containing \(N\) beam pulses. By inserting the definition of the downstream phase from Equation~\ref{e:r56PhasEq} and separating the terms in the sum this becomes:
+where the index \(i\) refers to the pulse number out of a dataset containing \(N\) beam pulses. By inserting the definition of the downstream phase from Equation~\ref{e:r56PhasEq} and separating the terms in the sum this becomes:
 \begin{equation}
 \mathrm{cov}\left[\phi_u,\phi_d\right] = \frac{1}{N} \sum_{i=1}^{N}\phi_{ui}^{2} + R_{56}\frac{1}{N} \sum_{i=1}^{N}\phi_{ui}\frac{\Delta p_i}{p}
 \label{e:r56CorrDef3}

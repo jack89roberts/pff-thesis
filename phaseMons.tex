@@ -3,7 +3,7 @@
 In order to successfully correct the phase with the PFF system it is clearly necessary to be able to accurately measure the phase, whilst meeting the low latency and high bandwidth requirements of the correction. Purpose-built phase monitors for the PFF system have been designed and constructed by INFN, Italy \cite{phMonEuCard}. Three of these monitors are currently installed at CTF3 --- two in the CT line at the end of the linac and one after the TL2 chicane in the TBL line. The approximate positions of the monitors are shown on the layout of the PFF system in Figure~\ref{f:ctfpffLayout}. The two ``upstream'' phase monitors in the CT line will be referred to as Mon~1 and Mon~2 (Mon~1 being upstream of Mon~2 in the beam line) in this chapter. The ``downstream'' phase monitor in TBL will be referred to as Mon~3. Mon~1 is normally used as the PFF correction input, with the neighbouring Mon~2 used for performance cross-checks. Mon~3 is then used to measure the effect of the PFF correction. In the rest of the thesis the phase measurements are generally simply referred to as being from either one of the upstream phase monitors, or the downstream monitor. 
 
 The chapter begins with an overview of the design and installation of the phase monitors themselves as well as the associated electronics. The electronics were provided as a ``black box'', with the design and construction completed prior to author's involvement in the project.
-The role of the author has been to maximise the performance of the existing electronics design, with the main focus of the chapter being the operational procedures, performance measurements and changes that have been necessary to achieve this. A resolution, or sensitivity to phase, of below \(0.14^\circ\) was achieved (Section~\ref{s:resolutionMeas}), as derived to be necessary to be able to achieve the targeted \(0.2^\circ\) corrected phase jitter with the PFF system in Section~\ref{s:resolutionEqs}. Several effects have also been identified that can still degrade the accuracy of the phase measurement, such as the position dependence seen in Section~\ref{s:monPosition}, and suggestions for further investigations are given, should an improvement in phase monitor performance be needed in the future.
+The role of the author has been to maximise the performance of the existing electronics design, with the main focus of the chapter being the operational procedures, performance measurements and changes that have been necessary to achieve this. A resolution, or sensitivity to phase, of below \(0.14^\circ\) was achieved (Section~\ref{s:resolutionMeas}), as derived to be necessary to be able to measure \(0.2^\circ\) corrected phase jitter with the PFF system in Section~\ref{s:resolutionEqs}. Several effects have also been identified that can still degrade the accuracy of the phase measurement, such as the position dependence seen in Section~\ref{s:monPosition}, and suggestions for further investigations are given, should an improvement in phase monitor performance be needed in the future.
 
 \newsection{phaseMonDesign}{Phase Monitor Design}
 
@@ -32,7 +32,7 @@ And for the TE modes as:
 \begin{equation}
 f_{nm} = \frac{c}{2\pi}\frac{p'_{nm}}{a} 
 \end{equation}
-Here \(a\) is the radius of the cavity, \(p_{nm}\) is the \(m^\mathrm{th}\) zero of the Bessel function \(J_n(x)\), and \(p'_{nm}\) is the \(m^\mathrm{th}\) zero of the derivative of the Bessel function \(J'_n(x)\) \cite{kreyszig}. The beam pipe around the location of the phase monitors at CTF3 is usually 4~cm in diameter, and a cavity of this size would support six separate TM or TE modes with a cutoff frequency below 12~GHz \cite{phMonIPAC10}. It is for this reason that the phase monitor diameter was reduced to 23~mm, where only two modes are present: TM01 at 4.98~GHz (\(n=0,~m=1,~p_{01}=2.4\)) and TE11 at 3.74~GHz (\(n=1,~m=1,~p'_{11}=1.8\)).
+where \(a\) is the radius of the cavity, \(p_{nm}\) is the \(m^\mathrm{th}\) zero of the Bessel function \(J_n(x)\), and \(p'_{nm}\) is the \(m^\mathrm{th}\) zero of the derivative of the Bessel function \(J'_n(x)\) \cite{kreyszig}. The beam pipe around the location of the phase monitors at CTF3 is usually 4~cm in diameter, and a cavity of this size would support six separate TM or TE modes with a cutoff frequency below 12~GHz \cite{phMonIPAC10}. It is for this reason that the phase monitor diameter was reduced to 23~mm, where only two modes are present: TM01 at 4.98~GHz (\(n=0,~m=1,~p_{01}=2.4\)) and TE11 at 3.74~GHz (\(n=1,~m=1,~p'_{11}=1.8\)).
 
 TM01 is referred to as the monopole mode and TE11 as the dipole mode. The induced field distribution resulting from a bunch entering the cavity for both modes is shown in Figure~\ref{f:transModes}. The precise expressions for each field distribution can be found in \cite{lipka}. When the beam has been correctly setup it should enter the phase monitor cavity close to its centre. 
 For small (horizontal or vertical) offsets between the beam position and the cavity centre there is no dependence of the monopole mode amplitude on the incoming beam position. However, the amplitude of the dipole mode does depend on the beam position, even for small offsets from the cavity centre. 
@@ -84,7 +84,7 @@ The output of the phase monitor cavities (or more precisely the combined output 
 \begin{equation}
 RF(t) = A_{RF}(t)\cos[\omega_{RF} t + \phi(t)]
 \end{equation}
-Where \(A_{RF}(t)\) is the time dependent amplitude (voltage) of the phase monitor signal and \(\phi(t)\) is the time dependent beam phase of interest for the PFF system. The beam based signals from the phase monitors are referred to as the RF signals.
+where \(A_{RF}(t)\) is the time dependent amplitude (voltage) of the phase monitor signal and \(\phi(t)\) is the time dependent beam phase of interest for the PFF system. The beam based signals from the phase monitors are referred to as the RF signals.
 
 This high frequency signal cannot by digitised directly, so it is multiplied by a similar reference signal to create a lower frequency output that can be digitised, whilst preserving the beam phase information. Mixers are the devices that perform this multiplication. The reference signal is referred to as the local oscillator or LO input, and it is usually a continuous sinusoidal signal with constant amplitude \(A_{LO}\) and frequency \(\omega_{LO}\):
 \begin{equation}
@@ -123,7 +123,7 @@ The phase can then be reconstructed from the mixer and diode outputs as follows:
 &\phi(t) = \arccos\left[\frac{\mathrm{Mixer(t)}}{A\sqrt{\mathrm{Diode(t)}}}\right]
 \label{e:phaseRecIdeal} 
 \end{align}
-Where \(A\) is a calibration constant dependent on the relative amplitudes of the mixer and diode outputs. The electronics for the three PFF phase monitors use mixers and diodes as described above to produce signals that are dependent on the phase and amplitude of the output from the phase monitor cavities. Figure~\ref{f:mixerFrontPanel} shows the front panel of one of the sets of the electronics, showing the RF and LO inputs and mixer and diode outputs. The mixer and diode outputs are digitised, with the phase calculation above performed after the digitisation rather than by the phase monitor electronics themselves. 
+where \(A\) is a calibration constant dependent on the relative amplitudes of the mixer and diode outputs. The electronics for the three PFF phase monitors use mixers and diodes as described above to produce signals that are dependent on the phase and amplitude of the output from the phase monitor cavities. Figure~\ref{f:mixerFrontPanel} shows the front panel of one of the sets of the electronics, showing the RF and LO inputs and mixer and diode outputs. The mixer and diode outputs are digitised, with the phase calculation above performed after the digitisation rather than by the phase monitor electronics themselves. 
 
 In order to avoid non-linearities and achieve the target resolution (Section~\ref{s:resolutionEqs}), multiple mixers and diodes are used within each set of electronics. Non-linearities in the response of mixers and diodes are typically worse at higher input powers \cite{alex09}, but higher input powers are desirable to improve the signal to noise ratio of the output. With a single mixer and diode a compromise must therefore be made between the accuracy (linearity) and resolution (noise) of the electronics. To be able to operate the mixers at low power whilst maintaining a good signal to noise ratio eight separate mixers and diodes are used in each set of electronics \cite{alex09}. The RF and LO inputs are split between the eight mixers and diodes, and then the eight outputs of each type are added together to create the final mixer and diode outputs from the electronics. Figure~\ref{f:phaseMonDiagram} shows a simplified example of this with two mixers and diodes.
 
@@ -169,7 +169,7 @@ Figure~\ref{f:phaseMonRack} shows the complete phase monitor electronics install
 \end{figure}
 
 
-\newsection{resolutionEqs}{Resolution Definition}
+\newsection{resolutionEqs}{Resolution Definition and Requirements}
 
 The performance of the PFF system clearly depends on the resolution with which the phase can be measured. Many of the measurements in this chapter are therefore focused on the phase monitor resolution, or more precisely on the resolution of the combined phase monitor and electronics setup. The resolution is defined as the noise between the measured phase and the true beam phase, which can be calculated by comparing the difference between the measured phase of two monitors. This is why two phase monitors, Mon~1 and Mon~2 are installed neighbouring each other in the upstream system in the CT line. The beam phase should be identical in these two monitors thus their measurements can always be compared to derive the resolution.
 
@@ -178,18 +178,18 @@ The precise derivation of the resolution dependent on the measurement of two mon
 \phi_x(t) &= \phi_b(t) + n_x(t) \label{e:resEq1} \\
 \phi_y(t) &= \phi_b(t) + n_y(t) \label{e:resEq2}
 \end{align}
-Here \(\phi_b(t)\) is the true beam phase and \(n_x(t)\) and \(n_y(t)\) is the noise on the measurement at that time. The time dependence will not be written explicitly from this point. These equations assume the beam phase is identical in each monitor, as should be the case for Mon~1 and Mon~2. The variance of each phase monitor measurement can then be derived from the equations above by adding the variance of the beam phase and the noise in quadrature:
+where \(\phi_b(t)\) is the true beam phase and \(n_x(t)\) and \(n_y(t)\) is the noise on the measurement at that time. The time dependence will not be written explicitly from this point. These equations assume the beam phase is identical in each monitor, as should be the case for Mon~1 and Mon~2. The variance of each phase monitor measurement can then be derived from the equations above by adding the variance of the beam phase and the noise in quadrature:
 \begin{align}
 \sigma_x^2 &= \sigma_b^2 + \sigma_{nx}^2 \label{e:measJitWithRes} \\
 \sigma_y^2 &= \sigma_b^2 + \sigma_{ny}^2
 \end{align}
-Here \(\sigma_x\) and \(\sigma_y\) are the phase jitters measured by each phase monitor, \(\sigma_b\) is the true beam phase jitter and \(\sigma_{nx}\) and \(\sigma_{ny}\) are the phase monitor resolutions. The covariance terms are not considered as it is assumed the beam phase and the noise are uncorrelated. Assuming the magnitude (standard deviation) of the noise, \(\sigma_n\), is the same for each phase monitor, this can be simplified to \(\sigma_x^2~=~\sigma_y^2~=~\sigma_b^2~+~\sigma_n^2\).
+where \(\sigma_x\) and \(\sigma_y\) are the phase jitters measured by each phase monitor, \(\sigma_b\) is the true beam phase jitter and \(\sigma_{nx}\) and \(\sigma_{ny}\) are the phase monitor resolutions. The covariance terms are not considered as it is assumed the beam phase and the noise are uncorrelated. Assuming the magnitude (standard deviation) of the noise, \(\sigma_n\), is the same for each phase monitor, this can be simplified to \(\sigma_x^2~=~\sigma_y^2~=~\sigma_b^2~+~\sigma_n^2\).
 
 The quantity of interest for calculating the phase monitor resolution is the jitter in the difference between the two measured phases, \(\sigma_{x-y}\). The variance of the difference between two correlated variables is defined as:
 \begin{align}
 \sigma_{x-y}^2 &= \sigma_x^2 + \sigma_y^2 - 2\sigma_x\sigma_y\rho_{xy} \\
 \end{align}
-Here \(\rho_{xy}\) is the correlation between the phase measurement of \(x\) and \(y\). Substituting in the previously derived expressions for \(\sigma_x\) and \(\sigma_y\) this becomes:
+where \(\rho_{xy}\) is the correlation between the phase measurement of \(x\) and \(y\). Substituting in the previously derived expressions for \(\sigma_x\) and \(\sigma_y\) this becomes:
 \begin{align}
 \sigma_{x-y}^2 &= 2(\sigma_b^2 + \sigma_n^2)(1-\rho_{xy})
 \end{align}
@@ -198,7 +198,7 @@ The correlation coefficient \(\rho_{xy}\) depends on the covariance between \(x\
 \begin{align}
 \rho_{xy} &= \frac{\mathrm{cov}[x,y]}{\sigma_x\sigma_y} = \frac{\mathrm{cov}[x,y]}{\sigma_b^2+\sigma_n^2} \\
 \end{align}
-Here the covariance is defined as:
+where the covariance is defined as:
 \begin{align}
 \mathrm{cov}[x,y] = \frac{1}{N}\sum_{i=1}^{N}\phi_{xi}\phi_{yi} \\
 \end{align}
@@ -232,6 +232,8 @@ In terms of a resolution calculation these equations only apply to the two upstr
 
 However, as the PFF system can also be thought of as subtracting two phases (removing the upstream phase from the downstream phase) the same equations can be directly applied to determine the limitations that the phase monitor resolution places on the PFF performance. Equation~\ref{e:pffVsResolution} shows that the lowest possible measured corrected downstream phase jitter is a factor \(\sqrt{2}\) times larger than the phase monitor resolution. In order to reduce the measured downstream phase jitter to the CLIC target of \(0.2^\circ\) the phase monitor resolution must therefore be better than \(0.14^\circ\). Equation~\ref{e:corrVsResolution} shows that with this \(0.14^\circ\) resolution and a typical beam phase jitter of \(0.8^\circ\) (Section~\ref{s:origJitter}) the measured correlation between two phase monitor measurements would be \(97\%\).
 
+It is important to make the distinction here between the measured downstream phase jitter, and the actual beam phase jitter. The theoretical limit on the corrected beam phase jitter is in fact the resolution of the upstream phase monitor (the PFF input). Adding the downstream monitor resolution to this beam jitter in quadrature gives the theoretical limit of \(\sqrt{2}\) times the resolution in the measured corrected phase jitter (assuming both monitors have the same resolution). Therefore, a resolution of \(0.2^\circ\) is theoretically sufficient to be able to achieve CLIC level phase stability. Nevertheless, in practice the theoretical limit will always be difficult to achieve in a real world system. Ideally it should be possible to measure \(0.2^\circ\) corrected downstream jitter, with noise from the phase monitor only making a small contribution to this value. For this reason a phase monitor resolution of closer to \(0.1^\circ\) would be preferable for the CLIC PFF system.
+
 \newsection{monDigitisers}{Digitisation of Phase Monitor Signals}
 
 The mixer and diode outputs from the phase monitor electronics are digitised for the signals to be processed and used for the PFF correction and offline data analysis. Two different types of analogue to digital converters (ADCs) have been used to digitise the phase monitor signals --- the Texas Instruments ADS5474 ADCs \cite{fontADCs} on the purpose-built FONT5a board used as the PFF controller, and a commercially available SiS 3320 digitiser \cite{sisDigi}. The design and use of the FONT5a board is discussed in more detail in Section~\ref{s:fontSetup}. Table~\ref{t:adcSpecs} summarises the specifications of each type of ADC. 
@@ -262,7 +264,7 @@ Figure~\ref{f:digitiserNosie} shows the ADC noise, converted from counts in to a
   \label{f:digitiserNosie}
 \end{figure}
 
-As derived in the Section~\ref{s:resolutionEqs} the phase resolution must be better than \(0.14^\circ\) in order to achieve a corrected downstream phase jitter of \(0.2^\circ\) with the PFF system. The below \(0.03^\circ\) contribution of ADC noise on the FONT5a board is therefore insignificant compared to the resolution requirements. However, although it does not directly impact the PFF performance the \(0.2^\circ\) ADC jitter on the SiS digitisers would greatly degrade the resolution of the measurements of Mon~2 and Mon~3 usually connected to the SiS~digitisers and used for offline data analysis of the PFF results. 
+As derived in the Section~\ref{s:resolutionEqs} the phase resolution must be better than \(0.14^\circ\), or ideally close to \(0.10^\circ\), in order to achieve a measured corrected downstream phase jitter of \(0.20^\circ\) with the PFF system. The below \(0.03^\circ\) contribution of ADC noise on the FONT5a board is therefore insignificant compared to the resolution requirements. However, although it does not directly impact the PFF performance the \(0.20^\circ\) ADC jitter on the SiS digitisers would greatly degrade the resolution of the measurements of Mon~2 and Mon~3 usually connected to the SiS~digitisers and used for offline data analysis of the PFF results. 
 
 The high phase jitter contribution from the SiS digitisers originates from the roughly 500~mV maximum mixer output being much lower than the SiS ADC range of \(\pm2.5\)~V. In order to rectify this the mixer outputs are boosted by roughly a factor 2.5 in voltage using an amplifier prior to the SiS digitisers. The specifications of the amplifier used are documented in \cite{ampSiS}. With the amplifier in place the peak signal level sent to the SiS digitisers is around 1~V, and the equivalent phase jitter is reduced to \(0.078\pm0.002^\circ\). This no longer prevents \(0.14^\circ\) resolution from being achieved on measurements using the SiS digitisers, as proven later in Section~\ref{s:resolutionMeas}. A small further improvement in measured resolution could be achieved using a different amplifier and boosting the peak output voltage closer to 2~V.
 
@@ -394,7 +396,7 @@ Overall, the agreement between the actual mixer output and the sinusoidal fits a
 \begin{equation}
 \Delta \phi(t) = \arcsin\left(\frac{V_{MIXER}(t)-V_{FIT}(t)}{A}\right)
 \end{equation}
-Here \(V_{MIXER}(t)\) and \(V_{FIT}(t)\) are the mixer voltage and fitted voltage at sample \(t\) respectively, and \(A\) is the fitted mixer amplitude. On the falling slope between the peaks there is only a slight deviation about the ideal sinusoidal behaviour. The deviation from ideal is at the level of \(0.25\pm0.03^\circ\) and \(0.30\pm0.04^\circ\) for the first and third mixers, with a slightly larger effect of \(0.45\pm0.04^\circ\) for the second mixer. This applies within \(\pm80^\circ\) of the zero crossing in the mixer output. Outside this range, close to the maximum or minimum mixer output, the deviation from the sine fit rapidly increases, reaching several degrees for each mixer. For operation with the beam this means that the accuracy of the phase measurement cannot be guaranteed when the LO phase is set so that the mixer is giving close to its maximum or minimum output. This is also true for other reasons, as seen in Section~\ref{s:resolutionMeas}. The PFF system can only correct small offsets at the level of around \(\pm5^\circ\) (Section~\ref{ss:corrRange}), so the non-ideal response close to peak output is not an issue for the PFF performance.
+where \(V_{MIXER}(t)\) and \(V_{FIT}(t)\) are the mixer voltage and fitted voltage at sample \(t\) respectively, and \(A\) is the fitted mixer amplitude. On the falling slope between the peaks there is only a slight deviation about the ideal sinusoidal behaviour. The deviation from ideal is at the level of \(0.25\pm0.03^\circ\) and \(0.30\pm0.04^\circ\) for the first and third mixers, with a slightly larger effect of \(0.45\pm0.04^\circ\) for the second mixer. This applies within \(\pm80^\circ\) of the zero crossing in the mixer output. Outside this range, close to the maximum or minimum mixer output, the deviation from the sine fit rapidly increases, reaching several degrees for each mixer. For operation with the beam this means that the accuracy of the phase measurement cannot be guaranteed when the LO phase is set so that the mixer is giving close to its maximum or minimum output. This is also true for other reasons, as seen in Section~\ref{s:resolutionMeas}. The PFF system can only correct small offsets at the level of around \(\pm5^\circ\) (Section~\ref{ss:corrRange}), so the non-ideal response close to peak output is not an issue for the PFF performance.
 
 \begin{figure}
   \centering
@@ -450,7 +452,7 @@ Taking the power dependent asymmetry in to account the actual mixer response can
 \mathrm{Mixer}(t) = m_1A(t)\sin[\phi(t)] + m_2A(t)^2 + m_3A(t) + m_4
 \label{e:actualMixerResponse}
 \end{equation}
-Here \(A(t)\) is the input voltage at time \(t\), and \(m_1\), \(m_2\), \(m_3\), and \(m_4\) are calibration constants needed to describe the power dependence.
+where \(A(t)\) is the input voltage at time \(t\), and \(m_1\), \(m_2\), \(m_3\), and \(m_4\) are calibration constants needed to describe the power dependence.
 
 \subsection{Diode Performance}
 \label{ss:sigGenDiode}
@@ -508,7 +510,7 @@ Finally, Figure~\ref{f:PhaseDiodeVsMixer} compares the oscillation on the diode 
 \mathrm{Diode(t)} = d_1A(t)^2 + d_2A(t) + d_3 + d_4A(t)\sin[\phi(t)+\delta]
 \label{e:actualDiodeResponse}
 \end{equation}
-Here \(d_1\), \(d_2\), \(d_3\) are calibration constants describing the actual power dependence of the diode output, and \(d_4\) and \(\delta\) are calibration constants describing the cross-talk from the mixer.
+where \(d_1\), \(d_2\), \(d_3\) are calibration constants describing the actual power dependence of the diode output, and \(d_4\) and \(\delta\) are calibration constants describing the cross-talk from the mixer.
 
 
 
@@ -667,7 +669,7 @@ The full fit to the calibration result that is performed is:
 \begin{equation}
 \mathrm{Mixer} = A\sin(bx + c) + d
 \end{equation}
-Here \(x\) is the phase shifter setting. \(A\) and \(d\) are the calibration constants used to reconstruct the phase, with their values already quoted in Table~\ref{t:calSiSConsts}. The remaining fit parameters \(b\) and \(c\) convert the phase shifter setting in to the phase offset between the LO and the beam. As the shifter readings are approximately in 4~GHz degrees, the expected value for \(b\) that converts the shifter value in to 12~GHz radians is \((12/4)*(\pi/180) \simeq 50\)~mrad/unit.
+where \(x\) is the phase shifter setting. \(A\) and \(d\) are the calibration constants used to reconstruct the phase, with their values already quoted in Table~\ref{t:calSiSConsts}. The remaining fit parameters \(b\) and \(c\) convert the phase shifter setting in to the phase offset between the LO and the beam. As the shifter readings are approximately in 4~GHz degrees, the expected value for \(b\) that converts the shifter value in to 12~GHz radians is \((12/4)*(\pi/180) \simeq 50\)~mrad/unit.
 
 To obtain the best resolution for the measurement the mixers should be operated where the dependence of the output voltage on the phase is maximal. This means maximising the partial derivative of the mixer output with respect to the phase shifter setting:
 \begin{equation}
@@ -700,7 +702,7 @@ Due to the large phase sag along the beam pulse it is clearly not possible to be
 
 \newsection{shifters}{Phase Shifter Noise}
 
-In the first tests with all three phase monitors in their final positions at CTF3 the measured phase resolution was far in excess of the \(0.14^\circ\) derived to be necessary to achieve a \(0.2^\circ\) corrected downstream phase jitter in Section~\ref{s:resolutionEqs}. Figure~\ref{f:resolutionDigShift} shows a typical example of the measured resolution along the pulse at that time with an achieved resolution of around \(0.4^\circ\), three times larger than required. The lowest downstream phase jitter that could be achieved with the PFF system in these conditions is above \(0.55^\circ\), only about 30\% smaller than the initial upstream phase jitter at CTF3 (Chapter~\ref{c:phasePropagation}). To be able to achieve a large reduction in downstream phase jitter with the PFF prototype the source of the poor phase monitor resolution had to be identified and removed.
+In the first tests with all three phase monitors in their final positions at CTF3 the phase resolution was far in excess of the \(0.14^\circ\) derived to be necessary to achieve \(0.2^\circ\) measured corrected downstream phase jitter in Section~\ref{s:resolutionEqs}. Figure~\ref{f:resolutionDigShift} shows a typical example of the measured resolution along the pulse at that time with an achieved resolution of around \(0.4^\circ\), three times larger than required. The lowest downstream phase jitter that could be achieved with the PFF system in these conditions is above \(0.55^\circ\), only about 30\% smaller than the initial upstream phase jitter at CTF3 (Chapter~\ref{c:phasePropagation}). To be able to achieve a large reduction in downstream phase jitter with the PFF prototype the source of the poor phase monitor resolution had to be identified and removed.
 
 \begin{figure}
   \centering
@@ -790,9 +792,9 @@ The example shown here is the lowest measured resolution to date. However, the p
 \subsection{With Sample Averaging}
 \label{ss:resSampAvg}
 
-The phase monitor signals are digitised with a much higher sampling rate, 357~MHz on the FONT5a board or 192~MHz on the SiS digitisers, than the targeted PFF correction bandwidth of 30~MHz. This means the results from several samples could be averaged to reduce noise on the measurement whilst maintaining the same correction bandwidth. For example, for a measurement on the SiS digitisers, such as those shown here, 5 samples can be averaged to effectively create a signal with 38.4~MHz sampling rate, reduced from the initial 192~MHz. 
+The phase monitor signals are digitised with a much higher sampling rate, 357~MHz on the FONT5a board or 192~MHz on the SiS digitisers, than the targeted PFF correction bandwidth of 30~MHz. This means the results from several samples could be averaged to reduce noise on the measurement whilst maintaining the same correction bandwidth. For example, for a measurement on the SiS digitisers, such as those shown here, 5 samples can be averaged to effectively create a signal with a 38~MHz sampling rate, reduced from the initial 192~MHz. 
 
-The effect of doing this is shown in Figure~\ref{f:resolutionWithAveraging}, using a resolution measurement with \(0.199^\circ\) point-by-point resolution (with a standard deviation of \(0.011^\circ\) in that value along the pulse). By averaging five samples the resolution is improved to \(0.174^\circ\) (with a standard deviation of \(0.009^\circ\)), with the main improvement from the averaging coming from the reduction in digitiser noise (on the SiS digitisers). In addition, many of the measurements in Chapters~\ref{c:phasePropagation}--\ref{c:feedforward} use the mean, rather than point-by-point, pulse phase. For these measurements (averaging around 100~samples) there is a further small improvement in phase monitor resolution, to \(0.165\pm0.008^\circ\), for the example shown here.  For reference, the best achieved point-by-point resolution of \(0.126^\circ\) (Section~\ref{ss:bestRes}), can also be reduced by averaging 5 samples, to \(0.108^\circ\). 
+The effect of doing this is shown in Figure~\ref{f:resolutionWithAveraging}, using a resolution measurement with \(0.199^\circ\) point-by-point resolution (with a standard deviation of \(0.011^\circ\) in that value along the pulse). By averaging five samples the resolution is improved to \(0.174^\circ\) (with a standard deviation of \(0.009^\circ\)), with the main improvement from the averaging coming from the reduction in digitiser noise (on the SiS digitisers). In addition, many of the measurements in Chapters~\ref{c:phasePropagation}--\ref{c:feedforward} use the mean, rather than point-by-point, pulse phase. For these measurements (averaging around 100~samples) there is a further small improvement in phase monitor resolution, to \(0.165\pm0.008^\circ\), for the measurement used here.  For reference, the best achieved point-by-point resolution of \(0.126^\circ\) (Section~\ref{ss:bestRes}), can also be reduced by averaging 5 samples, to \(0.108^\circ\). 
 
 Currently the phase propagation (Chapter~\ref{c:phasePropagation}) is believed to be the main limiting factor for the PFF performance rather than the phase monitor resolution. However, it would be possible to implement sample averaging in the PFF firmware on the FONT5a board if deemed necessary for future tests \cite{glennPriv}. 
 
@@ -834,7 +836,7 @@ Figure~\ref{f:bandwidthPlot} shows the response of the Mon~3 mixer to a beam pul
 \begin{equation}
 \mathrm{BW} = \frac{350}{t}
 \end{equation}
-Where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the signal in ns. The transition between the two phase states as seen on the mixer output occurs between 156.6~ns and 167.0~ns, a rise time of 10.4~ns corresponding to a bandwidth of approximately 34~MHz. In addition, the falling edge of the mixer output at the end of the pulse also takes around a 10~ns, also leading to a bandwidth estimate in the region of 35~MHz.
+where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the signal in ns. The transition between the two phase states as seen on the mixer output occurs between 156.6~ns and 167.0~ns, a rise time of 10.4~ns corresponding to a bandwidth of approximately 34~MHz. In addition, the falling edge of the mixer output at the end of the pulse also takes around a 10~ns, also leading to a bandwidth estimate in the region of 35~MHz.
 
 \begin{figure}
   \centering
@@ -940,7 +942,7 @@ In these conditions a position offset of \(x_{430}\) measured in the BPM (in hor
 x_{M1} &= r_{M1}x_{430} \\
 x_{M2} &= r_{M2}x_{430}
 \end{align}
-Here \(r_{M1}\) and \(r_{M2}\) are the position offsets in the phase monitors per unit position offset in the BPM, given by:
+where \(r_{M1}\) and \(r_{M2}\) are the position offsets in the phase monitors per unit position offset in the BPM, given by:
 \begin{align}
 r_{M1} &= \frac{s_{M1}}{s_{430}} \\
 r_{M2} &= \frac{s_{M2}}{s_{430}}
@@ -964,7 +966,7 @@ To remove the effects of drifts in the beam phase the difference between the mea
 \phi_{M1} &= \phi_b + c_{M1}x_{M1} \\
 \phi_{M2} &= \phi_b + c_{M2}x_{M2}
 \end{align}
-Here \(c_{M1}\) and \(c_{M2}\) are constants expressing the phase shift per unit position offset in each monitor. The difference between the measured phase in Mon~1 and Mon~2 is therefore given by:
+where \(c_{M1}\) and \(c_{M2}\) are constants expressing the phase shift per unit position offset in each monitor. The difference between the measured phase in Mon~1 and Mon~2 is therefore given by:
 \begin{equation}
 \phi_{M2}-\phi_{M1} = c_{M2}x_{M2} - c_{M1}x_{M1} \\
 \end{equation}
