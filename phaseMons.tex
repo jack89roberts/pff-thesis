@@ -302,14 +302,14 @@ c &= \arcsin\left(\frac{y-d}{A}\right) - bx
 The amplitude, \(A\), and offset, \(d\), of the sine curve are simply estimated by comparing the minimum and maximum output. These initial values are therefore highly biased by any large outliers around the minimum and maximum output, but this is rarely the case for the application here and these simple estimators are sufficient.
 Rearranging Equation~\ref{e:generalSinEq} gives the expression for \(c\) above. Due to its use of arcsin the equation is only valid in the first and fourth quadrants, between \(-\pi/2\) and \(+\pi/2\) where the gradient of the sine curve is positive. The \(y\) value at each data point is compared to its neighbours to determine whether it is on the rising slope, in order to meet this criteria. The initial value of \(c\) is the mean value calculated across all the data points that meet this criteria.
 
-Figure~\ref{f:sinFitEx} and Table~\ref{t:sinFitEx} show the results of an example fit using this approach. An initial distribution of points with \(y=\sin(x+1)+1\) is used (\(A = b = c = d = 1\)), with random noise added. An approximate value for \(b\) is assumed to be know (from the phase monitor electronics specifications, as described), thus \(b=1\) is directly used as its initial estimated value. The initial estimates for \(A\) and \(d\) are within a few percent of their true value. The initial estimate for \(c\) is within \(20\%\) of the correct value. After fitting all four parameters are in agreement with the expected values.
-
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/sinFitEx}
+  \includegraphics[width=0.7\textwidth]{Figures/phaseMons/sinFitEx}
   \caption{Example sine fit (red) to generated data with added random noise (blue markers). The dashed green line shows the initial conditions used for the fit with estimated values for the four fit parameters. \(x\) and \(y\) are defined as in Equation~\ref{e:generalSinEq}}
   \label{f:sinFitEx}
 \end{figure}
+
+Figure~\ref{f:sinFitEx} and Table~\ref{t:sinFitEx} show the results of an example fit using this approach. An initial distribution of points with \(y=\sin(x+1)+1\) is used (\(A = b = c = d = 1\)), with random noise added. An approximate value for \(b\) is assumed to be know (from the phase monitor electronics specifications, as described), thus \(b=1\) is directly used as its initial estimated value. The initial estimates for \(A\) and \(d\) are within a few percent of their true value. The initial estimate for \(c\) is within \(20\%\) of the correct value. After fitting all four parameters are in agreement with the expected values.
 
 \begin{table}
   \begin{center}
@@ -780,8 +780,6 @@ This section presents resolution measurements with the mechanical phase shifters
 
 Figure~\ref{f:bestResolution} shows the best phase resolution that has been achieved sample by sample along the pulse. Each point corresponds to the phase jitter in the difference between the measured Mon~1 and Mon~2 phase divided by the square-root of two as per Equation~\ref{e:resolutionEq}.  The resolution is quite stable along the pulse, with a mean value of \(0.126^\circ\) and a standard deviation of \(0.007^\circ\). This is below the \(0.14^\circ\) needed to be able to theoretically measure \(0.2^\circ\) corrected phase jitter with the PFF prototype, as derived in Section~\ref{s:resolutionEqs}. The achieved resolution corresponds to a theoretical limit of around \(0.18^\circ\) on the measured corrected downstream phase jitter. 
 
-The example shown here is the lowest measured resolution to date. However, the performance of the monitors, and in particular the electronics, is very sensitive to small changes to the environment in the klystron gallery and to the beam setup. A representative value of the routinely achievable point-by-point resolution is \(0.2^\circ\), such as the example shown in Figure~\ref{f:resolutionWithAveraging} in Section~\ref{ss:resSampAvg}. Several sources of additional noise in the measured phase are discussed in Sections~\ref{s:monComp}--\ref{s:monPosition}. In particular, a sensitivity of the LO signals in the electronics to the power and phase of nearby klystrons has recently been identified (Section~\ref{s:monComp}).
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/bestResolution}
@@ -789,14 +787,14 @@ The example shown here is the lowest measured resolution to date. However, the p
   \label{f:bestResolution}
 \end{figure}
 
+The example shown here is the lowest measured resolution to date. However, the performance of the monitors, and in particular the electronics, is very sensitive to small changes to the environment in the klystron gallery and to the beam setup. A representative value of the routinely achievable point-by-point resolution is \(0.2^\circ\), such as the example shown in Figure~\ref{f:resolutionWithAveraging} in Section~\ref{ss:resSampAvg}. Several sources of additional noise in the measured phase are discussed in Sections~\ref{s:monComp}--\ref{s:monPosition}. In particular, a sensitivity of the LO signals in the electronics to the power and phase of nearby klystrons has recently been identified (Section~\ref{s:monComp}).
+
+
+
 \subsection{With Sample Averaging}
 \label{ss:resSampAvg}
 
 The phase monitor signals are digitised with a much higher sampling rate, 357~MHz on the FONT5a board or 192~MHz on the SiS digitisers, than the targeted PFF correction bandwidth of 30~MHz. This means the results from several samples could be averaged to reduce noise on the measurement whilst maintaining the same correction bandwidth. For example, for a measurement on the SiS digitisers, such as those shown here, 5 samples can be averaged to effectively create a signal with a 38~MHz sampling rate, reduced from the initial 192~MHz. 
-
-The effect of doing this is shown in Figure~\ref{f:resolutionWithAveraging}, using a resolution measurement with \(0.199^\circ\) point-by-point resolution (with a standard deviation of \(0.011^\circ\) in that value along the pulse). By averaging five samples the resolution is improved to \(0.174^\circ\) (with a standard deviation of \(0.009^\circ\)), with the main improvement from the averaging coming from the reduction in digitiser noise (on the SiS digitisers). In addition, many of the measurements in Chapters~\ref{c:phasePropagation}--\ref{c:feedforward} use the mean, rather than point-by-point, pulse phase. For these measurements (averaging around 100~samples) there is a further small improvement in phase monitor resolution, to \(0.165\pm0.008^\circ\), for the measurement used here.  For reference, the best achieved point-by-point resolution of \(0.126^\circ\) (Section~\ref{ss:bestRes}), can also be reduced by averaging 5 samples, to \(0.108^\circ\). 
-
-Currently the phase propagation (Chapter~\ref{c:phasePropagation}) is believed to be the main limiting factor for the PFF performance rather than the phase monitor resolution. However, it would be possible to implement sample averaging in the PFF firmware on the FONT5a board if deemed necessary for future tests \cite{glennPriv}. 
 
 \begin{figure}
   \centering
@@ -805,13 +803,15 @@ Currently the phase propagation (Chapter~\ref{c:phasePropagation}) is believed t
   \label{f:resolutionWithAveraging}
 \end{figure}
 
+The effect of doing this is shown in Figure~\ref{f:resolutionWithAveraging}, using a resolution measurement with \(0.199^\circ\) point-by-point resolution (with a standard deviation of \(0.011^\circ\) in that value along the pulse). By averaging five samples the resolution is improved to \(0.174^\circ\) (with a standard deviation of \(0.009^\circ\)), with the main improvement from the averaging coming from the reduction in digitiser noise (on the SiS digitisers). In addition, many of the measurements in Chapters~\ref{c:phasePropagation}--\ref{c:feedforward} use the mean, rather than point-by-point, pulse phase. For these measurements (averaging around 100~samples) there is a further small improvement in phase monitor resolution, to \(0.165\pm0.008^\circ\), for the measurement used here.  For reference, the best achieved point-by-point resolution of \(0.126^\circ\) (Section~\ref{ss:bestRes}), can also be reduced by averaging 5 samples, to \(0.108^\circ\). 
+
+Currently the phase propagation (Chapter~\ref{c:phasePropagation}) is believed to be the main limiting factor for the PFF performance rather than the phase monitor resolution. However, it would be possible to implement sample averaging in the PFF firmware on the FONT5a board if deemed necessary for future tests \cite{glennPriv}. 
+
+
+
 
 \subsection{Dependence of Resolution on LO Phase}
 \label{ss:resVsShifter}
-
-The process of setting the mixers at their zero crossing after calibrations was documented in Section~\ref{ss:calZeroCross}. This is necessary to operate the mixers where there output voltage is most sensitive to variations in the phase (close to the peaks of the mixer output there is negligible change in output voltage for small changes in phase). The dependence of the phase resolution on the beam phase across the full \(\pm180^\circ\) range is shown in Figure~\ref{f:resolutionVsShifter}. The plotted phase is the offset between the LO phase shifter setting and the calculated optimal setting. More than \(50^\circ\) away from the zero crossing there is a large degradation in resolution, reaching above 1~degree at the \(+90^\circ\) peak.
-
-However, for the PFF system the phase resolution only needs to be guaranteed within its correction range, which is calculated to be \(\pm5.5^\circ\) in Section~\ref{ss:corrRange}. In Figure~\ref{f:resVsSmallPhasOff} it is seen that there is no noticeable degradation in resolution in the range between \(\pm15^\circ\). Therefore, providing the mixers have been correctly set at their zero crossings, this is not an issue for the PFF system.
 
 \begin{figure}
   \centering
@@ -822,6 +822,12 @@ However, for the PFF system the phase resolution only needs to be guaranteed wit
   \caption{Dependence of the phase monitor resolution on the phase offset between the beam and the LO, for offsets between \(\pm20^\circ\).}
   \label{f:resVsSmallPhasOff}
 \end{figure}
+
+The process of setting the mixers at their zero crossing after calibrations was documented in Section~\ref{ss:calZeroCross}. This is necessary to operate the mixers where there output voltage is most sensitive to variations in the phase (close to the peaks of the mixer output there is negligible change in output voltage for small changes in phase). The dependence of the phase resolution on the beam phase across the full \(\pm180^\circ\) range is shown in Figure~\ref{f:resolutionVsShifter}. The plotted phase is the offset between the LO phase shifter setting and the calculated optimal setting. More than \(50^\circ\) away from the zero crossing there is a large degradation in resolution, reaching above 1~degree at the \(+90^\circ\) peak.
+
+However, for the PFF system the phase resolution only needs to be guaranteed within its correction range, which is calculated to be \(\pm5.5^\circ\) in Section~\ref{ss:corrRange}. In Figure~\ref{f:resVsSmallPhasOff} it is seen that there is no noticeable degradation in resolution in the range between \(\pm15^\circ\). Therefore, providing the mixers have been correctly set at their zero crossings, this is not an issue for the PFF system.
+
+
 
 %\subsection{Dependence of Resolution on Input Power}
 %\label{ss:resVsPower}
@@ -858,10 +864,6 @@ where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the 
 
 \newsection{monComp}{Comparison of Measured Phase Along Pulse}
 
-It has been shown that the phase jitter is at the same level in Mon~1 and Mon~2 after the installation of mechanical phase shifters (Section~\ref{s:shifters}), and that the achieved resolution is better than the level needed to be able to theoretically achieve a \(0.2^\circ\) PFF correction (Section~\ref{ss:bestRes}). Nevertheless there are several remaining effects that have been identified which may limit the PFF performance in a way not described by the resolution. These are the focus of the remainder of this chapter, starting with differences between the measured shape of the phase along the pulse, discussed here. Neither the phase jitter nor the resolution are sensitive to any static differences in the measured phase in each monitor. For the PFF system to remove not only phase jitter but also to flatten the phase sag along the pulse the shape of the upstream and downstream phase must be the same.
-
-Figure~\ref{f:phaseAlongAll} shows an example of the measured phase along the pulse in all three monitors, as well as a fourth phase measurement taken from one of the power extraction and transfer structures (PETS) in the TBL line after Mon~3 \cite{reidarPETS}. The PETS measurement provides an independent cross-check of the response and calibration of the three PFF monitors. All four phase measurements show approximately the same overall phase sag of around \(45^\circ\) along the full pulse length, as desired.
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/phaseAlongAll}
@@ -871,6 +873,10 @@ Figure~\ref{f:phaseAlongAll} shows an example of the measured phase along the pu
   \caption{Difference between the measured Mon~1 and Mon~2 phase along the pulse.}
   \label{f:DiffMon1Mon2Along}
 \end{figure}
+
+It has been shown that the phase jitter is at the same level in Mon~1 and Mon~2 after the installation of mechanical phase shifters (Section~\ref{s:shifters}), and that the achieved resolution is better than the level needed to be able to theoretically achieve a \(0.2^\circ\) PFF correction (Section~\ref{ss:bestRes}). Nevertheless there are several remaining effects that have been identified which may limit the PFF performance in a way not described by the resolution. These are the focus of the remainder of this chapter, starting with differences between the measured shape of the phase along the pulse, discussed here. Neither the phase jitter nor the resolution are sensitive to any static differences in the measured phase in each monitor. For the PFF system to remove not only phase jitter but also to flatten the phase sag along the pulse the shape of the upstream and downstream phase must be the same.
+
+Figure~\ref{f:phaseAlongAll} shows an example of the measured phase along the pulse in all three monitors, as well as a fourth phase measurement taken from one of the power extraction and transfer structures (PETS) in the TBL line after Mon~3 \cite{reidarPETS}. The PETS measurement provides an independent cross-check of the response and calibration of the three PFF monitors. All four phase measurements show approximately the same overall phase sag of around \(45^\circ\) along the full pulse length, as desired.
 
 Nevertheless, there are differences between the measurements. As described later in Chapter~\ref{c:phasePropagation} there are many mechanisms by which the beam phase can change between the upstream and downstream monitors. Small discrepancies between the Mon~1 and Mon~2 phase compared to the Mon~3 and PETS phase are therefore not unexpected. A detailed comparison between the upstream and downstream phase is left to Chapter~\ref{c:phasePropagation} rather than being discussed here. 
 
@@ -890,11 +896,6 @@ If there was a real difference in the phase sag between monitors (rather than it
 
 \newsection{effectsMultiSampCal}{Effect of Variations in Calibration Constant}
 
-In Section~\ref{ss:calMultiSamp} it was shown how the calibration parameters vary along the pulse. In the PFF algorithm, and usually also in data analysis, single values for each calibration constant are used across the full pulse length. This will lead to small discrepancies between the measured phase and the true beam phase. Examples of the size of this effect are shown in Figures~\ref{f:multiSampMon2Along}, for Mon~2, and in Figure~\ref{f:multiSampMon3Along} for Mon~3, comparing the measured phase along the pulse when using single value calibration constants or varying calibration constants along the pulse. In the range between 650~ns and 900~ns around the middle of the pulse where the phase sag is flattest (the part of interest for the PFF system) using a varying calibration constant along the pulse makes almost no difference to the measured upstream phase, with residuals of below \(0.2^\circ\) between the two calibration methods. This is unsurprising as the calibration constants normally used are calculated from one sample in this range. Outside this range the difference between the two reaches a peak of \(1.5^\circ\) near the start of the pulse.
-
-For the downstream phase the differences are larger, including up to \(1^\circ\) offsets between the two methods in the range of interest for the PFF system. However, the example shown is without fully optimised downstream beam conditions achieved in Chapter~\ref{c:phasePropagation} and so represents a worst case scenario for normal PFF operation. The PFF correction quality also does not directly depend on the downstream phase measurement (apart from for the gain calculation, as derived in Section~\ref{s:pffEquations}), so these differences can be removed in offline analysis if deemed necessary.
-
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/multiSampMon2Along}
@@ -904,6 +905,11 @@ For the downstream phase the differences are larger, including up to \(1^\circ\)
   \caption{Effect of using a varying calibration constant on the downstream phase. Top: Phase with a constant calibration constant (blue) and phase with a varying calibration constant (red). Bottom: The difference between the two.}
   \label{f:multiSampMon3Along}
 \end{figure}
+
+In Section~\ref{ss:calMultiSamp} it was shown how the calibration parameters vary along the pulse. In the PFF algorithm, and usually also in data analysis, single values for each calibration constant are used across the full pulse length. This will lead to small discrepancies between the measured phase and the true beam phase. Examples of the size of this effect are shown in Figures~\ref{f:multiSampMon2Along}, for Mon~2, and in Figure~\ref{f:multiSampMon3Along} for Mon~3, comparing the measured phase along the pulse when using single value calibration constants or varying calibration constants along the pulse. In the range between 650~ns and 900~ns around the middle of the pulse where the phase sag is flattest (the part of interest for the PFF system) using a varying calibration constant along the pulse makes almost no difference to the measured upstream phase, with residuals of below \(0.2^\circ\) between the two calibration methods. This is unsurprising as the calibration constants normally used are calculated from one sample in this range. Outside this range the difference between the two reaches a peak of \(1.5^\circ\) near the start of the pulse.
+
+For the downstream phase the differences are larger, including up to \(1^\circ\) offsets between the two methods in the range of interest for the PFF system. However, the example shown is without fully optimised downstream beam conditions achieved in Chapter~\ref{c:phasePropagation} and so represents a worst case scenario for normal PFF operation. The PFF correction quality also does not directly depend on the downstream phase measurement (apart from for the gain calculation, as derived in Section~\ref{s:pffEquations}), so these differences can be removed in offline analysis if deemed necessary.
+
 
 %\begin{figure}
 %  \centering
@@ -961,6 +967,17 @@ Figure~\ref{f:horizontalPosScan} shows the results of a horizontal position scan
   \label{f:horizontalScanDiode}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\textwidth]{Figures/phaseMons/horizontalScanFit}
+  \caption{Fit (black line) to the measured difference between the Mon~1 and Mon~2 phase (blue markers) versus the horizontal position.}
+  \label{f:horizontalScanFit}
+  \includegraphics[width=0.85\textwidth]{Figures/phaseMons/verticalScanFit}
+  \caption{Fit (black line) to the measured difference between the Mon~1 and Mon~2 phase (blue markers) versus the vertical position.}
+  \label{f:verticalScanFit}
+\end{figure}
+
+
 To remove the effects of drifts in the beam phase the difference between the measured Mon~1 and Mon~2 phase can be considered instead. The true beam phase, \(\phi_b\), should be identical in Mon~1 and Mon~2, so any differences between their measurements \(\phi_{M1}\) and \(\phi_{M2}\) during the scan can be modelled as coming from the beam position in the monitor, as follows:
 \begin{align}
 \phi_{M1} &= \phi_b + c_{M1}x_{M1} \\
@@ -986,15 +1003,16 @@ Figure~\ref{f:horizontalScanFit} shows how the difference between the Mon~1 and 
 
 Exactly the same process can be repeated in the vertical plane, and the results of doing this are shown in Figure~\ref{f:verticalScanFit}. Although the effect is smaller there is still a visible dependence of the phase on the vertical position, in this case with a gradient of \(0.06\pm0.01^\circ\)~per~mm offset in the BPM corresponding to \(0.53\pm0.07^\circ\)~per~mm vertical offset in the phase monitors.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.85\textwidth]{Figures/phaseMons/horizontalScanFit}
-  \caption{Fit (black line) to the measured difference between the Mon~1 and Mon~2 phase (blue markers) versus the horizontal position.}
-  \label{f:horizontalScanFit}
-  \includegraphics[width=0.85\textwidth]{Figures/phaseMons/verticalScanFit}
-  \caption{Fit (black line) to the measured difference between the Mon~1 and Mon~2 phase (blue markers) versus the vertical position.}
-  \label{f:verticalScanFit}
-\end{figure}
 
 The position dependence of the measurement appears large when quoted like this but it must be remembered that millimetre scale changes in beam orbit are rare during normal operation. Orbit jitter at CTF3 around the location of the upstream phase monitors is typically at the 0.02~mm level. Taking the calculated position dependence of Mon~1 and Mon~2 this corresponds to only an additional measured phase jitter of roughly \(0.04^\circ\), using the larger dependence in the horizontal plane. This is only a small contribution to the overall phase monitor resolution of around \(0.13^\circ\) as seen in Section~\ref{s:resolutionMeas}. However, it is important to consider that any change in beam setup that alters the trajectory through the monitors will lead to a change in output power and therefore a change in calibration constants. Calibrations are always repeated when the CTF3 setup is changed to take this in to account. Position scans around the region of the downstream phase monitor Mon~3 would be much more difficult to perform and have not yet been attempted. The effect should be of a similar magnitude, although the downstream beam is less stable than upstream so the contribution to measured phase jitter is likely to be slightly larger. 
+
+\newsection{phMonSum}{Summary}
+
+Three new phase monitors have been installed at CTF3 for the PFF system -- two upstream monitors (prior to TL2) in the CT-line and one downstream monitor in TBL (following the TL2 chicane). The resolution of these monitors defines the theoretical limit on performance of the PFF system: to achieve a measured downstream phase jitter of \(0.2^\circ\) the resolution must be better than \(0.14^\circ\). This chapter has discussed the work carried out to characterise and improve the performance of the phase monitors, and in particular the phase monitor electronics.
+
+The phase monitor electronics provides two outputs -- a phase dependent ``mixer'' signal and a power dependent ``diode'' signal. Measurements of the electronics using a signal generator identified that the diode outputs were not performing as expected. The diodes have therefore been excluded from the phase reconstruction process. Also, digital phase shifters were found to be introducing noise to the reference LO phase used by the mixers, and were replaced with passive mechanical devices.
+
+To be able to calculate the phase from the mixer signal a calibration must first be performed, in which the LO phase shifters are varied through \(360^\circ\) to determine the mixer output for all input phases. Calibration results have been presented, both for a single sample and point-by-point along the pulse. Following a calibration the LO phase shifters are set so that the mixer is centred around zero, where the phase dependence of the output is maximal and the resolution is optimal.
+
+The best achieved point-by-point resolution (sampled at 192~MHz) is \(0.126^\circ\) (\(\pm 0.007^\circ\) rms), or \(0.106\pm0.006^\circ\) on the mean pulse phase. This value is sensitive to changes in beam conditions or the environment around the electronics in the klystron gallery, with the routinely achievable point-by-point resolution closer to \(0.2^\circ\). A sensitivity of the electronics to the phase and power of nearby klystrons may explain variations in the measured resolution, and differences in the shape of the measured phase along the pulse in the two upstream phase monitors, but this has not yet been fully characterised. Other effects, such as a dependence of the measured phase on the beam position in the cavity, have been identified but appear to be negligible.
 

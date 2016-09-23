@@ -313,7 +313,7 @@ The results described above immediately demonstrate large discrepancies between 
 k = \frac{\mathrm{FQL}\times I}{E}
 \end{equation}
 where \(\mathrm{FQL} = 31.78\) is a constant defined by the properties of the quadrupole, \(I\) is the current delivered to the quadrupole from its power supply and \(E\) is the beam energy\footnote{\(k\) is referred to as \(\mathrm{K1}\) in MADX. \(k\) is used here to avoid confusion with the first kicker \(K1\).}. 
-This \(k\) value must be multiplied by the 30~cm active magnetic length of the quadrupole to determine the equivalent focal length in the quadrupole transfer matrix previously seen in Equation~\ref{e:quadTransfer}.
+Multiplying the \(k\) value above by the 30~cm active magnetic length of the L-type quadrupoles gives their equivalent focal length.
 %The \(\mathrm{K1}\) value is analogous to the constant \(k\) in the quadrupole transfer matrix previously seen in Equation~\ref{e:quadTransfer}. This must be multiplied by the 30~cm active magnetic length of the quadrupole to determine the equivalent focal length of the quadrupole.
 
 As the properties of the ``L-type'' quadrupoles were not measured in place at CERN prior to their use in CTF3 there was a large uncertainty on the correct value of \(\mathrm{FQL}\) to use. Therefore, changing the \(\mathrm{FQL}\) value in the MADX model was potentially a good candidate to try to improve the agreement between the model and the measurements.
@@ -341,7 +341,7 @@ Another way in which dipoles produce focusing effects is via their fringe fields
 %The fringe fields can be approximated as a linear decrease in magnetic field from the peak bending field within the magnet, to zero outside the magnet. 
 For SBEND magnets the reference trajectory of the beam is also perpendicular to the edge fields and there are no additional focusing effects apart from those already described. For RBEND magnets the \(\theta/2\) angle between the reference trajectory and the edge fields results in a magnetic field component in the bending plane. This creates a position dependent focusing effect in the non-bending transverse plane, with no effect in the bending plane \cite{mackay}. Therefore, both SBEND and RBEND dipoles have focusing effects in one plane -- the bending plane in the case of SBEND magnets, and the non-bending plane in the case of RBEND magnets.
 
-Finally, higher order field errors in the dipole can lead to further focusing terms. MADX allows a quadrupole field coefficient (K1) to be added to a dipole to model this effect. In other sections of CTF3 it was found that the default MADX parameters did not give a good approximation of the dipole focusing terms \cite{benOptics}. The FINT, HGAP and K1 parameters for each of the 7 dipoles in TL2 are therefore also good candidates to try to correct the  MADX model of TL2.
+Finally, higher order field errors in the dipole can lead to further focusing terms. MADX allows a quadrupole field coefficient (\(k\)) to be added to a dipole to model this effect. In other sections of CTF3 it was found that the default MADX parameters did not give a good approximation of the dipole focusing terms \cite{benOptics}. The FINT, HGAP and K1 parameters for each of the 7 dipoles in TL2 are therefore also good candidates to try to correct the  MADX model of TL2.
 
 \subsection{Corrections to MADX Model}
 \label{ss:modelCorrections}
@@ -359,7 +359,7 @@ The first adjustment made was to the modelled strength of the L-type quadrupoles
 
 Figures~\ref{f:modelOrigBendV} and \ref{f:modelCorrBendV} show an example of adjusting the focusing of the four dipoles in the horizontal chicane (the outer 500/800 pair and inner 600/700 pair) to remove remaining differences between the measurement and the model. In this case the beam is kicked from the CC.DVF0525 corrector just after the first dipole in the horizontal chicane, making the measurement insensitive to any optics errors upstream of CC.DVF0525 in the line. In both figures the \(7\%\) increase in the L-type quadrupole strength has been applied in the MADX model. With the quadrupole correction in place but no adjustment to the dipole focusing, in Figure~\ref{f:modelOrigBendV}, the simulated orbit has the same overall shape as the measured orbit inside the chicane (up until CC.BPI0735). However, there are still offsets between the two and these eventually lead to a large discrepancy between the model and the measurement still being present in the two BPMs following the chicane (CC.BPIM0845 and CC.BPM0930), which is also seen in Figure~\ref{f:modelCorrQuadH}. 
 
-By adjusting the HGAP, FINT and quadrupole K1 component of the dipoles in the horizontal chicane a solution is found that reduces the difference between the model and the measurement in the chicane, and then also gives much better agreement between the two after the chicane. This is shown in Figure~\ref{f:modelCorrBendV}. Repeating this process with correctors prior to the vertical chicane, and prior to the CC.BHH0200 bend at the start of TL2, yields the focusing parameters for the seven dipoles in the line summarised in Table~\ref{t:tl2ModelChanges}. The largest quadrupolar component of K1 = 0.425~\(\mathrm{m^{-2}}\) for the CC.BHH0600 and CC.BHH0700 dipoles corresponds to a focusing strength of roughly \(2\%\) of a typical quadrupole magnet in TL2.
+By adjusting the HGAP, FINT and quadrupole (\(k\)) component of the dipoles in the horizontal chicane a solution is found that reduces the difference between the model and the measurement in the chicane, and then also gives much better agreement between the two after the chicane. This is shown in Figure~\ref{f:modelCorrBendV}. Repeating this process with correctors prior to the vertical chicane, and prior to the CC.BHH0200 bend at the start of TL2, yields the focusing parameters for the seven dipoles in the line summarised in Table~\ref{t:tl2ModelChanges}. The largest quadrupolar component of \(k = 0.425~\mathrm{m^{-2}}\) for the CC.BHH0600 and CC.BHH0700 dipoles corresponds to a focusing strength of roughly \(2\%\) of a typical quadrupole magnet in TL2.
 
 \begin{figure}
   \centering
@@ -379,16 +379,16 @@ By adjusting the HGAP, FINT and quadrupole K1 component of the dipoles in the ho
         Device & Parameter & Original Value & Corrected Value\\ \hline
 		CC.BHH0200 & HGAP & 0~m & 0.084~m \\
 		 	       & FINT & 0 & 0.79 \\
-		           & K1 & 0~\(\mathrm{m^{-2}}\) & 0~\(\mathrm{m^{-2}}\) \\ \hline
+		           & \(k\) & 0~\(\mathrm{m^{-2}}\) & 0~\(\mathrm{m^{-2}}\) \\ \hline
 		CC.BVA0300   & HGAP & 0~m & 0~m \\
 		 	 \&      & FINT & 0 & 0 \\
-		CC.BVB0400   & K1 & 0~\(\mathrm{m^{-2}}\) & -0.125~\(\mathrm{m^{-2}}\) \\ \hline
+		CC.BVB0400   & \(k\) & 0~\(\mathrm{m^{-2}}\) & -0.125~\(\mathrm{m^{-2}}\) \\ \hline
 		CC.BHG0500   & HGAP & 0~m & 0.06~m \\
 		 	 \&      & FINT & 0 & 0.4 \\
-		CC.BHG0800   & K1 & 0~\(\mathrm{m^{-2}}\) & 0.15~\(\mathrm{m^{-2}}\) \\ \hline
+		CC.BHG0800   & \(k\) & 0~\(\mathrm{m^{-2}}\) & 0.15~\(\mathrm{m^{-2}}\) \\ \hline
 		CC.BHH0600   & HGAP & 0~m & 0.06~m \\
 		 	 \&      & FINT & 0 & 0.2 \\
-		CC.BHH0700   & K1 & 0~\(\mathrm{m^{-2}}\) & 0.425~\(\mathrm{m^{-2}}\) \\ \hline
+		CC.BHH0700   & \(k\) & 0~\(\mathrm{m^{-2}}\) & 0.425~\(\mathrm{m^{-2}}\) \\ \hline
 		L-type Quadrupoles & FQL & 31.78 & 34.03 \\
 	   \hline
     \end{tabular}
@@ -411,7 +411,7 @@ Figures~\ref{f:modelCorrectedH}~and~\ref{f:modelCorrectedV} compare the measured
 
 \newsection{matchedOptics}{Matched TL2 Optics}
 
-With the corrected MADX model of TL2 in place the new optics for the PFF system were created. The optics were obtained using MADX matching libraries \cite{madx}, in which many desired constraints can be defined for the line (each with its own weight) and then one of several optimisation algorithms can be used to change the quadrupole strengths and derive an optics that meets those constraints. Two sets of optics were created for TL2 -- a nominal set of optics containing only the constraints from Section~\ref{ss:nominalOpticsReqs}, and a set of PFF optics containing the additional \(R_{52}\) and orbit closure related constraints for the PFF system from Section~\ref{ss:pffOpticsReqs}. Without the additional PFF constraints roughly a factor two smaller maximum dispersion and beta values can be achieved in the nominal optics. However, the beam quality achieved with the PFF optics exceeded expectations, and the benefit gained from the nominal optics in terms of dispersion and beta functions did not outweigh the time taken to change optics regularly. Therefore, only the PFF optics is routinely used, and the nominal optics is not documented here.
+With the corrected MADX model of TL2 in place the new optics for the PFF system were created. The optics were obtained using MADX matching libraries \cite{madx}, in which many desired constraints can be defined for the line (each with its own weight) and then one of several optimisation algorithms can be used to change the quadrupole strengths and derive an optics that meets those constraints. Two sets of optics were created for TL2 -- a nominal set of optics containing only the constraints from Section~\ref{ss:nominalOpticsReqs}, and a set of PFF optics containing the additional \(R_{52}\) and orbit closure related constraints for the PFF system from Section~\ref{ss:pffOpticsReqs}. Without the additional PFF constraints roughly a factor two smaller maximum dispersion and beta values can be achieved in the nominal optics. However, the beam quality achieved with the PFF optics exceeded expectations, and the benefit gained from the nominal optics in terms of dispersion and beta functions did not outweigh the time taken to change optics regularly. Therefore, only the PFF optics is routinely used. The nominal optics is not documented in detail here, but the optics parameters are provided in Tables~\ref{t:pffOpticsQuads}~and~\ref{t:pffOpticsVals} for a point of comparison with the PFF optics.
 
 \subsection{Matching Process}
 \label{ss:matchingMethod}
@@ -431,79 +431,70 @@ As there are relatively few variables (quadrupoles) compared to the number of co
 \subsection{PFF Optics}
 \label{ss:tl2PFFOptics}
 
-The PFF optics for TL2 that has been used for all the tests presented in this thesis is presented here. Table~\ref{t:pffOpticsQuads} lists the matched quadrupole currents to apply and Table~\ref{t:pffOpticsVals} summarises the optics constraints and their matched values. Figures~\ref{f:pffOpticsBeta}~to~\ref{f:pffOpticsPhase} plot various optical parameters of interest along the line from CC.QFH0210 to CC.QDL0920. In these plots the position of the two chicanes (vertical and horizontal) are marked by dotted red lines, and the position of the two PFF kickers are marked by dotted green lines. In addition, underneath each figure the position of all quadrupoles, dipoles and the PFF kickers along the line are indicated. Blue convex lenses indicate focusing quadrupoles and blue concave lenses defocusing quadrupoles. Red rectangles mark the position of dipoles, and green squares the position of the two PFF kickers.
-
-Figures~\ref{f:pffOpticsBeta}~and~\ref{f:pffOpticsAlpha} shows the Twiss alpha and beta functions along TL2. The largest beta and alpha functions in both the horizontal and vertical planes are found in the region around the beginning of the vertical chicane, as a result of the long drift space between CC.QFH0230 and CC.QFL0270 (2~m to 9~m on the horizontal axis) preceding it. In this area the maximum beta value is 72.1~m, and the maximum alpha is 75.9. The alpha value is above the desired target of keeping alpha below a magnitude of 30 everywhere along the line. This constraint is primarily placed to minimise the strength of focusing in the line, which normally yields more stable optics that are less susceptible to errors, in particular to any remaining optics errors in the model. The vertical chicane therefore becomes a sensitive area for achieving good beam transport through TL2. However, in the rest of the line the beta (up to 32~m) and alpha functions (up to 18) are much smaller than their constrained maximum values.
-
-Figure~\ref{f:pffOpticsDisp} shows the horizontal and vertical dispersion along the line. The dispersions and their derivatives are closed at the \(10^{-5}\) level in the vertical chicane, and the \(10^{-6}\) level in the horizontal chicane. This leaves no residual dispersion in the straight sections, as desired. In the vertical chicane the dispersion reaches a peak magnitude of 0.11~m, whilst in the horizontal chicane the peak is 1.16~m. Both are much smaller than the constrained maximum values. In addition, the dispersion in the region of the second kicker (K2), which is an aperture restriction as described previously, is 0.98~m and much smaller than the constrained maximum of 2~m.
-
-The key constraint that is not met in the matched PFF optics is \(R_{56}\), where a non-zero value had to be accepted in order to meet the remaining constraints. As seen in Figure~\ref{f:pffOpticsR56} the \(R_{56}\) transfer matrix coefficient across the horizontal chicane is -0.18~m. This leads to additional energy dependent phase jitter following the chicane that is not present prior to the chicane, which has severe consequences for the performance of the PFF system. The extent and mitigation of this effect is the focus of Chapter~\ref{c:phasePropagation}.
-
-The last two figures, \ref{f:pffOpticsX}~and~\ref{f:pffOpticsPhase}, show the effect of kicking the beam with the PFF kickers. A deflection of +1~mrad is applied from the first kicker, and -1~mrad from the second kicker. This leads to a peak horizontal orbit offset of 3.5~mm inside the horizontal chicane. The orbit is closed at the \(10^{-7}\) level following the chicane, so that the beam's trajectory following the PFF system is independent of the applied kick. The values from the approximated orbit closure expressions in Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} are -1.03 and 1.04 respectively (with \(R_{11} = 1.2\), \(R_{12} = -0.9\), \(R_{21} = -0.7\), \(R_{22} = 1.3\) and \(m = 0.4\)). The 3--4\% difference from the expected values of -1 and +1 is explained by the 4\% increased strength of CC.IQDH0790 compared to CC.IQDH0490, which was not taken in to account in the derivation of the simplified equations.
-
-Finally, the \(R_{52}\) value between the two kickers is 0.74~m. This defines the phase shift resulting from kicking the beam in the chicane, which is the key figure of merit for the PFF system. As shown in Figure~\ref{f:pffOpticsPhase} a kick of 1~mrad provides a phase shift of \(-10.6^\circ\) in this optics. This is converted in to the actual range of the PFF system taking in to account the specifications of the kicker amplifiers in Chapter~\ref{c:commissioning}. Verifications of the performance of the optics are presented in Chapters~\ref{c:phasePropagation}~and~\ref{c:commissioning}.
-
 \begin{table}
   \begin{center}
-    \begin{tabular}{|c c|}
+    \begin{tabular}{|c c c|}
 	    \hline
-        Quadrupole & Current \\ \hline
-		CC.IQFH0210 &	47.00~A \\
-		CC.IQDH0220 &	48.83~A \\
-		CC.IQFH0230 &	31.75~A \\
-		CC.IQFL0270 &	14.44~A \\
-		CC.IQDL0280 &	24.96~A \\
-		CC.IQDL0330 &	24.57~A \\
-		CC.IQFH0350 &	40.07~A \\
-		CC.IQDL0370 &	24.57~A \\
-		CC.IQDL0430 &	0.16~A \\
-		CC.IQFL0450 &	0.17~A \\
-		CC.IQDH0490 &	-6.05~A \\
-		CC.IQFL0530 &	21.94~A \\
-		CC.IQDL0550 &	27.57~A \\
-		CC.IQFL0570 &	30.19~A \\
-		CC.IQFL0620 &	-1.16~A \\
-		CC.IQDL0650 &	-10.46~A \\
-		CC.IQFL0680 &	-5.96~A \\
-		CC.IQFL0730 &	-7.77~A \\
-		CC.IQDL0750 &	-14.81~A \\
-		CC.IQDH0790 &	6.32~A \\
-		CC.IQDD0820 &	63.49~A \\
-		CC.IQFD0840 &	76.53~A \\
-		CC.IQFL0910 &	-11.97~A \\
-		CC.IQDL0920 &	-12.84~A \\
+        Quadrupole & PFF Optics & Nominal Optics \\ \hline
+		CC.IQFH0210 &	47.00~A & 44.97~A \\
+		CC.IQDH0220 &	48.83~A & 43.27~A \\
+		CC.IQFH0230 &	31.75~A & 16.50~A \\
+		CC.IQFL0270 &	14.44~A & 14.20~A \\
+		CC.IQDL0280 &	24.96~A & 22.84~A \\
+		CC.IQDL0330 &	24.57~A & 24.57~A \\
+		CC.IQFH0350 &	40.07~A & 42.90~A \\
+		CC.IQDL0370 &	24.57~A & 24.57~A \\
+		CC.IQDL0430 &	0.16~A & 16.22~A \\
+		CC.IQFL0450 &	0.17~A & 18.86~A \\
+		CC.IQDH0490 &	-6.05~A & 23.98~A \\
+		CC.IQFL0530 &	21.94~A & 19.29~A \\
+		CC.IQDL0550 &	27.57~A & 3.47~A \\
+		CC.IQFL0570 &	30.19~A & -4.90~A \\
+		CC.IQFL0620 &	-1.16~A & 7.63~A \\
+		CC.IQDL0650 &	-10.46~A & 2.06~A \\
+		CC.IQFL0680 &	-5.96~A & -0.46~A \\
+		CC.IQFL0730 &	-7.77~A & 10.36~A \\
+		CC.IQDL0750 &	-14.81~A & 17.18~A \\
+		CC.IQDH0790 &	6.32~A & -66.63~A \\
+		CC.IQDD0820 &	63.49~A & 19.75~A \\
+		CC.IQFD0840 &	76.53~A & 39.03~A \\
+		CC.IQFL0910 &	-11.97~A & -7.29~A \\
+		CC.IQDL0920 &	-12.84~A & -5.01~A \\
 	   \hline
     \end{tabular}
-    \caption{Quadrupole power supply currents to set in the new PFF TL2 optics for a beam energy of 135~MeV.}
+    \caption{Quadrupole power supply currents to set in the new PFF TL2 optics for a beam energy of 135~MeV, with the currents in the nominal optics not including the PFF constraints also provided for comparison.}
   	\label{t:pffOpticsQuads}
   \end{center}
 
   \begin{center}
-    \begin{tabular}{|c c c|}
+    \begin{tabular}{|c c c c|}
 	   \hline
-       Parameter & Constraint & Value \\ \hline
-       \(\beta_x\) & Max \(<100\)~m & 55.3~m at CC.QFL0270\\
-	   \(\beta_y\) & Max \(<100\)~m & 72.1~m at CC.QDL0330\\
-	   \(|\alpha_x|\) & Max \(<30\) & 43.3 at CC.QFL0270\\
-	   \(|\alpha_y|\) & Max \(<30\) & 75.9 at CC.QFL0330\\
-	   \(|D_x|\) & Max \(<2.5\)~m & 1.16~m at CC.QDL0650\\
-	   \(|D_y|\) & Max \(<1\)~m & 0.11~m at CC.QDL0330\\
-	   \(|D_x|\) & \(\ll 2\)~m at K2 & 0.98~m\\
-	   \(D_x\) & 0~m at CC.BHG0800 & \(9\times10^{-7}\)~m\\
-	   \(D_x'\) & 0 at CC.BHG0800 & \(-6\times10^{-6}\)\\
-	   \(D_y\) & 0~m at CC.BVB0400 & \(4\times10^{-5}\)~m\\
-	   \(D_y'\) & 0 at CC.BVB0400 & \(-6\times10^{-5}\)\\
-	   \(|R_{52}|\) & \(\gg 0\)~m from K1 to K2 & 0.74~m\\
-	   \(x\) & 0~m after K2 & \(3\times10^{-7}\)~m (1~mrad kick)\\
-	   \(x'\) & 0 after K2 & \(-5\times10^{-7}\) (1~mrad kick)\\
-	   \(R_{56}\) & 0~m from CC.BHG0500 to CC.BHG0800 & -0.18~m\\
+       Parameter & Constraint & PFF Optics & Nominal Optics \\ \hline
+       \(|R_{52}|\) & \(\gg 0\)~m (K1 to K2) & 0.74~m & N/A \\
+	   \(x\) & 0~m after K2 & \(3\times10^{-7}\)~m (1~mrad kick) & N/A \\
+	   \(x'\) & 0 after K2 & \(-5\times10^{-7}\) (1~mrad kick) & N/A \\
+	   \(|D_x|\) & Max \(<2.5\)~m & 1.16~m at QDL0650 & 0.62~m at QDH0790 \\
+	   \(|D_y|\) & Max \(<1\)~m & 0.11~m at QDL0330 & 0.11~m at QDL0330\\
+	   \(|D_x|\) & \(\ll 2\)~m at K2 & 0.98~m & 0.62~m \\
+	   \(D_x\) & 0~m at BHG0800 & \(9\times10^{-7}\)~m & \(2\times10^{-11}\)~m \\
+	   \(D_x'\) & 0 at BHG0800 & \(-6\times10^{-6}\) & \(-1\times10^{-10}\) \\
+	   \(D_y\) & 0~m at BVB0400 & \(4\times10^{-5}\)~m & \(4\times10^{-11}\) \\
+	   \(D_y'\) & 0 at BVB0400 & \(-6\times10^{-5}\) & \(6\times10^{-11}\)\\
+       \(\beta_x\) & Max \(<100\)~m & 55.3~m at QFL0270 & 22.2~m at QFD0840\\
+	   \(\beta_y\) & Max \(<100\)~m & 72.1~m at QDL0330 & 29.6~m at QDH0490\\
+	   \(|\alpha_x|\) & Max \(<30\) & 43.3 at QFL0270 & 18.2 at QFD0840\\
+	   \(|\alpha_y|\) & Max \(<30\) & 75.9 at QFL0330 & 20.7 at QDH0220 \\
+	   \(R_{56}\) & 0~m & -0.18~m & \(-1\times10^{-3}\)~m\\
 	   \hline
     \end{tabular}
-    \caption{Summary of constraints and their matched values in the new TL2 PFF optics.}
+    \caption{Summary of constraints and their matched values in the new TL2 PFF optics, with the nominal optics not including the PFF constraints provided for comparison.}
   	\label{t:pffOpticsVals}
   \end{center}
 \end{table}
 
+The PFF optics for TL2 that has been used for all the tests presented in this thesis is presented here. Table~\ref{t:pffOpticsQuads} lists the matched quadrupole currents to apply and Table~\ref{t:pffOpticsVals} summarises the optics constraints and their matched values. Figures~\ref{f:pffOpticsBeta}~to~\ref{f:pffOpticsPhase} plot various optical parameters of interest along the line from CC.QFH0210 to CC.QDL0920. In these plots the position of the two chicanes (vertical and horizontal) are marked by dotted red lines, and the position of the two PFF kickers are marked by dotted green lines. In addition, underneath each figure the position of all quadrupoles, dipoles and the PFF kickers along the line are indicated. Blue convex lenses indicate focusing quadrupoles and blue concave lenses defocusing quadrupoles. Red rectangles mark the position of dipoles, and green squares the position of the two PFF kickers.
+
+Figures~\ref{f:pffOpticsBeta}~and~\ref{f:pffOpticsAlpha} shows the Twiss alpha and beta functions along TL2. The largest beta and alpha functions in both the horizontal and vertical planes are found in the region around the beginning of the vertical chicane, as a result of the long drift space between CC.QFH0230 and CC.QFL0270 (2~m to 9~m on the horizontal axis) preceding it. In this area the maximum beta value is 72.1~m, and the maximum alpha is 75.9. The alpha value is above the desired target of keeping alpha below a magnitude of 30 everywhere along the line. This constraint is primarily placed to minimise the strength of focusing in the line, which normally yields more stable optics that are less susceptible to errors, in particular to any remaining optics errors in the model. The vertical chicane therefore becomes a sensitive area for achieving good beam transport through TL2. However, in the rest of the line the beta (up to 32~m) and alpha functions (up to 18) are much smaller than their constrained maximum values.
 
 \afterpage{\begin{landscape}
 \begin{figure}
@@ -538,3 +529,24 @@ position of the two PFF kickers.}
   \label{f:pffOpticsPhase}
 \end{figure}
 \end{landscape}}
+
+Figure~\ref{f:pffOpticsDisp} shows the horizontal and vertical dispersion along the line. The dispersions and their derivatives are closed at the \(10^{-5}\) level in the vertical chicane, and the \(10^{-6}\) level in the horizontal chicane. This leaves no residual dispersion in the straight sections, as desired. In the vertical chicane the dispersion reaches a peak magnitude of 0.11~m, whilst in the horizontal chicane the peak is 1.16~m. Both are much smaller than the constrained maximum values. In addition, the dispersion in the region of the second kicker (K2), which is an aperture restriction as described previously, is 0.98~m and much smaller than the constrained maximum of 2~m.
+
+The key constraint that is not met in the matched PFF optics is \(R_{56}\), where a non-zero value had to be accepted in order to meet the remaining constraints. As seen in Figure~\ref{f:pffOpticsR56} the \(R_{56}\) transfer matrix coefficient across the horizontal chicane is -0.18~m. This leads to additional energy dependent phase jitter following the chicane that is not present prior to the chicane, which has severe consequences for the performance of the PFF system. The extent and mitigation of this effect is the focus of Chapter~\ref{c:phasePropagation}.
+
+The last two figures, \ref{f:pffOpticsX}~and~\ref{f:pffOpticsPhase}, show the effect of kicking the beam with the PFF kickers. A deflection of +1~mrad is applied from the first kicker, and -1~mrad from the second kicker. This leads to a peak horizontal orbit offset of 3.5~mm inside the horizontal chicane. The orbit is closed at the \(10^{-7}\) level following the chicane, so that the beam's trajectory following the PFF system is independent of the applied kick. The values from the approximated orbit closure expressions in Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} are -1.03 and 1.04 respectively (with \(R_{11} = 1.2\), \(R_{12} = -0.9\), \(R_{21} = -0.7\), \(R_{22} = 1.3\) and \(m = 0.4\)). The 3--4\% difference from the expected values of -1 and +1 is explained by the 4\% increased strength of CC.IQDH0790 compared to CC.IQDH0490, which was not taken in to account in the derivation of the simplified equations.
+
+Finally, the \(R_{52}\) value between the two kickers is 0.74~m. This defines the phase shift resulting from kicking the beam in the chicane, which is the key figure of merit for the PFF system. As shown in Figure~\ref{f:pffOpticsPhase} a kick of 1~mrad provides a phase shift of \(-10.6^\circ\) in this optics. This is converted in to the actual range of the PFF system taking in to account the specifications of the kicker amplifiers in Chapter~\ref{c:commissioning}. Verifications of the performance of the optics are presented in Chapters~\ref{c:phasePropagation}~and~\ref{c:commissioning}.
+
+
+
+\newsection{opticsSumm}{Summary}
+
+Two new kickers have been installed in the TL2 line for the PFF system, one (K1) prior to the first dipole of the horizontal chicane and another (K2) prior to the last dipole of the chicane. In order to maintain the functionality of the lattice, quadrupoles previously installed at the locations of the new kickers could not be removed completely.
+Instead, wide aperture (``H-type'') quadrupoles, previously installed in the vertical chicane, were swapped with the (``L-type'') quadrupoles originally at the kicker locations. The kickers are installed inside these wide aperture magnets.
+
+New optics for TL2 were then required, both to take these changes in to account and to accommodate new constraints placed by the PFF system. In particular, the PFF system requires a large value of the transfer matrix coefficient \(R_{52}\) between the kickers, as this defines the phase shift resulting from a given kicker voltage (and therefore the correction range of the PFF system). Additional constraints are also placed to ensure the second kicker closes the orbit bump created by the first kicker, so that the PFF system does not degrade the transverse stability of the beam downstream of the chicane.
+
+Optics at CTF3 are created using a MADX model of the machine. However, the accuracy of the model of TL2 had not been verified. By comparing the measured and simulated (MADX) beam orbit resulting from changing magnetic correctors along the line it was apparent that there were large errors in the model.  Increasing the modelled strength of L-type quadrupoles in the line by 7\% and adjusting the focusing parameters of dipoles in the horizontal and vertical chicanes, improved the agreement between the MADX model and the measurements by an order of magnitude.
+
+New TL2 optics for the PFF system were then matched using the corrected MADX model. An optics yielding an \(R_{52}\) value of 0.74~m was found whilst limiting the Twiss beta and alpha functions to an acceptable level and keeping dispersion well below 2~m. However, it was not possible to match an optics that fulfilled all constraints and a non-zero \(R_{56}\) value of -0.18~m had to be accepted in the horizontal chicane. This leads to an expected dependence of the downstream phase on the beam energy, which is the main focus of Chapter~\ref{c:phasePropagation}.

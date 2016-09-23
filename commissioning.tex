@@ -127,7 +127,7 @@ The following parameters control the timing of the DAC output signals:
 \label{ss:droopCorr}
 
 The FONT5a (and previous FONT5) boards were originally designed and operated extensively on very short (delta-function like) pulsed signals.
-During the first tests of the FONT5 board at CTF3, where the beam pulse length is up to \(1.2~\mathrm{\mu}\)s, it was immediately apparent that there was a large droop in the measured phase monitor diode outputs using the FONT ADCs. An example of this, taken from the FONT5a board, is shown in Figure~\ref{f:iirDiodefiltOffOn}, remembering that as the diodes are highly saturated the response should be close to a perfect square wave. The measured diode output droops by 200~counts (approximately 15\%) across the pulse length, with this difference also visible as an offset in the baseline after the pulse.
+During the first tests of the earlier FONT5 board at CTF3, where the beam pulse length is up to \(1.2~\mathrm{\mu}\)s, it was immediately apparent that there was a large droop in the measured phase monitor diode outputs using the FONT ADCs. An example of this, taken from the FONT5a board, is shown in Figure~\ref{f:iirDiodefiltOffOn}, remembering that as the diodes are highly saturated the response should be close to a perfect square wave. The measured diode output droops by 200~counts (approximately 15\%) across the pulse length, with this difference also visible as an offset in the baseline after the pulse.
 
 \begin{figure}
   \centering
@@ -137,10 +137,11 @@ During the first tests of the FONT5 board at CTF3, where the beam pulse length i
 \end{figure}
 
 The droop emerges as a result of the use of AC coupling on the ADC input transformers for electrical isolation. 
-This results in the low frequency (or DC like) components, with  \({dV}/{dt}\sim0\) (\(V\) being voltage and \(t\) time), of the input signal being blocked \cite{acCoupling}. 
-In particular for the diode channel the output is increasingly well described by a DC signal on the flat top as you move away from the leading edge of the pulse, with the capacitor causing droop in the response as a result. There is also a small effect on the mixer output, as will be seen later.
+AC coupling blocks the low frequency (or DC like) components of a signal with  \({dV(t)}/{dt}\sim0\), where \(V(t)\) is the input voltage and \(t\) is time \cite{acCoupling}. 
+The phase monitor diode signal is  well described by a DC signal, being approximately square with only small variations along the beam pulse, so that \({dV(t)}/{dt}\) is small in the signal region (away from the leading and trailing edge of the pulse). By reducing the magnitude of the low frequency components of the signal, AC coupling thereby causes the observed droop in the measured diode output along the pulse on the FONT ADCs.
+There is also a small effect on the mixer output, as will be seen later.
 
-In the simplest case the droop should be well described by an exponential decay of the form \(A\exp\left(-t/\tau\right)\), where \(t\) is the time or sample number along the pulse and \(\tau\) is the decay time constant. For the FONT5 board this only gave a rough approximation of the true droop characteristics due to non-linear properties of the input transformers. On the updated FONT5a board the transformers were changed to both reduce the magnitude of the droop and give closer to the expected exponential decay \cite{colinPriv}. Figure~\ref{f:iirDiodeFit} shows an exponential fit to the Mon1 diode output as seen on the FONT5a board (ADC1). Apart from a small deviation at the beginning of the pulse the agreement is excellent, with residuals to the fit of only up to 2~counts compared to a signal magnitude of 1250~counts. For ADC1 the fitted decay time constant is \(\tau = 838\pm16\)~samples, or \(2.35\pm0.05~\mathrm{\mu}\)s. Each ADC on the FONT5a board has slightly different droop characteristics, with the decay time constant for ADC2 being \(938\pm18\)~samples, or \(2.62\pm0.05~\mathrm{\mu}\)s, for example (calculated with the diode moved on to ADC2).
+In the simplest case the droop should be well described by an exponential decay of the form \(A\exp\left(-t/\tau\right)\), where \(t\) is the time or sample number along the pulse and \(\tau\) is the decay time constant \cite{colinPriv}. For the FONT5 board this only gave a rough approximation of the true droop characteristics due to non-linear properties of the input transformers. On the updated FONT5a board the transformers were changed to both reduce the magnitude of the droop and give closer to the expected exponential decay \cite{colinPriv}. Figure~\ref{f:iirDiodeFit} shows an exponential fit to the Mon1 diode output as seen on the FONT5a board (ADC1). Apart from a small deviation at the beginning of the pulse the agreement is excellent, with residuals to the fit of only up to 2~counts compared to a signal magnitude of 1250~counts. For ADC1 the fitted decay time constant is \(\tau = 838\pm16\)~samples, or \(2.35\pm0.05~\mathrm{\mu}\)s. Each ADC on the FONT5a board has slightly different droop characteristics, with the decay time constant for ADC2 being \(938\pm18\)~samples, or \(2.62\pm0.05~\mathrm{\mu}\)s, for example (calculated with the diode moved on to ADC2).
 
 \begin{figure}
   \centering
@@ -908,7 +909,6 @@ Relative K2 delays of both 0~and~2.8~ns (0~and~1 clock~cycles have been used dur
 \item \textbf{K2 delay}: 7 or 8 clock~cycles (19.6~or~22.4~ns).
 \end{itemize}
 
-
 %\newsection{earlyFFSim}{Early Phase Feedforward Attempts and Simulations}
 %
 %This is the introductory text.
@@ -919,3 +919,5 @@ Relative K2 delays of both 0~and~2.8~ns (0~and~1 clock~cycles have been used dur
 %\subsection{Effect of Limited Correction Range}
 %\label{ss:effectLimRange}
 %
+
+\newsection{commSummary}{Summary}
