@@ -278,6 +278,47 @@ It has been shown that the frequent drifts in both phase and downstream-upstream
 
 Firstly referring back to Figure~\ref{f:longFF_corrVsJitRat}, the size (area) and colour of the markers in the plot depend on the corrected downstream jitter that could be achieved in that dataset using the optimal gain. This is to emphasise again that it is a compromise between high correlation and low initial downstream jitter (and by extension low downstream-upstream jitter ratio) that gives the best conditions for the PFF correction. For example, there are seven datasets showing correlation above 93\% (as seen in the 15:38 record result), but they yield worse theoretical corrections, as 15:38 remains the only dataset in which a high correlation and low upstream-downstream jitter ratio have been achieved at the same time.
 
+\afterpage{
+\noindent\begin{minipage}{\linewidth}
+\centering
+%\begin{figure}
+%  \centering
+  \includegraphics[width=0.85\textwidth]{Figures/feedforward/longFF_datSetJitSim}
+  \captionof{figure}{Simulated downstream jitter in each simulation setup: Unlimited (pink), Range (blue), Gain (red), Offset (green) and All Effects (black).}
+  \label{f:longFF_datSetJitSim}
+%\end{figure}
+
+\vspace{2cm}
+
+%\begin{table}
+%  \begin{center}
+    \begin{tabular}{| c  c  c  c  c  c |}
+	   \hline
+       Time & Unlimited &  Range &  Gain &  Offset &  All Effects \\ \hline
+15:26 & \(1.01\pm0.05^\circ\) & \(1.04\pm0.05^\circ\) & \(1.04\pm0.05\) & \(1.03\pm0.05^\circ\) & \(1.03\pm0.05^\circ\) \\
+15:38 & \(0.27\pm0.02^\circ\) & \(0.27\pm0.02^\circ\) & \(0.31\pm0.03\) & \(0.27\pm0.02^\circ\) & \(0.31\pm0.03^\circ\) \\
+15:51 & \(0.41\pm0.03^\circ\) & \(0.41\pm0.03^\circ\) & \(0.41\pm0.03\) & \(0.42\pm0.03^\circ\) & \(0.42\pm0.03^\circ\) \\
+16:00 & \(0.60\pm0.06^\circ\) & \(0.65\pm0.07^\circ\) & \(0.76\pm0.08\) & \(0.65\pm0.07^\circ\) & \(0.78\pm0.08^\circ\) \\
+16:04 & \(0.36\pm0.03^\circ\) & \(0.36\pm0.03^\circ\) & \(0.37\pm0.03\) & \(0.39\pm0.03^\circ\) & \(0.41\pm0.03^\circ\) \\
+16:11 & \(0.44\pm0.03^\circ\) & \(0.44\pm0.03^\circ\) & \(0.45\pm0.03\) & \(0.45\pm0.03^\circ\) & \(0.45\pm0.03^\circ\) \\
+16:17 & \(0.44\pm0.03^\circ\) & \(0.44\pm0.03^\circ\) & \(0.46\pm0.03\) & \(0.45\pm0.03^\circ\) & \(0.45\pm0.03^\circ\) \\
+16:22 & \(0.57\pm0.04^\circ\) & \(0.58\pm0.04^\circ\) & \(0.58\pm0.04\) & \(0.62\pm0.04^\circ\) & \(0.62\pm0.04^\circ\) \\
+16:39 & \(0.46\pm0.03^\circ\) & \(0.47\pm0.03^\circ\) & \(0.48\pm0.03\) & \(0.58\pm0.04^\circ\) & \(0.59\pm0.04^\circ\) \\
+16:44 & \(0.76\pm0.05^\circ\) & \(0.77\pm0.05^\circ\) & \(0.82\pm0.06\) & \(0.90\pm0.06^\circ\) & \(0.94\pm0.07^\circ\) \\
+16:50 & \(0.91\pm0.07^\circ\) & \(0.93\pm0.07^\circ\) & \(1.07\pm0.08\) & \(1.07\pm0.08^\circ\) & \(1.16\pm0.08^\circ\) \\
+16:54 & \(0.42\pm0.03^\circ\) & \(0.42\pm0.03^\circ\) & \(0.48\pm0.03\) & \(0.45\pm0.03^\circ\) & \(0.51\pm0.04^\circ\) \\
+17:00 & \(0.42\pm0.03^\circ\) & \(0.43\pm0.03^\circ\) & \(0.44\pm0.03\) & \(0.46\pm0.03^\circ\) & \(0.47\pm0.03^\circ\) \\
+17:21 & \(0.43\pm0.04^\circ\) & \(0.42\pm0.04^\circ\) & \(0.42\pm0.04\) & \(0.44\pm0.04^\circ\) & \(0.44\pm0.04^\circ\) \\
+18:00 & \(0.47\pm0.04^\circ\) & \(0.48\pm0.04^\circ\) & \(0.49\pm0.04\) & \(0.52\pm0.04^\circ\) & \(0.54\pm0.04^\circ\) \\ \hline
+    \end{tabular}
+    \captionof{table}{Downstream phase jitter for each simulation setup and dataset.}
+  	\label{t:LongFFIndivSim}
+%  \end{center}
+%\end{table}
+\end{minipage}
+\pagebreak
+}
+
 Figure~\ref{f:longFF_datSetJitSim} and Table~\ref{t:LongFFIndivSim} show the simulated corrected downstream jitter chronologically for each dataset with five different simulation setups:
 \begin{itemize}
 \item \textbf{Unlimited:} With unlimited correction range and the optimal gain (theoretical limit).
@@ -301,58 +342,20 @@ For the gain the largest effect on the achievable corrected jitter is seen at 16
 Alternatively, in the period between 16:22 and 16:50 the offset in the PFF setup was above \(2^\circ\) and this gives an effect on the correction of the same magnitude as using non-optimal gain. The maximal degradation in the achievable downstream jitter as a result of the offset is \(0.16\pm0.10^\circ\) in the 16:50 dataset. 
 With the effects of limited correction range, non-optimal offset and non-optimal gain combined the achieved corrected jitter is expected to be up to \(0.25\pm0.11^\circ\) worse than the theoretical limit (16:50).%, although in most datasets the effect is much smaller than this, with no significant difference between the unlimited and all effects simulations in the previously mentioned 15:26, 15:38, 15:51 and 16:17 datasets, for example.
 
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.75\textwidth]{Figures/feedforward/longFF_datSetJitSim}
-  \caption{Simulated downstream jitter in each simulation setup: Unlimited (pink), Range (blue), Gain (red), Offset (green) and All Effects (black).}
-  \label{f:longFF_datSetJitSim}
-\end{figure}
-
-The achieved downstream jitters with the actual PFF system are presented in Figure~\ref{f:longFF_jitDatSet} and Table~\ref{t:LongFFIndiv}, along with the uncorrected downstream and upstream jitter and the most realistic "All Effects" simulation of the expected performance. Overall the agreement between the downstream jitter achieved with the actual PFF system and the simulation is very good. This gives confidence that the PFF system is behaving as expected and all the effects limiting the current performance are understood and in principle can be improved to yield lower jitter in future PFF attempts. However, there is a region between 16:17 and 16:44 where differences between the simulation and actual system can be seen. In particular, the \(0.58\pm0.04^\circ\) and \(0.82\pm0.06^\circ\) downstream jitter in the 16:17 and 16:22 datasets, respectively, are noticeably worse than the simulated results of \(0.45\pm0.03\) and \(0.62\pm0.04\). The source of this is not yet understood and possibly hints at additional areas for improvement in the PFF setup.
-
-Only the 15:38 dataset has a theoretical (and in all simulation scenarios) corrected downstream jitter of below \(0.3^\circ\) but in 10 out of 15 datasets below \(0.5^\circ\) jitter could have been achieved with an optimal PFF setup (or in 6 out of 15 with the actual setup). Nevertheless, 
-%despite highlighting where the PFF setup and beam conditions are non-optimal during this discussion
-the overall benefit of the PFF system is clear - the downstream phase jitter is reduced in every dataset, with a maximum reduction factor of 3.2 in the 16:05 dataset (in which the highest correlation of 96\% was achieved).
-
-%Attempts to demonstrate a larger reduction factor, closer to the CLIC specification of an order of magnitude, are presented in Section~\ref{s:pffNovelSetups}.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.75\textwidth]{Figures/feedforward/longFF_jitDatSet}
-  \caption{Downstream phase jitter with the PFF system off (blue) and on (red) in each dataset compared to the expected corrected jitter using the All Effects simulation (green). The upstream phase jitter is also shown for reference (dashed black).}
+\afterpage{
+\noindent\begin{minipage}{\linewidth}
+\centering
+%\begin{figure}
+%  \centering
+  \includegraphics[width=0.85\textwidth]{Figures/feedforward/longFF_jitDatSet}
+  \captionof{figure}{Downstream phase jitter with the PFF system off (blue) and on (red) in each dataset compared to the expected corrected jitter using the All Effects simulation (green). The upstream phase jitter is also shown for reference (dashed black).}
   \label{f:longFF_jitDatSet}
-\end{figure}
+%\end{figure}
 
-\begin{table}
-  \begin{center}
-    \begin{tabular}{| c  c  c  c  c  c |}
-	   \hline
-       Time & Unlimited &  Range &  Gain &  Offset &  All Effects \\ \hline
-15:26 & \(1.01\pm0.05^\circ\) & \(1.04\pm0.05^\circ\) & \(1.04\pm0.05\) & \(1.03\pm0.05^\circ\) & \(1.03\pm0.05^\circ\) \\
-15:38 & \(0.27\pm0.02^\circ\) & \(0.27\pm0.02^\circ\) & \(0.31\pm0.03\) & \(0.27\pm0.02^\circ\) & \(0.31\pm0.03^\circ\) \\
-15:51 & \(0.41\pm0.03^\circ\) & \(0.41\pm0.03^\circ\) & \(0.41\pm0.03\) & \(0.42\pm0.03^\circ\) & \(0.42\pm0.03^\circ\) \\
-16:00 & \(0.60\pm0.06^\circ\) & \(0.65\pm0.07^\circ\) & \(0.76\pm0.08\) & \(0.65\pm0.07^\circ\) & \(0.78\pm0.08^\circ\) \\
-16:04 & \(0.36\pm0.03^\circ\) & \(0.36\pm0.03^\circ\) & \(0.37\pm0.03\) & \(0.39\pm0.03^\circ\) & \(0.41\pm0.03^\circ\) \\
-16:11 & \(0.44\pm0.03^\circ\) & \(0.44\pm0.03^\circ\) & \(0.45\pm0.03\) & \(0.45\pm0.03^\circ\) & \(0.45\pm0.03^\circ\) \\
-16:17 & \(0.44\pm0.03^\circ\) & \(0.44\pm0.03^\circ\) & \(0.46\pm0.03\) & \(0.45\pm0.03^\circ\) & \(0.45\pm0.03^\circ\) \\
-16:22 & \(0.57\pm0.04^\circ\) & \(0.58\pm0.04^\circ\) & \(0.58\pm0.04\) & \(0.62\pm0.04^\circ\) & \(0.62\pm0.04^\circ\) \\
-16:39 & \(0.46\pm0.03^\circ\) & \(0.47\pm0.03^\circ\) & \(0.48\pm0.03\) & \(0.58\pm0.04^\circ\) & \(0.59\pm0.04^\circ\) \\
-16:44 & \(0.76\pm0.05^\circ\) & \(0.77\pm0.05^\circ\) & \(0.82\pm0.06\) & \(0.90\pm0.06^\circ\) & \(0.94\pm0.07^\circ\) \\
-16:50 & \(0.91\pm0.07^\circ\) & \(0.93\pm0.07^\circ\) & \(1.07\pm0.08\) & \(1.07\pm0.08^\circ\) & \(1.16\pm0.08^\circ\) \\
-16:54 & \(0.42\pm0.03^\circ\) & \(0.42\pm0.03^\circ\) & \(0.48\pm0.03\) & \(0.45\pm0.03^\circ\) & \(0.51\pm0.04^\circ\) \\
-17:00 & \(0.42\pm0.03^\circ\) & \(0.43\pm0.03^\circ\) & \(0.44\pm0.03\) & \(0.46\pm0.03^\circ\) & \(0.47\pm0.03^\circ\) \\
-17:21 & \(0.43\pm0.04^\circ\) & \(0.42\pm0.04^\circ\) & \(0.42\pm0.04\) & \(0.44\pm0.04^\circ\) & \(0.44\pm0.04^\circ\) \\
-18:00 & \(0.47\pm0.04^\circ\) & \(0.48\pm0.04^\circ\) & \(0.49\pm0.04\) & \(0.52\pm0.04^\circ\) & \(0.54\pm0.04^\circ\) \\ \hline
-    \end{tabular}
-    \caption{Downstream phase jitter for each simulation setup and dataset.}
-  	\label{t:LongFFIndivSim}
-  \end{center}
-\end{table}
+\vspace{1cm}
 
-
-\begin{table}
-  \begin{center}
+%\begin{table}
+%  \begin{center}
     \begin{tabular}{| c  c  c  c  c  c  |}
 	   \hline
 	           &   & \(\sigma_d\) & \(\rho_{ud}\)  & \(\sigma_d\)  & \(\sigma_d\)  \\
@@ -373,10 +376,22 @@ the overall benefit of the PFF system is clear - the downstream phase jitter is 
 17:21 & \(0.84\pm0.07^\circ\) & \(1.18\pm0.10^\circ\) & \(0.93\pm0.05\) & \(0.44\pm0.04^\circ\) & \(0.44\pm0.04^\circ\) \\
 18:00 & \(0.95\pm0.08^\circ\) & \(1.40\pm0.11^\circ\) & \(0.94\pm0.04\) & \(0.57\pm0.05^\circ\) & \(0.54\pm0.04^\circ\) \\ \hline
     \end{tabular}
-    \caption{Summary of PFF system results for each individual dataset. The simulated results are from the ``All Effects'' simulation in Table~\ref{t:LongFFIndivSim}}
+    \captionof{table}{Summary of PFF system results for each individual dataset. The simulated results are from the ``All Effects'' simulation in Table~\ref{t:LongFFIndivSim}}
   	\label{t:LongFFIndiv}
-  \end{center}
-\end{table}
+%  \end{center}
+%\end{table}
+\end{minipage}
+\pagebreak
+}
+
+The achieved downstream jitters with the actual PFF system are presented in Figure~\ref{f:longFF_jitDatSet} and Table~\ref{t:LongFFIndiv}, along with the uncorrected downstream and upstream jitter and the most realistic "All Effects" simulation of the expected performance. Overall the agreement between the downstream jitter achieved with the actual PFF system and the simulation is very good. This gives confidence that the PFF system is behaving as expected and all the effects limiting the current performance are understood and in principle can be improved to yield lower jitter in future PFF attempts. However, there is a region between 16:17 and 16:44 where differences between the simulation and actual system can be seen. In particular, the \(0.58\pm0.04^\circ\) and \(0.82\pm0.06^\circ\) downstream jitter in the 16:17 and 16:22 datasets, respectively, are noticeably worse than the simulated results of \(0.45\pm0.03\) and \(0.62\pm0.04\). The source of this is not yet understood and possibly hints at additional areas for improvement in the PFF setup.
+
+Only the 15:38 dataset has a theoretical (and in all simulation scenarios) corrected downstream jitter of below \(0.3^\circ\) but in 10 out of 15 datasets below \(0.5^\circ\) jitter could have been achieved with an optimal PFF setup (or in 6 out of 15 with the actual setup). Nevertheless, 
+%despite highlighting where the PFF setup and beam conditions are non-optimal during this discussion
+the overall benefit of the PFF system is clear - the downstream phase jitter is reduced in every dataset, with a maximum reduction factor of 3.2 in the 16:05 dataset (in which the highest correlation of 96\% was achieved).
+
+%Attempts to demonstrate a larger reduction factor, closer to the CLIC specification of an order of magnitude, are presented in Section~\ref{s:pffNovelSetups}.
+
 
 Alternatively, rather than showing each individual dataset Figures~\ref{f:longFF_histDownstreamPhase}---\ref{f:longFF_scatterFFSimReal} and Table~\ref{t:LongFF} present the upstream-downstream phase distribution and overall jitter improvement with all the datasets combined. In order to yield meaningful results the mean upstream and downstream phase (both with FF on and FF off) are subtracted separately for each dataset. The effect of this can be seen by comparing Figure~\ref{f:longFF_noMeanSubHistory} (with no mean subtraction) and Figure~\ref{f:longFF_history}. Without this subtraction any calculated jitter and correlation values across the combined dataset would be dominated by changes in the downstream phase resulting from changing the zero point (offset) for the correction between datasets, plus the large step in the downstream phase between the 16:00 and 16:04 datasets due to a beam setup change.
 
@@ -436,3 +451,7 @@ Optimisations to the PFF system setup can therefore yield around a 15\% reductio
 \end{table}
 
 \newsection{resultsSumm}{Summary}
+
+With the best phase propagation conditions achieved to date and an optimised PFF system setup, a measured mean downstream phase jitter of \(0.28\pm0.02^\circ\) has been achieved with the PFF prototype at CTF3. The stability of the phase along the pulse is also improved significantly, with the amplitude of the phase sag and other static features in the phase reduced by close to a factor seven, and an achieved point-by-point jitter of \(0.36\pm0.01^\circ\). Across a CLIC pulse length and excluding the phase monitor resolution component of the measured jitter, these results correspond to a beam jitter of \(0.28\pm0.01^\circ\), close to the CLIC target of \(0.2^\circ\).
+
+The routinely achievable corrected downstream phase jitter is closer to \(0.4^\circ\) on short time scales, or \(0.7^\circ\) on the scale of hours. The main limitation is the phase propagation, with large variations in the initial (uncorrected) downstream phase jitter and upstream-downstream phase correlation between datasets. Nevertheless, it has also been identified that the methods used to set the system gain and channel offset could be improved. Moving towards automated procedures would yield a reduction of around 15\% in the achieved corrected jitter for a typical dataset. 
