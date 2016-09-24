@@ -5,7 +5,7 @@ A practical ``real world'' beam line must also include many diagnostic devices (
 
 The performance of the PFF system depends heavily on the lattice and optics of the correction chicane in the TL2 line at CTF3. This chapter describes the design of TL2, the modifications that have been made to its lattice for the PFF system and the derivation of suitable optics for the line taking in to account new constraints for the PFF system.
 
-\newsection{opticsIntro}{Introduction to Optics}
+\newsection{opticsIntro}{Definitions of Optics Nomenclature}
 
 %This section presents basic aspects of lattice design and optics to introduce the terms used in the remainder of the thesis. 
 Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\) that defines how it transforms the initial coordinates of a particle in the beam \cite{wilson}:
@@ -13,7 +13,9 @@ Each element of a beam line can be expressed as a transfer matrix \(\mathbf{R}\)
 \vec{x_f} = \mathbf{R}\vec{x_i}
 \label{e:basicTransMatEq}
 \end{equation}
-where \(\vec{x_i}\) and \(\vec{x_f}\) are six dimensional vectors describing the initial and final state of the particle. In the transverse plane the vectors \(\vec{x}\) contain the horizontal and vertical offsets (\(x\), \(y\)) and divergences (\(x' = \mathrm{d}x/\mathrm{d}s\), \(y' = \mathrm{d}y/\mathrm{d}s\)), where \(s\) is the longitudinal position along the beam line. The parameters (\(x, y, s\)) define a curvilinear set of coordinates that measure the position of the particle with respect to the nominal or reference orbit, for example following the trajectory of the beam through bending magnets \cite{wilson}. The final two longitudinal coordinates are the time offset (\(t\)) and momentum offset (\(\Delta p/p_{ref}\)) of the particle with respect to the reference or ideal particle. The time \(t\) is analogous to the phase of interest for the PFF system. Equation \ref{e:basicTransMatEq} can therefore be expanded to become:
+where \(\vec{x_i}\) and \(\vec{x_f}\) are six dimensional vectors describing the initial and final state of the particle. In the transverse plane the vectors \(\vec{x}\) contain the horizontal and vertical offsets (\(x\), \(y\)) and divergences (\(x' = \mathrm{d}x/\mathrm{d}s\), \(y' = \mathrm{d}y/\mathrm{d}s\)), where \(s\) is the longitudinal position along the beam line. The parameters (\(x, y, s\)) define a curvilinear set of coordinates that measure the position of the particle with respect to the nominal or reference orbit, for example following the trajectory of the beam through bending magnets \cite{wilson}. The final two longitudinal coordinates are the time offset (\(t\)) and momentum offset (\(\Delta p/p_{ref}\)) of the particle with respect to the reference or ideal particle. The time \(t\) is analogous to the phase of interest for the PFF system. 
+
+Equation \ref{e:basicTransMatEq} can be expanded to become:
 \begin{equation}
 \left( \begin{array}{c} x_f \\ x_f' \\ y_f \\ y_f' \\ t_f \\ \Delta p_f/p_{ref} \end{array} \right)
 =
@@ -27,7 +29,7 @@ R_{61} & R_{62} & R_{63} & R_{64}  & R_{65} & R_{66}\\
 \end{array} \right)
 \left( \begin{array}{c} x_i \\ x_i' \\ y_i \\ y_i' \\ t_i \\ \Delta p_i/p_{ref} \end{array} \right)
 \end{equation}
-Each coefficient \(R_{ij}\) of the \(6\times6\) transfer matrix \(\mathbf{R}\) defines how the final value of the \(i^{\mathrm{th}}\) coordinate after passing through the element is influenced by the initial value of the \(j^{\mathrm{th}}\) coordinate prior to the element.
+where each coefficient \(R_{ij}\) of the \(6\times6\) transfer matrix \(\mathbf{R}\) defines how the final value of the \(i^{\mathrm{th}}\) coordinate after passing through the element is influenced by the initial value of the \(j^{\mathrm{th}}\) coordinate prior to the element.
 
 %The most common elements in a beam line are drift spaces and quadrupole magnets. Using the thin lens approximation and assuming an ultra-relativistic beam, the transfer matrices \(\mathbf{R_{drift}}\) and \(\mathbf{R_{quad}}\) for drift spaces and quadrupoles respectively can be defined as follows:
 %\begin{equation}

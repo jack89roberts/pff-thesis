@@ -215,18 +215,6 @@ uses them to produce four high voltage outputs. These are connected to the downs
 The amplifier is purpose built for the PFF prototype, also at Oxford University, with further details of its design available in \cite{colinCLIC16}. An annotated picture of its front panel is shown in Figure~\ref{f:AmplifierPanelPic} and a simplified diagram showing the flow of signals between the FONT5a board, amplifier and kickers is shown in Figure~\ref{f:amplifierDiagram}.
 The amplifier is installed in a standard 3U rack and has a modular design. It consists of five individual modules split between two sides, labelled left and right. The left side of the amplifier, which uses the DAC~1 output, powers the first kicker in the chicane, and the right side of the amplifier, which uses the DAC~2 output, powers the second kicker. Each side of the amplifier contains its own ``drive module'' and ``terminator module''. Finally there is a central ``control module'' that is common to both sides of the amplifier.
 
-%All the outputs from the FONT5a board are connected to the control module, this includes the DAC~1 and DAC~2 outputs as well as the trigger for the amplifier. The required 24~V, 1.1~A power supply is also connected to the control module. 
-The control module takes the amplifier trigger and drive signals from the FONT5a board, as well as 24~V, 1.1~A power from the mains.
-It then deals with the distribution of power and input signals (derived from the DAC inputs) to the two drive modules, including signal processing designed to protect the drive modules. For example, it ensures the maximum signal level sent to the drive modules is at a safe level and limits the rate of large changes in the input drive signal (limits the slew-rate), as well as disabling the trigger for the drive modules if a problem is detected.
-
-The amplification of the signals to create the high voltage outputs occurs in the drive modules. Each drive module takes one input signal but creates two high voltage outputs (A and B) which have equal magnitude but opposite polarity. These are connected to the downstream end of the left and right strips of one of the kickers, to create a potential difference across the kicker strips that is double the voltage of each individual drive output. The signal amplification consists of low voltage Si FETs (Ixys DE150-201N09A \cite{ixysFET}) driving high voltage SiC FETs (Wolfspeed C2M0160120D \cite{wolfFET}) and a final output transformer, giving a peak output of around \(\pm700\)~V (seen in more detail in Section~\ref{ss:ampLin}). The output has a bandwidth of 47~MHz for small signal variations up to 20\% of maximum output (around 140~V). The bandwidth for larger variations is slew rate limited, and around 25~MHz for variations up to 50\% of the maximum output, for example \cite{colinCLIC16}.
-
-Each drive module requires a ramp up time of 1~\(\mathrm{\mu s}\), which defines when the trigger must arrive from the FONT5a board. After this period the drive modules are powered for 1.6~\(\mathrm{\mu s}\)  with full output across 1.3~\(\mathrm{\mu s}\) (slightly longer than needed to correct the full 1.1~\(\mathrm{\mu s}\) CTF3 beam pulse length). The control module includes a monitoring output (labelled ``ON'') that can be used as a reference to observe the time period within which the drive modules are on and ready to receive input.
-
-The high voltage signals leaving the upstream ends of the kicker strips are terminated back at the amplifier on the terminator modules. Each module consists of two 50~\(\mathrm{\Omega}\) terminators designed to be able to withstand the maximum 20~kW output from the drive modules \cite{colinCLIC16}. Each terminator also provides a monitoring signal, which gives output at around -40~dB or approximately 1/115 of the input voltage \cite{colinPriv}. These can be used to verify that the applied output from the drive modules is as expected, and form the basis of most of the measurements in the remainder of this section as well as for the timing checks in Section~\ref{ss:absTiming}, for example.
-
-The description of the amplifier here represents the version of the amplifier that was used for the latest PFF tests, and for almost all results in this thesis. A first version of the amplifier, which delivered half the output voltage (up to \(\pm350\)~V), was used for early PFF tests. Additional FETs were added in the second version described above to boost the output voltage to \(\pm700\)~V. 
-It was also originally planned to combine four drive modules on each side of the amplifier to give a voltage of up to \(\pm1400\)~V \cite{glennCLIC13}, but this would require additional hardware and is being considered as a future option. 
 
 \afterpage{\begin{landscape}
 \begin{figure}
@@ -246,20 +234,24 @@ It was also originally planned to combine four drive modules on each side of the
 \end{figure}
 \end{landscape}}
 
+
+%All the outputs from the FONT5a board are connected to the control module, this includes the DAC~1 and DAC~2 outputs as well as the trigger for the amplifier. The required 24~V, 1.1~A power supply is also connected to the control module. 
+The control module takes the amplifier trigger and drive signals from the FONT5a board, as well as 24~V, 1.1~A power from the mains.
+It then deals with the distribution of power and input signals (derived from the DAC inputs) to the two drive modules, including signal processing designed to protect the drive modules. For example, it ensures the maximum signal level sent to the drive modules is at a safe level and limits the rate of large changes in the input drive signal (limits the slew-rate), as well as disabling the trigger for the drive modules if a problem is detected.
+
+The amplification of the signals to create the high voltage outputs occurs in the drive modules. Each drive module takes one input signal but creates two high voltage outputs (A and B) which have equal magnitude but opposite polarity. These are connected to the downstream end of the left and right strips of one of the kickers, to create a potential difference across the kicker strips that is double the voltage of each individual drive output. The signal amplification consists of low voltage Si FETs (Ixys DE150-201N09A \cite{ixysFET}) driving high voltage SiC FETs (Wolfspeed C2M0160120D \cite{wolfFET}) and a final output transformer, giving a peak output of around \(\pm700\)~V (seen in more detail in Section~\ref{ss:ampLin}). The output has a bandwidth of 47~MHz for small signal variations up to 20\% of maximum output (around 140~V). The bandwidth for larger variations is slew rate limited, and around 25~MHz for variations up to 50\% of the maximum output, for example \cite{colinCLIC16}.
+
+Each drive module requires a ramp up time of 1~\(\mathrm{\mu s}\), which defines when the trigger must arrive from the FONT5a board. After this period the drive modules are powered for 1.6~\(\mathrm{\mu s}\)  with full output across 1.3~\(\mathrm{\mu s}\) (slightly longer than needed to correct the full 1.1~\(\mathrm{\mu s}\) CTF3 beam pulse length). The control module includes a monitoring output (labelled ``ON'') that can be used as a reference to observe the time period within which the drive modules are on and ready to receive input.
+
+The high voltage signals leaving the upstream ends of the kicker strips are terminated back at the amplifier on the terminator modules. Each module consists of two 50~\(\mathrm{\Omega}\) terminators designed to be able to withstand the maximum 20~kW output from the drive modules \cite{colinCLIC16}. Each terminator also provides a monitoring signal, which gives output at around -40~dB or approximately 1/115 of the input voltage \cite{colinPriv}. These can be used to verify that the applied output from the drive modules is as expected, and form the basis of most of the measurements in the remainder of this section as well as for the timing checks in Section~\ref{ss:absTiming}, for example.
+
+The description of the amplifier here represents the version of the amplifier that was used for the latest PFF tests, and for almost all results in this thesis. A first version of the amplifier, which delivered half the output voltage (up to \(\pm350\)~V), was used for early PFF tests. Additional FETs were added in the second version described above to boost the output voltage to \(\pm700\)~V. 
+It was also originally planned to combine four drive modules on each side of the amplifier to give a voltage of up to \(\pm1400\)~V \cite{glennCLIC13}, but this would require additional hardware and is being considered as a future option. 
+
 \subsection{Linearity}
 \label{ss:ampLin}
 
-Figure \ref{f:AmpOutvsDAC} shows the amplifier output, measured using the monitoring signals, at different constant input voltages sent from the FONT5a board between the minimum of -2V (-4095 DAC counts) and maximum of 2V (+4095 DAC counts). The amplitude of the monitoring signals is converted in to the amplifier output Voltage using the approximate conversion factor of 115 \cite{colinPriv}. All four amplifier outputs are shown (one for each strip of the two kickers). The values plotted are the mean of the 480~ns central region of the whole 1400~ns output pulse.
-
-The relative polarity of the four outputs used is equivalent to what would be applied to the kickers during PFF operation, with opposite polarity of the L and R amplifier outputs (powering the first and second kicker respectively), so that the beam is kicked in opposite directions by each kicker. The second kicker should then act to close the orbit bump created by the first kicker. Within each side of the amplifier the A and B outputs (applied to the left and right strip of each kicker respectively) also have opposite polarity. This is necessary to create the potential difference between the kicker strips that produces the deflecting field for the beam. The relative polarity of the A and B outputs is fixed in the amplifier design and cannot be controlled via the FONT5a board.
-
-The response of the amplifier is linear up to \(\pm1.2\)~V input voltage. Outside this range the amplifier clearly begins to enter saturation, in particular above input voltages of \(\pm1.7\)~V. The linear fits shown include only the points up to \(\pm1.2\)~V, in order to not be biased by the effects of saturation. Figure \ref{f:AmpOutvsDAC_residual} shows the difference between the linear fit and the real amplifier output across the full range of input voltages. A slight deviation from linearity in the \(\pm1.2\)~V range is also visible, although the maximum difference is only 10~V or a 3\% relative error. At the maximum input voltage of \(\pm2\)~V the deviation from linearity rises above 150~V,  a relative error of more than 25\%. For example, the RB output at an input voltage of \(+2\)~V is 605~V but the fitted response gives 769~V, a difference of 164~V or 27\%.
-
-The effects of amplifier saturation are not taken in to account in the PFF algorithm on the FONT5a board, in which the DAC output is linearly dependent on the input phase (voltage from the phase monitor mixer signal) across the full range. The correction applied to the downstream phase will therefore be non-optimal when the output calculated by the PFF algorithm is above an absolute value of 2500 DAC counts (1.2~V amplifier input). To date the non-linearity of the amplifier as it begins to enter saturation has also not been included in the PFF simulations presented in the following chapters. This may partially explain the small discrepancies seen between the simulated and measured results in some datasets, so including the effect will be pursued in the future. 
-%In addition, it could be foreseen to incorporate the saturation characteristics in to the PFF algorithm on the FONT5a board, so that calculated outputs above 2500 counts are boosted slightly to compensate for the lower than expected amplifier output.
-
-Discrepancies between the four amplifier outputs are seen in Figure~\ref{f:AmpOutvsDAC_residual} and Table~\ref{t:AmpOutVsDAC}, both in terms of gradient and peak output. These differences can be partially but not completely explained by errors of up to a few percent in the precise calibration of the four monitoring outputs, which do not output exactly 1/115 of the real input voltage \cite{colinPriv}. Differences between the A and B outputs for each kicker are not an issue for the PFF performance as both are linear (in the \(\pm1.2\)~V range) and the kick experienced by the beam in each kicker is proportional to the difference of the two. Therefore, only the calibration between the output from the FONT5a (the amplifier input) and the resulting phase shift in the TL2 chicane is affected. However, disparity between the potential difference across each kicker (LA-LB and RA-RB), so that the deflection of the beam in each kicker is different, leads to the orbit bump created by the PFF system not being closed in the chicane, degrading the horizontal beam stability downstream. The fitted potential difference at 1~V input is 869~V for the left amplifier (LA-LB, applied to the first kicker) and 835~V for the right amplifier (RA-RB, applied to the second kicker), a difference of 4\%. This could be compensated in the PFF setup on the FONT5a board by using a different gain for each correction output, so that the DAC output to the right amplifier is higher but the resulting voltage applied to both kickers is the same. Orbit closure is discussed further in Section~\ref{ss:orbitClosure}.
-
+Figure~\ref{f:AmpOutvsDAC} shows the amplifier output, measured using the monitoring signals, at different constant input voltages sent from the FONT5a board between the minimum of -2V (-4095 DAC counts) and maximum of 2V (+4095 DAC counts). The amplitude of the monitoring signals is converted in to the amplifier output Voltage using the approximate conversion factor of 115 \cite{colinPriv}. All four amplifier outputs are shown (one for each strip of the two kickers). The values plotted are the mean of the 480~ns central region of the whole 1400~ns output pulse.
 
 \begin{figure}
   \centering
@@ -270,6 +262,15 @@ Discrepancies between the four amplifier outputs are seen in Figure~\ref{f:AmpOu
   \caption{Residuals between the amplifier output voltage and the linear fits seen in Figure~\ref{f:AmpOutvsDAC}. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). }
   \label{f:AmpOutvsDAC_residual}
 \end{figure}
+
+The relative polarity of the four outputs used is equivalent to what would be applied to the kickers during PFF operation, with opposite polarity of the L and R amplifier outputs (powering the first and second kicker respectively), so that the beam is kicked in opposite directions by each kicker. The second kicker should then act to close the orbit bump created by the first kicker. Within each side of the amplifier the A and B outputs (applied to the left and right strip of each kicker respectively) also have opposite polarity. This is necessary to create the potential difference between the kicker strips that produces the deflecting field for the beam. The relative polarity of the A and B outputs is fixed in the amplifier design and cannot be controlled via the FONT5a board.
+
+The response of the amplifier is linear up to \(\pm1.2\)~V input voltage. Outside this range the amplifier clearly begins to enter saturation, in particular above input voltages of \(\pm1.7\)~V. The linear fits shown include only the points up to \(\pm1.2\)~V, in order to not be biased by the effects of saturation. Figure \ref{f:AmpOutvsDAC_residual} shows the difference between the linear fit and the real amplifier output across the full range of input voltages. A slight deviation from linearity in the \(\pm1.2\)~V range is also visible, although the maximum difference is only 10~V or a 3\% relative error. At the maximum input voltage of \(\pm2\)~V the deviation from linearity rises above 150~V,  a relative error of more than 25\%. For example, the RB output at an input voltage of \(+2\)~V is 605~V but the fitted response gives 769~V, a difference of 164~V or 27\%.
+
+The effects of amplifier saturation are not taken in to account in the PFF algorithm on the FONT5a board, in which the DAC output is linearly dependent on the input phase (voltage from the phase monitor mixer signal) across the full range. The correction applied to the downstream phase will therefore be non-optimal when the output calculated by the PFF algorithm is above an absolute value of 2500 DAC counts (1.2~V amplifier input). To date the non-linearity of the amplifier as it begins to enter saturation has also not been included in the PFF simulations presented in the following chapters. This may partially explain the small discrepancies seen between the simulated and measured results in some datasets, so including the effect will be pursued in the future. 
+%In addition, it could be foreseen to incorporate the saturation characteristics in to the PFF algorithm on the FONT5a board, so that calculated outputs above 2500 counts are boosted slightly to compensate for the lower than expected amplifier output.
+
+Discrepancies between the four amplifier outputs are seen in Figure~\ref{f:AmpOutvsDAC_residual} and Table~\ref{t:AmpOutVsDAC}, both in terms of gradient and peak output. These differences can be partially but not completely explained by errors of up to a few percent in the precise calibration of the four monitoring outputs, which do not output exactly 1/115 of the real input voltage \cite{colinPriv}. Differences between the A and B outputs for each kicker are not an issue for the PFF performance as both are linear (in the \(\pm1.2\)~V range) and the kick experienced by the beam in each kicker is proportional to the difference of the two. Therefore, only the calibration between the output from the FONT5a (the amplifier input) and the resulting phase shift in the TL2 chicane is affected. However, disparity between the potential difference across each kicker (LA-LB and RA-RB), so that the deflection of the beam in each kicker is different, leads to the orbit bump created by the PFF system not being closed in the chicane, degrading the horizontal beam stability downstream. The fitted potential difference at 1~V input is 869~V for the left amplifier (LA-LB, applied to the first kicker) and 835~V for the right amplifier (RA-RB, applied to the second kicker), a difference of 4\%. This could be compensated in the PFF setup on the FONT5a board by using a different gain for each correction output, so that the DAC output to the right amplifier is higher but the resulting voltage applied to both kickers is the same. Orbit closure is discussed further in Section~\ref{ss:orbitClosure}.
 
 \begin{table}
   \begin{center}
@@ -361,19 +362,6 @@ Figure \ref{f:phaseVsAmpVoltage} shows the measured mean phase shift in the down
   \label{f:phaseVsAmp_resid}
 \end{figure}
 
-\begin{table}
-  \begin{center}
-    \begin{tabular}{| c | c | c |}
-	   \hline
-        & Phase Shift at +1~V Input & Max Phase Shift \\ \hline
-       Data & \(3.5\pm0.1^\circ\) & \(5.5\pm0.3^\circ\) \\
-	   Model & \(3.6^\circ\) & \(5.6^\circ\) \\
- 	   \hline
-    \end{tabular}
-    \caption{Downstream phase shift resulting from an amplifier input of 1~V (\(+1\)~V for the left amplifier/first kicker, and \(-1\)~V for the right amplifier/second kicker). The ``Data'' row shows the fitted gradient from the actual measured phase shift. The ``Model'' row shows the expected result given the known hardware and optics parameters.}
-  	\label{t:PhaseVsDAC}
-  \end{center}
-\end{table}
 
 At the maximum amplifier input voltage of \(2\)~V the phase is shifted by \(5.5\pm0.3^\circ\). The fitted phase shift per Volt input is \(3.5\pm0.1^\circ\) in the \(\pm1.2\)~V linear range of the amplifier. This fitted gradient is required for the conversion between the PFF gain in the units on the FONT5a board and the effective system gain in Section~\ref{ss:fontGain}. %In Section~\ref{ss:fontGain} it is quoted in terms of the phase shift in radians per DAC count output from the FONT5a board, rather than degrees per Volt as shown here. The value of \(30\mathrm{\mu rad/count}\) is easily derived using the conversion factors between degrees and radians and knowing that a DAC output of 4095 counts corresponds to 2~V sent to the amplifier.
 
@@ -390,6 +378,21 @@ R_{52} = -0.7~\mathrm{m}\\
 \lambda_{12\mathrm{GHz}} = 2.5~\mathrm{cm} 
 \end{eqnarray*}
 The value of \(V_{amp}[1~\mathrm{V}]\) is given as a representative value in the linear range of the amplifier but the actual amplifier output at all input voltages is used in the predictions to include the effects of saturation in the calculated phase shift values. Also, the first kicker is used as this is most relevant for the phase shift in the chicane (the orbit should be closed after the second kicker with no further phase shift in the chicane after that point). The value of \(K\) is derived from the kicker design, in which 1.4~kV applied to each strip gives a 1~mrad kick for a 150~MeV beam \cite{kickerIPAC11}.  The actual CTF3 beam energy is approximately 135~MeV (calculated based on the dipole currents used in the machine setup and segmented dump measurements), so the value of \(K\) above is scaled by a factor 150/135.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{| c | c | c |}
+	   \hline
+        & Phase Shift at +1~V Input & Max Phase Shift \\ \hline
+       Data & \(3.5\pm0.1^\circ\) & \(5.5\pm0.3^\circ\) \\
+	   Model & \(3.6^\circ\) & \(5.6^\circ\) \\
+ 	   \hline
+    \end{tabular}
+    \caption{Downstream phase shift resulting from an amplifier input of 1~V (\(+1\)~V for the left amplifier/first kicker, and \(-1\)~V for the right amplifier/second kicker). The ``Data'' row shows the fitted gradient from the actual measured phase shift. The ``Model'' row shows the expected result given the known hardware and optics parameters.}
+  	\label{t:PhaseVsDAC}
+  \end{center}
+\end{table}
+
 
 In Figure~\ref{f:phaseVsAmpVoltage} the predicted phase shifts using Equation~\ref{e:ampVoltToPhase} are also shown. Table~\ref{t:PhaseVsDAC} compares the fitted gradients and maximum phase shift for the model and the measurement. The overall agreement between the two is good, with the residuals between the model and the data generally consistent with zero within error bars in the \(\pm1.2\)~V linear range of the amplifier as shown in Figure~\ref{f:phaseVsAmp_resid}. The residuals between the data and the linear 
 fit to the data are also consistent with zero in this range.
@@ -558,12 +561,6 @@ and with the full phase reconstruction method (derived in Section~\ref{ss:sigGen
 The PFF correction output is \(\phi_{\mathrm{SA}}\), using the upstream 
 phase monitor Mon~1, multiplied by a gain factor.
 
-Any differences between the calculated phase with the small angle
-approximation and the actual phase using the full phase reconstruction
- method will lead to imperfections in the applied PFF correction.
-The calculated phase with each approach is plotted in Figure~\ref{f:phaseRecDiff} for offsets between the beam phase and the electronics LO phase between \(\pm90^\circ\). For small incoming phases (close to zero Mixer output) the only difference between the two methods is a static offset of \(-d/A\) in the measured phase, and this holds up to \(\pm10^\circ\) (and is a good approximation up to \(\pm20^\circ\)). In this case the applied correction will also contain this constant offset, but the corrected downstream phase jitter, which has been the only focus of the PFF prototype to date, will still be optimal. 
-
-With larger offsets between the beam phase and the LO (i.e. for large Mixer output) the small angle approximation is no longer valid and the difference between the two methods rises to up to \(35^\circ\). Most importantly the measured phase, and therefore the correction output, is no longer linearly dependent on the incoming beam phase when there is a large offset between the beam and LO phases. In the most extreme case, the measured phase difference between two pulses with a beam-LO phase offset of \(80^\circ\) and \(90^\circ\) would only be \(1^\circ\) when using the small angle approximation, instead of the expected \(10^\circ\). In turn, the difference in the correction applied to the two pulses would only be \(1^\circ\) instead of \(10^\circ\), degrading the achievable corrected phase jitter.
 
 \begin{figure}
   \centering
@@ -575,6 +572,14 @@ With larger offsets between the beam phase and the LO (i.e. for large Mixer outp
   \caption{Achievable PFF jitter versus phase offset for the full phase reconstruction method (red), and the phase reconstruction using the small angle approximation (blue).}
   \label{f:phaseRecJitSim}
 \end{figure}
+
+
+Any differences between the calculated phase with the small angle
+approximation and the actual phase using the full phase reconstruction
+ method will lead to imperfections in the applied PFF correction.
+The calculated phase with each approach is plotted in Figure~\ref{f:phaseRecDiff} for offsets between the beam phase and the electronics LO phase between \(\pm90^\circ\). For small incoming phases (close to zero Mixer output) the only difference between the two methods is a static offset of \(-d/A\) in the measured phase, and this holds up to \(\pm10^\circ\) (and is a good approximation up to \(\pm20^\circ\)). In this case the applied correction will also contain this constant offset, but the corrected downstream phase jitter, which has been the only focus of the PFF prototype to date, will still be optimal. 
+
+With larger offsets between the beam phase and the LO (i.e. for large Mixer output) the small angle approximation is no longer valid and the difference between the two methods rises to up to \(35^\circ\). Most importantly the measured phase, and therefore the correction output, is no longer linearly dependent on the incoming beam phase when there is a large offset between the beam and LO phases. In the most extreme case, the measured phase difference between two pulses with a beam-LO phase offset of \(80^\circ\) and \(90^\circ\) would only be \(1^\circ\) when using the small angle approximation, instead of the expected \(10^\circ\). In turn, the difference in the correction applied to the two pulses would only be \(1^\circ\) instead of \(10^\circ\), degrading the achievable corrected phase jitter.
 
 Figure~\ref{f:phaseRecJitSim} shows a simulation of the theoretical downstream jitter that can be achieved with both phase reconstruction methods with \(0.8^\circ\) initial upstream and downstream phase jitter and an upstream-downstream phase correlation of \(97\%\). These values are chosen to represent the beam conditions that will need to be achieved in order to demonstrate \(0.2^\circ\) phase stability at CTF3. In the \(\pm10^\circ\) region where the small angle approximation holds there is no degradation in the achievable corrected phase jitter using the simplified method in the PFF algorithm. Outside this region the jitter is degraded, increasing from below \(0.2^\circ\) to \(0.3^\circ\) for a beam-LO phase offset of \(50^\circ\). 
 
@@ -592,7 +597,6 @@ In the PFF algorithm on the FONT5a board the DAC output is proportional to the A
 \end{equation}
 where \(M(t)\) is the Mon~1 mixer input, in ADC counts, which varies with time \(t\) along the pulse, and \(\delta\) is the channel offset, which is a constant offset applied to the full pulse length.
 
-Adjusting the channel offset is important as the \(\pm5.5^\circ\) correction range of the PFF prototype is much smaller than the \(\sim40^\circ\) phase sag along the pulse. The PFF correction output is therefore saturated for most of the pulse length, apart from the region  of the pulse that gives close to zero ADC~2 input. Using an effective system gain of unity, or 624 in the units used in the DAQ as derived in Section~\ref{ss:fontGain}, an ADC~2 input of 420~counts gives the maximum DAC output of 4095~counts (Equation~\ref{e:fontGain1}). Parts of the pulse where the ADC~2 input is above 420~counts therefore receive a constant kick resulting from the maximum 4095~counts (2~V) output to the amplifier, but the PFF system can no longer correct variations in phase along the pulse or reduce the phase jitter in these regions. In practice the limit is less than 420~counts, as the optimal gain values are typically larger than unity and the amplifier begins to enter saturation for DAC outputs below 4095~counts (Section~\ref{ss:ampLin}).
 
 \begin{figure}
   \centering
@@ -604,6 +608,9 @@ Adjusting the channel offset is important as the \(\pm5.5^\circ\) correction ran
   \caption{Simulated DAC output resulting from the ADC~2 inputs in Figure~\ref{f:offsetADCs} and using a set correction gain of 624~units in the DAQ.  Blue: Channel offset optimised to give zero output at sample~421. Red: Non-optimal channel offset giving 200~counts output at sample~421. The location of sample~421 is marked by the vertical dashed line.}
   \label{f:offsetDACs}
 \end{figure}
+
+
+Adjusting the channel offset is important as the \(\pm5.5^\circ\) correction range of the PFF prototype is much smaller than the \(\sim40^\circ\) phase sag along the pulse. The PFF correction output is therefore saturated for most of the pulse length, apart from the region  of the pulse that gives close to zero ADC~2 input. Using an effective system gain of unity, or 624 in the units used in the DAQ as derived in Section~\ref{ss:fontGain}, an ADC~2 input of 420~counts gives the maximum DAC output of 4095~counts (Equation~\ref{e:fontGain1}). Parts of the pulse where the ADC~2 input is above 420~counts therefore receive a constant kick resulting from the maximum 4095~counts (2~V) output to the amplifier, but the PFF system can no longer correct variations in phase along the pulse or reduce the phase jitter in these regions. In practice the limit is less than 420~counts, as the optimal gain values are typically larger than unity and the amplifier begins to enter saturation for DAC outputs below 4095~counts (Section~\ref{ss:ampLin}).
 
 Figure~\ref{f:offsetADCs} shows an example of the measured ADC~2 input with the channel offset optimised to give zero output at the mid-point of the pulse. The phase sag results in ADC~2 inputs of above 2500~counts at the start and end of the pulse. Figure~\ref{f:offsetDACs} shows a simulation of what the DAC~output would be in the PFF system (with unit gain), with this ADC~2 input. The DAC output matches the shape of the input between samples 346 and 506 (a 450~ns period), but is saturated for the rest of the pulse length. Figures~\ref{f:offsetADCs}~and~\ref{f:offsetDACs} also show the effect of using a non-optimal channel offset giving an ADC~2 input of 200~counts at the mid-point of the pulse. In this case the region of the pulse where the DAC output is not saturated is reduced to between sample 367 and 486 (a 330~ns period). 
 
@@ -767,7 +774,6 @@ The pairs of cables connected to the downstream ends of the strips for
 
 The PFF system aims to apply the correction in the TL2 chicane to the same beam pulse initially measured by the upstream phase monitors in the CT line (see Figure~\ref{f:ctfLayout}). For this to be possible the total system latency must be less than the 380~ns time of flight of the beam between the upstream phase monitors and the first kicker in the TL2 chicane (approximately 114~m of beam line). The system latency includes the latencies of each hardware component, namely the phase monitor electronics, FONT5a board and amplifier, as well as the signal transit time in all the associated cabling. As mentioned previously the cabling is the largest contribution, and includes cables from the phase monitors to the electronics in the klystron gallery, to and from the FONT5a board, and from the amplifier in the klystron gallery to the kickers in TL2.
 
-Table~\ref{t:systLatency} shows approximate latencies for each part of the PFF system. The length of the kicker cables was introduced in Section~\ref{ss:kickerCables}, with the 175~ns value in the table including the 3~ns added by the patch panel cable lengths. 2~m coaxial cables from the phase monitor electronics to the FONT5a board, and from the FONT5a board to the amplifier, both add 10~ns to the system latency. The total latency of the phase monitors and their electronics, including approximately 10~m of cabling between the monitors and the electronics in the klystron gallery, was measured to be 50~ns \cite{alexPriv}. The latency of the FONT5a board, including the time to process the input signals and calculate and apply the appropriate output, is 60~ns as mentioned in Section~\ref{ss:pffFirmware}. Finally, the estimated amplifier latency is around 30~ns, although precise measurements of this have not been made \cite{colinPriv}.
 
 \begin{table}
   \begin{center}
@@ -787,6 +793,9 @@ Table~\ref{t:systLatency} shows approximate latencies for each part of the PFF s
   	\label{t:systLatency}
   \end{center}
 \end{table}
+
+
+Table~\ref{t:systLatency} shows approximate latencies for each part of the PFF system. The length of the kicker cables was introduced in Section~\ref{ss:kickerCables}, with the 175~ns value in the table including the 3~ns added by the patch panel cable lengths. 2~m coaxial cables from the phase monitor electronics to the FONT5a board, and from the FONT5a board to the amplifier, both add 10~ns to the system latency. The total latency of the phase monitors and their electronics, including approximately 10~m of cabling between the monitors and the electronics in the klystron gallery, was measured to be 50~ns \cite{alexPriv}. The latency of the FONT5a board, including the time to process the input signals and calculate and apply the appropriate output, is 60~ns as mentioned in Section~\ref{ss:pffFirmware}. Finally, the estimated amplifier latency is around 30~ns, although precise measurements of this have not been made \cite{colinPriv}.
 
 Overall the latency of the complete PFF system is therefore expected to be 335~ns, meeting the latency requirements and meaning that the correction signal should arrive at the first kicker 45~ns before the beam in the case where the correction is output is soon as possible. The outputs of the FONT5a board are delayed in order to synchronise the arrival time of the correction with the beam, as discussed in Sections~\ref{ss:absTiming}~and~\ref{ss:relativeTiming}.
 
@@ -921,3 +930,14 @@ Relative K2 delays of both 0~and~2.8~ns (0~and~1 clock~cycles have been used dur
 %
 
 \newsection{commSummary}{Summary}
+
+This chapter has described the design and operation of the feedforward controller, the FONT5a board, and the kicker amplifiers, as well as verifying the function, and deriving the optimal setup of, the PFF system. 
+
+The FONT5a board processes the upstream phase monitor signals and calculates the appropriate voltage with which to drive the kicker amplifiers in order to correct the downstream phase, as well as controlling the triggering of the amplifier and correction timing. Droop in the response of the ADCs was removed via the implementation of IIR filters. The use of the small angle approximation in the calculation in firmware was shown to be valid. The optimal PFF gain to set on the FONT5a board, taking in to account the beam conditions, correction range and phase monitor calibration constants, was derived.
+
+
+The amplifier provides four high voltage drive outputs, connected to the downstream ends of the kicker strips, and terminates the four returning signals from the upstream ends of the kicker strips. The amplifier response was shown to be linear for input voltages between \(\pm1.2\)~V, with a maximum output of around 650~V for an input of \(\pm2\)~V. Variations in the amplifier voltage along the output pulse were shown to be small.
+
+The downstream phase was shown to linearly depend on the kicker voltage as required for the PFF system. With the maximal amplifier input voltage of \(\pm2\)~V, the phase shift is \(\pm5.5\pm0.3^\circ\), defining the correction range of the PFF system and in agreement with the hardware and optics specifications. It was also demonstrated that the applied phase shift can be varied along the pulse, with the shape of the applied correction being the inverse of the input phase as required. However, there is currently a dependence of the downstream beam orbit on the kicker voltage, as the optics used in the TL2 chicane has not been completely nominal to date.
+ 
+The PFF system has been shown to meet the latency requirements, with the largest contribution being the 170~ns signal transit time in the cables between the amplifier and the first kicker. By observing beam pickup on the kickers it was determined that the FONT5a correction outputs should be delayed by an additional 20~ns in order to synchronise their arrival at the kickers with the beam. As the difference in cable lengths for each kicker is similar to the beam time of flight between the kickers, the correction signal for each kicker can be output from the FONT5a board at the same time.

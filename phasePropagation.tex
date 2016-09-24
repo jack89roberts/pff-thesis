@@ -82,7 +82,7 @@ As well as the static variations in the downstream phase along the pulse, there 
 
 \subsubsection{Consequences for the PFF System}
 
-The differences between the mean upstream and downstream phase, both on the mean and along the pulse, need to be removed to enable phase jitters close to the CLIC target to be achieved with the PFF prototype at CTF3. Using Equation~\ref{e:theoretJitOptGain}, with the optimal PFF gain and \(0.34\pm0.06\) upstream--downstream phase correlation an initial downstream phase jitter of \(1.86\pm0.09^\circ\) could be reduced to \(1.51\pm0.09^\circ\). This is only a modest improvement of around 20\%, and far from the CLIC target of \(0.2^\circ\) phase stability. %Also, the limitations of the actual PFF system, such as in the correction range (Section~\ref{ss:corrRange}), means that in reality even this 20\% reduction would be difficult to achieve.
+The differences between the mean upstream and downstream phase, both on the mean and along the pulse, need to be removed to enable phase jitters close to the CLIC target to be achieved with the PFF prototype at CTF3. Using Equation~\ref{e:theoretJitOptGain}, with the optimal PFF gain and \(0.34\pm0.06\) upstream--downstream phase correlation, an initial downstream phase jitter of \(1.86\pm0.09^\circ\) could be reduced to \(1.51\pm0.09^\circ\). This is only a modest improvement of around 20\%, and far from the CLIC target of \(0.2^\circ\) phase stability. %Also, the limitations of the actual PFF system, such as in the correction range (Section~\ref{ss:corrRange}), means that in reality even this 20\% reduction would be difficult to achieve.
 
 Assuming the initial downstream phase jitter could be reduced to the same level as the upstream phase jitter, to \(0.8^\circ\), the upstream--downstream phase correlation required to theoretically achieve \(0.2^\circ\) corrected phase jitter is 97\%. This chapter will describe the procedures developed to achieve this level of downstream phase jitter and correlation. The first effect investigated was the energy dependence of the downstream phase, for the reasons described in Section~\ref{s:r56}.
 
@@ -209,7 +209,7 @@ The initial downstream phase jitter and upstream-downstream phase correlation ha
 \sigma_{PFF} = \left|R_{56}\right|\sigma_p\sqrt{1-\rho_{up}^2}
 \label{e:r56PFFJit}
 \end{equation}
-As expected the achievable corrected downstream phase jitter is minimised when \(R_{56}~=~0\). Note that this equation does not take in to account that the minimum achievable downstream phase jitter is limited to \(\sqrt{2}\) times the phase monitor resolution (Section~\ref{s:resolutionEqs}).
+As expected the achievable corrected downstream phase jitter is minimised when \(R_{56}~=~0\). Note that this equation does not take in to account that the minimum achievable downstream phase jitter is limited by the phase monitor resolution (Section~\ref{s:resolutionEqs}).
 
 In principle, the beam conditions for the PFF correction can also be improved by reducing the relative energy jitter (\(\sigma_p\)) or by increasing the upstream phase-energy correlation (\(\rho_{up}\)). Reducing the relative energy jitter decreases the additional phase jitter created by non-zero \(R_{56}\). Increasing the upstream phase-energy correlation (\(\rho_{up}\)) reduces the effect that non-zero \(R_{56}\) has on the upstream-downstream phase correlation (\(\rho_{ud}\)), as the additional energy dependent downstream phase jitter is correlated with the upstream phase in this case. 
 %For example, if \(\rho_{up}=1\) the source of all upstream phase jitter is energy jitter. In that case although non-zero \(R_{56}\) would further increase the downstream phase jitter, the additional jitter would be well correlated with the upstream phase and the upstream-downstream phase correlation would not be affected. 
@@ -638,14 +638,16 @@ Although the higher order energy dependent effects due to \(T_{566}\) have been 
 
 Alternatively, the second order effects can be reduced by decreasing the energy jitter and variations along the pulse at CTF3. Many improvements have recently been made at CTF3 to achieve this via the implementation of several new feedbacks \cite{lukasIPAC16}. New feedbacks on the phases of each klystron in the CTF3 injector as well as on the beam energy are now routinely in operation, and these have already improved the mean energy jitter to \(0.5\times10^{-3}\) on short time scales of several minutes, or \(0.8\times10^{-3}\) on longer time scales. Hardware changes and further improvements to the implementation of these feedbacks should allow the mean energy stability to be improved further.
 
-In addition, although they are not yet run online in normal operation, new feedback systems have also been implemented and commissioned that can smooth energy variations along the pulse, or directly smooth the upstream phase along the pulse itself. The energy flattening feedback \cite{tobiasPriv} varies the waveform of the last klystron in the CTF3 linac based on the measurement of the same dispersive BPM used to measure the beam energy in this chapter --- CT.0608 in TL1. This flattens the energy along the pulse by varying the energy gain along the pulse in the last accelerating structure. In addition, prior to the best phase propagation conditions currently achieved (presented in Section~\ref{s:bestPhaseProp}) a similar feedback was used to smooth features in the upstream phase along the pulse by varying the waveform of the first klystron in the CTF3 linac \cite{davideThesis}, as seen in Figure~\ref{f:beforeAfterDavideFlatten}. Feedbacks of this type will be critical to be able to improve the PFF performance for future tests.
+In addition, although they are not yet run online in normal operation, new feedback systems have also been implemented and commissioned that can smooth energy variations along the pulse, or directly smooth the upstream phase along the pulse itself. The energy flattening feedback \cite{tobiasPriv} varies the waveform of the last klystron in the CTF3 linac based on the measurement of the same dispersive BPM used to measure the beam energy in this chapter --- CT.0608 in TL1. This flattens the energy along the pulse by varying the energy gain along the pulse in the last accelerating structure. In addition, prior to the best phase propagation conditions currently achieved (presented in Section~\ref{s:bestPhaseProp}) a similar feedback was used to smooth features in the upstream phase along the pulse by varying the waveform of the first klystron in the CTF3 linac \cite{davideThesis}.
+%, as seen in Figure~\ref{f:beforeAfterDavideFlatten}.
+ Feedbacks of this type will be critical to be able to improve the PFF performance for future tests.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/propagation/beforeAfterDavideFlatten}
-  \caption{Effect of feedback used to smooth variations along the upstream phase (initial upstream phase in blue, and after applying the feedback in red).}
-  \label{f:beforeAfterDavideFlatten}
-\end{figure}
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=0.8\textwidth]{Figures/propagation/beforeAfterDavideFlatten}
+%  \caption{Effect of feedback used to smooth variations along the upstream phase (initial upstream phase in blue, and after applying the feedback in red).}
+%  \label{f:beforeAfterDavideFlatten}
+%\end{figure}
 
 \newsection{otherJitterSources}{Possible Other Sources of Phase Jitter}
 
@@ -728,17 +730,12 @@ This section summarises the best phase propagation conditions that have been ach
 
 \subsubsection{Mean Phase}
 
-The best phase propagation conditions are achieved when the upstream phase-energy correlation and the downstream phase-energy correlation is the same. Figure~\ref{f:bestProp_enCorr} shows the correlation of the upstream and downstream phase with the beam energy. With the optimised conditions almost all correlation between the downstream phase and the beam energy is removed, with a correlation of \(0.2\pm0.1\). This agrees with the upstream-downstream phase correlation of \(0.1\pm0.1\) within error bars.
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/bestProp_enCorr}
   \caption{Upstream (blue) and downstream (red) phase-energy correlation with optimised phase propagation.}
   \label{f:bestProp_enCorr}
 \end{figure}
-
-Figure~\ref{f:bestProp_meanPhase} shows that all drifts in the upstream phase are also present downstream, and that the upstream and downstream mean phase jitters also agree within errors bars --- \(0.69\pm0.06^\circ\) upstream and \(0.74\pm0.06^\circ\) downstream. The standard deviation of the residuals between the upstream and downstream phase is \(0.27\pm0.02^\circ\).%, which corresponds to below 0.2 degrees actual beam jitter between the two phases when the phase monitor resolution is taken in to account. 
-The correlation between the mean upstream and downstream phase is \(93\pm4\%\), as shown in Figure~\ref{f:bestProp_meanCorr}. This is very close to the targeted \(97\%\) that would make a reduction in downstream jitter to \(0.2^\circ\) possible with the PFF system.
 
 \begin{figure}
   \centering
@@ -754,9 +751,13 @@ The correlation between the mean upstream and downstream phase is \(93\pm4\%\), 
   \label{f:bestProp_meanCorr}
 \end{figure}
 
-\subsubsection{Phase Along Pulse}
+The best phase propagation conditions are achieved when the upstream phase-energy correlation and the downstream phase-energy correlation is the same. Figure~\ref{f:bestProp_enCorr} shows the correlation of the upstream and downstream phase with the beam energy. With the optimised conditions almost all correlation between the downstream phase and the beam energy is removed, with a correlation of \(0.2\pm0.1\). This agrees with the upstream-downstream phase correlation of \(0.1\pm0.1\) within error bars.
 
-Figure~\ref{f:bestProp_meanAlong} compares the phase along the pulse upstream and downstream in the optimal conditions. For reference, the mean phases presented above were calculated in the region between 530~ns and 950~ns. This is the flattest central part of the pulse where the PFF system can provide the maximum reduction in phase jitter, as seen in Section~\ref{s:jitterRecord}. The overall agreement in shape between the upstream and downstream phase is much better than the original conditions seen in Figure~\ref{f:origPhaseAlong}, with almost all energy dependent features removed from the mean downstream phase along the pulse. There are still some remaining differences in shape, particularly at the start and end of the pulse before and after the 530--950~ns range.
+Figure~\ref{f:bestProp_meanPhase} shows that all drifts in the upstream phase are also present downstream, and that the upstream and downstream mean phase jitters also agree within errors bars --- \(0.69\pm0.06^\circ\) upstream and \(0.74\pm0.06^\circ\) downstream. The standard deviation of the residuals between the upstream and downstream phase is \(0.27\pm0.02^\circ\).%, which corresponds to below 0.2 degrees actual beam jitter between the two phases when the phase monitor resolution is taken in to account. 
+The correlation between the mean upstream and downstream phase is \(93\pm4\%\), as shown in Figure~\ref{f:bestProp_meanCorr}. This is very close to the targeted \(97\%\) that would make a reduction in downstream jitter to \(0.2^\circ\) possible with the PFF system.
+
+
+\subsubsection{Phase Along Pulse}
 
 \begin{figure}
   \centering
@@ -768,11 +769,7 @@ Figure~\ref{f:bestProp_meanAlong} compares the phase along the pulse upstream an
   \label{f:bestProp_jitAlong}
 \end{figure}
 
-By viewing the phase jitters and correlations along the pulse the remaining areas for improvement start to become apparent. In Figure~\ref{f:bestProp_jitAlong}, showing the phase jitter along the pulse, it is clear that the start of the pulse is less stable. For times between 100~ns and 600~ns the downstream phase jitter is as much as 60\% larger than the upstream phase jitter.  However, there is a 400~ns portion of the pulse where the downstream phase jitter has been successfully reduced to the level of the upstream phase jitter. The best PFF results can be expected in this region.
-
-The upstream-downstream phase correlation along the pulse (the point by point correlation between the upstream and downstream phase calculated for each individual sample along the pulse), in Figure~\ref{f:bestProp_corrAlong}, is at the same level as the mean phase correlation in the region between 450~ns and 650~ns. However, there are also parts of the pulse where the upstream-downstream phase correlation is greatly reduced -- to 55\% at 300~ns and 70\% at 700~ns, for example. Differences earlier in the pulse are not critical for the PFF system, but the feature at 700~ns is in the area where the correction is attempted.
-
-By comparing the upstream-downstream correlation along the pulse to the correlations with energy along the pulse, in Figure~\ref{f:bestProp_enCorrAlong}, the problem becomes clear. Due to energy variations along the pulse and the effect of higher order energy dependences, as previously discussed, the phase propagation can not be optimised across the full pulse length. As a result there are parts of the pulse where the downstream phase-energy correlation is still high, up to 75\%. Areas where there is a large difference between the upstream phase-energy correlation and the downstream phase-energy correlation correspond to regions of degraded upstream-downstream phase correlation in Figure~\ref{f:bestProp_corrAlong}. This is the key area where improvements are needed to further improve the PFF performance.
+Figure~\ref{f:bestProp_meanAlong} compares the phase along the pulse upstream and downstream in the optimal conditions. For reference, the mean phases presented above were calculated in the region between 530~ns and 950~ns. This is the flattest central part of the pulse where the PFF system can provide the maximum reduction in phase jitter, as seen in Section~\ref{s:jitterRecord}. The overall agreement in shape between the upstream and downstream phase is much better than the original conditions seen in Figure~\ref{f:origPhaseAlong}, with almost all energy dependent features removed from the mean downstream phase along the pulse. There are still some remaining differences in shape, particularly at the start and end of the pulse before and after the 530--950~ns range.
 
 \begin{figure}
   \centering
@@ -784,4 +781,20 @@ By comparing the upstream-downstream correlation along the pulse to the correlat
   \label{f:bestProp_enCorrAlong}
 \end{figure}
 
+By viewing the phase jitters and correlations along the pulse the remaining areas for improvement start to become apparent. In Figure~\ref{f:bestProp_jitAlong}, showing the phase jitter along the pulse, it is clear that the start of the pulse is less stable. For times between 100~ns and 600~ns the downstream phase jitter is as much as 60\% larger than the upstream phase jitter.  However, there is a 400~ns portion of the pulse where the downstream phase jitter has been successfully reduced to the level of the upstream phase jitter. The best PFF results can be expected in this region.
+
+The upstream-downstream phase correlation along the pulse (the point by point correlation between the upstream and downstream phase calculated for each individual sample along the pulse), in Figure~\ref{f:bestProp_corrAlong}, is at the same level as the mean phase correlation in the region between 450~ns and 650~ns. However, there are also parts of the pulse where the upstream-downstream phase correlation is greatly reduced -- to 55\% at 300~ns and 70\% at 700~ns, for example. Differences earlier in the pulse are not critical for the PFF system, but the feature at 700~ns is in the area where the correction is attempted.
+
+By comparing the upstream-downstream correlation along the pulse to the correlations with energy along the pulse, in Figure~\ref{f:bestProp_enCorrAlong}, the problem becomes clear. Due to energy variations along the pulse and the effect of higher order energy dependences, as previously discussed, the phase propagation can not be optimised across the full pulse length. As a result there are parts of the pulse where the downstream phase-energy correlation is still high, up to 75\%. Areas where there is a large difference between the upstream phase-energy correlation and the downstream phase-energy correlation correspond to regions of degraded upstream-downstream phase correlation in Figure~\ref{f:bestProp_corrAlong}. This is the key area where improvements are needed to further improve the PFF performance.
+
+
+
 \newsection{propSumm}{Summary}
+
+The PFF system requires at least \(97\%\) correlation between the upstream and downstream phase to reduce an initial downstream phase jitter of \(0.8^\circ\) to the CLIC target of \(0.2^\circ\). However, preliminary measurements at CTF3 measured only \(0.34\pm0.06\) upstream--downstream phase correlation, and a downstream phase jitter of \(1.86\pm0.09^\circ\).
+
+The TL2 optics created in Chapter~\ref{c:tl2Optics} have a non-zero \(R_{56}\) transfer matrix coefficient of around \(-0.2\)~m, which creates additional energy dependent phase jitter downstream that is not present in the upstream phase. To achieve the necessary initial downstream phase jitter and upstream-downstream phase correlation, an absolute \(R_{56}\) value below 1.3~cm is required between the upstream and downstream phase monitors. To compensate for the negative \(R_{56}\) value in TL2, new optics with positive \(R_{56}\) values in the transfer line TL1 have therefore been created, to create a total \(R_{56}\) of zero between the monitors. By adjusting the \(R_{56}\) value in TL1 it has been possible to achieve an upstream-downstream mean phase correlation of \(93\pm4\%\) with a downstream phase jitter of \(0.74\pm0.06^\circ\), close to the requirements to enable a \(0.2^\circ\) correction.
+
+However, the optimal \(R_{56}\) value to use in TL1 was found to vary over time. This is caused by a large second order phase-energy dependence in the optics at CTF3, described by the coefficient \(T_{566}\). With non-zero \(T_{566}\) the apparent optimal \(R_{56}\) value depends on the beam energy. In particular, the effect of energy variations along the pulse, combined with \(T_{566}\), means the phase propagation cannot be optimal across the full pulse length. With recent improvements to the energy stability at CTF3, it has been shown that it should still be possible to achieve \(97\%\) upstream-downstream phase correlation despite the effects of \(T_{566}\). Alternatively, new optics using sextupoles could be created to reduce the \(T_{566}\) term.
+
+Preliminary measurements have identified that the downstream phase is sensitive to the stability of dipole power supplies, which may be an energy independent limitation on the achievable upstream-downstrema phase correlation.
