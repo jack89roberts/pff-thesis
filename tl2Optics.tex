@@ -99,7 +99,7 @@ The two electromagnetic kickers provide the phase correction in the PFF system b
   \label{f:kickerSchematic}
 \end{figure}
 
-At each end of each strip there is a feedthrough to a 50~\(\mathrm{\Omega}\) HN-type connector. A voltage is applied to the downstream end of each kicker strip, with opposite polarity on each side, for example \(+V\) to the left strip and \(-V\) to the right strip. The voltage is supplied by the amplifier discussed in Section~\ref{s:amplifierSetup}, and the the upstream ends of the kicker strips are also terminated back at the amplifier. The applied voltage \(V(t)\) creates a horizontal, position independent, electric field and vertical magnetic field between the strips with related amplitudes as follows \cite{byrdKicker}:
+At each end of each strip there is a feedthrough to a 50~\(\mathrm{\Omega}\) HN-type connector. A voltage is applied to the downstream end of each kicker strip, with opposite polarity on each side, for example \(+V\) to the left strip and \(-V\) to the right strip. The voltage is supplied by the amplifier, as discussed in Section~\ref{s:amplifierSetup}, and the the upstream ends of the kicker strips are also terminated back at the amplifier. The applied voltage \(V(t)\) creates a horizontal, position independent, electric field and vertical magnetic field between the strips with related amplitudes as follows \cite{byrdKicker}:
 \begin{eqnarray}
 E_x &\sim& V(t) \\
 B_y &\sim& \frac{V(t)}{c}
@@ -144,7 +144,7 @@ Due to building and cost constraints the PFF prototype had to make use of the pr
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{Figures/optics/kickerInsideQuad}
-  \caption{Schematic of the installation of the first kicker inside the quadrupole CC.QDH0490 (blue) before the first dipole in the chicane CC.BHG0500 (red). The kicker also passes through the aperture of the corrector CC.DHF0465 (brown) before the quadrupole \cite{kickInQuad}.}
+  \caption{Schematic of the installation of the first kicker inside the quadrupole CC.QDH0490 (blue) before the first dipole in the chicane CC.BHG0500 (red). The kicker also passes through the aperture of the corrector CC.DHF0465, the small square device on the right side of the quadrupole in the figure. Adapted from \cite{kickInQuad}.}
   \label{f:kickerInsideQuad}
 \end{figure}
 
@@ -179,7 +179,7 @@ The optics constraints on the Twiss functions are a compromise between small bet
 
 However, at the same time small beta values correspond to a smaller beam size and therefore stronger focusing along the line. Increasing the strength of quadrupoles also increases the magnitude of non-linear field errors in the magnets, for example, which can lead to aberrations in the beam. As a result it is desirable to have a weak optics, with the quadrupole strengths as low as possible whilst keeping beta at a tolerable level. This can be constrained in the optics by attempting to keep alpha as small as possible, typically below 30 at CTF3.
 
-As mentioned in Section~\ref{s:tl2} there are long drift spaces with no focusing elements at the start and end of TL2, and it is most difficult to maintain low beta and alpha values following these regions. At the start of TL2 the initial values of the Twiss parameters are also constrained by the optics of the combiner ring. In other words, the beta and alpha values at the start of TL2 are defined by the closed solution of the combiner ring. The optics at the beginning of TL2 are fixed by these and dispersion constraints and cannot be further adjusted. As a result, the new TL2 optics (Section~\ref{s:matchedOptics}) are usually matched starting from CC.QFH0210, and the required initial conditions at this location are summarised in Table~\ref{t:tl2InitTwiss}.
+As mentioned in Section~\ref{s:tl2} there are long drift spaces with no focusing elements at the start and end of TL2, and it is most difficult to maintain low beta and alpha values following these regions. At the start of TL2 the initial values of the Twiss parameters are also constrained by the optics of the combiner ring. In other words, the beta and alpha values at the start of TL2 are defined by the closed solution of the combiner ring. The optics at the beginning of TL2 are fixed by these constraints, as well as additional dispersion constraints, and cannot be further adjusted. As a result, the new TL2 optics (Section~\ref{s:matchedOptics}) are usually matched starting from CC.QFH0210, and the required initial conditions at this location are summarised in Table~\ref{t:tl2InitTwiss}.
 
 \begin{table}
   \begin{center}
@@ -219,7 +219,7 @@ The voltage applied to the kickers is used to correct the beam phase by varying 
 \begin{equation}
 t_{K2} = t_{K1} + R_{52}x_{K1}'
 \end{equation}
-where \(t_{K1}\) and \(t_{K2}\) are the time offset of the particle at the exit of the first kicker and at the entrance to the second kicker respectively, and \(x_{K1}\) is the divergence at the exit of the first kicker resulting from the applied kick. MADX uses \(ct\) for its `time' variable \cite{madx}, or the longitudinal distance of a particle with respect to the reference particle, therefore the units are metres. To convert these distances in to degrees at 12~GHz they must be multiplied by the constant factor \(360/\lambda_{\mathrm{12GHz}}\), where \(\lambda_{\mathrm{12GHz}} = 2.5\)~cm is the 12~GHz wavelength. Directly in terms of phase (in degrees) the equation above therefore becomes:
+where \(t_{K1}\) and \(t_{K2}\) are the time offset of the particle at the exit of the first kicker and at the entrance to the second kicker respectively, and \(x_{K1}\) is the divergence at the exit of the first kicker resulting from the applied kick. MADX uses metres as the units for its `time' variable \cite{madx}, as this is equivalent to the longitudinal offset of a particle with respect to the reference particle. To convert these distances in to degrees at 12~GHz they must be multiplied by the constant factor \(360/\lambda_{\mathrm{12GHz}}\), where \(\lambda_{\mathrm{12GHz}} = 2.5\)~cm is the 12~GHz wavelength. Directly in terms of phase (in degrees) the equation above therefore becomes:
 \begin{equation}
 \phi_{K2} = \phi_{K1} + R_{52}\left(\frac{360}{\lambda_{\mathrm{12GHz}}}\right)x_{K1}'
 \end{equation}
@@ -230,12 +230,12 @@ The path length difference in the chicane largely results from differing traject
 \subsubsection{Orbit Closure}
 
 The PFF system should not change the beam orbit after the chicane, which means the beam position and divergence after the second kicker must be independent of the applied kicks. In other words, the second kicker must close the horizontal orbit bump created by the first kicker. 
-To derive the constraints this places on the optics, the position \(x_{K2}\) and divergence \(x_{K2}'\) of the beam at the entrance to the second kicker can be expressed as follows:
+To derive the constraints this places on the optics, the offset in the position \(x_{K2}\) and divergence \(x_{K2}'\) of the beam at the entrance to the second kicker can be expressed as follows:
 \begin{eqnarray}
 x_{K2} &=& R_{11}x_{K1} + R_{12}x_{K1}' \\
 x_{K2}' &=& R_{21}x_{K1} + R_{22}x_{K1}'
 \end{eqnarray}
-where \(x_{K1}\) and \(x_{K1}'\) are the position and divergence at the exit of the first kicker, and \(R_{11}\), \(R_{12}\), \(R_{21}\) and \(R_{22}\) are transfer matrix coefficients for the optics between the exit of the first kicker and the entrance to the second kicker. The beam position at the exit of the first kicker is proportional to the applied kick:
+where \(x_{K1}\) and \(x_{K1}'\) are the position and divergence offset at the exit of the first kicker, and \(R_{11}\), \(R_{12}\), \(R_{21}\) and \(R_{22}\) are transfer matrix coefficients for the optics between the exit of the first kicker and the entrance to the second kicker. The beam position offset at the exit of the first kicker is proportional to the applied kick:
 \begin{equation}
 x_{K1} = m x_{K1}'
 \end{equation}
@@ -244,7 +244,7 @@ where \(m\) is a constant that depends on the properties of the kicker and also 
 x_{K2} &=& \left(R_{11} + \frac{R_{12}}{m}\right)x_{K1} \\
 x_{K2}' &=& (m R_{21} + R_{22})x_{K1}'
 \end{eqnarray}
-As stated \(x_{K2}\) and \(x_{K2}'\) are defined above at the entrance to the second kicker. The requirement for the PFF chicane optics is that the position and divergence at the exit of the second kicker are zero independent of the applied kicks. However, a derivation of the exact expression for the optics requirements between the kickers in order to close the orbit at the exit of the second kicker is complicated by the fact that the quadrupole around the second kicker, CC.QDH0790, can have a different strength to the quadrupole around the first kicker. 
+As stated \(x_{K2}\) and \(x_{K2}'\) are defined above at the entrance to the second kicker. The requirement for the PFF chicane optics is that there is no change in position nor divergence at the exit of the second kicker for all applied kicks. However, a derivation of the exact expression for the optics requirements between the kickers in order to close the orbit at the exit of the second kicker is complicated by the fact that the quadrupole around the second kicker, CC.QDH0790, can have a different strength to the quadrupole around the first kicker. 
 
 For the purpose of the discussion here the simplified case where CC.QDH0790 has the same strength but opposite polarity (focuses in the opposite plane) as CC.QDH0490 will be considered. The ideal case where the two kickers can be powered with the same magnitude voltage but opposite polarity is also assumed. With these conditions, the second quadrupole/kicker effectively have precisely the opposite effect on the beam as the first quadrupole/kicker. To close the orbit after the second kicker the position and divergence at the entrance to the second kicker must therefore meet the following criteria:
 \begin{eqnarray}
@@ -272,7 +272,7 @@ There are many possible solutions to these expressions, with the simplest exampl
 
 \newsection{opticsMeas}{TL2 Optics Measurements}
 
-As seen above there are many optics constraints in TL2 that must be met both to ensure that the beam can be transported efficiently in to the CLEX area as well as to obtain the desired behaviour in the horizontal chicane for the PFF system. MADX was used to create optics that meet these criteria (Section~\ref{s:matchedOptics}), but they will be of no use if the model of TL2 does not accurately describe the actual characteristics of the line. As such, a series of measurements has been taken to determine and improve the accuracy of the TL2 MADX model. Measurements of this type had not previously been completed for the TL2 line at CTF3, thus any errors identified in the model are not limited to only the hardware changes made for the PFF system.
+As seen above there are many optics constraints in TL2 that must be met both to ensure that the beam can be transported efficiently into the CLEX area as well as to obtain the desired behaviour in the horizontal chicane for the PFF system. MADX was used to create optics that meet these criteria (Section~\ref{s:matchedOptics}), but they will be of no use if the model of TL2 does not accurately describe the actual characteristics of the line. As such, a series of measurements has been taken to determine and improve the accuracy of the TL2 MADX model. Measurements of this type had not previously been completed for the TL2 line at CTF3, thus any errors identified in the model are not limited to only the hardware changes made for the PFF system.
 
 \subsection{Method}
 \label{ss:opticsMethod}
@@ -281,7 +281,7 @@ The TL2 line includes 12 magnetic orbit correctors, as shown in Figure~\ref{f:ne
 %An electric current can be applied to horizontal or vertical coils on the corrector, creating independently adjustable horizontal and vertical fields that deflect the beam. 
 The primary purpose of the correctors is to compensate differences in beam orbit resulting from small misalignments of devices along the line. However, they can also be used to probe the accuracy of the TL2 model.
 
-By changing the strength (supplied power supply current) of one of the correctors the beam is deflected on to a new trajectory along the line. The new orbit is observed in the BPMs downstream of the corrector, with a total of 12 BPMs in TL2 (also shown in Figure~\ref{f:newTL2Lattice}). The position offset in each BPM depends on the transfer matrix between the corrector and that BPM, and therefore on the focusing properties of all the magnetic elements between the corrector and the BPM. By deflecting the beam with each corrector along the line, and in both planes, the response of the whole line as well as individual parts of the line was determined.
+By changing the strength (power supply current) of one of the correctors the beam is deflected onto a new trajectory along the line. The new orbit is observed in the BPMs downstream of the corrector, with a total of 12 BPMs in TL2 (also shown in Figure~\ref{f:newTL2Lattice}). The position offset in each BPM depends on the transfer matrix between the corrector and that BPM, and therefore on the focusing properties of all the magnetic elements between the corrector and the BPM. By deflecting the beam with each corrector along the line, and in both planes, the response of the whole line as well as individual parts of the line was determined.
 
 The same process was repeated in the MADX model, applying a current to one of the correctors and creating a simulated deflected orbit. All the BPMs are included in the model, allowing the real measured position in each BPM to be compared to the simulated position from the MADX model. Any difference between the two highlights inaccuracies in the modelled properties of the TL2 lattice.
 
@@ -295,10 +295,10 @@ In the horizontal plane there is good agreement between the model and the measur
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelOriginalH}
-  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the expected orbit in the original MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
+  \caption{Measured horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the expected orbit in the original MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelOriginalH}
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelOriginalV}
-  \caption{Vertical orbit due to a kick from the corrector CC.DHF0175 (red) compared to the expected orbit in the original MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
+  \caption{Measured vertical orbit due to a kick from the corrector CC.DHF0175 (red) compared to the expected orbit in the original MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelOriginalV}
 \end{figure}
 
@@ -355,7 +355,7 @@ The first adjustment made was to the modelled strength of the L-type quadrupoles
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrQuadH}
-  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the orbit in the MADX model of TL2 with the L-type quadrupole strengths increased by \(7\%\). The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
+  \caption{Measured horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the orbit in the MADX model of TL2 with the L-type quadrupole strengths increased by \(7\%\). The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelCorrQuadH}
 \end{figure}
 
@@ -366,10 +366,10 @@ By adjusting the HGAP, FINT and quadrupole (\(k\)) component of the dipoles in t
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelOrigBendV}
-  \caption{Vertical orbit due to a kick from the corrector CC.DVF0525 (red) with the default MADX model of the dipole focusing. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
+  \caption{Measured vertical orbit due to a kick from the corrector CC.DVF0525 (red) with the default MADX model of the dipole focusing. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelOrigBendV}
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrBendV}
-  \caption{Vertical orbit due to a kick from the corrector CC.DVF0525 (red) with the corrected MADX model of the dipole focusing. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
+  \caption{Measured vertical orbit due to a kick from the corrector CC.DVF0525 (red) with the corrected MADX model of the dipole focusing. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelCorrBendV}
 \end{figure}
 
@@ -404,16 +404,16 @@ Figures~\ref{f:modelCorrectedH}~and~\ref{f:modelCorrectedV} compare the measured
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrectedH}
-  \caption{Horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the corrected MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
+  \caption{Measured horizontal orbit due to a kick from the corrector CC.DHF0175 (red) compared to the corrected MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelCorrectedH}
   \includegraphics[width=0.9\textwidth]{Figures/optics/modelCorrectedV}
-  \caption{Vertical orbit due to a kick from the corrector CC.DVF0175 (red) compared to the corrected MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
+  \caption{Measured vertical orbit due to a kick from the corrector CC.DVF0175 (red) compared to the corrected MADX model of TL2. The black line shows the MADX orbit propagated through all elements along the line, and the dashed blue line the orbit restricted to only the BPM positions.}
   \label{f:modelCorrectedV}
 \end{figure}
 
 \newsection{matchedOptics}{Matched TL2 Optics}
 
-With the corrected MADX model of TL2 in place the new optics for the PFF system were created. The optics were obtained using MADX matching libraries \cite{madx}, in which many desired constraints can be defined for the line (each with its own weight) and then one of several optimisation algorithms can be used to change the quadrupole strengths and derive an optics that meets those constraints. Two sets of optics were created for TL2 -- a nominal set of optics containing only the constraints from Section~\ref{ss:nominalOpticsReqs}, and a set of PFF optics containing the additional \(R_{52}\) and orbit closure related constraints for the PFF system from Section~\ref{ss:pffOpticsReqs}. Without the additional PFF constraints roughly a factor two smaller maximum dispersion and beta values can be achieved in the nominal optics. However, the beam quality achieved with the PFF optics exceeded expectations, and the benefit gained from the nominal optics in terms of dispersion and beta functions did not outweigh the time taken to change optics regularly. Therefore, only the PFF optics is routinely used. The nominal optics is not documented in detail here, but the optics parameters are provided in Tables~\ref{t:pffOpticsQuads}~and~\ref{t:pffOpticsVals} for a point of comparison with the PFF optics.
+With the corrected MADX model of TL2 in place the new optics for the PFF system were created. The optics were obtained using MADX matching libraries \cite{madx}, in which many desired constraints can be defined for the line (each with its own weight) and then one of several optimisation algorithms can be used to change the quadrupole strengths and derive an optics solution that meets those constraints. Two sets of optics were created for TL2 -- a nominal set of optics containing only the constraints from Section~\ref{ss:nominalOpticsReqs}, and a set of PFF optics containing the additional \(R_{52}\) and orbit closure related constraints for the PFF system from Section~\ref{ss:pffOpticsReqs}. Without the additional PFF constraints roughly a factor two smaller maximum dispersion and beta values can be achieved in the nominal optics. However, the beam quality achieved with the PFF optics exceeded expectations, and the benefit gained from the nominal optics in terms of dispersion and beta functions did not outweigh the time taken to change optics regularly. Therefore, only the PFF optics is routinely used. The nominal optics is not documented in detail here, but the optics parameters are provided in Tables~\ref{t:pffOpticsQuads}~and~\ref{t:pffOpticsVals} for a point of comparison with the PFF optics.
 
 \subsection{Matching Process}
 \label{ss:matchingMethod}

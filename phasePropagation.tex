@@ -31,7 +31,7 @@ Substituting the optimal gain value back in to Equation~\ref{e:pffEq2} gives an 
 \sigma_{PFF} = \sigma_d\sqrt{1-\rho_{ud}^2}
 \label{e:theoretJitOptGain}
 \end{equation}
-With the optimal PFF setup the achievable corrected downstream phase jitter has no dependence on the upstream phase jitter. It depends only on the initial downstream phase jitter and most strongly on the upstream--downstream phase correlation. The dependence of the achievable corrected downstream phase jitter on the phase monitor resolution (Section~\ref{s:resolutionEqs}) is implicit, as this contributes to the measured upstream--downstream phase correlation. If non-optimal gains are used there is also a dependence on the upstream phase jitter and the set gain value as per Equation~\ref{e:pffEq2}. Figure~\ref{f:theoretJitvsCorr} shows how the achievable corrected downstream phase jitter depends on the upstream--downstream phase correlation. A factor 2 reduction in the initial downstream phase jitter requires a correlation of 86.6\%, for example.
+With the optimal PFF setup the achievable corrected downstream phase jitter has no dependence on the upstream phase jitter. It depends only on the initial downstream phase jitter and the upstream--downstream phase correlation. The dependence of the achievable corrected downstream phase jitter on the phase monitor resolution (Section~\ref{s:resolutionEqs}) is implicit, as this contributes to the measured upstream--downstream phase correlation. If non-optimal gains are used there is also a dependence on the upstream phase jitter and the gain as per Equation~\ref{e:pffEq2}. Figure~\ref{f:theoretJitvsCorr} shows how the achievable corrected downstream phase jitter depends on the upstream--downstream phase correlation. A factor 2 reduction in the initial downstream phase jitter requires a correlation of 86.6\%, for example.
 
 Equations~\ref{e:pffEq2},~\ref{e:theoretOptGain}~and~\ref{e:theoretJitOptGain} are used extensively in the remainder of this thesis to determine the beam conditions needed to achieve a \(0.2^\circ\) correction at CTF3, as well as to calculate the expected effect of the PFF system given the beam conditions and PFF setup.
 
@@ -48,7 +48,7 @@ This section summarises the status of the phase propagation during the first PFF
 
 \subsubsection{Mean Phase}
 
-Figure~\ref{f:origMeanPhJit} compares the mean phase upstream and downstream across one dataset of 213 pulses, or roughly 5 minutes. The downstream phase jitter is more than double the upstream phase jitter --- at \(1.86\pm0.09^\circ\) compared to \(0.81\pm0.04^\circ\) upstream (rms). Theoretically the PFF system could still remove the amplified downstream phase jitter providing the jitter is well correlated with the upstream phase, as derived in the previous section. Unfortunately, as shown in Figure~\ref{f:origUpVsDown}, there is almost no correlation between the upstream and downstream phase, with a calculated coefficient of \(0.34\pm0.06\) in this case.
+Figure~\ref{f:origMeanPhJit} compares the mean phase upstream and downstream across one dataset of 213 pulses, or roughly 5 minutes. The downstream phase jitter is more than double the upstream rms phase jitter --- at \(1.86\pm0.09^\circ\) compared to \(0.81\pm0.04^\circ\) upstream. Theoretically the PFF system could still remove the amplified downstream phase jitter providing the jitter is well correlated with the upstream phase, as derived in the previous section. Unfortunately, as shown in Figure~\ref{f:origUpVsDown}, there is almost no correlation between the upstream and downstream phase, with a calculated coefficient of \(0.34\pm0.06\) in this case.
 
 \begin{figure}
   \centering
@@ -78,7 +78,7 @@ In addition to the differences in the mean phase there are also large discrepanc
   \label{f:origJitterAlong}
 \end{figure}
 
-As well as the static variations in the downstream phase along the pulse, there are also large differences in the phase jitter along the pulse. An example is shown in Figure~\ref{f:origJitterAlong}. The point by point upstream phase jitter along the pulse is quite flat at around 1 degree, slightly larger than the jitter on the mean. Alternatively, the downstream phase jitter has large variations along the pulse. In some regions the downstream jitter is a factor 4 higher than the upstream phase jitter, whilst in others it is only 50\% higher.
+As well as the static variations in the downstream phase along the pulse, there are also large differences in the phase jitter along the pulse. An example is shown in Figure~\ref{f:origJitterAlong}. The point by point upstream phase jitter along the pulse is quite flat at around 1 degree, slightly larger than the jitter on the mean. Conversely, the downstream phase jitter has large variations along the pulse. In some regions the downstream jitter is a factor 4 higher than the upstream phase jitter, whilst in others it is only 50\% higher.
 
 \subsubsection{Consequences for the PFF System}
 
