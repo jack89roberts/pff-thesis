@@ -73,6 +73,7 @@ Several other transfer matrix coefficients are also of specific interest for the
 The previous discussion shows how the propagation of a single particle through a beam line can be modelled. The matrix formalism above can be adjusted to describe the trajectories of many particles by replacing the column vectors \(\vec{x}\) with matrices of many column vectors describing each particle. However, to understand the properties of a complete beam it is also useful to introduce the general solution to the transverse equations of motion (Hill's Equation) \cite{lee}:
 \begin{equation}
 x_i(s) = \sqrt{\beta_x(s)\epsilon_x}\cos[\mu_x(s) + \delta_{xi}]
+\label{e:twissEqBeta}
 \end{equation}
 where the subscript \(i\) refers to the \(i^\mathrm{th}\) particle. Replacing \(x\) with \(y\) gives the equivalent solution in the vertical plane. The transverse motion follows a modified harmonic oscillation with amplitude \(\sqrt{\beta_x(s)\epsilon_x}\). The betatron (or beta) function \(\beta_x(s)\) varies along the beam line and depends on the lattice and optics, whilst the beam emittance \(\epsilon_x\) is a preserved quantity \cite{wolski}. The phase advance \(\mu_x(s)\) defines the phase of the oscillation at each point along the lattice, with each particle having an initial phase offset \(\delta_{xi}\). 
 
@@ -85,6 +86,7 @@ where the explicit dependence on \(s\) of all the parameters apart from the emit
 \alpha_x = -\frac{1}{2}\frac{\mathrm{d}\beta_x}{\mathrm{d}s}
 \qquad\mathrm{;}\qquad
 \gamma_x = \frac{1+\alpha_x^2}{\beta_x}
+\label{e:twissEqAlpha}
 \end{equation}
 The Courant-Snyder invariant defines an ellipse with area \(\pi\epsilon_x\) in \((x, x')\) phase space. All particles therefore follow elliptical trajectories in phase space as they progress through the beam line. At any point along the lattice the 68\% of particles (\(\pm 1\sigma\)) in a Gaussian beam are contained within an envelope of \(x(s) \leq \sqrt{\beta_x(s)\epsilon_x}\). The beta function defines the beam size at any point in the lattice, assuming a beam in which all particles have the reference energy. The dispersion previously introduced can then be used to independently determine the increase in beam size resulting from the beam's energy spread.
 
@@ -110,7 +112,7 @@ F_x = e(E_x + vB_y) \sim e(1+\beta)V(t) \sim 2eV(t)
 \end{equation}
 where \(e\) is the charge of an electron and \(\beta = v/c\). The final expression holds for an ultra-relativistic particle where \(\beta \simeq 1\), which is true for the CTF3 beam. In this case the forces resulting from the electric and magnetic fields have the same magnitude and direction. If the voltage were applied to the upstream end of the strip rather than the downstream end, the magnetic field would be in the opposite direction and the resulting electric and magnetic forces would cancel. 
 
-With the voltage correctly applied to the downstream end of the strips the force is as above and the kicker imparts a horizontal deflection to the beam. The kicker design gives a horizontal deflection of 1~mrad for an applied voltage of \(\pm1.26~kV\) to each strip \cite{kickerIPAC11}, assuming the CTF3 beam energy of around 135 MeV. This value together with the peak voltage output from the amplifier and the optics of the TL2 chicane (as described below) defines the maximum phase offset that can be corrected by the PFF system (Section~\ref{ss:corrRange}).
+With the voltage correctly applied to the downstream end of the strips the force is as above and the kicker imparts a horizontal deflection to the beam. The kicker design gives a horizontal deflection of 1~mrad for an applied voltage of \(\pm1.26\)~kV to each strip \cite{kickerIPAC11}, assuming the CTF3 beam energy of around 135 MeV. This value together with the peak voltage output from the amplifier and the optics of the TL2 chicane (as described below) defines the maximum phase offset that can be corrected by the PFF system (Section~\ref{ss:corrRange}).
 
 
 
@@ -139,7 +141,7 @@ Other features along the TL2 line that are important for the derivation of optic
 \subsection{Integration of PFF Hardware}
 \label{ss:tl2PFFIntegration}
 
-Due to building and cost constraints the PFF prototype had to make use of the pre-existing layout of the TL2 horizontal chicane, with only minor modifications possible to accommodate the PFF hardware. These changes are highlighted in Figure~\ref{f:newTL2Lattice}.
+Due to building and cost constraints the PFF prototype had to make use of the pre-existing layout of the TL2 horizontal chicane, although with many modifications necessary to accommodate the PFF hardware. These changes are highlighted in Figure~\ref{f:newTL2Lattice}.
 
 \begin{figure}
   \centering
@@ -163,7 +165,7 @@ The nominal optics constraints are mostly put in place to minimise the transvers
 
 The dispersion describes the energy dependent component of the beam size (Section~\ref{s:opticsIntro}). Optics are usually created so that there is no dispersion (\(D_{x} = D_{y} = 0\)) in straight sections. However, inside chicanes and rings the dispersion can never be zero everywhere. To give zero dispersion in the straight sections the dispersion must therefore be closed at the exit of all bending sections. Dispersion closure means that both the dispersion and its derivative (\(D_x' = \mathrm{d}D_x/\mathrm{d}s\), and \(D_y' = \mathrm{d}D_y/\mathrm{d}s\)) are zero at the exit from the chicane or ring. In TL2 this condition applies after the bend CC.BHH0200 at the start of the line and at the exit of the horizontal chicane (CC.BHG0800) for the horizontal dispersion, and at the exit of the vertical chicane (CC.BVB0400) for the vertical dispersion.
 
-Within the bending sections the magnitude of the dispersion should be kept as small as possible whilst meeting the other optics constraints. At CTF3 the rms energy spread of the beam is typically at the  level of 0.8\% -- 1.0\% \cite{CTF3}. Dispersion is then usually the largest contribution to the beam size, with a dispersion of 1~m giving excursions up to \(\pm1\)~cm in individual particle orbits, for example. The diameter of the beam pipe in bending sections at CTF3 is 10~cm in most cases, as opposed to 4~cm in straight sections, in order to minimise the effects of dispersion dependent beam size growth on the beam transport \cite{CTF3}. However, the second kicker installed in the chicane for the PFF system (CC.KHD0780) only has the normal 4~cm aperture (2~cm radius).  Dispersion around the second kicker must therefore be kept well below 2~m to avoid losing a fraction of off-energy particles on the kicker strips.
+Within the bending sections the magnitude of the dispersion should be kept as small as possible whilst meeting the other optics constraints. At CTF3 the rms energy spread of the beam is typically at the  level of 0.8\% -- 1.0\% \cite{CTF3}. Dispersion is then usually the largest contribution to the beam size, with a dispersion of 1~m giving one sigma (\(\Delta p/p=0.01\)) excursions of \(\pm1\)~cm in individual particle orbits, for example. The diameter of the beam pipe in bending sections at CTF3 is 10~cm in most cases, as opposed to 4~cm in straight sections, in order to minimise the effects of dispersion dependent beam size growth on the beam transport \cite{CTF3}. However, the second kicker installed in the chicane for the PFF system (CC.KHD0780) only has the normal 4~cm aperture (2~cm radius).  Dispersion around the second kicker should ideally be kept below 0.66~m so that off-energy particles up to three sigma (\(\Delta p/p=0.03\)) are not lost on the kicker strips.
 
 \subsubsection{Twiss Functions}
 
@@ -173,11 +175,11 @@ Within the bending sections the magnitude of the dispersion should be kept as sm
 %real emittance is 0.5555 micrometres
 %50~m beta function gives around +/- 0.5 cm beam size
 
-The Twiss beta functions define the energy independent component of the transverse beam size and the alpha functions define the rate of change of the beta function along the line (Section~\ref{s:opticsIntro}). The transverse beam size at any point in the lattice is related to the beta function and emittance via the relationship \(\sqrt{\beta_x(s)\epsilon_x}\) (and the vertical equivalent). 
+The Twiss beta functions define the energy independent component of the transverse beam size and the alpha functions define the rate of change of the beta function along the line (Equations~\ref{e:twissEqBeta}--\ref{e:twissEqAlpha}). The transverse beam size at any point in the lattice is related to the beta function and emittance via the relationship \(\sqrt{\beta_x(s)\epsilon_x}\) (and the vertical equivalent). 
 
-The optics constraints on the Twiss functions are a compromise between small beta and small alpha values. The beta value must be kept small enough to avoid the transverse beam size becoming similar to the aperture of the beam pipe, which would result in beam losses. At CTF3 the geometric beam emittance is usually around 0.5~\(\mathrm{\mu m}\), but may be up to a factor two larger than this in the horizontal plane depending on the beam setup \cite{davideThesis}. With an emittance of 0.5~\(\mathrm{\mu m~rad}\) a beta value of 50~m at one point in the lattice corresponds to a transverse beam size of 0.5~cm at that location, compared to the 4~cm beam pipe aperture in straight sections at CTF3, for example. Beta is usually kept below 50~m when possible, but values up to 100~m can be accepted \cite{piotrPriv}. 
+The optics constraints on the Twiss functions are a compromise between small beta and small alpha values. The beta value must be kept small enough to avoid the transverse beam size becoming similar to the aperture of the beam pipe, which would result in beam losses. At CTF3 the geometric beam emittance is usually around 0.5~\(\mathrm{\mu m}\), but may be up to a factor two larger than this in the horizontal plane depending on the beam setup \cite{davideThesis}. With an emittance of 0.5~\(\mathrm{\mu m~rad}\) a beta value of 50~m at one point in the lattice corresponds to a one sigma transverse beam size of 0.5~cm at that location, compared to the 4~cm beam pipe aperture in straight sections at CTF3, for example. Beta is usually kept below 50~m when possible, but values up to 100~m can be accepted \cite{piotrPriv}. 
 
-However, at the same time small beta values correspond to a smaller beam size and therefore stronger focusing along the line. Increasing the strength of quadrupoles also increases the magnitude of non-linear field errors in the magnets, for example, which can lead to aberrations in the beam. As a result it is desirable to have a weak optics, with the quadrupole strengths as low as possible whilst keeping beta at a tolerable level. This can be constrained in the optics by attempting to keep alpha as small as possible, typically below 30 at CTF3.
+However, at the same time small beta values correspond to a smaller beam size and therefore stronger focusing along the line. Increasing the strength of quadrupoles also increases the sensitivity of the optics to variations in initial conditions, errors in the model, or non-linear field errors in the magnets, for example, which can lead to aberrations in the beam. As a result it is desirable to have a weak optics, with the quadrupole strengths as low as possible whilst keeping beta at a tolerable level. This can be constrained in the optics by attempting to keep alpha as small as possible, typically below 30 at CTF3.
 
 As mentioned in Section~\ref{s:tl2} there are long drift spaces with no focusing elements at the start and end of TL2, and it is most difficult to maintain low beta and alpha values following these regions. At the start of TL2 the initial values of the Twiss parameters are also constrained by the optics of the combiner ring. In other words, the beta and alpha values at the start of TL2 are defined by the closed solution of the combiner ring. The optics at the beginning of TL2 are fixed by these constraints, as well as additional dispersion constraints, and cannot be further adjusted. As a result, the new TL2 optics (Section~\ref{s:matchedOptics}) are usually matched starting from CC.QFH0210, and the required initial conditions at this location are summarised in Table~\ref{t:tl2InitTwiss}.
 
@@ -205,7 +207,8 @@ The dispersion describes how the transverse orbit of a particle is changed by it
 t_{f} = t_{i} + R_{56}\left(\frac{\Delta p}{p}\right)
 \end{equation}
 
-The \(R_{56}\) value between the entrance and exit of all bending sections at CTF3 is nominally zero so that there is no transformation of energy jitter in to phase jitter. In TL2 this places the constraints for \(R_{56}\) to be zero between the entrance and exit of the vertical chicane (CC.BVA0300 to CC.BVB0400) and between the entrance and exit of the horizontal chicane (CC.BHG0500 to CC.BHG0800).
+The \(R_{56}\) value between the entrance and exit of all bending sections at CTF3 is nominally zero so that that the bunch length is not increased along the facility, and there is then no transformation of energy jitter in to phase jitter. In TL2 this places the constraints for \(R_{56}\) to be zero between the entrance between the entrance and exit of the horizontal chicane (CC.BHG0500 to CC.BHG0800).
+%and exit of the vertical chicane (CC.BVA0300 to CC.BVB0400) and 
 
 \subsection{PFF Optics Constraints}
 \label{ss:pffOpticsReqs}
@@ -256,7 +259,8 @@ Comparing these two expressions to the previously derived equations for \(x_{K2}
 R_{11} + \frac{R_{12}}{m} &=& -1  \label{e:orbClosConst1} \\
 m R_{21} + R_{22} &=& +1 \label{e:orbClosConst2}
 \end{eqnarray}
-There are many possible solutions to these expressions, with the simplest example being \(R_{11} = -1\), \(R_{12} = 0\), \(R_{21} = 0\) and \(R_{22} = 1\). However, the optics matching (Section~\ref{s:matchedOptics}) allows the quadrupoles CC.QDH0490 and CC.QDH0790 to have different strengths. MADX is then used to model the actual beam orbit in the chicane and the figure of merit is for the simulated orbit to be closed after the second kicker, rather than for the above constraints to be met. Nevertheless, the optics eventually created do satisfy Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} within several percent (Section~\ref{ss:tl2PFFOptics}).
+%There are many possible solutions to these expressions, with 
+The simplest solution to these equations is \(R_{11} = -1\), \(R_{12} = 0\), \(R_{21} = 0\) and \(R_{22} = 1\). However, other solutions exist and the optics matching (Section~\ref{s:matchedOptics}) allows the quadrupoles CC.QDH0490 and CC.QDH0790 to have different strengths, which is not taken in to account here. MADX is used to model the actual beam orbit in the chicane and the figure of merit is for the simulated orbit to be closed after the second kicker, rather than for the above constraints to be met. Nevertheless, the optics eventually created do satisfy Equations~\ref{e:orbClosConst1}~and~\ref{e:orbClosConst2} within several percent (Section~\ref{ss:tl2PFFOptics}).
 
 %First assuming a simplified case of zero length kickers (with only the divergence changing in the kicker and not the beam position), the position \(x_{K2}\), and divergence, \(x_{K2}'\), of the beam at the entrance to the second kicker can be expressed as:
 %\begin{eqnarray}
@@ -399,7 +403,7 @@ By adjusting the HGAP, FINT and quadrupole (\(k\)) component of the dipoles in t
   \end{center}
 \end{table}
 
-Figures~\ref{f:modelCorrectedH}~and~\ref{f:modelCorrectedV} compare the measured horizontal and vertical orbit to the new MADX model of TL2 with all the corrections from Table~\ref{t:tl2ModelChanges} in place. The same corrector, CC.DHF0175, and data are used as for the examples from the original model in Figures~\ref{f:modelOriginalH}~and~\ref{f:modelOriginalV}. The new version of the model is a clear improvement. In both the horizontal and vertical planes the measured and modelled beam orbit now agree along the full length of the line within a small margin of error. With the original MADX model the mean absolute difference between the measured and simulated positions in the ten BPMs following CC.DHF0175 was \(3.9\pm1.0\)~mm in the horizontal plane and \(3.1\pm0.8\)~mm in the vertical plane. The corrected model reduces these differences by an order of magnitude, to \(0.2\pm0.1\)~mm in the horizontal plane and \(0.3\pm0.1\)~mm in the vertical plane.
+Figures~\ref{f:modelCorrectedH}~and~\ref{f:modelCorrectedV} compare the measured horizontal and vertical orbit to the new MADX model of TL2 with all the corrections from Table~\ref{t:tl2ModelChanges} in place. The same corrector, CC.DHF0175, and data are used as for the examples from the original model in Figures~\ref{f:modelOriginalH}~and~\ref{f:modelOriginalV}. The new version of the model is a clear improvement. In both the horizontal and vertical planes the measured and modelled beam orbit now agree along the full length of the line within a small margin of error. With the original MADX model the mean absolute difference between the measured and simulated positions in the ten BPMs following CC.DHF0175 was \(3.9\pm1.0\)~mm in the horizontal plane and \(3.1\pm0.8\)~mm in the vertical plane. The corrected model reduces these differences by an order of magnitude, to \(0.2\pm0.1\)~mm in the horizontal plane and \(0.3\pm0.1\)~mm in the vertical plane. Optics calculated with the corrected model immediately gave good transmission in to CLEX, with the measured Twiss parameters also close to the expected values from the model. This was not the case for the original MADX model.
 
 \begin{figure}
   \centering
@@ -477,7 +481,7 @@ As there are relatively few variables (quadrupoles) compared to the number of co
 	   \(x'\) & 0 after K2 & \(-5\times10^{-7}\) (1~mrad kick) & N/A \\
 	   \(|D_x|\) & Max \(<2.5\)~m & 1.16~m at QDL0650 & 0.62~m at QDH0790 \\
 	   \(|D_y|\) & Max \(<1\)~m & 0.11~m at QDL0330 & 0.11~m at QDL0330\\
-	   \(|D_x|\) & \(\ll 2\)~m at K2 & 0.98~m & 0.62~m \\
+	   \(|D_x|\) & \(<0.66\)~m at K2 & 0.98~m & 0.62~m \\
 	   \(D_x\) & 0~m at BHG0800 & \(9\times10^{-7}\)~m & \(2\times10^{-11}\)~m \\
 	   \(D_x'\) & 0 at BHG0800 & \(-6\times10^{-6}\) & \(-1\times10^{-10}\) \\
 	   \(D_y\) & 0~m at BVB0400 & \(4\times10^{-5}\)~m & \(4\times10^{-11}\) \\
@@ -532,7 +536,7 @@ position of the two PFF kickers.}
 \end{figure}
 \end{landscape}}
 
-Figure~\ref{f:pffOpticsDisp} shows the horizontal and vertical dispersion along the line. The dispersions and their derivatives are closed at the \(10^{-5}\) level in the vertical chicane, and the \(10^{-6}\) level in the horizontal chicane. This leaves no residual dispersion in the straight sections, as desired. In the vertical chicane the dispersion reaches a peak magnitude of 0.11~m, whilst in the horizontal chicane the peak is 1.16~m. Both are much smaller than the constrained maximum values. In addition, the dispersion in the region of the second kicker (K2), which is an aperture restriction as described previously, is 0.98~m and much smaller than the constrained maximum of 2~m.
+Figure~\ref{f:pffOpticsDisp} shows the horizontal and vertical dispersion along the line. The dispersions and their derivatives are closed at the \(10^{-5}\) level in the vertical chicane, and the \(10^{-6}\) level in the horizontal chicane. This leaves no residual dispersion in the straight sections, as desired. In the vertical chicane the dispersion reaches a peak magnitude of 0.11~m, whilst in the horizontal chicane the peak is 1.16~m. Both are much smaller than the constrained maximum values. However, the dispersion in the region of the second kicker (K2), which is an aperture restriction as described previously, is 0.98~m and larger than the ideal value of below \(0.66\)~m to avoid losses on the kicker strips for energy offsets up to \(\Delta p/p = 0.03\). The region around the second kicker is therefore another sensitive area for beam transport in this optics.
 
 The key constraint that is not met in the matched PFF optics is \(R_{56}\), where a non-zero value had to be accepted in order to meet the remaining constraints. As seen in Figure~\ref{f:pffOpticsR56} the \(R_{56}\) transfer matrix coefficient across the horizontal chicane is -0.18~m. This leads to additional energy dependent phase jitter following the chicane that is not present prior to the chicane, which has severe consequences for the performance of the PFF system. The extent and mitigation of this effect is the focus of Chapter~\ref{c:phasePropagation}.
 
