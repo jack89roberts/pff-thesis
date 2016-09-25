@@ -62,7 +62,8 @@ where \(f\) is the frequency at which bunches collide, \(N\) is the number of pa
 
 \newsection{futureColliders}{Motivation for Future Linear Colliders}
 
-Colliders can be circular (synchrotrons) or linear (linacs) and most commonly use either electron or proton beams (and their associated anti-particles). Some colliders also use more exotic beams, consisting of lead ions or other nuclei, for example. The choice of collider shape and particle has many consequences for the properties of the resulting experiment. 
+Colliders can be circular (synchrotrons) or linear (linacs) and most commonly use either electron or proton beams (and their associated anti-particles). S%ome colliders also use more exotic beams, consisting of lead ions or other nuclei, for example. 
+The choice of collider shape and particle has many consequences for the properties of the resulting experiment. 
 
 In circular colliders the two beams are bent around a path of fixed radius using magnetic fields (dipole magnets). The beams circulate the collider many times, being brought in to collision at one or several interaction points around the ring where detectors are placed. A large fraction of the ring can be filled with bunches, 
 and %with these bunches circulating at close to the speed of light
@@ -71,7 +72,8 @@ For proton machines the highest achievable energy in a synchrotron is predominan
 
 Proton collisions present a number of challenges for the particle detectors and data analysis, however. Protons are not fundamental particles, but rather consist of quarks and gluons. Therefore the interactions that occur in proton colliders are in reality between the constituents of the protons, rather than the protons themselves. The precise energy of each quark or gluon is not known, which leads to increased uncertainties in the analysis of the collision products. In addition, strong interactions between the quarks and gluons lead to high background in the collision events, making particle identification and tracking in the detectors more difficult. As electrons are (to our current knowledge) fundamental and do not partake in the strong interaction the resulting collisions in a electron (or electron--positron) collider are much cleaner and the uncertainties smaller. This motivates research in to a future high energy electron collider, where the properties of recently discovered heavy particles such as the Higgs boson and top quark, or any new particles discovered by the LHC in the coming years, could be studied with high precision. 
 
-Electron machines present a different challenge to protons due to their approximately 2000 times lower mass. Charged particles bent in a magnetic field emit radiation, known as synchrotron radiation. The power radiated due to synchrotron radiation, \(P\), depends on the bending radius, \(r\), the particle's energy, \(E\), and the particle's rest mass, \(m_0\), as follows \cite{wilson}:
+Electron machines present a different challenge to protons due to their approximately 2000 times lower mass. 
+Charged particles bent in a magnetic field emit radiation, known as synchrotron radiation. The power radiated due to synchrotron radiation, \(P\), depends on the bending radius, \(r\), the particle's energy, \(E\), and the particle's rest mass, \(m_0\), as follows \cite{wilson}:
 \begin{equation}
 P \propto \frac{1}{r^2} \frac{E^4}{m_0^4}
 \end{equation}
@@ -84,7 +86,7 @@ Currently there are two separate proposals for the design of a future linear ele
 \newsection{clicIntro}{The Compact Linear Collider (CLIC)}
 
 The parameters of CLIC, summarised in Table~\ref{t:clicParams}, are chosen to optimise the cost of an electron--positron collider with a centre of mass energy of 3~TeV whilst providing similar or higher luminosity than the LHC. Superconducting RF cavities are more limited in terms of the peak fields they can achieve, and so room temperature normal conducting cavities are used to achieve an accelerating gradient of 100~MV/m. This reduces the site length, and associated civil engineering costs, by roughly a factor 3 compared to what would be necessary with a superconducting 3~TeV machine. Studies and cost optimisations of the cavities necessary to support the high peak fields, taking in to account the RF field breakdown rate for example, lead to the choice of a 12~GHz RF frequency with a beam pulse length of 156~ns \cite{clicCDR}. Each accelerating cavity requires a peak RF input power of around 65~MW \cite{clicCDR}.
-
+\linebreak
 \begin{table}
   \begin{center}
   	\begin{tabular}{| c c |}
@@ -127,8 +129,6 @@ Figure~\ref{f:clicLayout} shows the layout of the CLIC complex. The bottom half 
 The top half of the figure shows the beam lines involved in the generation of the high intensity drive beams. The drive beam accelerators are conventional linacs with an RF frequency of 1~GHz, a beam pulse length of 142~\(\mathrm{\mu s}\), a beam current of 4.2~A and a final energy of 2.4~GeV. The longer beam pulse length and lower power requirements means klystrons can be used with high efficiencies, unlike the main beams. Following the linac the drive beams enter a series of ``delay loops'' and ``combiner rings'' in which the drive beam is interleaved with itself to increase its intensity by a factor 24 (to 100~A) in a series of shorter 240~ns beam pulses. This drive beam recombination process is described in Section~\ref{ss:clicCombination}.
 
 The 100~A drive beam is then directed in to 24 decelerator sections. Here a series of specially designed cavities, Power Extraction and Transfer Structures (PETS), are installed which decelerate, and extract power from, the drive beam. The PETS extract 90\% of the energy of the drive beam \cite{clicCDR}, creating an RF pulse with the necessary properties to accelerate the main beam at 100~MV/m. The extracted RF power from the PETS is transferred to the main beam accelerating cavities via short waveguides.
-
-
 
 \subsection{Drive Beam Recombination}
 \label{ss:clicCombination}
@@ -176,8 +176,7 @@ This dependence of path length on the kicker voltage is used to correct the phas
 
 Measuring the phase upstream of the correction location (feedforward rather than feedback) combined with the use of the turnaround gives the benefit of being able to apply the correction to the same drive beam bunches that were initially measured. This is possible  despite the beam travelling at close to the speed of light as the path length of the signals between the phase monitors and the kickers is shorter than the trajectory of the beam. In other words the correction signals bypass the turnaround, with minimal separation between the phase monitor and the chicane to minimise the system latency. The difference between the beam path length and the correction signal path length defines the available latency for the PFF hardware (signal processing, correction calculation and voltage generation).
 
-The \(0.2^\circ\) phase stability must be maintained along the full combined beam pulse length, and thus the PFF correction will also be high bandwidth, able to correct variations along the pulse as well as any overall offsets in the mean pulse phase. The drive beam recombination scheme and the properties of the main beam accelerating structures result in a 
-large reduction in amplitude of any high frequency components 
+The \(0.2^\circ\) phase stability must be maintained along the full combined beam pulse length, and thus the PFF correction will also be high bandwidth, able to correct variations along the pulse as well as any overall offsets in the mean pulse phase. The drive beam recombination scheme and the properties of the main beam accelerating structures result in the damping of high frequency components 
 that may be present in the initial drive beam phase \cite{alexThesis}. 
 Given the expected frequency spectrum of the drive beam phase jitter, the PFF system must have a bandwidth in excess of 17.5~MHz in order to achieve the required RF phase stability after the correction. 
 The measurement from the phase monitors and the output of the kicker amplifiers must have bandwidths above 17.5~MHz to be able to achieve this.
