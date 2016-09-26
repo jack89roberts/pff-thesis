@@ -42,12 +42,21 @@ This means the amplitude of any of the four individual RF outputs from the monit
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/monopole}
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/dipole}
+  \includegraphics[width=0.86\textwidth]{Figures/phaseMons/dipole}
   \caption{Field distribution of Monopole (TM01) and dipole (TE11) modes in the phase monitor cavities. The dipole mode has both horizontal and vertical components - only the horizontal component is shown.}
   \label{f:transModes}
 \end{figure}
 
 To remove the unwanted dipole mode the horizontal and vertical pairs of outputs from the cavities are combined, as the mode is symmetric and has equal magnitude but opposite sign on each side of the cavity. The CTF3 beam is generally more stable in the vertical plane (the majority of bends in the beam line are horizontal, so energy related orbit jitter resulting from dispersion is larger in the horizontal plane), thus the vertical pair of RF feedthroughs from the monitors are normally used. The two outputs are summed using 180 degree hybrids \cite{alexCWS13} installed next to the phase monitor cavities in the machine hall. The horizontal pair is also instrumented in the same way but the outputs are typically not used. For an ideal (perfectly symmetric) cavity and hybrid this would create an output with only the position independent monopole mode present. In reality small misalignments, for example in the waveguides and RF feedthroughs, cause slight asymmetries in the cavity and signal combination which leaves a small residual dipole component. The signal combination in the hybrids is expected to reduce the dipole amplitude by a further 20~dB at a 1~mm offset, giving a final amplitude around \(1\%\) of the monopole mode \cite{alexCWS13}. The remaining position dependence of the phase measurement is discussed in Section~\ref{s:monPosition}.
+
+\afterpage{\begin{landscape}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\hsize]{Figures/phaseMons/phMonCTPic}
+  \caption{Annotated picture of the two upstream phase monitors installed in the machine.}
+  \label{f:phMonCTPic}
+\end{figure}
+\end{landscape}}
 
 Figure~\ref{f:phMonCTPic} shows the installation of the upstream phase monitors in the CT line. The installation allows up to three phase monitors to be installed neighbouring each other, with the current two monitors installed in the first and third slots leaving approximately a 20~cm gap between the two. The connections between the four RF feedthroughs on the monitors and the hybrids fixed underneath the monitors can be seen in the figure, with the hybrids combining the horizontal pairs visible and two further hybrids placed on the other side of the beam line for the vertical pairs. The outputs from the hybrids are routed up to the klystron gallery on the floor above the accelerator hall, where they are processed and used for the PFF inputs. The complete phase monitor setup including the cables and electronics adds around 50~ns to the overall PFF latency \cite{alexPriv}. For reference the power level of the three phase monitor signals as measured once they reach the klystron gallery are quoted in Table~\ref{t:monPowers}. These are useful to interpret the results of Section~\ref{s:monSigResponse}, for example. %Mon~3 has a slightly lower power level due to a longer cable being required to transport the signal from the TBL line to the phase monitor electronics placed directly above the CT line.
 
@@ -68,16 +77,6 @@ Figure~\ref{f:phMonCTPic} shows the installation of the upstream phase monitors 
 %Bunch length sensitivity: more sensitive to variation in bunch length for longer variations. 5mm bunch length - 50\% amplitude output compared to 0mm. With 1mm bunches 16\% variation in bunch length needed to cause 1\% change in output voltage.
 
 %what is the effect of using 3GHz beam not 12GHz beam?
-
-\afterpage{\begin{landscape}
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\hsize]{Figures/phaseMons/phMonCTPic}
-  \caption{Annotated picture of the two upstream phase monitors installed in the machine.}
-  \label{f:phMonCTPic}
-\end{figure}
-\end{landscape}}
-
 
 \newsection{monElectronics}{Phase Monitor Electronics}
 
@@ -113,6 +112,14 @@ Finally, by using a reference LO signal with the same frequency as the RF signal
 \end{equation}
 The resulting mixer output is therefore a low frequency signal that depends only on the amplitude of the RF signal and the phase (as well as the constant LO amplitude).
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Figures/phaseMons/mixerFrontPanel}
+  \caption{Front panel of the phase monitor electronics boxes containing the mixers and diodes. The connectors labelled LO and RF take the signals from the LO source and the phase monitors respectively. The connectors labelled \(A^2\) and \(A\sin(\mathrm{phi})\) are the diode and mixer outputs respectively.}
+  \label{f:mixerFrontPanel}
+\end{figure}
+
+
 To use the mixer output to calculate the phase, the voltage of the RF signal, \(A_{RF}\), must  be known. This can be determined by splitting the RF signal between the mixer and a diode detector, whose output is dependent on the power of the signal (the square of the voltage):
 \begin{equation}
 \mathrm{Diode}(t) = A_{RF}(t)^2
@@ -126,11 +133,21 @@ The phase can then be reconstructed from the mixer and diode outputs as follows:
 \end{align}
 where \(A\) is a calibration constant dependent on the amplitude of the LO. The electronics for the three PFF phase monitors use mixers and diodes as described above to produce signals that are dependent on the phase and amplitude of the output from the phase monitor cavities. Figure~\ref{f:mixerFrontPanel} shows the front panel of one of the sets of the electronics, showing the RF and LO inputs and mixer and diode outputs. The mixer and diode outputs are digitised, with the phase calculation above performed after the digitisation rather than by the phase monitor electronics themselves. 
 
+\afterpage{\begin{landscape}
+\begin{figure}
+  \centering
+  \includegraphics[width=\hsize]{Figures/phaseMons/phaseMonDiagram}
+  \caption{Simplified schematic of the phase monitor electronics setup. The components involved in the generation of the LO are shown in blue, the phase monitor beam signal in green and the outputs in red. For the purposes of the diagram only two individual mixers and diodes are shown. In the actual design the input signals are split between eight mixers and diodes, and then combined in the same way to create the two outputs. The outputs are digitised on either the FONT5a board or the SiS digitisers.}
+  \label{f:phaseMonDiagram}
+\end{figure}
+\end{landscape}}
+
 In order to avoid non-linearities and achieve the target resolution (Section~\ref{s:resolutionEqs}), multiple mixers and diodes are used within each set of electronics. Non-linearities in the response of mixers and diodes are typically worse at higher input powers \cite{alex09}, but higher input powers are desirable to improve the signal to noise ratio of the output. With a single mixer and diode a compromise must therefore be made between the accuracy (linearity) and resolution (noise) of the electronics. To be able to operate the mixers at low power whilst maintaining a good signal to noise ratio eight separate mixers and diodes are used in each set of electronics \cite{alex09}. The RF and LO inputs are split between the eight mixers and diodes, and then the eight outputs of each type are added together to create the final mixer and diode outputs from the electronics. Figure~\ref{f:phaseMonDiagram} shows a simplified example of this with two mixers and diodes.
 
 Figure~\ref{f:phaseMonDiagram} also shows all the elements present in the generation of the LO reference signal for the electronics. The LO signal for all three sets of electronics is generated from a common 3~GHz source that is locked to the timing of the CTF3 drive beam (which has a 3~GHz acceleration frequency). The 3~GHz signal is split into three to provide the LO input for each set of electronics. After the split each LO chain includes a phase shifter, bandpass filter, frequency multiplier and an amplifier. The phase shifters are required for the calibration process as discussed in Section~\ref{s:monCalibrations}. Initially these were 3~GHz digital phase shifters of type \cite{reyShifters}, but these were later replaced with passive mechanical phase shifters to reduce noise on the LO (Section~\ref{s:shifters}). The mechanical shifters are of type \cite{mechPhShift}, and can be changed in units of 0.02 degrees at 4~GHz. After the shifters, a bandpass filter \cite{klFilter} removes any unwanted out of frequency noise in the LO signal, the frequency multiplier \cite{freqMulti} increases the frequency of the LO to 11.994~GHz and finally the amplifier \cite{amp12GHz} is used to boost the power of the LO signals to the level seen in Table~\ref{t:loPowers}. The LO is designed to have a stability of 5~fs, or 0.02 degrees at 12~GHz \cite{alex09}.
 
-Figure~\ref{f:phaseMonRack} shows the complete phase monitor electronics installation in the racks in the klystron gallery.
+
+
 
 \begin{table}
   \begin{center}
@@ -146,22 +163,9 @@ Figure~\ref{f:phaseMonRack} shows the complete phase monitor electronics install
   \end{center}
 \end{table}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.7\textwidth]{Figures/phaseMons/mixerFrontPanel}
-  \caption{Front panel of the phase monitor electronics boxes containing the mixers and diodes. The connectors labelled LO and RF take the signals from the LO source and the phase monitors respectively. The connectors labelled \(A^2\) and \(A\sin(\mathrm{phi})\) are the diode and mixer outputs respectively.}
-  \label{f:mixerFrontPanel}
-\end{figure}
+Figure~\ref{f:phaseMonRack} shows the complete phase monitor electronics installation in the racks in the klystron gallery.
 
-\afterpage{\begin{landscape}
-\begin{figure}
-  \centering
-  \includegraphics[width=\hsize]{Figures/phaseMons/phaseMonDiagram}
-  \caption{Simplified schematic of the phase monitor electronics setup. The components involved in the generation of the LO are shown in blue, the phase monitor beam signal in green and the outputs in red. For the purposes of the diagram only two individual mixers and diodes are shown. In the actual design the input signals are split between eight mixers and diodes, and then combined in the same way to create the two outputs. The outputs are digitised on either the FONT5a board or the SiS digitisers.}
-  \label{f:phaseMonDiagram}
-\end{figure}
-\end{landscape}}
-
+\pagebreak
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{Figures/phaseMons/phaseMonRack}
@@ -169,6 +173,7 @@ Figure~\ref{f:phaseMonRack} shows the complete phase monitor electronics install
   \label{f:phaseMonRack}
 \end{figure}
 
+\FloatBarrier
 
 \newsection{resolutionEqs}{Resolution Definition and Requirements}
 
@@ -343,17 +348,6 @@ Secondly, the diode outputs were amplified during these tests (using the same am
 
 There are some differences between the properties of the generated signal and the beam signal that would be used in normal operation. Firstly, unlike the pulsed beam signal the generated signal is continuous. It has been verified that the response of the mixers is equivalent for both the continuous and pulsed signals, at least in terms of output power and saturation levels \cite{jackFONTOct15}. The cross-talk properties are difficult to characterise with beam based measurements alone, but assumed to be similar.
 
-Secondly, the phase of the generated signal does not vary with time, compared to the beam signal which has a large phase sag of around \(40^\circ\)  along the pulse and much larger phase jitter. If the signal generator was used at the same frequency as the beam and LO signals, 11.994~GHz, the mixer output would therefore be constant as it depends only on the static phase of the signal generator as per Equation~\ref{e:mixOutSameFreq}. Instead, a generated signal with a slightly lower frequency of 11.991~GHz has been used. From Equation~\ref{e:mixOutAnyFreq} it can be seen that in this case the mixer output voltage is sinusoidal, with a frequency equal to the frequency difference between the LO and RF inputs, or \(11.994-11.991\)~GHz = 3~MHz, with the setup used here. This has the benefit of being able to see the response of the electronics to all input phases in one measurement, rather than having to take multiple measurements varying the LO phase shifter between each one.
-
-\subsection{Results}
-\label{ss:sigGenResults}
-
-Figures~\ref{f:sigGenAllMix1}--\ref{f:sigGenAllDio3} show the mixer and diode outputs for all three sets of electronics at each of the input power levels from the signal generator. 
-%These will be referred back to and discussed in more detail in Sections~\ref{ss:sigGenMixer}~and~\ref{ss:sigGenDiode}. Some initial observations that are immediately clear from these figures are as follows. 
-All mixer outputs show a sinusoidal oscillation with a frequency of 3~MHz, or around 60 samples at the sampling frequency of 192~MHz, as expected. An oscillation with the same frequency is also visible on the diode outputs, with the largest amplitude for the 2nd set of electronics. This is the first hint of the non-ideal characteristics of the electronics. Finally, the output of the mixer and diode increases with the input power, as expected. At high input powers the outputs begin to saturate. 
-%This is apparent by observing the diode signals, on which the output is much flatter at the highest power levels, with a much reduced amplitude of oscillation, compared to lower input powers. 
-The characteristics of the mixers are discussed in Section~\ref{ss:sigGenMixer} and the diodes in Section~\ref{ss:sigGenDiode}.
-
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/phaseMons/Mixer1_AllPowerLevels}
@@ -384,20 +378,29 @@ The characteristics of the mixers are discussed in Section~\ref{ss:sigGenMixer} 
   \label{f:sigGenAllDio3}
 \end{figure}
 
+
+Secondly, the phase of the generated signal does not vary with time, compared to the beam signal which has a large phase sag of around \(40^\circ\)  along the pulse and much larger phase jitter. If the signal generator was used at the same frequency as the beam and LO signals, 11.994~GHz, the mixer output would therefore be constant as it depends only on the static phase of the signal generator as per Equation~\ref{e:mixOutSameFreq}. Instead, a generated signal with a slightly lower frequency of 11.991~GHz has been used. From Equation~\ref{e:mixOutAnyFreq} it can be seen that in this case the mixer output voltage is sinusoidal, with a frequency equal to the frequency difference between the LO and RF inputs, or \(11.994-11.991\)~GHz = 3~MHz, with the setup used here. This has the benefit of being able to see the response of the electronics to all input phases in one measurement, rather than having to take multiple measurements varying the LO phase shifter between each one.
+
+
+
+\subsection{Results}
+\label{ss:sigGenResults}
+
+
+
+Figures~\ref{f:sigGenAllMix1}--\ref{f:sigGenAllDio3} show the mixer and diode outputs for all three sets of electronics at each of the input power levels from the signal generator. 
+%These will be referred back to and discussed in more detail in Sections~\ref{ss:sigGenMixer}~and~\ref{ss:sigGenDiode}. Some initial observations that are immediately clear from these figures are as follows. 
+All mixer outputs show a sinusoidal oscillation with a frequency of 3~MHz, or around 60 samples at the sampling frequency of 192~MHz, as expected. An oscillation with the same frequency is also visible on the diode outputs, with the largest amplitude for the 2nd set of electronics. This is the first hint of the non-ideal characteristics of the electronics. Finally, the output of the mixer and diode increases with the input power, as expected. At high input powers the outputs begin to saturate. 
+%This is apparent by observing the diode signals, on which the output is much flatter at the highest power levels, with a much reduced amplitude of oscillation, compared to lower input powers. 
+The characteristics of the mixers are discussed in Section~\ref{ss:sigGenMixer} and the diodes in Section~\ref{ss:sigGenDiode}.
+
+
 \subsection{Mixer Performance}
 \label{ss:sigGenMixer}
 
 \subsubsection{Sinusoidal Characteristics}
 
 Figure~\ref{f:mixersFit27dBm} shows fits to the response of all mixer outputs at an input power of 27~dBm, close to the typical input power from the beam signals. The phase offset (displacement in peaks) between the output of each mixer holds no significance for the electronics performance. This is set only by the relative phase between the signal generator and the LO at the time the measurement was started. For normal operation with beam the LO phase shifters are changed to match the phasing of each set of electronics (Section~\ref{s:monCalibrations}).
-
-The reconstruction of the phase from the mixer output depends on the mixer output being sinusoidal. In particular the maximum mixer output is critical due to the dependence on the amplitude in Equation~\ref{e:phaseRecIdeal}. Each set of electronics has a different output amplitude due to slight differences in the LO power for each set of electronics and between the individual components used. At an input power of 27~dBm Mixer 1 has a higher peak output of 510~mV, compared to 410~mV and 380~mV for Mixer 2 and Mixer 3 respectively. 
-
-Overall, the agreement between the actual mixer output and the sinusoidal fits at this input power is good. However, there is some distortion away from the ideal sine curve that is most visible around the maximum and minimum mixer output. Figure~\ref{f:mixersFitResid27dBm} shows the residuals between the mixer outputs and the sine fits for the full mixer output range (from minimum to maximum, or equivalently phase offsets between \(\pm90^\circ\)). In the figure, the plotted residual is the difference between the fit and the data expressed in terms of an equivalent phase offset, \(\Delta \phi\), using:
-\begin{equation}
-\Delta \phi(t) = \arcsin\left(\frac{V_{MIXER}(t)-V_{FIT}(t)}{A}\right)
-\end{equation}
-where \(V_{MIXER}(t)\) and \(V_{FIT}(t)\) are the mixer voltage and fitted voltage at sample \(t\) respectively, and \(A\) is the fitted mixer amplitude. On the falling slope between the peaks there is only a slight deviation about the ideal sinusoidal behaviour. The deviation from ideal is at the level of \(0.25\pm0.03^\circ\) and \(0.30\pm0.04^\circ\) for the first and third mixers, with a slightly larger effect of \(0.45\pm0.04^\circ\) for the second mixer. This applies within \(\pm80^\circ\) of the zero crossing in the mixer output. Outside this range, close to the maximum or minimum mixer output, the deviation from the sine fit rapidly increases, reaching several degrees for each mixer. For operation with the beam this means that the accuracy of the phase measurement cannot be guaranteed when the LO phase is set so that the mixer is giving close to its maximum or minimum output. This is also true for other reasons, as seen in Section~\ref{s:resolutionMeas}. The PFF system can only correct small offsets at the level of around \(\pm5^\circ\) (Section~\ref{ss:corrRange}), so the non-ideal response close to peak output is not an issue for the PFF performance.
 
 \begin{figure}
   \centering
@@ -408,6 +411,16 @@ where \(V_{MIXER}(t)\) and \(V_{FIT}(t)\) are the mixer voltage and fitted volta
   \caption{Residuals to sinusoidal fit at 27dBm. Blue: Mixer~1, Red: Mixer~2 and Green: Mixer~3. Markers show the data points and the lines are sinusoidal fits to the data.}
   \label{f:mixersFitResid27dBm}
 \end{figure}
+
+The reconstruction of the phase from the mixer output depends on the mixer output being sinusoidal. In particular the maximum mixer output is critical due to the dependence on the amplitude in Equation~\ref{e:phaseRecIdeal}. Each set of electronics has a different output amplitude due to slight differences in the LO power for each set of electronics and between the individual components used. At an input power of 27~dBm Mixer 1 has a higher peak output of 510~mV, compared to 410~mV and 380~mV for Mixer 2 and Mixer 3 respectively. 
+
+Overall, the agreement between the actual mixer output and the sinusoidal fits at this input power is good. However, there is some distortion away from the ideal sine curve that is most visible around the maximum and minimum mixer output. Figure~\ref{f:mixersFitResid27dBm} shows the residuals between the mixer outputs and the sine fits for the full mixer output range (from minimum to maximum, or equivalently phase offsets between \(\pm90^\circ\)). In the figure, the plotted residual is the difference between the fit and the data expressed in terms of an equivalent phase offset, \(\Delta \phi\), using:
+\begin{equation}
+\Delta \phi(t) = \arcsin\left(\frac{V_{MIXER}(t)-V_{FIT}(t)}{A}\right)
+\end{equation}
+where \(V_{MIXER}(t)\) and \(V_{FIT}(t)\) are the mixer voltage and fitted voltage at sample \(t\) respectively, and \(A\) is the fitted mixer amplitude. On the falling slope between the peaks there is only a slight deviation about the ideal sinusoidal behaviour. The deviation from ideal is at the level of \(0.25\pm0.03^\circ\) and \(0.30\pm0.04^\circ\) for the first and third mixers, with a slightly larger effect of \(0.45\pm0.04^\circ\) for the second mixer. This applies within \(\pm80^\circ\) of the zero crossing in the mixer output. Outside this range, close to the maximum or minimum mixer output, the deviation from the sine fit rapidly increases, reaching several degrees for each mixer. For operation with the beam this means that the accuracy of the phase measurement cannot be guaranteed when the LO phase is set so that the mixer is giving close to its maximum or minimum output. This is also true for other reasons, as seen in Section~\ref{s:resolutionMeas}. The PFF system can only correct small offsets at the level of around \(\pm5^\circ\) (Section~\ref{ss:corrRange}), so the non-ideal response close to peak output is not an issue for the PFF performance.
+
+
 
 However, for input powers in the range from 15--21~dBm the non-ideal characteristics of the mixers are larger. One example of this is shown in Figure~\ref{f:mixersFit18dBm}, at an input power of 18~dBm. If input powers in this range are used calibrations of the mixer response should normally be restricted to around the zero crossing so that the fitted amplitude gives the best approximation to the true behaviour for small phase offsets. 
 
@@ -429,6 +442,16 @@ Figure~\ref{f:LinFitMixerVsVolts} shows the dependence of the mixer output ampli
 Linear fits to the mixer outputs restricted to the range between 0.45~V and 1.75~V (6~dBm to 18~dBm) are also shown in the figure.
 All three mixers give a linear response up to an input voltage of around 3~V (23~dBm), after which the effects of saturation begin to appear. At an input voltage of 5~V (27~dBm) the first and third mixers are almost fully saturated with almost no remaining power dependence in the output. The second mixer begins to enter saturation at the same voltage as the other two mixers but retains a strong power dependence up to a higher input voltage of 7~V (30~dBm).
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\textwidth]{Figures/phaseMons/MixerVsVolts}
+  \caption{Mixer maximum output voltage (dashed lines with upward triangle markers) and minimum output voltage (dashed lines with downward triangle markers) vs. the input voltage. Solid lines with circular markers show the average of the minimum and maximum. Blue: Mixer~1, Red: Mixer~2 and Green: Mixer~3.}
+  \label{f:MixerVsVolts}
+  \includegraphics[width=0.85\textwidth]{Figures/phaseMons/MixerAsymmetryVsVolts}
+  \caption{Relative amplitude of cross-talk on the mixer from the diode vs. the input voltage. Blue: Mixer~1, Red: Mixer~2 and Green: Mixer~3. Lines with circular markers are the measured data, and dashed lines quadratic fits to the data.}
+  \label{f:MixerAsymmetryVsVolts}
+\end{figure}
+
 
 \subsubsection{Asymmetry in Output}
 
@@ -436,15 +459,6 @@ One final interesting property of the mixers is that the output is not symmetric
 
 Figure~\ref{f:MixerVsVolts} shows how the mixer amplitude at maximum and minimum output varies with the input voltage. The asymmetry is largest for Mixer~1 and smallest for Mixer~3. The effect appears to increase in magnitude with the input voltage, with approximately a \(100\)~mV asymmetry on Mixer~1 at an input of 10~V, but only several mV at low input powers. For each mixer the amplitude at maximum output is larger for input voltages up to 2.5~V (21~dBm). Above 2.5~V input voltage this flips, with the minimum mixer amplitude being larger than the maximum amplitude.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/MixerVsVolts}
-  \caption{Mixer maximum output voltage (dashed lines with upward triangle markers) and minimum output voltage (dashed lines with downward triangle markers) vs. the input voltage. Solid lines with circular markers show the average of the minimum and maximum. Blue: Mixer~1, Red: Mixer~2 and Green: Mixer~3.}
-  \label{f:MixerVsVolts}
-  \includegraphics[width=0.9\textwidth]{Figures/phaseMons/MixerAsymmetryVsVolts}
-  \caption{Relative amplitude of cross-talk on the mixer from the diode vs. the input voltage. Blue: Mixer~1, Red: Mixer~2 and Green: Mixer~3. Lines with circular markers are the measured data, and dashed lines quadratic fits to the data.}
-  \label{f:MixerAsymmetryVsVolts}
-\end{figure}
 
 For input voltages between 0.45~V and 1.25~V (6~dBm to 15~dBm) the mixer asymmetry has an approximate quadratic dependence on the input voltage, as shown in Figure~\ref{f:MixerAsymmetryVsVolts}. Outside this range there is no simple relationship that can explain the dependence of the asymmetry on the input voltage. One explanation for the asymmetry in the mixer outputs is cross-talk coming from the diode signals. Above 15~dBm the diodes enter saturation, as discussed in Section~\ref{ss:sigGenDiode}, which may explain why the quadratic fit to the mixer asymmetry is only valid at power levels up to this value. 
 
@@ -455,26 +469,30 @@ Taking the power dependent asymmetry in to account the actual mixer response can
 \end{equation}
 where \(A(t)\) is the input voltage at time \(t\), and \(m_1\), \(m_2\), \(m_3\), and \(m_4\) are calibration constants needed to describe the power dependence.
 
-\subsection{Diode Performance}
-\label{ss:sigGenDiode}
+
+\subsection{Diode Performance}\label{ss:sigGenDiode}
 
 \subsubsection{Dependence on Input Power}
-
-The dependence of the three diode outputs on the input power is shown in Figure~\ref{f:SqrtDiodeVsVolts}. The square root of the diode output is plotted, as the output voltage is expected to vary linearly with input power. It is immediately apparent that the diode signals saturate at much lower input voltages than the mixer signals. All three diodes are almost fully saturated at an input of 2~V (20~dBm), with the effects of saturation already beginning to appear above 1.25~V (15~dBm). Figure~\ref{f:LinFitSqrtDiodeVsVolts} shows a linear fit to the square root of the diode, using the range of input voltages between 0.45~V and 1.25~V (6--15~dBm). Even below saturation the response of sqrt(Diode) is not well approximated by a linear dependence as desired. However, in the range from 0.30~V to 1.25~V (3~dBm to 15~dBm) a quadratic fit to the diode output directly (not sqrt(Diode)) does give a good approximation to the true dependence of the diodes on the input voltage. This is shown in Figure~\ref{f:QuadFitDiodeVsVolts}.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/phaseMons/SqrtDiodeVsVolts}
   \caption{Square root of the diode output vs. the input voltage. Blue: Diode~1, Red: Diode~2 and Green: Diode~3.}
   \label{f:SqrtDiodeVsVolts}
-\end{figure}
-
-\begin{figure}
-  \centering
+  
+      \centering
   \includegraphics[width=0.9\textwidth]{Figures/phaseMons/LinFitSqrtDiodeVsVolts}
   \caption{Linear fits (dashed lines) to the square root of the diode output (solid lines with circular markers) vs. the input voltage. The fits are restricted to the region marked by vertical black lines. Blue: Diode~1, Red: Diode~2 and Green: Diode~3.}
   \label{f:LinFitSqrtDiodeVsVolts}
-  \centering
+\end{figure}
+
+The dependence of the three diode outputs on the input power is shown in Figure~\ref{f:SqrtDiodeVsVolts}. The square root of the diode output is plotted, as the output voltage is expected to vary linearly with input power. It is immediately apparent that the diode signals saturate at much lower input voltages than the mixer signals. All three diodes are almost fully saturated at an input of 2~V (20~dBm), with the effects of saturation already beginning to appear above 1.25~V (15~dBm). Figure~\ref{f:LinFitSqrtDiodeVsVolts} shows a linear fit to the square root of the diode, using the range of input voltages between 0.45~V and 1.25~V (6--15~dBm). Even below saturation the response of sqrt(Diode) is not well approximated by a linear dependence as desired. However, in the range from 0.30~V to 1.25~V (3~dBm to 15~dBm) a quadratic fit to the diode output directly (not sqrt(Diode)) does give a good approximation to the true dependence of the diodes on the input voltage. This is shown in Figure~\ref{f:QuadFitDiodeVsVolts}.
+
+\begin{figure}
+
+
+
+
   \includegraphics[width=0.9\textwidth]{Figures/phaseMons/QuadFitDiodeVsVolts}
   \caption{Quadratic fits (dashed lines) to the diode output (solid lines with circular markers) vs. the input voltage. The fits are restricted to the region marked by vertical black lines. Blue: Diode~1, Red: Diode~2 and Green: Diode~3.}
   \label{f:QuadFitDiodeVsVolts}
@@ -541,18 +559,12 @@ The remainder of this chapter presents the performance of the complete phase mon
 
 The first step in using the phase monitor measurements is to calibrate the mixer outputs. Calibrations of the phase monitor signals are typically taken on a daily basis during data taking periods, as well as additional calibrations when there have been any changes in beam conditions or to the setup of the electronics. These are needed to determine the calibration constants, amplitude and offset, required to calculate the phase from the mixer output (Equation~\ref{e:phaseRecUsed}). This section presents typical calibration results for all three phase monitors and discusses aspects such as the stability of the calibration along the pulse and determining the optimal set point for the LO phase shifters. 
 
-Calibrations are performed using the LO phase shifters. By varying the LO phase shifter the phase between the LO and the beam signal is changed. During a calibration the phase shifters are moved through \(360^\circ\) at 12~GHz  so that the response of the mixer to all phase offsets between the beam and LO can be determined. Normally calibrations are taken at 12 shifter settings across the full \(360^\circ\) range, with 10 pulses acquired at each setting and the whole scan taking approximately 10~minutes. These choices are a compromise between having enough points for a good quality fit whilst reducing the possibility of large drifts in beam phase during the scan which would degrade the fit results. All the calibrations presented use the electronics setup with the mechanical LO phase shifters in place (see Section~\ref{s:shifters}). The settings on these phase shifters approximately correspond to degrees at 4~GHz, thus a phase shifter change of 120 units corresponds to \(360^\circ\) at 12~GHz.
+Calibrations are performed by varying the LO phase shifter, so that the phase between the LO and the beam signal is changed. During a calibration the phase shifters are moved through \(360^\circ\) at 12~GHz  so that the response of the mixer to all phase offsets between the beam and LO can be determined. Normally calibrations are taken at 12 shifter settings across the full \(360^\circ\) range, with 10 pulses acquired at each setting and the whole scan taking approximately 10~minutes. These choices are a compromise between having enough points for a good quality fit whilst reducing the possibility of large drifts in beam phase during the scan which would degrade the fit results. All the calibrations presented use the electronics setup with the mechanical LO phase shifters in place (see Section~\ref{s:shifters}). The settings on these phase shifters approximately correspond to degrees at 4~GHz, thus a phase shifter change of 120 units corresponds to \(360^\circ\) at 12~GHz.
 
 A calibration using both the SiS digitiser and FONT5a setup will be shown. During operation of the PFF system Mon~1 is usually connected to the FONT5a board as the correction input, whilst Mon~2 and Mon~3 are connected to the SiS digitisers where they can be acquired together with other signals at CTF3. The difference in measured output voltage between the two systems results from the use of an amplifier before the SiS digitisers to reduce noise in that setup (Section~\ref{s:monDigitisers}). Also, when using the FONT5a board the mixer outputs are attenuated by 1~dB to avoid saturating the FONT ADCs. The calibration constants from Mon~1 on the FONT5a board are needed for the PFF gain calculation in Section~\ref{ss:pffFirmware}. Measurements of the upstream and downstream phase following this chapter use Mon~2 and Mon~3 on the SiS digitisers and their respective calibration constants, unless indicated otherwise.
 
 \subsection{Calibration on SiS Digitisers}
 \label{ss:SiSCal}
-
-Figures~\ref{f:mon1AllPoints}--\ref{f:mon3AllPoints} show the mixer output as a function of time for all phase shifter settings in an LO scan, for each phase monitor respectively. Away from the minimum and maximum output each mixer shows the expected phase sag along the beam pulse resulting from the RF pulse compression used at CTF3 \cite{rfCompress}. The shape of the phase sag as seen on the mixer changes sign depending on whether the LO phase places the mixer on the rising or falling slope of its sinusoidal output. Usually the mixers are operated on the falling slope where the measured phase sag is `u'-shaped, rather than `n'-shaped, as this is also the convention for other phase dependent signals at CTF3 \cite{piotrPriv}.
-
-Near the minimum or maximum mixer amplitude the beam phase sag causes a much smaller variation in the mixer output voltage along the pulse. The phase resolution close to the peaks in the mixer output is therefore greatly reduced, as seen in Section~\ref{ss:resVsShifter}. LO phase scans are used to not only calculate the calibration constants but also to determine the phase shifter settings that zero the mixer output, where the resolution is maximal. This process is documented in Section~\ref{ss:calZeroCross}.
-
-The noisier appearance of the output on Mon~3 is not an effect of the phase monitors or phase monitor electronics but is rather caused by real differences between the beam phase upstream (Mon~1, Mon~2) and downstream (Mon~3). Reducing the differences between the upstream and downstream phase is the focus of Chapter~\ref{c:phasePropagation}.
 
 \begin{figure}
   \centering
@@ -571,9 +583,7 @@ The noisier appearance of the output on Mon~3 is not an effect of the phase moni
   \label{f:mon3AllPoints}
 \end{figure}
 
-Figure~\ref{f:calSiS} shows the result of fitting the mixer output versus the phase shifter setting at sample 605 (see Figures~\ref{f:mon1AllPoints}--\ref{f:mon3AllPoints}). The mixer response is sinusoidal as expected and as seen previously in the signal generator tests. In the signal generator tests there was some visible distortion away from the sinusoidal fit around the peaks at some input power levels (Section~\ref{ss:sigGenMixer}). There is no visible effect for the input power of the phase monitor signals (Table~\ref{t:monPowers}). Differences in the peak output of each monitor are expected due to differences in the input power from each phase monitor as well as differences between the sets of electronics. Small offsets between the data and the fit at some shifter settings are caused by drifts in the beam phase during the scan (particularly for Mon~3 where the beam is less stable), as well as human error in setting the shifter values.
-
-The fitted values of the mixer amplitude, \(A\), and offset, \(d\), are found in Table~\ref{t:calSiSConsts}. These values are used to calculate the beam phase as per Equation~\ref{e:phaseRecUsed}. 
+Figures~\ref{f:mon1AllPoints}--\ref{f:mon3AllPoints} show the mixer output as a function of time for all phase shifter settings in an LO scan, for each phase monitor respectively. Away from the minimum and maximum output each mixer shows the expected phase sag along the beam pulse resulting from the RF pulse compression used at CTF3 \cite{rfCompress}. The shape of the phase sag as seen on the mixer changes sign depending on whether the LO phase places the mixer on the rising or falling slope of its sinusoidal output. Usually the mixers are operated on the falling slope where the measured phase sag is `u'-shaped, rather than `n'-shaped, as this is also the convention for other phase dependent signals at CTF3 \cite{piotrPriv}.
 
 \begin{figure}
   \centering
@@ -581,6 +591,7 @@ The fitted values of the mixer amplitude, \(A\), and offset, \(d\), are found in
   \caption{Fits (solid lines) to the mixer output for each phase monitor (markers) vs. the LO phase shifter setting. The data shown is for sample 605 on the SiS digitisers. Blue: Mon~1, Red: Mon~2 and Green: Mon~3.}
   \label{f:calSiS}
 \end{figure}
+
 
 \begin{table}
   \begin{center}
@@ -596,12 +607,21 @@ The fitted values of the mixer amplitude, \(A\), and offset, \(d\), are found in
   \end{center}
 \end{table}
 
+Near the minimum or maximum mixer amplitude the beam phase sag causes a much smaller variation in the mixer output voltage along the pulse. The phase resolution close to the peaks in the mixer output is therefore greatly reduced, as seen in Section~\ref{ss:resVsShifter}. LO phase scans are used to not only calculate the calibration constants but also to determine the phase shifter settings that zero the mixer output, where the resolution and linearity are maximal. This process is documented in Section~\ref{ss:calZeroCross}.
+
+The noisier appearance of the output on Mon~3 is not an effect of the phase monitors or phase monitor electronics but is rather caused by real differences between the beam phase upstream (Mon~1, Mon~2) and downstream (Mon~3) during the scan. Reducing the differences between the upstream and downstream phase is the focus of Chapter~\ref{c:phasePropagation}.
+
+Figure~\ref{f:calSiS} shows the result of fitting the mixer output versus the phase shifter setting at sample 605 (see Figures~\ref{f:mon1AllPoints}--\ref{f:mon3AllPoints}). The mixer response is sinusoidal as expected and as seen previously in the signal generator tests. In the signal generator tests there was some visible distortion away from the sinusoidal fit around the peaks at some input power levels (Section~\ref{ss:sigGenMixer}). There is no visible effect for the input power of the phase monitor signals (Table~\ref{t:monPowers}). Differences in the peak output of each monitor are expected due to differences in the input power from each phase monitor as well as differences between the sets of electronics. Small offsets between the data and the fit at some shifter settings are caused by drifts in the beam phase during the scan (particularly for Mon~3 where the beam is less stable), as well as human error in setting the shifter values.
+
+
+
+The fitted values of the mixer amplitude, \(A\), and offset, \(d\), are found in Table~\ref{t:calSiSConsts}. These values are used to calculate the beam phase as per Equation~\ref{e:phaseRecUsed}. 
+
+
+
 \subsection{Calibration on FONT5a Board}
 \label{ss:FONTCal}
 
-Figure~\ref{f:calFONT} and Table~\ref{t:calFONTConsts} show the results of a calibration performed in exactly the same way but on the FONT5a board. The FONT5a board ADCs flip the sign of the input \cite{glennPriv}, so a positive ADC output in counts corresponds to a negative input voltage and vice-versa. This explains the inverted polarity of the resulting sine curves on the FONT5a board in Figure~\ref{f:calFONT}, compared to the SiS digitisers in Figure~\ref{f:calSiS}. For operation of the PFF system this difference must be taken in to account either by operating the mixer on the rising slope as seen on the FONT5a board (which in reality is the falling slope, as desired), or alternatively by using negative gain values for the correction output. The fitted values for \(d\) in Table~\ref{t:calFONTConsts} are also negative rather than positive as a result of this sign flip. Apart from these differences the overall shape of the mixer output follows the sinusoidal dependence as expected.
-
-The FONT5a ADC outputs are 13-bit, or \(\pm4096\)~counts, with an input range of \(\pm500\)~mV (Section~\ref{s:fontSetup}). The fitted Mon~1 output, with 1~dB attenuation added after the mixer, of between -3712~counts and +3156~counts therefore corresponds to an input voltage range of between +453~mV and -385~mV. Without the attenuator, which reduces the voltage by roughly 10\%, the Mon~1 mixer would saturate the ADC at its peak output. As the contribution of digitiser noise is small on the FONT5a board (Section~\ref{s:monDigitisers}) a 1~dB attenuator is also added to the Mon~2 and Mon~3 outputs so that the overall setup for each monitor is the same in this measurement. However, during normal operation of the PFF system Mon~2 and Mon~3 are connected to the SiS digitisers, with their mixer outputs then being amplified rather than attenuated.
 
 \begin{figure}
   \centering
@@ -609,6 +629,11 @@ The FONT5a ADC outputs are 13-bit, or \(\pm4096\)~counts, with an input range of
   \caption{Results of a calibration performed on the FONT5a board. Solid lines are sinusoidal fits to the data (markers). Blue: Mon~1, Red: Mon~2 and Green: Mon~3.}
   \label{f:calFONT}
 \end{figure}
+
+
+Figure~\ref{f:calFONT} and Table~\ref{t:calFONTConsts} show the results of a calibration performed in exactly the same way but on the FONT5a board. The FONT5a board ADCs flip the sign of the input \cite{glennPriv}, so a positive ADC output in counts corresponds to a negative input voltage and vice-versa. This explains the inverted polarity of the resulting sine curves on the FONT5a board in Figure~\ref{f:calFONT}, compared to the SiS digitisers in Figure~\ref{f:calSiS}. For operation of the PFF system this difference must be taken in to account either by operating the mixer on the rising slope as seen on the FONT5a board (which in reality is the falling slope, as desired), or alternatively by using negative gain values for the correction output. The fitted values for \(d\) in Table~\ref{t:calFONTConsts} are also negative rather than positive as a result of this sign flip. Apart from these differences the overall shape of the mixer output follows the sinusoidal dependence as expected.
+
+The FONT5a ADC outputs are 13-bit, or \(\pm4096\)~counts, with an input range of \(\pm500\)~mV (Section~\ref{s:fontSetup}). The fitted Mon~1 output, with 1~dB attenuation added after the mixer, of between -3712~counts and +3156~counts therefore corresponds to an input voltage range of between +453~mV and -385~mV. Without the attenuator, which reduces the voltage by roughly 10\%, the Mon~1 mixer would saturate the ADC at its peak output. As the contribution of digitiser noise is small on the FONT5a board (Section~\ref{s:monDigitisers}) a 1~dB attenuator is also added to the Mon~2 and Mon~3 outputs so that the overall setup for each monitor is the same in this measurement. However, during normal operation of the PFF system Mon~2 and Mon~3 are connected to the SiS digitisers, with their mixer outputs then being amplified rather than attenuated.
 
 
 \begin{table}
@@ -630,14 +655,6 @@ The FONT5a ADC outputs are 13-bit, or \(\pm4096\)~counts, with an input range of
 
 The calibration results on both the SiS digitisers and FONT5a board have been presented at one sample number around the middle of the pulse close to where the phase sag along the pulse is flattest. In this section the variation in the fitted calibration constants along the pulse is discussed. This is particularly important after taking the decision to not use the diodes, as the intended purpose of using the diodes was to normalise the mixer response to give an output independent of the input power. Without using the diodes any variations in input power along the pulse will also create differences in the calibration constants along the pulse. 
 
-The current implementation of the PFF algorithm on the FONT5a board uses the mixer multiplied by a single gain value that is constant along the full pulse length to create the correction output (Section~\ref{ss:pffFirmware}). It therefore cannot take in to account any variations in calibration constants along the pulse. Offline data analysis is usually performed in the same way so that the quoted resolutions are representative of the values that apply to the implementation of the PFF correction. The effect of taking in to account the variations in calibration parameters along the pulse seen here is shown in Section~\ref{s:effectsMultiSampCal}.
-
-Figures~\ref{f:calAmpVsSample}~and~\ref{f:calOffVsSample} show the variation in the fitted calibration amplitude and offset across the full pulse length, using the same calibration on the SiS digitisers presented in Section~\ref{ss:SiSCal}. Differences in both the amplitude and offset along the pulse are visible. These are summarised in Table~\ref{t:calConstsStdAlong} in terms of the standard deviation of the fitted parameter values along the pulse. 
-
-The stability of the fitted amplitude along the pulse is similar for the upstream monitors (Mon~1 and Mon~2), with a variation of around 8~mV in both cases. As the downstream beam is less stable than the upstream beam the variations in fitted amplitude along the pulse are larger for Mon~3, at the 15~mV level. In terms of a relative difference these values correspond to roughly a 0.7\% variation in fitted amplitude for Mon~1 and Mon~2, or 1.5\% for Mon~3. With further optimisation of the downstream beam, as documented in Chapter~\ref{c:phasePropagation}, it should be possible to achieve similar Mon~3 amplitude stability to that seen for Mon~1 and Mon~2. 
-
-Absolute stability in the fitted offset along the pulse is similar to that of the amplitude but therefore much larger as a relative difference at the level of several percent. The variation in fitted offset along the pulse is smallest for Mon~2 at around 3~mV. For both Mon~1 and Mon~3 the variation is around a factor two larger, at 6~mV.
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/calAmpVsSample}
@@ -648,6 +665,16 @@ Absolute stability in the fitted offset along the pulse is similar to that of th
   \caption{Variation in fitted offset along the pulse for each phase monitor. Blue: Mon~1, Red: Mon~2 and Green: Mon~3.}
   \label{f:calOffVsSample}
 \end{figure}
+
+
+The current implementation of the PFF algorithm on the FONT5a board uses the mixer multiplied by a single gain value that is constant along the full pulse length to create the correction output (Section~\ref{ss:pffFirmware}). It therefore cannot take in to account any variations in calibration constants along the pulse. Offline data analysis is usually performed in the same way so that the quoted resolutions are representative of the values that apply to the implementation of the PFF correction. The effect of taking in to account the variations in calibration parameters along the pulse seen here is shown in Section~\ref{s:effectsMultiSampCal}.
+
+Figures~\ref{f:calAmpVsSample}~and~\ref{f:calOffVsSample} show the variation in the fitted calibration amplitude and offset across the full pulse length, using the same calibration on the SiS digitisers presented in Section~\ref{ss:SiSCal}. Differences in both the amplitude and offset along the pulse are visible. These are summarised in Table~\ref{t:calConstsStdAlong} in terms of the standard deviation of the fitted parameter values along the pulse. 
+
+The stability of the fitted amplitude along the pulse is similar for the upstream monitors (Mon~1 and Mon~2), with a variation of around 8~mV in both cases. As the downstream beam is less stable than the upstream beam the variations in fitted amplitude along the pulse are larger for Mon~3, at the 15~mV level. In terms of a relative difference these values correspond to roughly a 0.7\% variation in fitted amplitude for Mon~1 and Mon~2, or 1.5\% for Mon~3. With further optimisation of the downstream beam, as documented in Chapter~\ref{c:phasePropagation}, it should be possible to achieve similar Mon~3 amplitude stability to that seen for Mon~1 and Mon~2. 
+
+Absolute stability in the fitted offset along the pulse is similar to that of the amplitude but therefore much larger as a relative difference at the level of several percent. The variation in fitted offset along the pulse is smallest for Mon~2 at around 3~mV. For both Mon~1 and Mon~3 the variation is around a factor two larger, at 6~mV.
+
 
 \begin{table}
   \begin{center}
@@ -699,7 +726,7 @@ In addition, as previously mentioned the convention is to operate the mixers on 
   \end{center}
 \end{table}
 
-Due to the large phase sag along the beam pulse it is clearly not possible to be at the zero crossing of the mixer for the full pulse length. For the PFF system the region of interest is the central portion of the pulse where the phase sag is flattest. The shifters are therefore set to zero the mixer output in this region, giving best resolution in the central part of the pulse but slightly degraded resolution near the start and end of the pulse. In addition to this, slow drifts in the beam phase, particularly downstream, mean that the shifters must routinely be changed to stay at the zero crossing. With the current setup using mechanical phase shifters this must be done by hand, with no possibility to implement an automatic feedback on the shifter settings, for example.
+Due to the large phase sag along the beam pulse it is clearly not possible to be at the zero crossing of the mixer for the full pulse length. For the PFF system the region of interest is the central portion of the pulse where the phase sag is flattest. The shifters are therefore set to zero the mixer output in this region, giving best resolution in the central part of the pulse but slightly degraded resolution near the start and end of the pulse. In addition to this, slow drifts in the beam phase, particularly downstream, mean that the shifter set points must routinely be changed to stay at the zero crossing. With the current setup using mechanical phase shifters this must be done by hand, with no possibility to implement an automatic feedback on the shifter settings, for example. For any future application at CLIC, mechanical phase shifters with remotely controllable stepping motors could be used to resolve this issue.
 
 \newsection{shifters}{Phase Shifter Noise}
 
@@ -782,7 +809,8 @@ This section presents resolution measurements with the mechanical phase shifters
 \subsection{Achieved Point-by-Point Resolution}
 \label{ss:bestRes}
 
-Figure~\ref{f:bestResolution} shows the best phase resolution that has been achieved sample by sample along the pulse. Each point corresponds to the standard deviation of the difference between the measured Mon~1 and Mon~2 phase divided by the square-root of two, as per Equation~\ref{e:resolutionEq}.  The resolution is quite stable along the pulse, with a mean value of \(0.126^\circ\) and a standard deviation of \(0.007^\circ\). This is below the \(0.14^\circ\) needed to be able to theoretically measure \(0.2^\circ\) corrected phase jitter with the PFF prototype, as derived in Section~\ref{s:resolutionEqs}. The achieved resolution corresponds to a theoretical limit of around \(0.18^\circ\) on the measured corrected downstream phase jitter. 
+
+Figure~\ref{f:bestResolution} shows the phase resolution that has been achieved sample by sample along the pulse. Each point corresponds to the standard deviation of the difference between the measured Mon~1 and Mon~2 phase divided by the square-root of two, as per Equation~\ref{e:resolutionEq}.  The resolution is quite stable along the pulse, with a mean value of \(0.126^\circ\) and a standard deviation of \(0.007^\circ\). This is below the \(0.14^\circ\) needed to be able to theoretically measure \(0.2^\circ\) corrected phase jitter with the PFF prototype, as derived in Section~\ref{s:resolutionEqs}. The achieved resolution corresponds to a theoretical limit of around \(0.18^\circ\) on the measured corrected downstream phase jitter. 
 
 \begin{figure}
   \centering
@@ -791,12 +819,15 @@ Figure~\ref{f:bestResolution} shows the best phase resolution that has been achi
   \label{f:bestResolution}
 \end{figure}
 
-The example shown here is the lowest measured resolution to date. However, the performance of the monitors, and in particular the electronics, is very sensitive to small changes to the environment in the klystron gallery and to the beam setup. A representative value of the routinely achievable point-by-point resolution is \(0.2^\circ\), such as the example shown in Figure~\ref{f:resolutionWithAveraging} in Section~\ref{ss:resSampAvg}. Several sources of additional noise in the measured phase are discussed in Sections~\ref{s:monComp}--\ref{s:monPosition}. In particular, a sensitivity of the LO signals in the electronics to the power and phase of nearby klystrons has recently been identified (Section~\ref{s:monComp}).
+
+The presented value corresponds to the lowest measured resolution to date. However, it must be noted that this value fluctuates over time as the performance of the monitors, and in particular the electronics, is very sensitive to small changes to the environment in the klystron gallery and to the beam setup. A representative value of the routinely achievable point-by-point resolution is \(0.2^\circ\), such as the example shown in Figure~\ref{f:resolutionWithAveraging} in Section~\ref{ss:resSampAvg}. Several sources of additional noise in the measured phase are discussed in Sections~\ref{s:monComp}--\ref{s:monPosition}. In particular, a sensitivity of the LO signals in the electronics to the power and phase of nearby klystrons has recently been identified (Section~\ref{s:monComp}).
 
 
 
 \subsection{With Sample Averaging}
 \label{ss:resSampAvg}
+
+
 
 The phase monitor signals are digitised with a much higher sampling rate, 357~MHz on the FONT5a board or 192~MHz on the SiS digitisers, than the targeted PFF correction bandwidth of 30~MHz. This means the results from several samples could be averaged to reduce noise on the measurement whilst maintaining the same correction bandwidth. For example, for a measurement on the SiS digitisers, such as those shown here, 5 samples can be averaged to effectively create a signal with a 38~MHz sampling rate, reduced from the initial 192~MHz. 
 
@@ -827,7 +858,7 @@ Currently the phase propagation (Chapter~\ref{c:phasePropagation}) is believed t
   \label{f:resVsSmallPhasOff}
 \end{figure}
 
-The process of setting the mixers at their zero crossing after calibrations was documented in Section~\ref{ss:calZeroCross}. This is necessary to operate the mixers where there output voltage is most sensitive to variations in the phase (close to the peaks of the mixer output there is negligible change in output voltage for small changes in phase). The dependence of the phase resolution on the beam phase across the full \(\pm180^\circ\) range is shown in Figure~\ref{f:resolutionVsShifter}. The plotted phase is the offset between the LO phase shifter setting and the calculated optimal setting. More than \(50^\circ\) away from the zero crossing there is a large degradation in resolution, reaching above 1~degree at the \(+90^\circ\) peak.
+The process of setting the mixers at their zero crossing after calibrations was documented in Section~\ref{ss:calZeroCross}. This is necessary to operate the mixers where the output voltage is most sensitive to variations in the phase. The dependence of the phase resolution on the beam phase across the full \(\pm180^\circ\) range is shown in Figure~\ref{f:resolutionVsShifter}. The plotted phase is the offset between the LO phase shifter setting and the calculated optimal setting. More than \(50^\circ\) away from the zero crossing there is a large degradation in resolution, reaching above 1~degree at the \(+90^\circ\) peak.
 
 However, for the PFF system the phase resolution only needs to be guaranteed within its correction range, which is calculated to be \(\pm5.5^\circ\) in Section~\ref{ss:corrRange}. In Figure~\ref{f:resVsSmallPhasOff} it is seen that there is no noticeable degradation in resolution in the range between \(\pm15^\circ\). Therefore, providing the mixers have been correctly set at their zero crossings, this is not an issue for the PFF system.
 
@@ -840,20 +871,23 @@ However, for the PFF system the phase resolution only needs to be guaranteed wit
 
 \newsection{monBandwidth}{Bandwidth}
 
-The overall targeted bandwidth for the prototype PFF correction is 30~MHz, which means each individual hardware component must have a bandwidth in excess of 30~MHz. To estimate the bandwidth of the phase measurement the delay loop has been used to create a sharp jump in the phase mid-way along the pulse. Normally the delay loop (whose length is 140~ns) is used with 1.5~GHz beam at CTF3, with seven 180 degree phase switches in the bunching at 140~ns intervals. Alternating 140~ns sub-trains are deflected in to the delay loop with a 1.5~GHz RF deflector, and then recombine with the 140~ns sub-trains bypassing the delay loop to double the drive beam current (Section~\ref{s:ctfIntro}). If the delay loop is instead used with 3~GHz beam alternating bunches, rather than sub-trains, enter the delay loop. The first 140~ns of the pulse after the delay loop contains only bunches that bypassed the loop, so is a 1.5~GHz beam with half the initial beam current. After the first 140~ns there is a fast transition back to 3~GHz beam with the same initial current as delayed bunches merge with the bypassing bunches. By varying the length of the delay loop (using a wiggler \cite{wiggler}) the phase of the bunches leaving the delay loop can be changed, also creating a fast phase jump at the transition to 3~GHz beam.
-
-Figure~\ref{f:bandwidthPlot} shows the response of the Mon~3 mixer to a beam pulse with a phase step setup in this way. The first 140~ns of the pulse contains only bunches bypassing the delay loop, as described, followed by the fast transition to 3~GHz beam and the phase step. The time taken for the mixer output to respond to the fast phase change can be related to the bandwidth by this approximate relationship \cite{bwRisTim}:
-\begin{equation}
-\mathrm{BW} = \frac{350}{t}
-\end{equation}
-where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the signal in ns. The transition between the two phase states as seen on the mixer output occurs between 156.6~ns and 167.0~ns, a rise time of 10.4~ns corresponding to a bandwidth of approximately 34~MHz. In addition, the falling edge of the mixer output at the end of the pulse also takes around a 10~ns, also leading to a bandwidth estimate in the region of 35~MHz.
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/bandwidthPlot}
   \caption{Response of Mixer~3 to a jump in phase in the middle of the pulse.}
   \label{f:bandwidthPlot}
 \end{figure}
+
+The overall targeted bandwidth for the prototype PFF correction is 30~MHz, which means each individual hardware component must have a bandwidth in excess of 30~MHz. To estimate the bandwidth of the phase measurement the delay loop has been used to create a sharp jump in the phase mid-way along the pulse. Normally the delay loop (whose length is 140~ns) is used with 1.5~GHz beam at CTF3, with seven 180 degree phase switches in the bunching at 140~ns intervals. Alternating 140~ns sub-trains are deflected in to the delay loop with a 1.5~GHz RF deflector, and then recombine with the 140~ns sub-trains bypassing the delay loop to double the drive beam current (Section~\ref{s:ctfIntro}). If the delay loop is instead used with 3~GHz beam alternating bunches, rather than sub-trains, enter the delay loop. The first 140~ns of the pulse after the delay loop contains only bunches that bypassed the loop, so is a 1.5~GHz beam with half the initial beam current. After the first 140~ns there is a fast transition back to 3~GHz beam with the same initial current as delayed bunches merge with the bypassing bunches. By varying the length of the delay loop (using a wiggler \cite{wiggler}) the phase of the bunches leaving the delay loop can be changed, also creating a fast phase jump at the transition to 3~GHz beam.
+
+Figure~\ref{f:bandwidthPlot} shows the response of the Mon~3 mixer to a beam pulse with a phase step setup in this way. 
+In this case an initial 140~ns, 3~GHz, 4~A beam pulse is used, and is converted in to a 280~ns, 1.5~GHz, 2~A pulse following the delay loop by the process described above. With this pulse length the resulting downstream beam pulse has a phase jump but constant beam current and bunch frequency.
+The time taken for the mixer output to respond to the fast phase change can be related to the bandwidth by this approximate relationship \cite{bwRisTim}:
+\begin{equation}
+\mathrm{BW} = \frac{350}{t}
+\end{equation}
+where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the signal in ns. The transition between the two phase states as seen on the mixer output occurs between 156.6~ns and 167.0~ns, a rise time of 10.4~ns corresponding to a bandwidth of approximately 34~MHz. In addition, the falling edge of the mixer output at the end of the pulse also takes around a 10~ns, also leading to a bandwidth estimate in the region of 35~MHz.
+
 
 %or use transient start of upstream pulse
 %on FONT5a board goes 30 to 41 ns, suggests 32~MHz
@@ -878,7 +912,7 @@ where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the 
   \label{f:DiffMon1Mon2Along}
 \end{figure}
 
-It has been shown that the phase jitter is at the same level in Mon~1 and Mon~2 after the installation of mechanical phase shifters (Section~\ref{s:shifters}), and that the achieved resolution is better than the level needed to be able to theoretically achieve a \(0.2^\circ\) PFF correction (Section~\ref{ss:bestRes}). Nevertheless there are several remaining effects that have been identified which may limit the PFF performance in a way not described by the resolution. These are the focus of the remainder of this chapter, starting with differences between the measured shape of the phase along the pulse, discussed here. Neither the phase jitter nor the resolution are sensitive to any static differences in the measured phase in each monitor. For the PFF system to remove not only phase jitter but also to flatten the phase sag along the pulse the shape of the upstream and downstream phase must be the same.
+It has been shown that the phase jitter is at the same in Mon~1 and Mon~2 (Section~\ref{s:shifters}), and that the achieved resolution is better at the level required for the PFF correction (Section~\ref{ss:bestRes}). Nevertheless there are several remaining effects that have been identified which may limit the PFF performance in a way not described by the resolution. These are the focus of the remainder of this chapter, starting with differences between the measured shape of the phase along the pulse, discussed here. Neither the phase jitter nor the resolution are sensitive to any static differences in the measured phase in each monitor. For the PFF system to remove not only phase jitter but also to flatten the phase sag along the pulse the shape of the upstream and downstream phase must be the same. In other words, the PFF system is sensitive to the accuracy of the phase measurement as well as the resolution.
 
 Figure~\ref{f:phaseAlongAll} shows an example of the measured phase along the pulse in all three monitors, as well as a fourth phase measurement taken from one of the power extraction and transfer structures (PETS) in the TBL line after Mon~3 \cite{reidarPETS}. The PETS measurement provides an independent cross-check of the response and calibration of the three PFF monitors. All four phase measurements show approximately the same overall phase sag of around \(45^\circ\) along the full pulse length, as expected.
 
@@ -886,7 +920,7 @@ Nevertheless, there are differences between the measurements. As described later
 
 However, as Mon~1 and Mon~2 are neighbouring each other in the beam line their measurements are expected to agree almost perfectly but this is not the case. Figure~\ref{f:DiffMon1Mon2Along} shows the difference between the Mon~1 and Mon~2 phase along the pulse. The offset between the two has almost a linear dependence on the time along the pulse, varying by close to \(10^\circ\) across the full pulse length. Possible explanations could be an error in the fitted calibration amplitude or a time offset between the two signals. The fact that the Mon~2 phase is lower at one end of the pulse but higher at the other means that the difference is not simply a scale factor between the two, and therefore cannot be described by an error in calibration amplitude. Neither can it be explained by differences in the calibration constants along the pulse, as seen in Section~\ref{s:effectsMultiSampCal}. Similarly, by observing small variations along the pulse, for example at the end of the pulse after a time of 1000~ns in Figure~\ref{f:phaseAlongAll}, it can be seen that the two measurements are well aligned in time.
 
-If there was a real difference in the phase sag between monitors (rather than it being a measurement effect) or if there was an issue with Mon~1, used as the PFF correction input, it would not be possible to completely flatten the phase sag along the pulse with the PFF system. The excellent flattening of the pulse that has in reality been achieved with the PFF system (Chapter~\ref{c:feedforward}) suggests this may be an issue affecting only Mon~2, as the correction input is based solely on Mon~1. Although the effect is not yet understood, recent measurements have suggested the source of the difference may be intermittent noise on the LO phase used by the second mixer, and not present or at least much weaker on the first and third LO sources used for Mon~1 and Mon~3 \cite{jackFONTAug16}. The noise appears to be correlated with the phase and power of the two klystrons nearest the phase monitor electronics in the klystron gallery, suggesting a possible grounding issue in the electronics.
+If there was a real difference in the phase sag between monitors (rather than it being a measurement effect) or if there was an issue with Mon~1, used as the PFF correction input, it would not be possible to completely flatten the phase sag along the pulse with the PFF system. The excellent flattening of the pulse that has in reality been achieved with the PFF system (Chapter~\ref{c:feedforward}) suggests this may be an issue affecting only Mon~2, as the correction input is based solely on Mon~1. Although the effect is not fully yet understood, recent measurements have suggested the source of the difference may be intermittent features on the LO phase used by the second mixer, and not present or at least much weaker on the first and third LO sources used for Mon~1 and Mon~3 \cite{jackFONTAug16}. The effect appears to be correlated with the phase and power of the two klystrons nearest the phase monitor electronics in the klystron gallery, suggesting a possible grounding issue in the electronics.
 
 %\begin{figure}
 %  \centering
@@ -902,15 +936,15 @@ If there was a real difference in the phase sag between monitors (rather than it
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/multiSampMon2Along}
+  \includegraphics[width=0.75\textwidth]{Figures/phaseMons/multiSampMon2Along}
   \caption{Effect of using a varying calibration constant on the upstream phase. Top: Phase with a constant calibration constant (blue) and phase with a varying calibration constant (red). Bottom: The difference between the two.}
   \label{f:multiSampMon2Along}
-  \includegraphics[width=0.8\textwidth]{Figures/phaseMons/multiSampMon3Along}
+  \includegraphics[width=0.75\textwidth]{Figures/phaseMons/multiSampMon3Along}
   \caption{Effect of using a varying calibration constant on the downstream phase. Top: Phase with a constant calibration constant (blue) and phase with a varying calibration constant (red). Bottom: The difference between the two.}
   \label{f:multiSampMon3Along}
 \end{figure}
 
-In Section~\ref{ss:calMultiSamp} it was shown how the calibration parameters vary along the pulse. In the PFF algorithm, and usually also in data analysis, single values for each calibration constant are used across the full pulse length. This will lead to small discrepancies between the measured phase and the true beam phase. Examples of the size of this effect are shown in Figures~\ref{f:multiSampMon2Along}, for Mon~2, and in Figure~\ref{f:multiSampMon3Along} for Mon~3, comparing the measured phase along the pulse when using single value calibration constants or varying calibration constants along the pulse. In the range between 650~ns and 900~ns around the middle of the pulse where the phase sag is flattest (the part of interest for the PFF system) using a varying calibration constant along the pulse makes almost no difference to the measured upstream phase, with residuals of below \(0.2^\circ\) between the two calibration methods. This is unsurprising as the calibration constants normally used are calculated from one sample in this range. Outside this range the difference between the two reaches a peak of \(1.5^\circ\) near the start of the pulse.
+In Section~\ref{ss:calMultiSamp} it was shown how the calibration parameters vary along the pulse. In the PFF algorithm, and usually also in data analysis, single values for each calibration constant are used across the full pulse length. This will lead to small discrepancies between the measured and the true beam phase. Examples of the size of this effect are shown in Figures~\ref{f:multiSampMon2Along}, for Mon~2, and in Figure~\ref{f:multiSampMon3Along} for Mon~3, comparing the measured phase when using single value and the actual point-by-point calibration constants. In the range between 650~ns and 900~ns around the middle of the pulse where the phase sag is flattest (the part of interest for the PFF system) using a varying calibration constant along the pulse makes almost no difference to the measured upstream phase, with residuals of below \(0.2^\circ\) between the two calibration methods. This is unsurprising as the calibration constants normally used are calculated from one sample in this range. %Outside this range the difference between the two reaches a peak of \(1.5^\circ\) near the start of the pulse.
 
 For the downstream phase the differences are larger, including up to \(1^\circ\) offsets between the two methods in the range of interest for the PFF system. However, the example shown is without fully optimised downstream beam conditions achieved in Chapter~\ref{c:phasePropagation} and so represents a worst case scenario for normal PFF operation. The PFF correction quality also does not directly depend on the downstream phase measurement (apart from for the gain calculation, as derived in Section~\ref{s:pffEquations}), so these differences can be removed in offline analysis if deemed necessary.
 
@@ -959,8 +993,6 @@ r_{M2} &= \frac{s_{M2}}{s_{430}}
 \end{align}
 and where \(s_{M1}\), \(s_{M2}\) and \(s_{430}\) are the distances between the corrector and the phase monitors (\(s_{M1}\), \(s_{M2}\)) or BPM (\(s_{430}\)). Substituting in the values from Table~\ref{t:distanceFromCT360} gives values of \(r_{M1} = 0.29\) and \(r_{M2} = 0.41\).
 
-Figure~\ref{f:horizontalPosScan} shows the results of a horizontal position scan in the upstream phase monitors, with the phase plotted against the horizontal position in the BPM. Position scans of this type require a long time to complete in order to be able to acquire enough statistics at multiple corrector settings. The scan presented represents a data taking period of around one hour, for example. This means real drifts in beam phase (aside from any position dependent effects on the monitor signals) are unavoidable during the scan. The first impression of Figure~\ref{f:horizontalPosScan} is that the only visible change in measured phase is due to actual drifts in beam phase rather than being as a result of the changes in position. However, Figure~\ref{f:horizontalScanDiode} shows the response of the phase monitor diode signals to the horizontal position in the BPM during the scan. Even though the diodes are heavily saturated a dependence of their output, and so a dependence of power, on the position is visible. 
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/horizontalPosScan}
@@ -970,6 +1002,10 @@ Figure~\ref{f:horizontalPosScan} shows the results of a horizontal position scan
   \caption{Mon~1 (blue) and Mon~2 (red) diode dependence on the horizontal position during the scan.}
   \label{f:horizontalScanDiode}
 \end{figure}
+
+Figure~\ref{f:horizontalPosScan} shows the results of a horizontal position scan in the upstream phase monitors, with the phase plotted against the horizontal position in the BPM. Position scans of this type require a long time to complete in order to be able to acquire enough statistics at multiple corrector settings. The scan presented represents a data taking period of around one hour, for example. This means real drifts in beam phase (aside from any position dependent effects on the monitor signals) are unavoidable during the scan. The first impression of Figure~\ref{f:horizontalPosScan} is that the only visible change in measured phase is due to actual drifts in beam phase rather than being as a result of the changes in position. However, Figure~\ref{f:horizontalScanDiode} shows the response of the phase monitor diode signals to the horizontal position in the BPM during the scan. Even though the diodes are heavily saturated a dependence of their output, and so a dependence of power, on the position is visible. 
+
+
 
 \begin{figure}
   \centering
