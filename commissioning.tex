@@ -50,12 +50,6 @@ The FONT5a board is controlled using a LabVIEW control and data acquisition syst
 \subsection{Implementation of the PFF Correction in Firmware}
 \label{ss:pffFirmware}
 
-The diagram in Figure~\ref{f:fontDiagram} shows all the connections to and from the FONT5a board that were introduced in the previous section, from the phase monitor and timing inputs on the left side of the diagram to the outputs for the amplifier and DAQ on the right side of the figure. The central portion of the figure shows a simplified schematic of how the FONT5a firmware calculates and applies the PFF correction. All the parameters shown in the figure, and several others not shown in the diagram but described later in this section, must be appropriately set (via the DAQ) for correct operation of the PFF system.
-
-The basic logic of the firmware is as follows. The ADC timing, sampling rate, and start time, are defined by the input trigger and external 357~MHz clock. The ADC outputs are processed continuously on the FPGA, including the addition of channel offsets and the application of filters. The processed ADC~2 (Mixer) output is then split in to two, to create the two parallel strands that become the DAC~1 and DAC~2 outputs. Note that, instead of using arcsine, the Mixer value is used directly in the calculation, thereby assuming the small angle approximation. Section~\ref{ss:fontSmallAng} discusses whether the use of the small angle approximation in the calculation is valid. If the diode (ADC~1) is being used in the calculation the ADC~2 output is also multiplied by 1/sqrt(ADC~1). Values for the square-root are taken from a lookup table rather than being calculated directly to reduce the number of clock cycles needed for the calculation \cite{glennCLIC13}. Prior to being sent to the DACs the two output strands are multiplied by their corresponding gain factors. An additional delay can be added to the DAC outputs, allowing the synchronisation of the correction with the beam to be adjusted. The two calculated DAC outputs are connected to the amplifier drive inputs, where they are amplified and eventually output to the kickers to deflect the beam and correct the phase. 
-%Meanwhile the input trigger for the FONT5a board is used to derive the trigger for the amplifier, with a variable delay that can also be set in the DAQ. 
-The overall latency of the FONT5a board, from the arrival of the signal at the ADCs to the output of the calculated correction at the DACs, is around 22 clock cycles (at 357~MHz) or 60~ns \cite{glennCLIC14}.
-
 \afterpage{\begin{landscape}
 \begin{figure}
   \centering
@@ -64,6 +58,14 @@ The overall latency of the FONT5a board, from the arrival of the signal at the A
   \label{f:fontDiagram}
 \end{figure}
 \end{landscape}}
+
+
+The diagram in Figure~\ref{f:fontDiagram} shows all the connections to and from the FONT5a board that were introduced in the previous section, from the phase monitor and timing inputs on the left side of the diagram to the outputs for the amplifier and DAQ on the right side of the figure. The central portion of the figure shows a simplified schematic of how the FONT5a firmware calculates and applies the PFF correction. All the parameters shown in the figure, and several others not shown in the diagram but described later in this section, must be appropriately set (via the DAQ) for correct operation of the PFF system.
+
+The basic logic of the firmware is as follows. The ADC timing, sampling rate, and start time, are defined by the input trigger and external 357~MHz clock. The ADC outputs are processed continuously on the FPGA, including the addition of channel offsets and the application of filters. The processed ADC~2 (Mixer) output is then split in to two, to create the two parallel strands that become the DAC~1 and DAC~2 outputs. Note that, instead of using arcsine, the Mixer value is used directly in the calculation, thereby assuming the small angle approximation. Section~\ref{ss:fontSmallAng} discusses whether the use of the small angle approximation in the calculation is valid. If the diode (ADC~1) is being used in the calculation the ADC~2 output is also multiplied by 1/sqrt(ADC~1). Values for the square-root are taken from a lookup table rather than being calculated directly to reduce the number of clock cycles needed for the calculation \cite{glennCLIC13}. Prior to being sent to the DACs the two output strands are multiplied by their corresponding gain factors. An additional delay can be added to the DAC outputs, allowing the synchronisation of the correction with the beam to be adjusted. The two calculated DAC outputs are connected to the amplifier drive inputs, where they are amplified and eventually output to the kickers to deflect the beam and correct the phase. 
+%Meanwhile the input trigger for the FONT5a board is used to derive the trigger for the amplifier, with a variable delay that can also be set in the DAQ. 
+The overall latency of the FONT5a board, from the arrival of the signal at the ADCs to the output of the calculated correction at the DACs, is around 22 clock cycles (at 357~MHz) or 60~ns \cite{glennCLIC14}.
+
 
 All the parameters and controls that must be adjusted during the PFF system setup, and their respective values where relevant, are listed below for reference. These are only introduced in brief here, but parameters that are either non-trivial to derive or are critical for the PFF performance are described in more detail in later sections and chapters as indicated. The given values are in the units as they are in the DAQ and the firmware. Each parameter is expressed by up to a 14~bit number. The size of each control is chosen to give a reasonable degree of flexibility around the expected set point. 
 
@@ -130,9 +132,6 @@ The majority of the results presented in the remainder of this chapter use const
 \subsection{ADC Droop Correction}
 \label{ss:droopCorr}
 
-The FONT5a (and previous FONT5) boards were originally designed and operated extensively on very short (delta-function like) pulsed signals.
-During the first tests of the earlier FONT5 board at CTF3, where the beam pulse length is up to \(1.2~\mathrm{\mu}\)s, it was immediately apparent that there was a large droop in the measured phase monitor diode outputs using the FONT ADCs. An example of this, taken from the FONT5a board, is shown in Figure~\ref{f:iirDiodefiltOffOn}, remembering that as the diodes are highly saturated the response should be close to a perfect square wave. The measured diode output droops by 200~counts (approximately 15\%) across the pulse length, with this difference also visible as an offset in the baseline after the pulse.
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn}
@@ -140,26 +139,44 @@ During the first tests of the earlier FONT5 board at CTF3, where the beam pulse 
   \label{f:iirDiodefiltOffOn}
 \end{figure}
 
+The FONT5a (and previous FONT5) boards were originally designed and operated extensively on very short (delta-function like) pulsed signals.
+During the first tests of the earlier FONT5 board at CTF3, where the beam pulse length is up to \(1.2~\mathrm{\mu}\)s, it was immediately apparent that there was a large droop in the measured phase monitor diode outputs using the FONT ADCs. An example of this, taken from the FONT5a board, is shown in Figure~\ref{f:iirDiodefiltOffOn}, remembering that as the diodes are highly saturated the response should be close to a perfect square wave. The measured diode output droops by 200~counts (approximately 15\%) across the pulse length, with this difference also visible as an offset in the baseline after the pulse.
+
 The droop emerges as a result of the use of AC coupling on the ADC input transformers for electrical isolation. 
 AC coupling blocks the low frequency (or DC like) components of a signal with  \({dV(t)}/{dt}\sim0\), where \(V(t)\) is the input voltage and \(t\) is time \cite{acCoupling}. 
 The phase monitor diode signal is  well described by a DC signal, being approximately square with only small variations along the beam pulse, so that \({dV(t)}/{dt}\) is small in the signal region (away from the leading and trailing edge of the pulse). By reducing the magnitude of the low frequency components of the signal, AC coupling thereby causes the observed droop in the measured diode output along the pulse on the FONT ADCs.
 There is also a small effect on the mixer output, as will be seen later.
 
-In the simplest case the droop should be well described by an exponential decay of the form \(A\exp\left(-t/\tau\right)\), where \(t\) is the time or sample number along the pulse and \(\tau\) is the decay time constant \cite{colinPriv}. For the FONT5 board this only gave a rough approximation of the true droop characteristics due to non-linear properties of the input transformers. On the updated FONT5a board the transformers were changed to both reduce the magnitude of the droop and give closer to the expected exponential decay \cite{colinPriv}. Figure~\ref{f:iirDiodeFit} shows an exponential fit to the Mon1 diode output as seen on the FONT5a board (ADC1). Apart from a small deviation at the beginning of the pulse the agreement is excellent, with residuals to the fit of only up to 2~counts compared to a signal magnitude of 1250~counts. For ADC1 the fitted decay time constant is \(\tau = 838\pm16\)~samples, or \(2.35\pm0.05~\mathrm{\mu}\)s. Each ADC on the FONT5a board has slightly different droop characteristics, with the decay time constant for ADC2 being \(938\pm18\)~samples, or \(2.62\pm0.05~\mathrm{\mu}\)s, for example (calculated with the diode moved on to ADC2).
+In the simplest case the droop should be well described by an exponential decay of the form \(A\exp\left(-t/\tau\right)\), where \(t\) is the time or sample number along the pulse and \(\tau\) is the decay time constant \cite{colinPriv}. For the FONT5 board this only gave a rough approximation of the true droop characteristics due to non-linear properties of the input transformers. On the updated FONT5a board the transformers were changed to both reduce the magnitude of the droop and give closer to the expected exponential decay \cite{colinPriv}. Figure~\ref{f:iirDiodeFit} shows an exponential fit to the Mon1 diode output as seen on the FONT5a board (ADC1). Apart from a small deviation at the beginning of the pulse the agreement is excellent, with residuals to the fit of only up to 2~counts compared to a signal magnitude of 1250~counts (Figure~\ref{f:iirDiodeFitResid}). For ADC1 the fitted decay time constant is \(\tau = 838\pm16\)~samples, or \(2.35\pm0.05~\mathrm{\mu}\)s. Each ADC on the FONT5a board has slightly different droop characteristics, with the decay time constant for ADC2 being \(938\pm18\)~samples, or \(2.62\pm0.05~\mathrm{\mu}\)s, for example (calculated with the diode moved on to ADC2).
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFit}
+  \includegraphics[width=0.75\textwidth]{Figures/commissioning/iirDiodeFit}
   \caption{Exponential fit (red) to droop on the measured diode output (blue).}
   \label{f:iirDiodeFit}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFitResid}
+  \includegraphics[width=0.75\textwidth]{Figures/commissioning/iirDiodeFitResid}
   \caption{Residuals between the measured diode output and the exponential fit to the droop shown in Figure~\ref{f:iirDiodeFit}.}
   \label{f:iirDiodeFitResid}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
+  \caption{Measured diode output on the FONT5a board with the IIR filter off (blue) and on (red). Zoomed in to show deviations from the ideal square wave that are not visible in Figure~\ref{f:iirDiodefiltOffOn}.}
+  \label{f:iirDiodefiltOffOn_zoom}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirPhaseFiltOffOn}
+  \caption{Measured phase on the FONT5a board with the IIR filter off (blue) and on (red).}
+  \label{f:iirPhasefiltOffOn}
+\end{figure}
+
 
 In the case where the diode is used in the phase reconstruction as originally envisaged the ADC droop would propagate in to the applied correction and create an output to the amplifier that increases with time with respect to the ideal value (as the Mixer is divided by sqrt(Diode)). The effect on the correction is much smaller without diode normalisation but it still slightly distorts the measured Mixer input to ADC2. Therefore, a digital Infinite Impulse Response (IIR) filter has been implemented in the FONT5a board firmware to remove the exponential droop in the ADC outputs \cite{glennCLIC14}. This works by recursively adding the expected droop to the ADC output based on the known decay constants, so that:
 \begin{equation}
@@ -191,19 +208,6 @@ where \(y(t)\) is the filtered ADC output at sample \(t\), \(x(t)\) is the origi
 
 With the IIR filters enabled on the FONT5a board the droop on the diode (ADC1) is almost perfectly removed as shown in Figures~\ref{f:iirDiodefiltOffOn}~and~\ref{f:iirDiodefiltOffOn_zoom}, although in the zoomed-in Figure~\ref{f:iirDiodefiltOffOn_zoom} some slight deviation from flat is visible due to the residuals around the exponential fit seen previously. The effect on the reconstructed phase using only the mixer (ADC2) is shown in Figure~\ref{f:iirPhasefiltOffOn}, with a modest adjustment to the overall shape that is most visible at the start and end of the pulse.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
-  \caption{Measured diode output on the FONT5a board with the IIR filter off (blue) and on (red). Zoomed in to show deviations from the ideal square wave that are not visible in Figure~\ref{f:iirDiodefiltOffOn}.}
-  \label{f:iirDiodefiltOffOn_zoom}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirPhaseFiltOffOn}
-  \caption{Measured phase on the FONT5a board with the IIR filter off (blue) and on (red).}
-  \label{f:iirPhasefiltOffOn}
-\end{figure}
 
 
 
@@ -215,10 +219,6 @@ uses them to produce four high voltage outputs. These are connected to the downs
 
 \subsection{Design}
 \label{ss:ampDesign}
-
-The amplifier is purpose built for the PFF prototype, also at Oxford University, with further details of its design available in \cite{colinCLIC16}. An annotated picture of its front panel is shown in Figure~\ref{f:AmplifierPanelPic} and a simplified diagram showing the flow of signals between the FONT5a board, amplifier and kickers is shown in Figure~\ref{f:amplifierDiagram}.
-The amplifier is installed in a standard 3U rack and has a modular design. It consists of five individual modules split between two sides, labelled left and right. The left side of the amplifier, which uses the DAC~1 output, powers the first kicker in the chicane, and the right side of the amplifier, which uses the DAC~2 output, powers the second kicker. Each side of the amplifier contains its own ``drive module'' and ``terminator module''. Finally there is a central ``control module'' that is common to both sides of the amplifier.
-
 
 \afterpage{\begin{landscape}
 \begin{figure}
@@ -237,6 +237,12 @@ The amplifier is installed in a standard 3U rack and has a modular design. It co
   \label{f:amplifierDiagram}
 \end{figure}
 \end{landscape}}
+
+
+The amplifier is purpose built for the PFF prototype, also at Oxford University, with further details of its design available in \cite{colinCLIC16}. An annotated picture of its front panel is shown in Figure~\ref{f:AmplifierPanelPic} and a simplified diagram showing the flow of signals between the FONT5a board, amplifier and kickers is shown in Figure~\ref{f:amplifierDiagram}.
+The amplifier is installed in a standard 3U rack and has a modular design. It consists of five individual modules split between two sides, labelled left and right. The left side of the amplifier, which uses the DAC~1 output, powers the first kicker in the chicane, and the right side of the amplifier, which uses the DAC~2 output, powers the second kicker. Each side of the amplifier contains its own ``drive module'' and ``terminator module''. Finally there is a central ``control module'' that is common to both sides of the amplifier.
+
+
 
 
 %All the outputs from the FONT5a board are connected to the control module, this includes the DAC~1 and DAC~2 outputs as well as the trigger for the amplifier. The required 24~V, 1.1~A power supply is also connected to the control module. 
@@ -269,7 +275,7 @@ Figure~\ref{f:AmpOutvsDAC} shows the amplifier output, measured using the monito
 
 The relative polarity of the four outputs used is equivalent to what would be applied to the kickers during PFF operation, with opposite polarity of the L and R amplifier outputs (powering the first and second kicker respectively), so that the beam is kicked in opposite directions by each kicker. The second kicker should then act to close the orbit bump created by the first kicker. Within each side of the amplifier the A and B outputs (applied to the left and right strip of each kicker respectively) also have opposite polarity. This is necessary to create the potential difference between the kicker strips that produces the deflecting field for the beam. The relative polarity of the A and B outputs is fixed in the amplifier design and cannot be controlled via the FONT5a board.
 
-The response of the amplifier is linear up to \(\pm1.2\)~V input voltage. Outside this range the amplifier clearly begins to enter saturation, in particular above input voltages of \(\pm1.7\)~V. The linear fits shown include only the points up to \(\pm1.2\)~V, in order to not be biased by the effects of saturation. Figure \ref{f:AmpOutvsDAC_residual} shows the difference between the linear fit and the real amplifier output across the full range of input voltages. A slight deviation from linearity in the \(\pm1.2\)~V range is also visible, although the maximum difference is only 10~V or a 3\% relative error. At the maximum input voltage of \(\pm2\)~V the deviation from linearity rises above 150~V,  a relative error of more than 25\%. For example, the RB output at an input voltage of \(+2\)~V is 605~V but the fitted response gives 769~V, a difference of 164~V or 27\%.
+The response of the amplifier is linear up to \(\pm1.2\)~V input voltage. Outside this range the amplifier clearly begins to enter saturation, in particular above input voltages of \(\pm1.7\)~V. The linear fits shown include only the points up to \(\pm1.2\)~V, in order to not be biased by the effects of saturation. Figure \ref{f:AmpOutvsDAC_residual} shows the difference between the linear fit and the measured amplifier output across the full range of input voltages. A slight deviation from linearity in the \(\pm1.2\)~V range is also visible, although the maximum difference is only 10~V or a 3\% relative error. At the maximum input voltage of \(\pm2\)~V the deviation from linearity rises above 150~V,  a relative error of more than 25\%. For example, the RB output at an input voltage of \(+2\)~V is 605~V but the fitted response gives 769~V, a difference of 164~V or 27\%.
 
 The effects of amplifier saturation are not taken in to account in the PFF algorithm on the FONT5a board, in which the DAC output is linearly dependent on the input phase (voltage from the phase monitor mixer signal) across the full range. The correction applied to the downstream phase will therefore be non-optimal when the output calculated by the PFF algorithm is above an absolute value of 2500 DAC counts (1.2~V amplifier input). To date the non-linearity of the amplifier as it begins to enter saturation has also not been included in the PFF simulations presented in the following chapters. This may partially explain the small discrepancies seen between the simulated and measured results in some datasets, so including the effect will be pursued in the future. 
 %In addition, it could be foreseen to incorporate the saturation characteristics in to the PFF algorithm on the FONT5a board, so that calculated outputs above 2500 counts are boosted slightly to compensate for the lower than expected amplifier output.
@@ -318,7 +324,7 @@ For each side of the amplifier both the A and B outputs are plotted as well as t
 
 The PFF algorithm on the FONT5a board uses a single gain value across the whole pulse length for each correction output, thus making the approximation that the amplifier response is flat along the pulse. The variations along the amplifier pulse therefore directly translate in to discrepancies between the intended phase shift as calculated and the real phase shift experienced by the beam. As the region of interest for the correction is a few hundred nanoseconds about the central part of the pulse, as opposed to the full pulse length, the 1~\% mean variation is more indicative of the resulting error than the 6~\% peak-to-peak variation. With a correction range (Section \ref{ss:corrRange}) of \(\pm5.5^\circ\), the effects of the non-flat amplifier output should be below \(0.06^\circ\) and not measurable considering the phase monitor resolution of \(0.13^\circ\). 
 
-Variations in the amplifier output along the pulse can also lead to imperfect orbit closure in the chicane, as discussed in Section~\ref{ss:ampLin} for differences in the mean output. However, this would also be a small effect and in any case orbit closure has not yet been strictly enforced during operation of the PFF system (Section~\ref{ss:orbitClosure}). Nevertheless, it could be foreseen to implement a droop correction in the PFF algorithm on the FONT5a board, taking the variations in the amplifier output along the pulse in to account and providing a modest improvement to both the phase correction and orbit closure. A first attempt could use IIR filters on the FONT5a DAC outputs in the same way as implemented to correct the ADC droop (Section~\ref{ss:droopCorr}), so that the DAC output to the amplifier towards the end of the pulse is boosted slightly to compensate for droop in the amplifier output.
+Variations in the amplifier output along the pulse can also lead to imperfect orbit closure in the chicane, as discussed in Sections~\ref{ss:ampLin}~and~\ref{ss:orbitClosure} for differences in the mean output. However, this would also be a small effect and in any case orbit closure has not yet been strictly enforced during operation of the PFF system (Section~\ref{ss:orbitClosure}). Nevertheless, it could be foreseen to implement a droop correction in the PFF algorithm on the FONT5a board, taking the variations in the amplifier output along the pulse in to account and providing a modest improvement to both the phase correction and orbit closure. A first attempt could use IIR filters on the FONT5a DAC outputs in the same way as implemented to correct the ADC droop (Section~\ref{ss:droopCorr}), so that the DAC output to the amplifier towards the end of the pulse is boosted slightly to compensate for droop in the amplifier output.
 
 %Variations in the amplifier output along the pulse can also lead to imperfect orbit closure in the chicane (as was discussed previously for differences in mean output). For this the relevant quantity is the sum of the potential difference sent to each kicker, or \((LA-LB)+(RA-RB)\). To ensure orbit closure this quantity, named the residual kick here, should be zero across the whole pulse length for all input voltages. Figure \ref{f:ampClosure} shows the residual kick along the pulse for all the input voltages in the scan. Clearly they are not all centred around zero, but this is expected due to the differences in the mean output voltage of the four amplifier outputs seen in Section~\ref{ss:ampLin}. As already stated, the overall mean offset could be removed by using a different gain for the two correction outputs. However, any variations along the pulse cannot be compensated for in the PFF algorithm. The magnitude of the effect is summarised in Figure \ref{f:ampClosureFlatness}, showing the peak-to-peak and average deviation of the residual kick from flat. The overall residual kick is very flat and the effect is smaller than any of those previously shown --- only up to 2~V on the mean or 21~V peak-to-peak.
 
@@ -359,7 +365,7 @@ Figure \ref{f:phaseVsAmpVoltage} shows the measured mean phase shift in the down
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage}
-  \caption{Measured downstream phase shift versus amplifier input voltage (blue markers). The blue line shows a linear fit to the measured phase shift for inputs between \(\pm1.2\)~V. The red line shows the expected phase shift taking in to account the TL2 chicane optics, amplifier output voltage and kicker design (using Equation~\ref{e:ampVoltToPhase}.}
+  \caption{Measured downstream phase shift versus amplifier input voltage (blue markers). The blue line shows a linear fit to the measured phase shift for inputs between \(\pm1.2\)~V. The red line shows the expected phase shift taking in to account the TL2 chicane optics, amplifier output voltage and kicker design (using Equation~\ref{e:ampVoltToPhase}).}
   \label{f:phaseVsAmpVoltage}
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage_residuals}
   \caption{Residuals between the measured phase shift and the expected (red) and fitted (blue) phase shifts from Figure~\ref{f:phaseVsAmpVoltage}.}
@@ -481,10 +487,13 @@ Figure~\ref{f:orbClosureVsQuadModel} compares the measured beam orbit
   actual quadrupole strengths applied in TL2 during this dataset.
 
 This gives confidence that if a completely nominal optics could be 
-used in TL2 orbit closure would be obtained. For future tests attempts 
-will be made to further optimise the setup of CTF3 and allow a 
-completely nominal optics to be used in TL2. It should also be 
-noted that for these tests both sides of the amplifier were driven with the same magnitude input voltage. This has also been the case for 
+used in TL2 orbit closure would be obtained. 
+%For future tests attempts 
+%will be made to further optimise the setup of CTF3 and allow a 
+%completely nominal optics to be used in TL2. 
+After recent optimisations to the setup of the lines upstream of TL2, it has been possible to use the nominal quadrupole settings in TL2, and orbit closure measurements will be repeated in the near future.
+It should also be 
+noted that for the tests presented here both sides of the amplifier were driven with the same magnitude input voltage. This has also been the case for 
 all the PFF correction attempts presented in Chapter~\ref{c:feedforward}. 
 However, in Section~\ref{ss:ampLin} it was seen that the right side of the amplifier (powering the second kicker) gave 4\% lower output than the left side (powering the first kicker).
 To strictly enforce orbit closure with a nominal optics it would 
@@ -658,16 +667,18 @@ saturate at input voltages below 2~V, as seen in Figure~\ref{f:AmpOutvsDAC}.
 
 Most the results based on the amplifier outputs and kicked beam presented so far have used a constant voltage across the full \(1.4~\mathrm{\mu s}\) time window that the amplifier is powered for. As the \(1.4~\mathrm{\mu s}\) amplifier output to the kickers is longer than the \(1.1~\mathrm{\mu s}\) CTF3 beam pulse it is relatively straightforward to ensure that the full length of the pulse experiences the constant kick with this setup. However, for operation of the PFF system precise control of the correction output timing becomes critical. 
 
-In order to remove phase variations along the pulse with the PFF system the output correction signal, shaped by the upstream phase, must arrive at the kickers exactly synchronised with the beam. Timing misalignments between the beam and correction signal arrival will result in residual offsets in the corrected downstream phase, which in the ideal case should be zero across the full pulse length. 
-%Approximating the phase sag along the pulse to be quadratic, \(\phi_{u}(t) \sim \phi_{d}(t) \sim t^2\), a misaligned correction would yield a corrected downstream phase with a linear increase in phase along the pulse with time, \(\phi_{PFF}(t)~\sim~\phi_d(t)-\phi_u(t+\delta)~\sim -2\delta t - \delta^2\), for example, where \(\phi_{PFF}\) is the corrected phase, \(\phi_{d}\) the uncorrected downstream phase, \(\phi_{u}\) the upstream phase, \(t\) the time and \(\delta\) the time misalignment in the applied correction. Also, the effect is particularly significant for any higher frequency variations in phase along the pulse. If a 40~ns oscillation is present in the upstream phase but the correction is applied with a 50~ns delay, for example, a second 40~ns oscillation with opposite sign would be introduced to the ``corrected'' downstream phase at a later time with no change to the initial oscillation. 
-Figure~\ref{f:simCorrDelay} shows a simulated example of this for a correction applied 78~ns later than the beam. The resulting corrected downstream phase (the sum of the initial phase and the correction output) is clearly non-zero, with different behaviour for slow and fast variations in the initial phase. Considering the phase sag along the CTF3 beam pulse (a low frequency effect), applying the correction late (early) results in an approximately linear increase (decrease) in the corrected downstream phase along the pulse. Alternatively, faster features, with similar or smaller width than the timing mis-alignment, are introduced with opposite sign in the corrected downstream phase rather than being removed (also shown in Figure~\ref{f:simCorrDelay}).
-
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/simCorrDelay}
   \caption{Simulated effect of a 78~ns timing misalignment between the beam and the applied correction. Top: The initial downstream phase (blue) and the correction signal (red), sign flipped for easier comparison. Bottom: The resulting corrected downstream phase (green). A 57~ns width feature is added at time 546~ns in the initial phase, as marked by vertical dashed lines. }
   \label{f:simCorrDelay}
 \end{figure}
+
+
+In order to remove phase variations along the pulse with the PFF system the output correction signal, shaped by the upstream phase, must arrive at the kickers exactly synchronised with the beam. Timing misalignments between the beam and correction signal arrival will result in residual offsets in the corrected downstream phase, which in the ideal case should be zero across the full pulse length. 
+%Approximating the phase sag along the pulse to be quadratic, \(\phi_{u}(t) \sim \phi_{d}(t) \sim t^2\), a misaligned correction would yield a corrected downstream phase with a linear increase in phase along the pulse with time, \(\phi_{PFF}(t)~\sim~\phi_d(t)-\phi_u(t+\delta)~\sim -2\delta t - \delta^2\), for example, where \(\phi_{PFF}\) is the corrected phase, \(\phi_{d}\) the uncorrected downstream phase, \(\phi_{u}\) the upstream phase, \(t\) the time and \(\delta\) the time misalignment in the applied correction. Also, the effect is particularly significant for any higher frequency variations in phase along the pulse. If a 40~ns oscillation is present in the upstream phase but the correction is applied with a 50~ns delay, for example, a second 40~ns oscillation with opposite sign would be introduced to the ``corrected'' downstream phase at a later time with no change to the initial oscillation. 
+Figure~\ref{f:simCorrDelay} shows a simulated example of this for a correction applied 78~ns later than the beam. The resulting corrected downstream phase (the sum of the initial phase and the correction output) is clearly non-zero, with different behaviour for slow and fast variations in the initial phase. Considering the phase sag along the CTF3 beam pulse (a low frequency effect), applying the correction late (early) results in an approximately linear increase (decrease) in the corrected downstream phase along the pulse. Alternatively, faster features, with similar or smaller width than the timing mis-alignment, are introduced with opposite sign in the corrected downstream phase rather than being removed (also shown in Figure~\ref{f:simCorrDelay}).
+
 
 
 Although the effects are most visible along the pulse, any mis-timing of the correction will also degrade the achievable mean phase jitter. This section gives an overview of the methods that have been used to ensure that the correction output to the two kickers arrives in time with the beam. The ``absolute timing'', in Section~\ref{ss:absTiming}, refers to the timing that ensures the correction signal arrives to the first kicker synchronous to the beam. The ``relative timing'', in Section~\ref{ss:relativeTiming}, then derives whether the output from the FONT5a board for the second kicker must be delayed with respect to the first to ensure the timing is synchronised for both kickers.
@@ -777,7 +788,7 @@ The pairs of cables connected to the downstream ends of the strips for
 \subsection{System Latency}
 \label{ss:systLatency}
 
-The PFF system aims to apply the correction in the TL2 chicane to the same beam pulse initially measured by the upstream phase monitors in the CT line (see Figure~\ref{f:ctfLayout}). For this to be possible the total system latency must be less than the 380~ns time of flight of the beam between the upstream phase monitors and the first kicker in the TL2 chicane (approximately 114~m of beam line). The system latency includes the latencies of each hardware component, namely the phase monitor electronics, FONT5a board and amplifier, as well as the signal transit time in all the associated cabling. As mentioned previously the cabling is the largest contribution, and includes cables from the phase monitors to the electronics in the klystron gallery, to and from the FONT5a board, and from the amplifier in the klystron gallery to the kickers in TL2.
+The PFF system aims to apply the correction in the TL2 chicane to the same beam pulse initially measured by the upstream phase monitors in the CT line (see Figure~\ref{f:ctfpffLayout}). For this to be possible the total system latency must be less than the 380~ns time of flight of the beam between the upstream phase monitors and the first kicker in the TL2 chicane (approximately 114~m of beam line). The system latency includes the latencies of each hardware component, namely the phase monitor electronics, FONT5a board and amplifier, as well as the signal transit time in all the associated cabling. As mentioned previously the cabling is the largest contribution, and includes cables from the phase monitors to the electronics in the klystron gallery, to and from the FONT5a board, and from the amplifier in the klystron gallery to the kickers in TL2.
 
 
 \begin{table}
@@ -819,10 +830,6 @@ When the beam traverses the kickers image currents induce a voltage at the upstr
   \label{f:beamPickup_noKick}
 \end{figure}
 
-An example of this is shown in Figure~\ref{f:absDelay0_all}. A small constant voltage output of 0.1~V (200~DAC counts) is used to drive the amplifier and both the resulting amplifier output pulse and the beam pickup, at samples 275 and 493, are visible in the figure. A small output voltage is used so that the beam pickup can still be seen clearly in the presence of the amplifier output pulse. Importantly, the DAC output is gated using the upstream phase monitor diode signal (in other words, the constant DAC output is only enabled during the time when the diode is non-zero) and this has two consequences. Firstly, the amplifier output pulse has the same length as the beam pulse in the upstream phase monitor. Secondly, the timing of the output is identical to what it would be in normal PFF operation. In the case of Figure~\ref{f:absDelay0_all} the drive to the amplifier is output with minimal delay after the arrival of the upstream diode signal at the FONT5a board. It can be seen that the amplifier pulse arrives before the beam pickup, thus with the PFF system setup this way the correction would be applied early. 
-
-This result therefore proves that the PFF system just meets the latency requirements, with the overall time needed to transmit and process all the relevant signals being a few tens of nanoseconds less than the 380~ns time of flight of the beam between the upstream phase monitor and the first kicker. However, what is also clear in the figure is that the time offset between the start of the amplifier pulse and the first beam pickup spike is much larger than the time difference between the end of the amplifier pulse and the second beam pickup spike. This is due to the energy transient across the first 100~ns of the CTF3 beam pulse which is present in the upstream phase monitor but is then lost prior to the TL2 chicane, predominantly in TL1. As a result the downstream beam pulse is shorter than the upstream beam pulse which defines the length of the correction output. Therefore, in order to align the correction output with the beam the signals from the end of the amplifier and beam pulses must be used, not the start.
-
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/absDelay0_all}
@@ -832,6 +839,10 @@ This result therefore proves that the PFF system just meets the latency requirem
   \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) across the full range of possible output delays (as indicated by the colour scale).}
   \label{f:absDelayAll_endPulse}
 \end{figure}
+
+An example of this is shown in Figure~\ref{f:absDelay0_all}. A small constant voltage output of 0.1~V (200~DAC counts) is used to drive the amplifier and both the resulting amplifier output pulse and the beam pickup, at samples 275 and 493, are visible in the figure. A small output voltage is used so that the beam pickup can still be seen clearly in the presence of the amplifier output pulse. Importantly, the DAC output is gated using the upstream phase monitor diode signal (in other words, the constant DAC output is only enabled during the time when the diode is non-zero) and this has two consequences. Firstly, the amplifier output pulse has the same length as the beam pulse in the upstream phase monitor. Secondly, the timing of the output is identical to what it would be in normal PFF operation. In the case of Figure~\ref{f:absDelay0_all} the drive to the amplifier is output with minimal delay after the arrival of the upstream diode signal at the FONT5a board. It can be seen that the amplifier pulse arrives before the beam pickup, thus with the PFF system setup this way the correction would be applied early. 
+
+This result therefore proves that the PFF system just meets the latency requirements, with the overall time needed to transmit and process all the relevant signals being a few tens of nanoseconds less than the 380~ns time of flight of the beam between the upstream phase monitor and the first kicker. However, what is also clear in the figure is that the time offset between the start of the amplifier pulse and the first beam pickup spike is much larger than the time difference between the end of the amplifier pulse and the second beam pickup spike. This is due to the energy transient across the first 100~ns of the CTF3 beam pulse which is present in the upstream phase monitor but is then lost prior to the TL2 chicane, predominantly in TL1. As a result the downstream beam pulse is shorter than the upstream beam pulse which defines the length of the correction output. Therefore, in order to align the correction output with the beam the signals from the end of the amplifier and beam pulses must be used, not the start.
 
 The firmware for the FONT5a board includes an output delay parameter that is used to fine-tune the timing of the correction output sent to the amplifier (Section~\ref{ss:pffFirmware}). This can be done independently for each of the two correction outputs so that it can be ensured the correction arrives in time with the beam in each kicker individually (the relative timing of the two kickers is discussed in the Section~\ref{ss:relativeTiming}). 
 The delay can be varied in integer steps between 0~and~31~cycles of the system clock, so up to 86.8~ns, in steps of 2.8~ns, for a 357~MHz clock. 
@@ -876,7 +887,7 @@ By taking the difference of the PFF off and PFF on data in the BPM any residual 
   \label{f:absTimBeam_opt}
 \end{figure}
 
-This measurement was repeated with four different correction output delays applied in the FONT5 board, at delays of 0, 10, 20 and 30~clock~cycles (0 to 84~ns), which includes points where the correction is applied both early and late. Fitting the measured time offset between the peaks in the BPM and the phase in the same way as before yields an optimal correction output delay to apply of \(39\pm7\)~ns (Figure \ref{f:absTimBeam_fit}), or \(14\pm3\)~clock~cycles. Applying this delay in data analysis offline gives the result shown in Figure~\ref{f:absTimBeam_opt}, in which the similarity of the three signals becomes clear.
+This measurement was repeated with four different correction output delays applied in the FONT5 board, at delays of 0, 10, 20 and 30~clock~cycles (0 to 84~ns), which includes points where the correction is applied both early and late. Fitting the measured time offset between the peaks in the BPM and the phase in the same way as before yields an optimal correction output delay to apply of \(39\pm7\)~ns, or \(14\pm3\)~clock~cycles (Figure \ref{f:absTimBeam_fit}). Applying this delay in data analysis offline gives the result shown in Figure~\ref{f:absTimBeam_opt}, in which the similarity of the three signals becomes clear.
 
 The optimal output delay of \(39\pm7\)~ns derived with this method does not agree with the value of \(19.6\pm8.4\)~ns from the beam pickup based measurement discussed previously.
 The result from the BPM measurement is closer to the estimated difference of 45~ns between the beam time of flight and total system latency shown in Table~\ref{t:systLatency}. However, the results shown for the BPM method were performed with the first, lower power version of the amplifier and the FONT5 rather than the later FONT5a board. 
