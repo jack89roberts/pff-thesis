@@ -14,9 +14,7 @@ where \(g\) is the applied correction gain. The corrected downstream phase jitte
 \sigma_{PFF}^2 = \sigma_d^2 + g^2\sigma_u^2 - 2g\rho_{ud}\sigma_u\sigma_d
 \label{e:pffEq2}
 \end{equation}
-where \(\rho_{ud}\) is the correlation coefficient between the upstream phase and the downstream phase. 
-
-Setting the partial differential of Equation~\ref{e:pffEq2} with respect to the gain equal to zero yields an expression for the theoretical optimal gain value to apply:
+where \(\rho_{ud}\) is the correlation coefficient between the upstream phase and the downstream phase. Setting the partial differential of Equation~\ref{e:pffEq2} with respect to the gain equal to zero yields an expression for the theoretical optimal gain value to apply:
 \begin{equation}
 \frac{\partial \sigma_{PFF}^2}{\partial g} = 2g\sigma_u^2 - 2\rho_{ud}\sigma_u\sigma_d = 0
 \end{equation}
@@ -113,7 +111,7 @@ It should be noted that whilst this provides an accurate measurement of the rela
   \label{f:enJitter_mean}
 \end{figure}
 
-Figure~\ref{f:enJitter_mean} shows an example of variations in the mean beam energy on medium to long timescales at CTF3, in this case 500 pulses or roughly 10 minutes. Relative energy jitter on the mean is typically at the level of \(1 \times 10^{-3}\), and varies by roughly \(\pm50\%\) about this value. For shorter timescales, in datasets up to a couple of hundred pulses or a few minutes in length, the relative energy jitter is routinely closer to the \(0.5 \times 10^{-3}\) level (seen Figure~\ref{f:r56Scan_upstreamParams}, for example). The main sources of drifts in the mean energy at CTF3 are variations in beam current and temperature dependent effects on the klystron phase and RF power feedback loops \cite{lukasIPAC16}. Recent improvements have demonstrated an energy stability better than \(1 \times 10^{-3}\) energy stability on longer timescales (see Section~\ref{ss:t566Mitigation}), which will aid future PFF tests.
+Figure~\ref{f:enJitter_mean} shows an example of variations in the mean beam energy on medium to long timescales at CTF3, in this case 500 pulses or roughly 10 minutes. Relative energy jitter on the mean is typically at the level of \(1 \times 10^{-3}\), and varies by roughly \(\pm50\%\) about this value. For shorter timescales, in datasets up to a couple of hundred pulses or a few minutes in length, the relative energy jitter is routinely closer to the \(0.5 \times 10^{-3}\) level (seen Figure~\ref{f:r56Scan_upstreamParams}, for example). The main sources of drifts in the mean energy at CTF3 are variations in beam current and temperature dependent effects on the klystron phase and RF power feedback loops \cite{lukasIPAC16}. Recent improvements have demonstrated an energy stability better than \(1 \times 10^{-3}\) on longer timescales (see Section~\ref{ss:t566Mitigation}), which will aid future PFF tests.
 
 \subsubsection{Energy Variations Along the Pulse}
 
@@ -172,14 +170,16 @@ where \(\sigma_d\) is the downstream phase jitter, \(\sigma_u\) is the upstream 
 The effect of \(R_{56}\) on the upstream-downstream phase correlation, \(\rho_{ud}\), can also be defined starting from the definition of the Pearson product-moment correlation coefficient:
 \begin{equation}
 \rho_{ud} = \frac{\mathrm{cov}\left[\phi_u,\phi_d\right]}{\sigma_u\sigma_d}
+\qquad\mathrm{;}\qquad
+\mathrm{cov}\left[\phi_u,\phi_d\right] = \frac{1}{N} \sum_{i=1}^{N}\phi_{ui}\phi_{di}
 \label{e:r56CorrDef1}
 \end{equation}
-where \(\mathrm{cov}\left[\phi_u,\phi_d\right]\) is the covariance between the upstream and downstream phase, given by:
-\begin{equation}
- \mathrm{cov}\left[\phi_u,\phi_d\right] = \frac{1}{N} \sum_{i=1}^{N}\phi_{ui}\phi_{di}
-\label{e:r56CorrDef2}
-\end{equation} 
-where the index \(i\) refers to the pulse number out of a dataset containing \(N\) beam pulses. By inserting the definition of the downstream phase from Equation~\ref{e:r56PhasEq} and separating the terms in the sum this becomes:
+where \(\mathrm{cov}\left[\phi_u,\phi_d\right]\) is the covariance between the upstream and downstream phase, and the index \(i\) refers to the pulse number out of a dataset containing \(N\) beam pulses.
+%\begin{equation}
+% \mathrm{cov}\left[\phi_u,\phi_d\right] = \frac{1}{N} \sum_{i=1}^{N}%\phi_{ui}\phi_{di}
+%\label{e:r56CorrDef2}
+%\end{equation} 
+By inserting the definition of the downstream phase from Equation~\ref{e:r56PhasEq} and separating the terms in the sum the covariance becomes:
 \begin{equation}
 \mathrm{cov}\left[\phi_u,\phi_d\right] = \frac{1}{N} \sum_{i=1}^{N}\phi_{ui}^{2} + R_{56}\frac{1}{N} \sum_{i=1}^{N}\phi_{ui}\frac{\Delta p_i}{p}
 \label{e:r56CorrDef3}
@@ -204,7 +204,7 @@ Considering that in this model the only difference between the upstream and down
 \begin{equation}
 \sigma_{PFF} = \sigma_d\sqrt{1-\rho_{ud}^2}
 \end{equation}
-The initial downstream phase jitter and upstream-downstream phase correlation have been defined in terms of the \(R_{56}\) in Equations~\ref{e:r56JitEq}~\ref{e:r56CorrDefFinal} above. Inserting them in to this equation gives the following expression for the corrected downstream phase jitter in terms of the \(R_{56}\):
+The initial downstream phase jitter and upstream-downstream phase correlation have been defined in terms of the \(R_{56}\) in Equations~\ref{e:r56JitEq}~and~\ref{e:r56CorrDefFinal} above. Inserting them in to this equation gives the following expression for the corrected downstream phase jitter in terms of the \(R_{56}\):
 \begin{equation}
 \sigma_{PFF} = \left|R_{56}\right|\sigma_p\sqrt{1-\rho_{up}^2}
 \label{e:r56PFFJit}
@@ -293,7 +293,7 @@ In Figure~\ref{f:jitVsR56_90ctencorr} plotting the theoretical downstream jitter
 
 \newsection{r56Removal}{Mitigation of First Order Energy Dependence}
 
-The discussion in the Section~\ref{ss:r56TL2Effect} proves that with a residual \(R_{56}\) value of -0.2~m between the upstream and downstream phase monitors it is impossible to achieve the goals of the PFF prototype at CTF3. However, due to the highly constrained optics in TL2 it has already been seen in Chapter~\ref{c:tl2Optics} that it was not possible to find optics for the PFF chicane that yield zero \(R_{56}\) whilst also meeting requirements for both the PFF system and transverse matching. The only way to create a total \(R_{56}\) of zero between the upstream and downstream phase monitors is therefore to add positive \(R_{56}\) to one of the other beam lines in-between the two monitors in order to compensate for the negative \(R_{56}\) in the TL2 chicane. 
+The discussion in Section~\ref{ss:r56TL2Effect} proves that with a residual \(R_{56}\) value of -0.2~m between the upstream and downstream phase monitors it is impossible to achieve the goals of the PFF prototype at CTF3. However, due to the highly constrained optics in TL2 it has already been seen in Chapter~\ref{c:tl2Optics} that it was not possible to find optics for the PFF chicane that yield zero \(R_{56}\) whilst also meeting requirements for both the PFF system and transverse matching. The only way to create a total \(R_{56}\) of zero between the upstream and downstream phase monitors is therefore to add positive \(R_{56}\) to one of the other beam lines in-between the two monitors in order to compensate for the negative \(R_{56}\) in the TL2 chicane. 
 
 New optics for the transfer line TL1 with positive \(R_{56}\) values have been created to achieve this.
 TL1 transports the beam from the CT line (where the upstream phase monitors are installed) to the combiner ring, as seen in Figure~\ref{f:ctfLayout}. 
@@ -734,10 +734,11 @@ Combining the estimated phase jitters resulting from all the devices in quadratu
 \end{table}
 
 Modelling the downstream phase as \(\phi_d = \phi_u + x\), where \(x\) is a generic additional source of uncorrelated jitter, the downstream jitter and upstream-downstream phase correlation are given by:
-\begin{eqnarray}
-\sigma_d = \sqrt{\sigma_u^2 + \sigma_x^2} \\
+\begin{equation}
+\sigma_d = \sqrt{\sigma_u^2 + \sigma_x^2}
+\qquad\mathrm{;}\qquad
 \rho_{ud} = \frac{\sigma_u^2}{\sigma_u^2 + \sigma_x^2}
-\end{eqnarray}
+\end{equation}
 These are equivalent to the equations derived for the phase monitor resolution in Section~\ref{s:resolutionEqs}. Assuming an initial upstream phase jitter of \(0.8^\circ\) plus a \(\sigma_x = 0.18^\circ\) source of jitter resulting from the power supply stabilities previously discussed, the downstream phase jitter is increased slightly to \(0.82^\circ\) and the upstream-downstream phase correlation reduced to \(95\%\).
 
 The effect on the predicted upstream-downstream phase correlation is significant for the PFF system, which requires correlations above \(97\%\) to achieve CLIC level phase stability at CTF3. Therefore, jitter on the power supplies may become a limiting factor for the PFF system performance and this will be verified with repeated measurements of the power supply dependences and stabilities in the future.
