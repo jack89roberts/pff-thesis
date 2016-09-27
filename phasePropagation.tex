@@ -225,10 +225,10 @@ An interesting consequence of Equations~\ref{e:r56JitEq}~and~\ref{e:r56PFFJit} i
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/jitVsR56}
-  \caption{Initial (blue) and corrected (red) downstream phase jitter (\(\sigma_d\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)). The horizontal black line shows the CLIC target of 0.2~degrees corrected downstream phase jitter.}
+  \caption{Initial (blue) and corrected (red) downstream phase jitter (\(\sigma_d\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors. The horizontal black line shows the CLIC target of 0.2~degrees corrected downstream phase jitter.}
   \label{f:jitVsR56}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/corrVsR56}
-  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)). The horizontal black line shows the 97\% correlation needed to achieve 0.2~degrees corrected phase jitter at CTF3.}
+  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors. The horizontal black line shows the 97\% correlation needed to achieve 0.2~degrees corrected phase jitter at CTF3.}
   \label{f:corrVsR56}
 \end{figure}
 
@@ -259,10 +259,10 @@ Equations~\ref{e:r56JitEq}~and~\ref{e:r56CorrDefFinal} can be used to estimate t
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/corrVsR56_CTENCorr}
-  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)) for different upstream phase-energy correlations: \(\rho_{up}=0.0\) (blue), \(\rho_{up}=0.2\) (black), \(\rho_{up}=0.4\) (green) and \(\rho_{up}=0.9\) (red).}
+  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors for different upstream phase-energy correlations: \(\rho_{up}=0.0\) (blue), \(\rho_{up}=0.2\) (black), \(\rho_{up}=0.4\) (green) and \(\rho_{up}=0.9\) (red).}
   \label{f:corrVsR56_CTENCorr}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/jitVsR56_90ctencorr}
-  \caption{Initial (blue) and corrected (red) downstream phase jitter (\(\sigma_d\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)) with 90\% correlation between the upstream phase and the beam energy.}
+  \caption{Initial (blue) and corrected (red) downstream phase jitter (\(\sigma_d\)) vs. the \(R_{56}\) coefficient between the upstream and downstream phase monitors with 90\% correlation between the upstream phase and the beam energy.}
   \label{f:jitVsR56_90ctencorr}
 \end{figure}
 
@@ -328,7 +328,7 @@ To allow this, MADX has been used to match optics for TL1 with \(R_{56}\) values
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/r56MatchedVsTarget}
-  \caption{Matched \(R_{56}\) values in TL1 (\(R_{\mathrm{TL1}}\)) for the new sets of TL1 optics.}
+  \caption{Matched \(R_{56}\) values in TL1 for the new sets of TL1 optics.}
   \label{f:r56MatchedVsTarget}
 \end{figure}
 
@@ -341,7 +341,7 @@ As well as the different \(R_{56}\) values, each set of optics must maintain the
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/CTQFG0750}
-  \caption{Strength (power supply current) of the CT.QFG0750 quadrupole in TL1 vs. the \(R_{56}\) value in TL1 (\(R_{\mathrm{TL1}}\)) for each set of matched optics.}
+  \caption{Strength (power supply current) of the CT.QFG0750 quadrupole in TL1 vs. the \(R_{56}\) value in TL1 for each set of matched optics.}
   \label{f:CTQFG0750}
 \end{figure}
 
@@ -414,10 +414,10 @@ Differences in the phase jitter and phase--energy correlation between datasets p
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/r56Scan2_meanJitter}
-  \caption{Upstream (blue) and downstream (red) phase jitter during an \(R_{56}\) scan in TL1 showing an optimal set point of around \(R_{TL1}=0.1\)~m.}
+  \caption{Upstream (blue) and downstream (red) phase jitter during an \(R_{56}\) scan, showing an optimal set point of around \(R_{56}=0.1\)~m in TL1.}
   \label{f:r56Scan2_meanJitter}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/r56Scan3_meanJitter}
-  \caption{Upstream (blue) and downstream (red) phase jitter during an \(R_{56}\) scan in TL1 showing an optimal set point of \(R_{TL1}<0.05\)~m.}
+  \caption{Upstream (blue) and downstream (red) phase jitter during an \(R_{56}\) scan, showing an optimal set point of \(R_{56}<0.05\)~m in TL1.}
   \label{f:r56Scan3_meanJitter}
 \end{figure}
 
@@ -490,10 +490,10 @@ MADX does not output the optics \(T_{566}\) coefficient directly but it can be a
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/jitVsR56_t566}
-  \caption{Downstream phase jitter (\(\sigma_d\)) vs. \(R_{56}\) between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)). Blue lines include the effects of both \(R_{56}\) and \(T_{566}\), whereas red lines include only the first order \(R_{56}\) term. Solid lines show the initial downstream jitter, and dashed lines the achievable corrected downstream phase jitter. Beam conditions of \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\) are used for the simulation.}
+  \caption{Downstream phase jitter (\(\sigma_d\)) vs. \(R_{56}\) between the upstream and downstream phase monitors. Blue lines include the effects of both \(R_{56}\) and \(T_{566}\), whereas red lines include only the first order \(R_{56}\) term. Solid lines show the initial downstream jitter, and dashed lines the achievable corrected downstream phase jitter. Beam conditions of \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\) are used for the simulation.}
   \label{f:jitVsR56_t566}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/corrVsR56_t566}
-  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. \(R_{56}\) between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)). The blue line includes the effects of both \(R_{56}\) and \(T_{566}\), whereas the red line includes only the first order \(R_{56}\) term.  Beam conditions of \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\) are used for the simulation.}
+  \caption{Upstream-downstream phase correlation (\(\rho_{ud}\)) vs. \(R_{56}\) between the upstream and downstream phase monitors. The blue line includes the effects of both \(R_{56}\) and \(T_{566}\), whereas the red line includes only the first order \(R_{56}\) term.  Beam conditions of \(\sigma_u = 0.8^\circ\), \(\rho_{up}=0.2\) and \(\sigma_p = 1 \times 10^{-3}\) are used for the simulation.}
   \label{f:corrVsR56_t566}
 \end{figure}
 
@@ -530,7 +530,7 @@ One final consequence of the non-zero \(T_{566}\) between the upstream and downs
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/R56ScanGunWiggle_PhaseVsEnergy}
-  \caption{Measured downstream phase vs. beam energy (\(\Delta p/p\)) for three different sets of \(R_{56}\) optics in TL1: \(R_{TL1}=-0.100\)~m (red), \(R_{TL1}=0.075\)~m (blue), and \(R_{TL1}=0.300\)~m (green). Lines show quadratic fits to the data for each set of optics.}
+  \caption{Measured downstream phase vs. beam energy (\(\Delta p/p\)) for three different sets of \(R_{56}\) optics in TL1: \(R_{56}=-0.100\)~m (red), \(R_{56}=0.075\)~m (blue), and \(R_{56}=0.300\)~m (green). Lines show quadratic fits to the data for each set of optics.}
   \label{f:R56ScanGunWiggle_PhaseVsEnergy}
 \end{figure}
 
@@ -546,10 +546,10 @@ Figure~\ref{f:R56ScanGunWiggle_PhaseVsEnergy} shows the dependence of the mean d
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/propagation/R56ScanGunWiggle_R56Fit}
-  \caption{Fitted total \(R_{56}\) value between the upstream and downstream phase monitors (\(R_{\mathrm{TOT}}\)) for each \(R_{56}\) value applied in TL1 (\(R_{\mathrm{TL1}}\)) during the scan.}
+  \caption{Fitted total \(R_{56}\) value between the upstream and downstream phase monitors for each \(R_{56}\) value applied in TL1 during the scan.}
   \label{f:R56ScanGunWiggle_R56Fit}
   \includegraphics[width=0.8\textwidth]{Figures/propagation/R56ScanGunWiggle_T566Fit}
-  \caption{Fitted \(T_{566}\) value between the upstream and downstream phase monitors for each set of \(R_{56}\) optics applied in TL1 (\(R_{\mathrm{TL1}}\)) during the scan.}
+  \caption{Fitted \(T_{566}\) value between the upstream and downstream phase monitors for each set of \(R_{56}\) optics applied in TL1 during the scan.}
   \label{f:R56ScanGunWiggle_T566Fit}
 \end{figure}
 
@@ -715,20 +715,22 @@ Figure~\ref{f:tl1670} shows the effect of changing the last two dipoles in TL1 (
 %\end{figure}
 
 The power supplies at CTF3 give a relative stability in the supplied current of approximately \(10^{-4}\). Assuming this stability the effect of each device on the downstream phase jitter can be estimated by using the fitted phase shifts per ampere and the known power supply current setting for each device. These approximate phase jitters are also summarised in Table~\ref{t:otherJitSources}. By far the strongest potential source of phase jitter appears to be the last two dipoles in TL1 (CT.0670 and CT.0710), which by themselves could contribute \(0.17\pm0.03\) degrees phase jitter. 
-The explanation for these two dipoles having a much larger effect on the phase than the first two dipoles in TL1 is not known and will need to be verified by repeated measurements and checks of the expected response in the CTF3 MADX model. The combiner ring devices contribute roughly 5 times less phase jitter than the CT.0670 and CT.0710 dipoles. 
+The combiner ring devices contribute roughly 5 times less phase jitter than the CT.0670 and CT.0710 dipoles. 
 Combining the estimated phase jitters resulting from all the devices in quadrature gives an overall contribution of \(0.18\pm0.03^\circ\) additional downstream phase jitter.
+%The explanation for these two dipoles having a much larger effect on the phase than the first two dipoles in TL1 is not known and will need to be verified by repeated measurements and checks of the expected response in the CTF3 MADX model. 
+Introducing field errors to these devices in the CTF3 MADX model also predicts the phase to be most sensitive to the stability of the CT.0670 and CT.0710 dipoles (shown in Table~\ref{t:otherJitSources}).
 
 \begin{table}
   \begin{center}
-    \begin{tabular}{| c c c c |}
+    \begin{tabular}{| c | c c c | c|}
 	   \hline
-       Device & Current & Fit Gradient & Estimated Phase Jitter \\ \hline
-       TL1 540/630 Dipoles & 133~A & \(-0.4\pm0.3^\circ\)/A & \(0.005\pm0.004^\circ\)\\
-       TL1 670/710 Dipoles & 164~A & \(10\pm2^\circ\)/A & \(0.17\pm0.03^\circ\)\\
-       CR Septa & 890~A &  \(-0.5\pm0.1^\circ\)/A & \(0.05\pm0.01^\circ\)\\
-       CR Dipoles & 156~A & \(1.8\pm0.7^\circ\)/A & \(0.03\pm0.01^\circ\)\\ \hline 
+       Device & Current & Fit Gradient & Estimated Jitter & Simulated  Jitter \\ \hline
+       TL1 540/630 Dipoles & 133~A & \(-0.4\pm0.3^\circ\)/A & \(0.005\pm0.004^\circ\) & \(0.001^\circ\) \\
+       TL1 670/710 Dipoles & 164~A & \(10\pm2^\circ\)/A & \(0.17\pm0.03^\circ\) & \(0.38^\circ\)\\
+       CR Septa & 890~A &  \(-0.5\pm0.1^\circ\)/A & \(0.05\pm0.01^\circ\) & \(0.01^\circ\) \\
+       CR Dipoles & 156~A & \(1.8\pm0.7^\circ\)/A & \(0.03\pm0.01^\circ\) & \(0.002^\circ\) \\ \hline 
     \end{tabular}
-    \caption{Power supply current setting, dependence of the downstream phase on the current and estimated contribution to downstream phase jitter for the dipoles and septa in TL1 and the combiner ring.}
+    \caption{Power supply current setting, measured dependence of the downstream phase on the current and estimated contribution to downstream phase jitter for the dipoles and septa in TL1 and the combiner ring. Simulated values from MADX are shown for comparison.}
   	\label{t:otherJitSources}
   \end{center}
 \end{table}
