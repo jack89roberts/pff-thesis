@@ -718,19 +718,19 @@ The power supplies at CTF3 give a relative stability in the supplied current of 
 The combiner ring devices contribute roughly 5 times less phase jitter than the CT.0670 and CT.0710 dipoles. 
 Combining the estimated phase jitters resulting from all the devices in quadrature gives an overall contribution of \(0.18\pm0.03^\circ\) additional downstream phase jitter.
 %The explanation for these two dipoles having a much larger effect on the phase than the first two dipoles in TL1 is not known and will need to be verified by repeated measurements and checks of the expected response in the CTF3 MADX model. 
-Introducing field errors to these devices in the CTF3 MADX model also predicts the phase to be most sensitive to the stability of the CT.0670 and CT.0710 dipoles (shown in Table~\ref{t:otherJitSources}).
+%Introducing field errors to these devices in the CTF3 MADX model also predicts the phase to be most sensitive to the stability of the CT.0670 and CT.0710 dipoles (shown in Table~\ref{t:otherJitSources}).
 
 \begin{table}
   \begin{center}
     \begin{tabular}{| c | c c c | c|}
 	   \hline
-       Device & Current & Fit Gradient & Estimated Jitter & Simulated  Jitter \\ \hline
-       TL1 540/630 Dipoles & 133~A & \(-0.4\pm0.3^\circ\)/A & \(0.005\pm0.004^\circ\) & \(0.001^\circ\) \\
-       TL1 670/710 Dipoles & 164~A & \(10\pm2^\circ\)/A & \(0.17\pm0.03^\circ\) & \(0.38^\circ\)\\
-       CR Septa & 890~A &  \(-0.5\pm0.1^\circ\)/A & \(0.05\pm0.01^\circ\) & \(0.01^\circ\) \\
-       CR Dipoles & 156~A & \(1.8\pm0.7^\circ\)/A & \(0.03\pm0.01^\circ\) & \(0.002^\circ\) \\ \hline 
+       Device & Current & Fit Gradient & Estimated Jitter \\ \hline
+       TL1 540/630 Dipoles & 133~A & \(-0.4\pm0.3^\circ\)/A & \(0.005\pm0.004^\circ\) \\
+       TL1 670/710 Dipoles & 164~A & \(10\pm2^\circ\)/A & \(0.17\pm0.03^\circ\) \\
+       CR Septa & 890~A &  \(-0.5\pm0.1^\circ\)/A & \(0.05\pm0.01^\circ\) \\
+       CR Dipoles & 156~A & \(1.8\pm0.7^\circ\)/A & \(0.03\pm0.01^\circ\) \\ \hline 
     \end{tabular}
-    \caption{Power supply current setting, measured dependence of the downstream phase on the current and estimated contribution to downstream phase jitter for the dipoles and septa in TL1 and the combiner ring. Simulated values from MADX are shown for comparison.}
+    \caption{Power supply current setting, measured dependence of the downstream phase on the current and estimated contribution to downstream phase jitter for the dipoles and septa in TL1 and the combiner ring.}
   	\label{t:otherJitSources}
   \end{center}
 \end{table}
@@ -820,4 +820,4 @@ The TL2 optics created in Chapter~\ref{c:tl2Optics} have a non-zero \(R_{56}\) t
 
 However, the optimal \(R_{56}\) value to use in TL1 was found to vary over time. This is caused by a large second order phase-energy dependence in the optics at CTF3, described by the coefficient \(T_{566}\). With non-zero \(T_{566}\) the apparent optimal \(R_{56}\) value depends on the beam energy. In particular, the effect of energy variations along the pulse, combined with \(T_{566}\), means the phase propagation cannot be optimal across the full pulse length. With recent improvements to the energy stability at CTF3, it has been shown that it should still be possible to achieve \(97\%\) upstream-downstream phase correlation despite the effects of \(T_{566}\). Alternatively, new optics using sextupoles could be created to reduce the \(T_{566}\) term.
 
-Preliminary measurements have identified that the downstream phase is sensitive to the stability of dipole power supplies, which may be an energy independent limitation on the achievable upstream-downstrema phase correlation.
+Preliminary measurements have identified that the downstream phase is sensitive to the stability of dipole power supplies, which may be an energy independent limitation on the achievable upstream-downstream phase correlation.
