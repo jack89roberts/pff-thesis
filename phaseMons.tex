@@ -86,7 +86,7 @@ RF(t) = A_{RF}(t)\cos[\omega_{RF} t + \phi(t)]
 \end{equation}
 where \(A_{RF}(t)\) is the time dependent amplitude (voltage) of the phase monitor signal and \(\phi(t)\) is the time dependent beam phase of interest for the PFF system. The beam based signals from the phase monitors are referred to as the RF signals.
 
-This high frequency signal cannot by digitised directly, so it is multiplied by a similar reference signal to create a lower frequency output that can be digitised, whilst preserving the beam phase information. Mixers are the devices that perform this multiplication. The reference signal is referred to as the local oscillator or LO, and it is usually a continuous sinusoidal signal with constant amplitude \(A_{LO}\) and frequency \(\omega_{LO}\):
+This high frequency signal cannot be digitised directly, so it is multiplied by a similar reference signal to create a lower frequency output that can be digitised, whilst preserving the beam phase information. Mixers are the devices that perform this multiplication. The reference signal is referred to as the local oscillator or LO, and it is usually a continuous sinusoidal signal with constant amplitude \(A_{LO}\) and frequency \(\omega_{LO}\):
 \begin{equation}
 LO(t) = A_{LO}\cos[\omega_{LO} t]
 \end{equation}
@@ -177,7 +177,7 @@ Figure~\ref{f:phaseMonRack} shows the complete phase monitor electronics install
 
 \newsection{resolutionEqs}{Resolution Definition and Requirements}
 
-The performance of the PFF system clearly depends on the resolution with which the phase can be measured. Many of the measurements in this chapter are therefore focused on the phase monitor resolution, or more precisely on the resolution of the combined phase monitor and electronics setup. The resolution is defined as the noise between the measured phase and the true beam phase, which can be calculated by comparing the difference between the measured phase of two monitors. This is why two phase monitors, Mon~1 and Mon~2 are installed neighbouring each other in the upstream system in the CT line. The beam phase should be identical in these two monitors thus their measurements can always be compared to derive the resolution.
+The performance of the PFF system clearly depends on the resolution with which the phase can be measured. Many of the measurements in this chapter are therefore focused on the phase monitor resolution, or more precisely on the resolution of the combined phase monitor and electronics setup. The resolution is defined as the noise between the measured phase and the true beam phase, and is a measure of the uncertainty of the instrument. It can be calculated by comparing the difference between the measured phase of two monitors. This is why two phase monitors, Mon~1 and Mon~2 are installed neighbouring each other in the upstream system in the CT line. The beam phase should be identical in these two monitors thus their measurements can always be compared to derive the resolution.
 
 The precise derivation of the resolution dependent on the measurement of two monitors is as follows. First, the measured phase, \(\phi_x(t)\) and \(\phi_y(t)\), in two monitors at time \(t\) can be defined as:
 \begin{align}
@@ -305,7 +305,7 @@ d &= \frac{\mathrm{max}(y)+\mathrm{min}(y)}{2} \\
 c &= \arcsin\left(\frac{y-d}{A}\right) - bx
 \end{align}
 The amplitude, \(A\), and offset, \(d\), of the sine curve are simply estimated by comparing the minimum and maximum output. These initial values are therefore highly biased by any large outliers around the minimum and maximum output, but this is rarely the case for the application here and these simple estimators are sufficient.
-Rearranging Equation~\ref{e:generalSinEq} gives the expression for \(c\) above. Due to its use of arcsin the equation is only valid in the first and fourth quadrants, between \(-\pi/2\) and \(+\pi/2\) where the gradient of the sine curve is positive. The \(y\) value at each data point is compared to its neighbours to determine whether it is on the rising slope, in order to meet this criteria. The initial value of \(c\) is the mean value calculated across all the data points that meet this criteria.
+Rearranging Equation~\ref{e:generalSinEq} gives the expression for \(c\) above. Due to its use of arcsin the equation is only valid in the first and fourth quadrants, between \(-\pi/2\) and \(+\pi/2\) where the gradient of the sine curve is positive. The \(y\) value at each data point is compared to its neighbours to determine whether it is on the rising slope, in order to meet this criterion. The initial value of \(c\) is the mean value calculated across all the data points that meet this criterion.
 
 \begin{figure}
   \centering
@@ -407,7 +407,7 @@ Figure~\ref{f:mixersFit27dBm} shows fits to the response of all mixer outputs at
   \caption{Sinusoidal fit to mixer responses at 27~dBm input power. Blue: Mixer~1, Red: Mixer~2 and Green: Mixer~3. Markers show the data points and the lines are sinusoidal fits to the data. }
   \label{f:mixersFit27dBm}
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/mixersFitResid27dBm}
-  \caption{Residuals to sinusoidal fit at 27dBm. Blue: Mixer~1, Red: Mixer~2 and Green: Mixer~3. Markers show the data points and the lines are sinusoidal fits to the data.}
+  \caption{Residuals to sinusoidal fit at 27dBm. Blue: Mixer~1, Red: Mixer~2 and Green: Mixer~3.}
   \label{f:mixersFitResid27dBm}
 \end{figure}
 
@@ -703,13 +703,13 @@ To obtain the best resolution for the measurement the mixers should be operated 
 \frac{\partial \mathrm{Mixer}}{\partial x} = Ab\cos(bx+c)
 \label{e:partDerivMixer}
 \end{equation}
-This is maximised when \(bx + c = n\pi\), where \(n\) is any positive or negative integer. The optimal phase shifter settings therefore meet this criteria:
+This is maximised when \(bx + c = n\pi\), where \(n\) is any positive or negative integer. The optimal phase shifter settings therefore meet this criterion:
 \begin{equation}
 x = \frac{n\pi-c}{b}
 \end{equation}
 And with this phase shifter set point the mixer output is \(\mathrm{Mixer} = A\sin(n\pi)+d = d\). In the case where there is no offset between the minimum and maximum mixer output (\(d=0\)) the optimal point to operate the mixers is at zero output. Because of this the optimal shifter setting will be referred to as the zero crossing. In reality the small asymmetry in the mixer output means the optimal shifter setting is where mixer output is \(d\). The effect of operating the mixers away from the zero crossing on the resolution is shown in Section~\ref{ss:resVsShifter}.
 
-In addition, as previously mentioned the convention is to operate the mixers on the falling slope where the partial derivative in Equation~\ref{e:partDerivMixer} is negative. The phase shifter settings are obtained using the smallest positive integer \(n\) that leads to this criteria being met. Table~\ref{t:calZeroCross} shows an example of values for the fit parameters \(b\) and \(c\) and the calculated phase shifter settings to be on the zero crossing for each monitor. These values are taken from the same calibration and sample number presented in Section~\ref{ss:SiSCal} (on the SiS digitisers). In Figure~\ref{f:calSiS} it can be seen that the calculated phase shifter settings for the zero crossing are close to zero mixer output for each phase monitor.
+In addition, as previously mentioned the convention is to operate the mixers on the falling slope where the partial derivative in Equation~\ref{e:partDerivMixer} is negative. The phase shifter settings are obtained using the smallest positive integer \(n\) that leads to this criterion being met. Table~\ref{t:calZeroCross} shows an example of values for the fit parameters \(b\) and \(c\) and the calculated phase shifter settings to be on the zero crossing for each monitor. These values are taken from the same calibration and sample number presented in Section~\ref{ss:SiSCal} (on the SiS digitisers). In Figure~\ref{f:calSiS} it can be seen that the calculated phase shifter settings for the zero crossing are close to zero mixer output for each phase monitor.
 
 \begin{table}
   \begin{center}
@@ -911,7 +911,7 @@ where \(\mathrm{BW}\) is the bandwidth in MHz and \(t\) is the rise time of the 
   \label{f:DiffMon1Mon2Along}
 \end{figure}
 
-It has been shown that the phase jitter is at the same in Mon~1 and Mon~2 (Section~\ref{s:shifters}), and that the achieved resolution is better at the level required for the PFF correction (Section~\ref{ss:bestRes}). Nevertheless there are several remaining effects that have been identified which may limit the PFF performance in a way not described by the resolution. These are the focus of the remainder of this chapter, starting with differences between the measured shape of the phase along the pulse, discussed here. Neither the phase jitter nor the resolution are sensitive to any static differences in the measured phase in each monitor. For the PFF system to remove not only phase jitter but also to flatten the phase sag along the pulse the shape of the upstream and downstream phase must be the same. In other words, the PFF system is sensitive to the accuracy of the phase measurement as well as the resolution.
+It has been shown that the phase jitter is the same in Mon~1 and Mon~2 (Section~\ref{s:shifters}), and that the achieved resolution is better than the level required for the PFF correction (Section~\ref{ss:bestRes}). Nevertheless there are several remaining effects that have been identified which may limit the PFF performance in a way not described by the resolution. These are the focus of the remainder of this chapter, starting with differences between the measured shape of the phase along the pulse, discussed here. Neither the phase jitter nor the resolution are sensitive to any static differences in the measured phase in each monitor. For the PFF system to remove not only phase jitter but also to flatten the phase sag along the pulse the shape of the upstream and downstream phase must be the same. In other words, the PFF system is sensitive to the accuracy of the phase measurement as well as the resolution.
 
 Figure~\ref{f:phaseAlongAll} shows an example of the measured phase along the pulse in all three monitors, as well as a fourth phase measurement taken from one of the power extraction and transfer structures (PETS) in the TBL line after Mon~3 \cite{reidarPETS}. The PETS measurement provides an independent cross-check of the response and calibration of the three PFF monitors. All four phase measurements show approximately the same overall phase sag of around \(45^\circ\) along the full pulse length, as expected.
 
@@ -1049,7 +1049,7 @@ The position dependence of the measurement appears large when quoted like this b
 
 Three new phase monitors have been installed at CTF3 for the PFF system -- two upstream monitors (prior to TL2) in the CT-line and one downstream monitor in TBL (following the TL2 chicane). The resolution of these monitors defines the theoretical limit on performance of the PFF system: to achieve a measured downstream phase jitter of \(0.2^\circ\) the resolution must be better than \(0.14^\circ\). This chapter has discussed the work carried out to characterise and improve the performance of the phase monitors, and in particular the phase monitor electronics.
 
-The phase monitor electronics provides two outputs -- a phase dependent ``mixer'' signal and a power dependent ``diode'' signal. Measurements of the electronics using a signal generator identified that the diode outputs were not performing as expected. The diodes have therefore been excluded from the phase reconstruction process. Also, digital phase shifters were found to be introducing noise to the reference LO phase used by the mixers, and were replaced with passive mechanical devices.
+The phase monitor electronics provide two outputs -- a phase dependent ``mixer'' signal and a power dependent ``diode'' signal. Measurements of the electronics using a signal generator identified that the diode outputs were not performing as expected. The diodes have therefore been excluded from the phase reconstruction process. Also, digital phase shifters were found to be introducing noise to the reference LO phase used by the mixers, and were replaced with passive mechanical devices.
 
 To be able to calculate the phase from the mixer signal a calibration must first be performed, in which the LO phase shifters are varied through \(360^\circ\) to determine the mixer output for all input phases. Calibration results have been presented, both for a single sample and point-by-point along the pulse. Following a calibration the LO phase shifters are set so that the mixer is centred around zero, where the phase dependence of the output is maximal and the resolution is optimal.
 

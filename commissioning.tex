@@ -442,12 +442,12 @@ Aside from its use for the PFF setup, demonstrating the ability
 
 At CLIC the PFF system must not degrade the transverse beam stability. This means for any voltage sent to the kickers the horizontal beam orbit after the PFF chicane must be unchanged, or closed, despite the different orbits inside the chicane. As such, the PFF optics for the TL2 chicane at CTF3 is also designed to give a closed kick, as presented in Section~\ref{s:matchedOptics}. However, up until now the main focus during PFF operation has been the primary goal of reducing the downstream phase jitter and ensuring good beam transmission to the downstream phase monitor. As a result orbit closure after the TL2 chicane has not yet been strictly enforced during PFF operation as will be seen in this section, but the current status is shown here as an additional cross-check of the PFF optics and to highlight where improvements are needed for future tests.
 
-Using the same constant kick data as Section~\ref{ss:corrRange}, Figure~\ref{f:HOrbitVsInput} shows mean the horizontal orbit before, inside and after the TL2 chicane across the full \(\pm2\)~V range of amplifier input voltages. Two BPMs before and after the chicane, as well as the four inside the chicane, are included. The positions plotted are the difference between the kicked and nominal (non-kicked) orbit at each BPM, thus removing any misalignment in the BPM centres. Before the chicane and the first kicker there is no significant effect on the orbit as expected. Inside the chicane the PFF system induces an orbit offset of up to \(1.4\pm0.1\)~mm. After the chicane, in BPMs CC.845 and CC.930, the orbit should return to zero in the ideal case. However, a clear residual offset can be seen, up to \(0.5\pm0.1\)~mm in CC.930.
+Using the same constant kick data as Section~\ref{ss:corrRange}, Figure~\ref{f:HOrbitVsInput} shows the horizontal orbit before, inside and after the TL2 chicane across the full \(\pm2\)~V range of amplifier input voltages. Two BPMs before and after the chicane, as well as the four inside the chicane, are included. The positions plotted are the difference between the kicked and nominal (non-kicked) orbit at each BPM, thus removing any misalignment in the BPM centres. Before the chicane and the first kicker there is no significant effect on the orbit as expected. Inside the chicane the PFF system induces an orbit offset of up to \(1.4\pm0.1\)~mm. After the chicane, in BPMs CC.845 and CC.930, the orbit should return to zero in the ideal case. However, a clear residual offset can be seen, up to \(0.5\pm0.1\)~mm in CC.930.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{Figures/commissioning/HOrbitVsInput}
-  \caption{Horizontal orbit offset in and around the TL2 chicane at different amplifier input voltages (as indicated by the colour scale). The approximate positions of the chicane entrance and exit are indicated by vertical black lines. The two PFF kickers are located at index CC.480 and CC.780 (before the first and last dipoles in the chicane).}
+  \caption{Horizontal orbit offset in and around the TL2 chicane at different amplifier input voltages (as indicated by the colour scale). The approximate positions of the chicane entrance and exit are indicated by vertical black lines.}
   \label{f:HOrbitVsInput}
     \includegraphics[width=0.75\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
   \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data (red markers), nominal model (black line) and the model taking in to account the actual quadrupole currents used in TL2 at this time (dashed blue line). Vertical black lines mark the entrance and exit
@@ -482,7 +482,7 @@ Figure~\ref{f:orbClosureVsQuadModel} compares the measured beam orbit
   and the expected response in the MADX model taking in to account the 
   actual quadrupole strengths applied in TL2 during this dataset.
 
-This gives confidence that if a completely nominal optics could be 
+This gives confidence that if completely nominal optics could be 
 used in TL2 orbit closure would be obtained. 
 %For future tests attempts 
 %will be made to further optimise the setup of CTF3 and allow a 
@@ -552,7 +552,7 @@ g_{\mathrm{opt}} = \frac{\sigma_{d}}{\sigma_{u}} \rho_{ud}
 \end{equation}
 Therefore the optimal gain to set in the units used in the DAQ, dependent on the current beam conditions, is:
 \begin{equation}
-F_{\mathrm{opt}} \simeq 624 \frac{\sigma_{d}}{\sigma_{u}} \rho
+F_{\mathrm{opt}} \simeq 624 \frac{\sigma_{d}}{\sigma_{u}} \rho_{ud}
 \label{e:fontOptGain}
 \end{equation}
 In good conditions the correlation and jitter ratio are close to one, although the downstream phase jitter can be up to a factor two larger than the upstream jitter at CTF3 thus the applied gains in the DAQ are typically in the range between 625 and 1250.
@@ -809,7 +809,7 @@ The PFF system aims to apply the correction in the TL2 chicane to the same beam 
 
 Table~\ref{t:systLatency} shows approximate latencies for each part of the PFF system. The length of the kicker cables was introduced in Section~\ref{ss:kickerCables}, with the 175~ns value in the table including the 3~ns added by the patch panel cable lengths. 2~m coaxial cables from the phase monitor electronics to the FONT5a board, and from the FONT5a board to the amplifier, both add 10~ns to the system latency. The total latency of the phase monitors and their electronics, including approximately 10~m of cabling between the monitors and the electronics in the klystron gallery, was measured to be 50~ns \cite{alexPriv}. The latency of the FONT5a board, including the time to process the input signals and calculate and apply the appropriate output, is 60~ns as mentioned in Section~\ref{ss:pffFirmware}. Finally, the estimated amplifier latency is around 30~ns, although precise measurements of this have not been made \cite{colinPriv}.
 
-Overall the latency of the complete PFF system is therefore expected to be 335~ns, meeting the latency requirements and meaning that the correction signal should arrive at the first kicker 45~ns before the beam in the case where the correction is output is soon as possible. The outputs of the FONT5a board are delayed in order to synchronise the arrival time of the correction with the beam, as discussed in Sections~\ref{ss:absTiming}~and~\ref{ss:relativeTiming}.
+Overall the latency of the complete PFF system is therefore expected to be 335~ns, meeting the latency requirements and meaning that the correction signal should arrive at the first kicker 45~ns before the beam in the case where the correction is output as soon as possible. The outputs of the FONT5a board are delayed in order to synchronise the arrival time of the correction with the beam, as discussed in Sections~\ref{ss:absTiming}~and~\ref{ss:relativeTiming}.
 
 \subsection{Absolute Timing}
 \label{ss:absTiming}
