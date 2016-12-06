@@ -141,7 +141,7 @@ Other features along the TL2 line that are important for the derivation of optic
 \subsection{Integration of PFF Hardware}
 \label{ss:tl2PFFIntegration}
 
-Due to building and cost constraints the PFF prototype had to make use of the pre-existing layout of the TL2 horizontal chicane. However, many modifications to the line were necessary, mostly involving involving the rearrangement of elements on girders 4 and 7 in TL2 (CC.xxx04xx and CC.xxx07xx devices), where the new PFF kickers are installed. The largest changes are highlighted in Figure~\ref{f:newTL2Lattice}.
+Due to building and cost constraints the PFF prototype had to make use of the pre-existing layout of the TL2 horizontal chicane. However, many modifications to the line were necessary, mostly involving the rearrangement of elements on girders 4 and 7 in TL2 (CC.xxx04xx and CC.xxx07xx devices), where the new PFF kickers are installed. The largest changes are highlighted in Figure~\ref{f:newTL2Lattice}.
 
 \begin{figure}
   \centering
@@ -159,7 +159,7 @@ To take in to account the changes made to the TL2 lattice new optics were needed
 \subsection{Nominal Optics Constraints}
 \label{ss:nominalOpticsReqs}
 
-The nominal optics constraints are mostly put in place to minimise the transverse beam size along the line by restricting the magnitude of the dispersion and Twiss functions. The final constraints, on the \(R_{56}\) transfer matrix coefficient, relates to the longitudinal stability of the beam. This is necessary to preserve the bunch length, which is crucial for the RF power production, the principal purpose of the drive beam.
+The nominal optics constraints are mostly put in place to minimise the transverse beam size along the line by restricting the magnitude of the dispersion and Twiss functions. The final constraints, on the \(R_{56}\) transfer matrix coefficient, relate to the longitudinal stability of the beam. This is necessary to preserve the bunch length, which is crucial for the RF power production, the principal purpose of the drive beam.
 
 \subsubsection{Dispersion}
 
@@ -179,7 +179,7 @@ The Twiss beta functions define the energy independent component of the transver
 
 The optics constraints on the Twiss functions are a compromise between small beta and small alpha values. The beta value must be kept small enough to avoid the transverse beam size becoming similar to the aperture of the beam pipe, which would result in beam losses. At CTF3 the geometric beam emittance is usually around 0.5~\(\mathrm{\mu m}\), but may be up to a factor two larger than this in the horizontal plane depending on the beam setup \cite{davideThesis}. With an emittance of 0.5~\(\mathrm{\mu m~rad}\) a beta value of 50~m at one point in the lattice corresponds to a one sigma transverse beam size of 0.5~cm at that location, compared to the 4~cm beam pipe aperture in straight sections at CTF3, for example. Beta is usually kept below 50~m when possible, but values up to 100~m can be accepted \cite{piotrPriv}. 
 
-However, at the same time small beta values correspond to a smaller beam size and therefore stronger focusing along the line. Increasing the strength of quadrupoles also increases the sensitivity of the optics to variations in initial conditions, errors in the model, or non-linear field errors in the magnets, for example, which can lead to aberrations in the beam. As a result it is desirable to have a weak optics, with the quadrupole strengths as low as possible whilst keeping beta at a tolerable level. This can be constrained in the optics by attempting to keep alpha as small as possible, typically below 30 at CTF3.
+However, at the same time small beta values correspond to a smaller beam size and therefore stronger focusing along the line. Increasing the strength of quadrupoles also increases the sensitivity of the optics to variations in initial conditions, errors in the model, or non-linear field errors in the magnets, for example, which can lead to aberrations in the beam. As a result it is desirable to have weak optics, with the quadrupole strengths as low as possible whilst keeping beta at a tolerable level. This can be constrained in the optics by attempting to keep alpha as small as possible, typically below 30 at CTF3.
 
 As mentioned in Section~\ref{s:tl2} there are long drift spaces with no focusing elements at the start and end of TL2, and it is most difficult to maintain low beta and alpha values following these regions. At the start of TL2 the initial values of the Twiss parameters are also constrained by the optics of the combiner ring. In other words, the beta and alpha values at the start of TL2 are defined by the closed solution of the combiner ring. The optics at the beginning of TL2 are fixed by these constraints, as well as additional dispersion constraints, and cannot be further adjusted. As a result, the new TL2 optics (Section~\ref{s:matchedOptics}) are usually matched starting from CC.QFH0210, and the required initial conditions at this location are summarised in Table~\ref{t:tl2InitTwiss}.
 
@@ -207,7 +207,7 @@ The dispersion describes how the transverse orbit of a particle is changed by it
 t_{f} = t_{i} + R_{56}\left(\frac{\Delta p}{p}\right)
 \end{equation}
 
-The \(R_{56}\) value between the entrance and exit of all bending sections at CTF3 is nominally zero so that that the bunch length is not increased along the facility, and there is then no transformation of energy jitter in to phase jitter. In TL2 this places the constraints for \(R_{56}\) to be zero between the entrance between the entrance and exit of the horizontal chicane (CC.BHG0500 to CC.BHG0800).
+The \(R_{56}\) value between the entrance and exit of all bending sections at CTF3 is nominally zero so that that the bunch length is not increased along the facility, and there is then no transformation of energy jitter in to phase jitter. In TL2 this places the constraints for \(R_{56}\) to be zero between the entrance and exit of the horizontal chicane (CC.BHG0500 to CC.BHG0800).
 %and exit of the vertical chicane (CC.BVA0300 to CC.BVB0400) and 
 
 \subsection{PFF Optics Constraints}
@@ -222,7 +222,7 @@ The voltage applied to the kickers is used to correct the beam phase by varying 
 \begin{equation}
 t_{K2} = t_{K1} + R_{52}x_{K1}'
 \end{equation}
-where \(t_{K1}\) and \(t_{K2}\) are the time offset of the particle at the exit of the first kicker and at the entrance to the second kicker respectively, and \(x_{K1}\) is the divergence at the exit of the first kicker resulting from the applied kick. MADX uses metres as the units for its `time' variable \cite{madx}, as this is equivalent to the longitudinal offset of a particle with respect to the reference particle. To convert these distances in to degrees at 12~GHz they must be multiplied by the constant factor \(360/\lambda_{\mathrm{12GHz}}\), where \(\lambda_{\mathrm{12GHz}} = 2.5\)~cm is the 12~GHz wavelength. Directly in terms of phase (in degrees) the equation above therefore becomes:
+where \(t_{K1}\) and \(t_{K2}\) are the time offset of the particle at the exit of the first kicker and at the entrance to the second kicker respectively, and \(x_{K1}'\) is the divergence at the exit of the first kicker resulting from the applied kick. MADX uses metres as the units for its `time' variable \cite{madx}, as this is equivalent to the longitudinal offset of a particle with respect to the reference particle. To convert these distances in to degrees at 12~GHz they must be multiplied by the constant factor \(360/\lambda_{\mathrm{12GHz}}\), where \(\lambda_{\mathrm{12GHz}} = 2.5\)~cm is the 12~GHz wavelength. Directly in terms of phase (in degrees) the equation above therefore becomes:
 \begin{equation}
 \phi_{K2} = \phi_{K1} + R_{52}\left(\frac{360}{\lambda_{\mathrm{12GHz}}}\right)x_{K1}'
 \end{equation}
@@ -558,6 +558,6 @@ New optics for TL2 were then required, both to take these changes in to account 
 
 Optics at CTF3 are created using a MADX model of the machine. By comparing the measured and simulated beam orbit resulting from changing magnetic correctors along the line it was apparent that there were large errors in the model.  Increasing the modelled strength of L-type quadrupoles in the line by 7\% and adjusting the focusing parameters of the dipoles improved the agreement between the MADX model and the measurements by an order of magnitude.
 
-New TL2 optics for the PFF system were then matched using the corrected MADX model. An optics yielding an \(R_{52}\) value of 0.74~m was found whilst limiting the Twiss, beta and alpha, functions and dispersion to an acceptable level.
+New TL2 optics for the PFF system were then matched using the corrected MADX model. Optics yielding an \(R_{52}\) value of 0.74~m was found whilst limiting the Twiss, beta and alpha, functions and dispersion to an acceptable level.
 %and keeping dispersion well below 2~m. 
-However, it was not possible to match an optics that fulfilled all constraints and a non-zero \(R_{56}\) value of -0.18~m had to be accepted in the horizontal chicane. This leads to an expected dependence of the downstream phase on the beam energy, which is the main focus of Chapter~\ref{c:phasePropagation}.
+However, it was not possible to match optics that fulfilled all constraints and a non-zero \(R_{56}\) value of -0.18~m had to be accepted in the horizontal chicane. This leads to an expected dependence of the downstream phase on the beam energy, which is the main focus of Chapter~\ref{c:phasePropagation}.
