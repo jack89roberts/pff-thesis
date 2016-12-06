@@ -135,7 +135,7 @@ The majority of the results presented in the remainder of this chapter use const
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn}
-  \caption{Diode output on the FONT5a board with the IIR filter off (blue) and on (red).}
+  \caption{Diode output on the FONT5a board with the IIR filter off (blue) and on (red). Sampled at 357~MHz (2.8~ns per sample).}
   \label{f:iirDiodefiltOffOn}
 \end{figure}
 
@@ -152,28 +152,28 @@ In the simplest case the droop should be well described by an exponential decay 
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/iirDiodeFit}
-  \caption{Exponential fit (red) to droop on the measured diode output (blue).}
+  \caption{Exponential fit (red) to droop on the measured diode output (blue). Sampled at 357~MHz (2.8~ns per sample).}
   \label{f:iirDiodeFit}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/iirDiodeFitResid}
-  \caption{Residuals between the measured diode output and the exponential fit to the droop shown in Figure~\ref{f:iirDiodeFit}.}
+  \caption{Residuals between the measured diode output and the exponential fit to the droop shown in Figure~\ref{f:iirDiodeFit}. Sampled at 357~MHz (2.8~ns per sample).}
   \label{f:iirDiodeFitResid}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirDiodeFiltOffOn_zoom}
-  \caption{Measured diode output on the FONT5a board with the IIR filter off (blue) and on (red). Zoomed in to show deviations from the ideal square wave that are not visible in Figure~\ref{f:iirDiodefiltOffOn}.}
+  \caption{Measured diode output on the FONT5a board with the IIR filter off (blue) and on (red). Zoomed in to show deviations from the ideal square wave that are not visible in Figure~\ref{f:iirDiodefiltOffOn}. Sampled at 357~MHz (2.8~ns per sample).}
   \label{f:iirDiodefiltOffOn_zoom}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/iirPhaseFiltOffOn}
-  \caption{Measured phase on the FONT5a board with the IIR filter off (blue) and on (red).}
+  \caption{Measured phase on the FONT5a board with the IIR filter off (blue) and on (red). Sampled at 357~MHz (2.8~ns per sample).}
   \label{f:iirPhasefiltOffOn}
 \end{figure}
 
@@ -262,10 +262,10 @@ Figure~\ref{f:AmpOutvsDAC} shows the amplifier output, measured using the monito
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpOutvsDAC}
-  \caption{Mean output of each amplifier channel vs. the input voltage. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). Markers show the measured output, and lines a linear fit to the output in the \(\pm1.2\)~V input range.}
+  \caption{Mean output of each amplifier channel vs. the input voltage. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). Markers show the measured output, and lines a linear fit to the output in the \(\pm1.2\)~V input range. Errors are smaller than the markers.}
   \label{f:AmpOutvsDAC}
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/AmpOutvsDAC_residual}
-  \caption{Residuals between the amplifier output voltage and the linear fits seen in Figure~\ref{f:AmpOutvsDAC}. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). }
+  \caption{Residuals between the amplifier output voltage and the linear fits seen in Figure~\ref{f:AmpOutvsDAC}. The four amplifier channels are: LA (blue), LB (red), RA (green) and RB (magenta). Errors are smaller than the markers. }
   \label{f:AmpOutvsDAC_residual}
 \end{figure}
 
@@ -361,10 +361,10 @@ Figure \ref{f:phaseVsAmpVoltage} shows the measured mean phase shift in the down
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage}
-  \caption{Measured downstream phase shift versus amplifier input voltage (blue markers). The blue line shows a linear fit to the measured phase shift for inputs between \(\pm1.2\)~V. The red line shows the expected phase shift taking in to account the TL2 chicane optics, amplifier output voltage and kicker design (using Equation~\ref{e:ampVoltToPhase}).}
+  \caption{Measured downstream phase shift versus amplifier input voltage (blue markers with standard error bars). The blue line shows a linear fit to the measured phase shift for inputs between \(\pm1.2\)~V. The red line shows the expected phase shift taking in to account the TL2 chicane optics, amplifier output voltage and kicker design (using Equation~\ref{e:ampVoltToPhase}).}
   \label{f:phaseVsAmpVoltage}
   \includegraphics[width=0.8\textwidth]{Figures/commissioning/phaseVsAmpVoltage_residuals}
-  \caption{Residuals between the measured phase shift and the expected (red) and fitted (blue) phase shifts from Figure~\ref{f:phaseVsAmpVoltage}.}
+  \caption{Residuals between the measured phase shift and the expected (red) and fitted (blue) phase shifts from Figure~\ref{f:phaseVsAmpVoltage}. Error bars show the standard error on the residual in each case.}
   \label{f:phaseVsAmp_resid}
 \end{figure}
 
@@ -451,7 +451,7 @@ Using the same constant kick data as Section~\ref{ss:corrRange}, Figure~\ref{f:H
   \label{f:HOrbitVsInput}
     \includegraphics[width=0.75\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
   \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data (red markers), nominal model (black line) and the model taking in to account the actual quadrupole currents used in TL2 at this time (dashed blue line). Vertical black lines mark the entrance and exit
-   of the chicane.}
+   of the chicane. Error bars show the standard error on the position measured at each BPM.}
   \label{f:orbClosureVsQuadModel}
 \end{figure}
 
@@ -611,11 +611,11 @@ where \(M(t)\) is the Mon~1 mixer input, in ADC counts, which varies with time \
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/offsetADCs}
-  \caption{ADC~2 input (connected to the Mon~1 mixer) with the channel offset optimised to give zero output at sample~421 (blue), and with a non-optimal channel offset giving 200~counts output at sample~421 (red). The location of sample~421 is marked by the vertical dashed line.}
+  \caption{ADC~2 input (connected to the Mon~1 mixer) with the channel offset optimised to give zero output at sample~421 (blue), and with a non-optimal channel offset giving 200~counts output at sample~421 (red). The location of sample~421 is marked by the vertical dashed line. Sampled at 357~MHz (2.8~ns per sample).}
   \label{f:offsetADCs}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/offsetDACs}
-  \caption{Simulated DAC output resulting from the ADC~2 inputs in Figure~\ref{f:offsetADCs} and using a set correction gain of 624~units in the DAQ.  Blue: Channel offset optimised to give zero output at sample~421. Red: Non-optimal channel offset giving 200~counts output at sample~421. The location of sample~421 is marked by the vertical dashed line.}
+  \caption{Simulated DAC output resulting from the ADC~2 inputs in Figure~\ref{f:offsetADCs} and using a set correction gain of 624~units in the DAQ.  Blue: Channel offset optimised to give zero output at sample~421. Red: Non-optimal channel offset giving 200~counts output at sample~421. The location of sample~421 is marked by the vertical dashed line. Sampled at 357~MHz (2.8~ns per sample).}
   \label{f:offsetDACs}
 \end{figure}
 
@@ -829,10 +829,10 @@ When the beam traverses the kickers, image currents induce a voltage at the upst
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/absDelay0_all}
-  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 0~ns (0 clock cycles).}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 0~ns (0 clock cycles). Sampled at 192~MHz (5.2~ns per sample).}
   \label{f:absDelay0_all}
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/absDelayAll_endPulse}
-  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) across the full range of possible output delays (as indicated by the colour scale).}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) across the full range of possible output delays (as indicated by the colour scale). Sampled at 192~MHz (5.2~ns per sample).}
   \label{f:absDelayAll_endPulse}
 \end{figure}
 
@@ -847,10 +847,10 @@ Figure~\ref{f:absDelayAll_endPulse} shows the effect of varying the output delay
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/absDelay7_all}
-  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 19.6~ns (7 clock cycles).}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 19.6~ns (7 clock cycles). Sampled at 192~MHz (5.2~ns per sample).}
   \label{f:absDelay7_all}
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/absDelay7_end}
-  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 19.6~ns (7 clock cycles), zoomed in to the end of the pulse.}
+  \caption{Alignment between the amplifier output (square pulse) and the beam pickup on the kickers strips (spikes) for an applied output delay of 19.6~ns (7 clock cycles), zoomed in to the end of the pulse. Sampled at 192~MHz (5.2~ns per sample).}
   \label{f:absDelay7_end}
 \end{figure}
 
@@ -869,7 +869,7 @@ By taking the difference of the PFF off and PFF on data in the BPM any residual 
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/absTimBeam_d0}
-  \caption{Alignment of the upstream (green) and downstream (red) phase compared to the applied kick as measured in a BPM after the TL2 chicane (blue) for an output delay of 0~ns. Vertical black lines indicate the time shift between the phase and the kick for the clearest feature visible in all three signals.}
+  \caption{Alignment of the upstream (green) and downstream (red) phase compared to the applied kick as measured in a BPM after the TL2 chicane (blue) for an output delay of 0~ns. Vertical black lines indicate the time shift between the phase and the kick for the clearest feature visible in all three signals. Sampled at 192~MHz (5.2~ns per sample).}
   \label{f:absTimBeam_d0}
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/absTimBeam_fit}
   \caption{Fitted time offset between the applied kick and the beam at different output delays.}
@@ -879,7 +879,7 @@ By taking the difference of the PFF off and PFF on data in the BPM any residual 
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/absTimBeam_opt}
-  \caption{Alignment between the applied kick as measured by a BPM after the chicane (blue) and the phase signals (red downstream and green upstream) after applying the optimal output delay in data analysis.}
+  \caption{Alignment between the applied kick as measured by a BPM after the chicane (blue) and the phase signals (red downstream and green upstream) after applying the optimal output delay in data analysis. Sampled at 192~MHz (5.2~ns per sample).}
   \label{f:absTimBeam_opt}
 \end{figure}
 
@@ -912,7 +912,7 @@ Figure~\ref{f:relDelay_sim} shows a simulated example of the expected effect of 
 \begin{figure}
   \centering
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/relDelay_traces}
-  \caption{Measured position offset in a BPM after the chicane for different relative kick delays (as indicated by the colour scale).}
+  \caption{Measured position offset in a BPM after the chicane for different relative kick delays (as indicated by the colour scale). Sampled at 192~MHz (5.2~ns per sample).}
   \label{f:relDelay_traces}
 
   \includegraphics[width=0.75\textwidth]{Figures/commissioning/relDelay_fit}
