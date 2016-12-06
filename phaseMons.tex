@@ -177,7 +177,7 @@ Figure~\ref{f:phaseMonRack} shows the complete phase monitor electronics install
 
 \newsection{resolutionEqs}{Resolution Definition and Requirements}
 
-The performance of the PFF system clearly depends on the resolution with which the phase can be measured. Many of the measurements in this chapter are therefore focused on the phase monitor resolution, or more precisely on the resolution of the combined phase monitor and electronics setup. The resolution is defined as the noise between the measured phase and the true beam phase, and is a measure of the uncertainty of the instrument. It can be calculated by comparing the difference between the measured phase of two monitors. This is why two phase monitors, Mon~1 and Mon~2 are installed neighbouring each other in the upstream system in the CT line. The beam phase should be identical in these two monitors thus their measurements can always be compared to derive the resolution.
+The performance of the PFF system clearly depends on the resolution with which the phase can be measured. Many of the measurements in this chapter are therefore focused on the phase monitor resolution, or more precisely on the resolution of the combined phase monitor and electronics setup. The resolution is defined as the noise between the measured phase and the true beam phase, and is a measure of the uncertainty of the instrument. It can be calculated by comparing the difference between the measured phase of two monitors. This is why two phase monitors, Mon~1 and Mon~2, are installed neighbouring each other in the upstream system in the CT line. The beam phase should be identical in these two monitors thus their measurements can always be compared to derive the resolution.
 
 The precise derivation of the resolution dependent on the measurement of two monitors is as follows. First, the measured phase, \(\phi_x(t)\) and \(\phi_y(t)\), in two monitors at time \(t\) can be defined as:
 \begin{align}
@@ -540,7 +540,7 @@ The results of the signal generator tests have several consequences for the setu
 Secondly, the ideal phase reconstruction method using \(\mathrm{Mixer}/\sqrt{\mathrm{Diode}}\) (Equation~\ref{e:phaseRecIdeal}) does not take in to account cross-talk on the mixer and diode outputs. To include the effects of cross-talk the more complex Equations~\ref{e:actualMixerResponse}~and~\ref{e:actualDiodeResponse} would have to be used.
 However, the dependence of the diode output on \(\sin(\phi+\delta)\), for example, means there is no simple expression that can be derived to create an input power independent phase measurement from these equations. An iterative process would have to be used to estimate the phase instead, converging towards the true diode output without cross-talk after each iteration using the estimated phase value. This may be possible in offline data analysis but would be difficult to implement in the PFF algorithm whilst still meeting latency requirements.
 
-Due to these reasons, and with no possibility to make modifications to the electronics, the decision was eventually taken to not include the diode measurement in the phase reconstruction process. For operation with the beam this means making the assumption that the output power from the phase monitors is constant along the pulse, and that the jitter in the output power is small. This is a good approximation, as seen later in Section~\ref{ss:calMultiSamp}. To reduce the sensitivity to any slow drifts in the output power due to changes in the beam conditions calibrations are taken at regular intervals between measurements, as discussed in Section~\ref{s:monCalibrations}).
+Due to these reasons, and with no possibility to make modifications to the electronics, the decision was eventually taken to not include the diode measurement in the phase reconstruction process. For operation with the beam this means making the assumption that the output power from the phase monitors is constant along the pulse, and that the jitter in the output power is small. This is a good approximation, as seen later in Section~\ref{ss:calMultiSamp}. To reduce the sensitivity to any slow drifts in the output power due to changes in the beam conditions calibrations are taken at regular intervals between measurements, as discussed in Section~\ref{s:monCalibrations}.
 
 With this treatment of the electronics, the phase is reconstructed as follows:
 \begin{align}
@@ -749,7 +749,7 @@ The first hint towards identifying the cause of the degraded resolution came by 
   \caption{Phase jitter along the pulse with the nominal electronics setup -- Mon~1 connected to the first mixer, and Mon~2 connected to the second mixer. Blue: Mon~1, Mixer~1 and LO~1. Red: Mon~2, Mixer~2 and LO~2.}
   \label{f:Mix1Mon1_Mix2Mon2}
   \includegraphics[width=0.8\textwidth]{Figures/phaseMons/Mix1Mon2_Mix2Mon1}
-  \caption{Phase jitter along pulse with Mon~2 connected to the first mixer (blue) and Mon~1 connected to the second mixer (red).}
+  \caption{Phase jitter along the pulse with Mon~2 connected to the first mixer, and Mon~1 connected to the second mixer. Blue: Mon~2, Mixer~1 and LO~1. Red: Mon~1, Mixer~2 and LO~2.}
   \label{f:Mix1Mon2_Mix2Mon1}
 \end{figure}
 
