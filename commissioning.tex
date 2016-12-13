@@ -450,8 +450,8 @@ Using the same constant kick data as Section~\ref{ss:corrRange}, Figure~\ref{f:H
   \caption{Horizontal orbit offset in and around the TL2 chicane at different amplifier input voltages (as indicated by the colour scale). The approximate positions of the chicane entrance and exit are indicated by vertical black lines.}
   \label{f:HOrbitVsInput}
     \includegraphics[width=0.75\textwidth]{Figures/commissioning/orbClosureVsQuadModel}
-  \caption{Orbit in the TL2 chicane at 1~V amplifier input for the BPM data (red markers), nominal model (black line) and the model taking in to account the actual quadrupole currents used in TL2 at this time (dashed blue line). Vertical black lines mark the entrance and exit
-   of the chicane. Error bars show the standard error on the position measured at each BPM.}
+  \caption{Fitted horizontal position offset in the TL2 BPMs at 1~V amplifier input (red markers), compared to the simulated offset in the nominal model (black line) and the model taking in to account the actual quadrupole currents used in TL2 at this time (dashed blue line). Vertical black lines mark the entrance and exit
+   of the chicane. Error bars show the standard error on the fitted gradient at each BPM (position offset per volt amplifier input).}
   \label{f:orbClosureVsQuadModel}
 \end{figure}
 
@@ -474,7 +474,7 @@ Figure~\ref{f:orbClosureVsQuadModel} compares the measured beam orbit
  nominal quadrupole strengths, and the expected response taking in to
  account the actual quadrupole strengths used in this dataset.
  The full MADX orbit propagated through all elements is shown, with the eight measured BPM offsets included at their respective positions. 
- Each BPM point represents the gradient of a linear fit using the variation with input voltage seen previously in Figure~\ref{f:HOrbitVsInput}.
+ Each BPM point represents the gradient of a linear fit to the measured position offset versus the amplifier input voltage, using the complete dataset shown in Figure~\ref{f:HOrbitVsInput} (excluding inputs in the non-linear range of the amplifier). This is done to reduce the error on the measurement, as opposed to using the measured response at 1~V amplifier input directly.
  Before and inside the chicane the agreement between the BPM data and both models is excellent.
   After the chicane the orbit is closed in the nominal optics but the 
   measured position offset in the BPMs is non-zero, as seen previously.
