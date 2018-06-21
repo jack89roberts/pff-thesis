@@ -1,6 +1,6 @@
 # pff-thesis
 Phase Feedforward PhD Thesis
-December 2015
+October 2016
 ---------------------------------------
 Jack Roberts
 University of Oxford, UK
@@ -10,6 +10,6 @@ CERN, Geneva, Switzerland
 jack.roberts@physics.ox.ac.uk
 jack.roberts@cern.ch
 ---------------------------------------
-CONTENTS
+Submitted here: https://cds.cern.ch/record/2263832?ln=en
 
 
